@@ -1,0 +1,22 @@
+{
+  "name": "kk_aj_kulturkataalogen",
+  "description": "kulturkatalogen",
+  "main": "gulpfile.js",
+  "authors": [
+    "Andreas Josefsson <andreas@barnensbibliotek.se>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "^5.5.3"
+  }
+}
