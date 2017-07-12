@@ -1,0 +1,20 @@
+/*
+Responsive Template Name: RS-1200 Prototype 8
+File: Main CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+
+@import url(css/easy-autocomplete.min.css);
+@import url(public/css/kk_aj_PublicCSS.css);
+    
+
+
+/* If you want to add your own css code, please do it in the custom.css file
+@import url(layout/styles/custom.css); */
+
+/* Remove this before using the template 
+
+@import url(layout/styles/demo-only.css);*/

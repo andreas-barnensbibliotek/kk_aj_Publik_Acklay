@@ -28,7 +28,7 @@ var gulp = require('gulp'),
 		'scss': './_dev/devsass',	
 		'publik': './public',
         'devjs':'./_dev/devjs',
-		'jsbundle': './_dev/jsbundle'
+		'jsbundle': './_dev/_jsbundle'
 	};
 	
 	
@@ -48,15 +48,15 @@ gulp.task('SassToCssSrc', function() {
 });
 
 gulp.task('foundationJS', function () {
-	//gulp.src(
-	//		[
-	//			//srcPath.bower +'/jquery/dist/jquery.js',
-	//			srcPath.bower +'/foundation/js/foundation.js',
-	//			srcPath.bower + '/foundation/js/foundation/foundation.alert.js',
-	//		]
-	//	)			
-	//	.pipe(concat('foundationvendor.js'))
-	//	.pipe(gulp.dest(srcPath.jsbundle +'/'));
+	gulp.src(
+			[
+				//srcPath.bower +'/jquery/dist/jquery.js',
+				srcPath.bower +'/foundation/js/foundation.js',
+				srcPath.bower + '/foundation/js/foundation/foundation.alert.js',
+			]
+		)			
+		.pipe(concat('foundationvendor.js'))
+		.pipe(gulp.dest(srcPath.jsbundle +'/'));
 		
 	return gulp.src([
 		srcPath.bower + '/modernizr/modernizr.js'
@@ -67,44 +67,18 @@ gulp.task('foundationJS', function () {
 		
 });
 	
-//gulp.task('jsconcatfiles', ['foundationJS'], function () {
-//    return gulp.src(srcPath.jsbundle + '/**/*.js')
-//        .pipe(sourcemaps.init())
-//		.pipe(webpack( require('./config/webpack.config.js') ))
-//      .pipe(concat('kk_aj_publicbundle.js'))
-//        .pipe(sourcemaps.write())
-//      .pipe(gulp.dest(srcPath.publik + '/js/'));
-//});
-
-gulp.task('webpackjs', function () {
-    return gulp.src(srcPath.devjs + '/app.js')
-    .pipe(webpack(require('./config/webpack.config.js')))
-    .pipe(gulp.dest(srcPath.jsbundle + '/'));
+gulp.task('jsconcatfiles', ['foundationJS'], function () {
+    return gulp.src(srcPath.jsbundle + '/**/*.js')
+        .pipe(sourcemaps.init())
+		.pipe(webpack( require('./config/webpack.config.js') ))
+      .pipe(concat('kk_aj_publicbundle.js'))
+        .pipe(sourcemaps.write())
+      .pipe(gulp.dest(srcPath.publik + '/js/'));
 });
 
-gulp.task('jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
-    return gulp.src(
-            [
-                //srcPath.jsbundle + '/foundation/what-input.js',
-				srcPath.jsbundle + '/foundation/foundation.min.js',                
-                srcPath.jsbundle + '/handelbars/handlebars.js',
-				srcPath.jsbundle +'/autocomplete/jquery.easy-autocomplete.js',
-                srcPath.jsbundle +'/kk_aj_js/kk_aj_kulturkatalogenWebpack.js',
-            ]
-        )
-       .pipe(sourcemaps.init())
-       .pipe(concat('kk_aj_publicbundle.js'))
-       .pipe(sourcemaps.write())
-       .pipe(gulp.dest(srcPath.publik + '/js/'));
-});
+
 	 
-//gulp.task('jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
-//    return gulp.src(srcPath.jsbundle + '/**/*.js')
-//        .pipe(sourcemaps.init())
-//      .pipe(concat('kk_aj_publicbundle.js'))
-//        .pipe(sourcemaps.write())
-//      .pipe(gulp.dest(srcPath.publik + '/js/'));
-//});
+
 //Watch task
 gulp.task('default',function() {
     gulp.watch('_dev/devsass/**/*.scss', ['SassToCssSrc']); 

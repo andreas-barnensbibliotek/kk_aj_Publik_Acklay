@@ -1,8 +1,11 @@
 var msg = require("./jsmoduler/main.js");
-var $ = require("jquery");
 
-$(function(){
+//  ANDREAS EGEN!!!!
+$(function () {
+    $('body').foundation();
     $("#mainapp").attr('style','background:#fff;')
-        .html("funkar!");
-    msg.testar("ja du det funkar tror jag det");
+        .html("funkar! eller");    
+    alert('Foundation Core Version: ' + Foundation.version);
+    
+    msg.testar("ja du det funkar tror jag det eller JORÅ");
 });

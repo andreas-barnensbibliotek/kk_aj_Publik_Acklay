@@ -1,5 +1,5 @@
 /*
- * easy-autocomplete
+ * easy-autocomplete ANDREAS
  * jQuery plugin for autocompletion
  * 
  * @author Łukasz Pawełczak (http://github.com/pawelczak)
