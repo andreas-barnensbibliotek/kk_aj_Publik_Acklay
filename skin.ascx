@@ -38,15 +38,6 @@
 
 
 
-<!-- ################################################################################################ -->
-
-<!-- Content Wrapper. Contains page content -->
-
-<div id="ContentPane" class="contentPane content-wrapper" runat="server"></div>
-
-<!-- /.content-wrapper -->
-
-<!-- ################################################################################################ -->
 
 <!-- ### OFFCANVAS START ################################################################################################ --> 
  <div class="off-canvas-wrap" data-offcanvas>
@@ -61,11 +52,11 @@
 
              <section class="right tab-bar-section tab-bar-logosection">
                  <a href="index.html">
-                     <img src="http://kulturivast.se/sites/all/themes/kivnew/images/kivlogo.png" alt="Kultur i Väst" /></a>
+                     <img src="http://kulturivast.se/sites/all/themes/kivnew/images/kivlogo.png" alt="Kultur i V&auml;st" /></a>
              </section>
 
              <section class="right-small">
-                 <a href="#"><span>SÖK</span></a>
+                 <a href="#"><span>S&Ouml;K</span></a>
              </section>
          </nav>
          <!-- ### MENYBALK END (NAV) ################################################################################################ -->
@@ -75,37 +66,37 @@
                  <li>
                      <label></label>
                  </li>
-                 <li class="menu-mlid-7255"><a href="" class="active-trail  togglebgimageshow" title="">Det här jobbar vi med</a></li>
+                 <li class="menu-mlid-7255"><a href="" class="active-trail  togglebgimageshow" title="">Det h&auml;r jobbar vi med</a></li>
                  <ul class="off-canvas-submenu multiColumn">
                      <li><a href="mosaikListview2.html">Arkitektur</a></li>
-                     <li><a href="mosaikListview2.html">Arrangörsutveckling</a></li>
+                     <li><a href="mosaikListview2.html">Arrang&ouml;rsutveckling</a></li>
                      <li><a href="listview.html">Bibliotek</a></li>
                      <li><a href="artikel4.html">Dans</a></li>
                      <li><a href="listview2.html">Film</a></li>
-                     <li><a href="listview2.html">Klangfärg</a></li>
+                     <li><a href="listview2.html">Klangf&auml;rg</a></li>
                      <li><a href="listview2.html">Konst</a></li>
-                     <li><a href="listview2.html">Kulturkatalogen Väst</a></li>
+                     <li><a href="listview2.html">Kulturkatalogen V&auml;st</a></li>
                      <li><a href="listview2.html">Litteratur</a></li>
                      <li><a href="listview2.html">Musik och ljudkonst</a></li>
-                     <li><a href="listview2.html">Samhällsutveckling</a></li>
+                     <li><a href="listview2.html">Samh&auml;llsutveckling</a></li>
                      <li><a href="listview2.html">Teater</a></li>
 
                      <li><a href="listview2.html">Barn och unga</a></li>
                      <li><a href="listview2.html">Fria kulturlivet</a></li>
                      <li><a href="listview2.html">Internationellt</a></li>
-                     <li><a href="listview2.html">Jämställdhet</a></li>
-                     <li><a href="listview2.html">Kultur och hälsa</a></li>
-                     <li><a href="listview2.html">Kultur och lärande</a></li>
-                     <li><a href="listview2.html">Mångfald</a></li>
+                     <li><a href="listview2.html">J&auml;mst&auml;lldhet</a></li>
+                     <li><a href="listview2.html">Kultur och h&auml;lsa</a></li>
+                     <li><a href="listview2.html">Kultur och l&auml;rande</a></li>
+                     <li><a href="listview2.html">M&aring;ngfald</a></li>
                      <li><a href="listview2.html">Pedagogik</a></li>
                      <li><a href="listview2.html">Projekt</a></li>
                      <li><a href="listview2.html">Samarbeten</a></li>
-                     <li><a href="listview2.html">Tillgänglighet</a></li>
+                     <li><a href="listview2.html">Tillg&auml;nglighet</a></li>
                  </ul>
-                 <li><a href="#">Kurser | Nätverksträffar | Event</a></li>
+                 <li><a href="#">Kurser | N&auml;tverkstr&auml;ffar | Event</a></li>
                  <li><a href="#">Kalender</a></li>
                  <li><a href="#">Arrangera | Boka</a></li>
-                 <li><a href="#">Kulturkatalogen Väst</a></li>
+                 <li><a href="#">Kulturkatalogen V&auml;st</a></li>
                  <li><a href="#">Trycksaker | Publikationer</a></li>
                  <li><a href="#">Webb tv</a></li>
                  <li><a href="#">Kontakt</a></li>
@@ -126,7 +117,7 @@
                  <div class="row">
                      <div class="small-12 columns">
                          <div class="searchmainContent">
-                             <input type="text" class="searchinputbox" placeholder="Sök på kulturivast.se" />
+                             <input type="text" class="searchinputbox" placeholder="S&ouml;k p&aring; kulturivast.se" />
                              <button type="button" class="searchButton">
                                  <img src="http://kulturivast.se/sites/all/themes/kivnew/images/PilVanster28.png" /></button>
                          </div>
@@ -145,7 +136,7 @@
                              <a href="">START</a>
                          </li>
                          <li>
-                             <a href="">Arkitektur åäö</a>
+                             <a href="">Arkitektur &aring;&auml;&ouml;</a>
                          </li>
                      </ul>
                  </div>
@@ -154,21 +145,21 @@
          <!-- Navigerings breadcrumb END -->
 
          <br>
-         <div class="small-12 columns">
+         <div class="small-12 columns contentboxheight">
              <!-- ################################################################################################ -->
 
                 <!-- Content Wrapper. Contains page content -->
-
-                <div id="Maincontent" class="contentPane content-wrapper" runat="server">
+            <div class="row">
+                <div id="ContentPane" class="contentPane content-wrapper" runat="server">
                     <div class="loader">
                          <img src="http://kulturivast.se/sites/all/themes/kivnew/images/page-loader.gif" />
                      </div>
                 </div>
-
+              </div>
                 <!-- /.content-wrapper -->
 
                 <!-- ################################################################################################ -->
-
+             
          </div>
 
 <!-- CONTENTPANE END ################################################################################################ -->  
@@ -178,7 +169,7 @@
                      <div class="small-12 medium-12 large-12 columns">
                          <div class="vglogo">
                              <a href="http://www.vgregion.se" target="_blank">
-                                 <img alt="Västra Götalandsregionen" src="http://kulturivast.se/sites/all/themes/kivnew/images/vg_logo_white.png">
+                                 <img alt="V&auml;stra G&ouml;talandsregionen" src="http://kulturivast.se/sites/all/themes/kivnew/images/vg_logo_white.png">
                              </a>
                          </div>
                      </div>
@@ -187,7 +178,7 @@
                      <div class="small-12 medium-6 large-6 columns">
                          <div class="foot-kivlogo-container">
                              <a href="/">
-                                 <img alt="Kultur i Väst" src="http://kulturivast.se/sites/all/themes/kivnew/images/kivlogo.png"></a>
+                                 <img alt="Kultur i V&auml;st" src="http://kulturivast.se/sites/all/themes/kivnew/images/kivlogo.png"></a>
                          </div>
                      </div>
                      <div class="small-12 medium-6 large-6 columns">
@@ -218,18 +209,18 @@
 
                      <div class="small-12 medium-6 large-3 columns">
                         <h3>Postadress</h3>
-                        Kultur i Väst
+                        Kultur i V&auml;st
                         <br>
-                        405 44 Göteborg 
+                        405 44 G&ouml;teborg 
                      </div>
                      <div class="small-12 medium-6 large-3 columns">
-                        <h3>Besöksadress</h3>
+                        <h3>Bes&ouml;ksadress</h3>
                         Rosenlundsgatan 4<br>
-                        411 20 Göteborg
+                        411 20 G&ouml;teborg
                      </div>
                      <div class="small-12 medium-6 large-3 columns">
                         <h3>Telefon</h3>
-                        031 333 51 00 (växel)<br>
+                        031 333 51 00 (v&auml;xel)<br>
                         031 333 51 01 (reception) 
                      </div>
                      <div class="small-12 medium-6 large-3 columns">

@@ -11722,3 +11722,6 @@ body {
 /*.section-ljudmagasinet h1{
 color:transparent!important;
 }*/
+/* line 311, _dev/devsass/kk_aj_PublicCSS.scss */
+.contentboxheight {
+  min-height: 700px; }
