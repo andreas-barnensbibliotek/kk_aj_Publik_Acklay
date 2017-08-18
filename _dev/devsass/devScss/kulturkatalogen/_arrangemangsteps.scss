@@ -1,0 +1,116 @@
+﻿
+ #mainarrformcontainer-t-0{
+     text-align:center;
+ }
+  #mainarrformcontainer-t-0 a span{
+     text-align:center;
+ }
+ .steps{
+    ul{
+        li{
+            text-align: center;
+            .number{
+                display: block;
+                border-radius: 50%;
+                behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+                margin:auto;
+                width: 3em;
+                    height: 3em;
+                    padding: .9em;
+
+               background:$gainsboro;
+                border:0;
+                color: #fff;
+                text-align: center;
+                vertical-align:middle;
+                font: 1.3em Arial, sans-serif !important;
+                
+                @media #{$medium-only} {                   
+                    font: 1.6em Arial, sans-serif !important;
+                }
+                @media #{$large-up} {                   
+                    font: 2.4em Arial, sans-serif !important;
+                }
+            }
+            &.active{
+                    .number{
+                  background:$orange;
+                  
+                  }
+                }
+            &.active{  
+                @include Opacity(1);              
+                &.error{                   
+                    .number{
+                        background:red;                  
+                  }
+                }
+                &:hover{        
+                    .number{
+                        @include Opacity(.5);                 
+                    }               
+                }
+            }
+                          
+                &.done{     
+                    @include Opacity(1);               
+                    .number{
+                        background:green;                  
+                    }
+                    &:hover{        
+                       .number{
+                            @include Opacity(.9); 
+                                              
+                        }               
+                    }
+                }
+            
+        }
+    }          
+}
+ .tabs .tab-title > a {
+     background:transparent;
+      @media #{$small-only} {
+          font-size: 0.8rem;
+      padding: .2rem .5rem;
+    }
+ }
+ .tabs .tab-title > a:hover {
+        background-color: transparent; }
+
+#mainarrformcontainer{
+    .formheader{
+        margin-bottom:2em !important;
+    }
+    
+   .button {
+        
+            &:visited {
+            color: #fff;
+        
+    }
+        
+    }
+
+}
+
+.ArrangemangtypBlock{
+    label{
+        & > input{
+            visibility: hidden; /* Makes input not-clickable */
+            position: absolute;
+                &:checked{
+                    & + img{ 
+                        border:2px solid #f00;
+                }
+            }
+ 
+        }
+        & + img{ /* IMAGE STYLES */
+              cursor:pointer;
+              border:2px solid transparent;
+        }
+
+    }
+
+}

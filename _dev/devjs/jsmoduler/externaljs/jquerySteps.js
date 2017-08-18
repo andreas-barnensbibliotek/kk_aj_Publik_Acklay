@@ -7,7 +7,7 @@ module.exports = {
  * Copyright (c) 2014 Rafael Staib (http://www.jquery-steps.com)
  * Licensed under MIT http://www.opensource.org/licenses/MIT
  */
-      var test =  function ( undefined) {
+        var RunSteps = function (undefined) {
             $.fn.extend({
                 _aria: function (name, value) {
                     return this.attr("aria-" + name, value);
@@ -38,8 +38,7 @@ module.exports = {
                 _id: function (id) {
                     return (id) ? this.attr("id", id) : this.attr("id");
                 }
-            });
-
+            });            
             if (!String.prototype.format) {
                 String.prototype.format = function () {
                     var args = (arguments.length === 1 && $.isArray(arguments[0])) ? arguments[0] : arguments;
@@ -1570,7 +1569,7 @@ module.exports = {
                  * @default "<span class=\"number\">#index#.</span> #title#"
                  * @for defaults
                  **/
-                titleTemplate: "<span class=\"number\">#index#.</span> #title#",
+                titleTemplate: "<span class=\"number\">#index#</span> #title#",
 
                 /**
                  * The loading template which will be used to create the loading animation.
@@ -1900,7 +1899,9 @@ module.exports = {
                     loading: "Loading ..."
                 }
             };
-        };
-      test();
+      };
+     
+      RunSteps();
+    
     }
 };

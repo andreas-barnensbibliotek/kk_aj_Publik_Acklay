@@ -1,42 +1,69 @@
 ﻿//här sätts alla pluggin och jquery.ready starters 
 var $ = require("jquery");
 var appsettings = require("./appSettings.js");
-var jsJquerySteps = require("./externaljs/jquerySteps.js");
+//var jsJquerySteps = require("./externaljs/jquerySteps.js");
 
 module.exports = {
     start: function () {
- jsJquerySteps.init();
+        
         $(function () {
-            alert("inne i steps");
-           
 
-
-            
-            //form.validate({
-            //    errorPlacement: function errorPlacement(error, element) { element.before(error); },
-            //    rules: {
-            //        confirm: {
-            //            equalTo: "#password"
-            //        }
-            //    }
-            //});
-            $("#mainarrformcontainer").steps({
-                headerTag: "h3",
-                bodyTag: "section",
-                transitionEffect: "slideLeft",
-                onStepChanging: function (event, currentIndex, newIndex) {
-                    form.validate().settings.ignore = ":disabled,:hidden";
-                    return form.valid();
-                },
-                onFinishing: function (event, currentIndex) {
-                    form.validate().settings.ignore = ":disabled";
-                    return form.valid();
-                },
-                onFinished: function (event, currentIndex) {
-                    alert("Submitted!");
-                }
-            });
 
         });
+
+
+
+//jsJquerySteps.init();
+//        $(function () {
+          
+//            $("#mainarrformcontainer").steps({
+//                headerTag: "h3",
+//                bodyTag: "section",
+//                transitionEffect: "slideLeft",
+//                onStepChanging: function (event, currentIndex, newIndex) {
+//                    alert("inne i steps1" + formvalidator(currentIndex));
+
+//                    return formvalidator(currentIndex)
+//                },
+//                onFinishing: function (event, currentIndex) {
+//                    alert("inne i steps2" + formvalidator(currentIndex));
+//                    return formvalidator(currentIndex);
+//                },
+//                onFinished: function (event, currentIndex) {
+//                    alert("inne i steps3" + formvalidator(currentIndex));
+//                },
+//                saveState:true
+//            });
+
+//        });
     }
 };
+
+var formvalidator = function (step) {
+    var ret = false;
+    console.log(step);
+
+   if (step == 0) {
+    var pass = $("#password");
+        var passconfirm = $("#confirm");
+        console.log("pass: " + pass);
+        if (pass.val() != "" && pass.val() === passconfirm.val()) {
+            pass.removeClass("formerror");
+            ret= true;
+        } else {        
+            pass.addClass("formerror");
+            ret= false;
+        }   
+   }
+   if (step == 1) {
+       ret = true;
+   }
+   if (step == 2) {
+       ret = true;
+   }
+   if (step == 3) {
+       ret = true;
+   }
+    
+   return ret;
+}
