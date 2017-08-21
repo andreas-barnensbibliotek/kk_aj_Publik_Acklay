@@ -33,11 +33,10 @@
                 }
             }
             &.active{
-                    .number{
-                  background:$orange;
-                  
-                  }
+                .number{
+                    background:$orange;                  
                 }
+            }
             &.active{  
                 @include Opacity(1);              
                 &.error{                   
@@ -93,8 +92,7 @@
     }
 
 }
-
-.ArrangemangtypBlock{
+.valbaraRadiobuttons{
     label{
         & > input{
             visibility: hidden; /* Makes input not-clickable */
@@ -112,5 +110,19 @@
         }
 
     }
+}
 
+.ArrangemangtypBlock{
+    @extend .valbaraRadiobuttons;
+}
+.kontformBlock{
+    @extend .valbaraRadiobuttons;
+}
+
+.bottomtabs{
+    list-style-type: none;
+    li{
+        float:left;
+        margin-right:4rem;
+    }
 }

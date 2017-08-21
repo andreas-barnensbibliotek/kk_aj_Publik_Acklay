@@ -47,7 +47,8 @@
 	
 	var appsettingsobject = __webpack_require__(1);
 	var msg = __webpack_require__(2);
-	var pagehandler = __webpack_require__(3);
+	var jqueryStarter = __webpack_require__(3);
+	var pagehandler = __webpack_require__(5);
 
 	var appsetting = appsettingsobject.config;
 	//  kulturkatalogen publik start
@@ -97,10 +98,11 @@
 	            kk_aj_speltidLabel.html(ui.value + "min");
 	        }
 	    });
+
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	    // STOPP rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	    jqueryStarter.init();
 	   
 	   // $("#mainapp").attr('style','background:#fff;').html("funkar! eller");    
 	    //alert('Foundation Core Version: ' + appsettings.config.globalconfig.dnnURL);
@@ -112,6 +114,11 @@
 	    appsetting.currentpage = $('.kk_aj_CurrentPageType').html();
 
 	    var init = function () {
+
+	        
+
+	        
+
 
 	        pagehandler.pageloader(appsetting.currentpage);
 
@@ -166,55 +173,19 @@
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	
 	var $ = __webpack_require__(4);
 	var appsettings = __webpack_require__(1);
-	var arrformhandler = __webpack_require__(5);
-	module.exports = {    
-	    pageloader: function (pagetoload, val) {
-	       
-	        switch(pagetoload) {
-	            case "kk_aj_Publik_ArrangemangForm":
-	                arrformhandler.start();
-	                break;    
-	            default:               
-	                loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
-	                
-	                break;
-	        }        
+
+
+	module.exports = {
+	    init: function () {
+
+	        $(function () {
+	           
+	        });
 	    }
-	};
-
-	var loadtemplateTypes = function (pagetemplate, userid, sortera, val) {
-	  
-	    $.each(pagetemplate, function( obj, value ) {   
-	        ServiceHandler.injecttemplateDebug(value.templatedata, userid, val, function (data) {         
-	            loadpagetemplates(value, data, function (data) {
-	                if (data == "ja") {
-	                   // console.log("KLART");                    
-	                }
-	            });
-	        });     
-	    });
-	   
 	}
-
-
-	var loadpagetemplates = function (template, currentdata,callback) {
-	    
-	    $.get(appsettings.htmltemplateURL + "/" + template.filename, function (data) {
-	        var temptpl = Handlebars.compile(data);
-
-	        updatecountmenybox(currentdata);
-	        $(template.targetdiv).html(temptpl(currentdata));
-	        callback("ja");
-	    }, 'html');
-
-	}
-
-
-
-
-
 
 /***/ }),
 /* 4 */
@@ -10479,6 +10450,60 @@
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	var $ = __webpack_require__(4);
+	var appsettings = __webpack_require__(1);
+	var arrformhandler = __webpack_require__(6);
+	module.exports = {    
+	    pageloader: function (pagetoload, val) {
+	       
+	        switch(pagetoload) {
+	            case "kk_aj_Publik_ArrangemangForm":
+	                arrformhandler.start();
+	                break;    
+	            default:               
+	                loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
+	                
+	                break;
+	        }        
+	    }
+	};
+
+	var loadtemplateTypes = function (pagetemplate, userid, sortera, val) {
+	  
+	    $.each(pagetemplate, function( obj, value ) {   
+	        ServiceHandler.injecttemplateDebug(value.templatedata, userid, val, function (data) {         
+	            loadpagetemplates(value, data, function (data) {
+	                if (data == "ja") {
+	                   // console.log("KLART");                    
+	                }
+	            });
+	        });     
+	    });
+	   
+	}
+
+
+	var loadpagetemplates = function (template, currentdata,callback) {
+	    
+	    $.get(appsettings.htmltemplateURL + "/" + template.filename, function (data) {
+	        var temptpl = Handlebars.compile(data);
+
+	        updatecountmenybox(currentdata);
+	        $(template.targetdiv).html(temptpl(currentdata));
+	        callback("ja");
+	    }, 'html');
+
+	}
+
+
+
+
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
 	var appsettings = __webpack_require__(1);
@@ -10489,6 +10514,10 @@
 	        
 	        $(function () {
 
+	            var storage = Storages.localStorage
+	            storage.set('foo', 'Detta funkar bra detta!');
+	            var storage = Storages.localStorage
+	            console.log("localstorage: " + storage.get('foo'))
 
 	        });
 

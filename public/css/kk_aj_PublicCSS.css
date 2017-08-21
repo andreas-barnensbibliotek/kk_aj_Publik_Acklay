@@ -11763,68 +11763,76 @@ img .flip {
   /* line 36, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .steps ul li.active .number {
     background: #f77136; }
-  /* line 41, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 40, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .steps ul li.active {
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     filter: alpha(opacity=100); }
-    /* line 44, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 43, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .steps ul li.active.error .number {
       background: red; }
-    /* line 49, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 48, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .steps ul li.active:hover .number {
       opacity: 0.5;
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
       filter: alpha(opacity=50); }
-  /* line 55, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 54, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .steps ul li.done {
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     filter: alpha(opacity=100); }
-    /* line 57, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 56, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .steps ul li.done .number {
       background: green; }
-    /* line 61, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 60, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .steps ul li.done:hover .number {
       opacity: 0.9;
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
       filter: alpha(opacity=90); }
 
-/* line 71, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 70, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .tabs .tab-title > a {
   background: transparent; }
   @media only screen and (max-width: 40em) {
-    /* line 71, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 70, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .tabs .tab-title > a {
       font-size: 0.8rem;
       padding: .2rem .5rem; } }
 
-/* line 78, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 77, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .tabs .tab-title > a:hover {
   background-color: transparent; }
 
-/* line 82, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 81, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 #mainarrformcontainer .formheader {
   margin-bottom: 2em !important; }
 
-/* line 88, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 87, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 #mainarrformcontainer .button:visited {
   color: #fff; }
 
-/* line 99, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
-.ArrangemangtypBlock label > input {
+/* line 97, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.valbaraRadiobuttons label > input, .ArrangemangtypBlock label > input, .kontformBlock label > input {
   visibility: hidden;
   /* Makes input not-clickable */
   position: absolute; }
-  /* line 103, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
-  .ArrangemangtypBlock label > input:checked + img {
+  /* line 101, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .valbaraRadiobuttons label > input:checked + img, .ArrangemangtypBlock label > input:checked + img, .kontformBlock label > input:checked + img {
     border: 2px solid #f00; }
 
-/* line 109, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
-.ArrangemangtypBlock label + img {
+/* line 107, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.valbaraRadiobuttons label + img, .ArrangemangtypBlock label + img, .kontformBlock label + img {
   /* IMAGE STYLES */
   cursor: pointer;
   border: 2px solid transparent; }
+
+/* line 122, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.bottomtabs {
+  list-style-type: none; }
+  /* line 124, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .bottomtabs li {
+    float: left;
+    margin-right: 4rem; }
 
 /*@import 'foundation/components/grid';
 @import 'foundation/components/accordion';
@@ -12472,68 +12480,76 @@ textarea {
   /* line 36, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .steps ul li.active .number {
     background: #f77136; }
-  /* line 41, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 40, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .steps ul li.active {
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     filter: alpha(opacity=100); }
-    /* line 44, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 43, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .steps ul li.active.error .number {
       background: red; }
-    /* line 49, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 48, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .steps ul li.active:hover .number {
       opacity: 0.5;
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
       filter: alpha(opacity=50); }
-  /* line 55, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 54, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .steps ul li.done {
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     filter: alpha(opacity=100); }
-    /* line 57, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 56, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .steps ul li.done .number {
       background: green; }
-    /* line 61, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 60, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .steps ul li.done:hover .number {
       opacity: 0.9;
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
       filter: alpha(opacity=90); }
 
-/* line 71, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 70, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .tabs .tab-title > a {
   background: transparent; }
   @media only screen and (max-width: 40em) {
-    /* line 71, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+    /* line 70, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
     .tabs .tab-title > a {
       font-size: 0.8rem;
       padding: .2rem .5rem; } }
 
-/* line 78, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 77, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .tabs .tab-title > a:hover {
   background-color: transparent; }
 
-/* line 82, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 81, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 #mainarrformcontainer .formheader {
   margin-bottom: 2em !important; }
 
-/* line 88, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 87, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 #mainarrformcontainer .button:visited {
   color: #fff; }
 
-/* line 99, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
-.ArrangemangtypBlock label > input {
+/* line 97, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.valbaraRadiobuttons label > input, .ArrangemangtypBlock label > input, .kontformBlock label > input {
   visibility: hidden;
   /* Makes input not-clickable */
   position: absolute; }
-  /* line 103, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
-  .ArrangemangtypBlock label > input:checked + img {
+  /* line 101, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .valbaraRadiobuttons label > input:checked + img, .ArrangemangtypBlock label > input:checked + img, .kontformBlock label > input:checked + img {
     border: 2px solid #f00; }
 
-/* line 109, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
-.ArrangemangtypBlock label + img {
+/* line 107, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.valbaraRadiobuttons label + img, .ArrangemangtypBlock label + img, .kontformBlock label + img {
   /* IMAGE STYLES */
   cursor: pointer;
   border: 2px solid transparent; }
+
+/* line 122, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.bottomtabs {
+  list-style-type: none; }
+  /* line 124, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .bottomtabs li {
+    float: left;
+    margin-right: 4rem; }
 
 /* line 89, _dev/devsass/kk_aj_PublicCSS.scss */
 .h2 {

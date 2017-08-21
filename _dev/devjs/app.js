@@ -1,6 +1,7 @@
 
 var appsettingsobject = require("./jsmoduler/appSettings.js");
 var msg = require("./jsmoduler/main.js");
+var jqueryStarter = require("./jsmoduler/appJqueryfunctionStarter.js");
 var pagehandler = require("./jsmoduler/pageloadhandler.js");
 
 var appsetting = appsettingsobject.config;
@@ -51,10 +52,11 @@ $(function () {
             kk_aj_speltidLabel.html(ui.value + "min");
         }
     });
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // STOPP rangesliders för arrangemangformuläret-----------------------------------------------------------------------------
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    jqueryStarter.init();
    
    // $("#mainapp").attr('style','background:#fff;').html("funkar! eller");    
     //alert('Foundation Core Version: ' + appsettings.config.globalconfig.dnnURL);
@@ -66,6 +68,11 @@ $(function () {
     appsetting.currentpage = $('.kk_aj_CurrentPageType').html();
 
     var init = function () {
+
+        
+
+        
+
 
         pagehandler.pageloader(appsetting.currentpage);
 

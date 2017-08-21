@@ -88,7 +88,8 @@ gulp.task('jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
                 //srcPath.jsbundle + '/foundation/what-input.js',
 				srcPath.jsbundle + '/foundation/foundation.min.js',                
                 srcPath.jsbundle + '/handelbars/handlebars.js',				
-                srcPath.jsbundle + '/autocomplete/jquery.easy-autocomplete.js',               
+                srcPath.jsbundle + '/autocomplete/jquery.easy-autocomplete.js',
+                srcPath.jsbundle + '/localstorage/localstorage.js',
                 srcPath.jsbundle +'/kk_aj_js/kk_aj_kulturkatalogenWebpack.js',
             ]
         )

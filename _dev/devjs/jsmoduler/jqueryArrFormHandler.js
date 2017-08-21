@@ -8,6 +8,10 @@ module.exports = {
         
         $(function () {
 
+            var storage = Storages.localStorage
+            storage.set('foo', 'Detta funkar bra detta!');
+            var storage = Storages.localStorage
+            console.log("localstorage: " + storage.get('foo'))
 
         });
 
