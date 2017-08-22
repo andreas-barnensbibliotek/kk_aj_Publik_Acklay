@@ -13,6 +13,37 @@ module.exports = {
             var storage = Storages.localStorage
             console.log("localstorage: " + storage.get('foo'))
 
+
+            // Verify steg 1
+            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
+                if (formvalidator(1)) {
+                    return true
+                }else{                
+                    return false;
+                }
+            });
+            // Verify steg 2
+            $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
+                if (formvalidator(2)) {
+                    return true
+                } else {                   
+                    return false;
+                }
+            });
+
+            //back to steg 1
+            $('.kk_aj_btn_before_step1').on('click', function (e) {
+                $('.tab-title[rel=1]').addClass('active').removeClass('done');
+                $('.tab-title[rel=2]').addClass('disabled').removeClass('active');
+                return true;                    
+            });
+            //back to steg 2
+            $('.kk_aj_btn_before_step2').on('click', function (e) {
+                $('.tab-title[rel=2]').addClass('active').removeClass('done');
+                $('.tab-title[rel=3]').addClass('disabled').removeClass('active');
+                return true;
+            });
+            
         });
 
 
@@ -45,7 +76,7 @@ module.exports = {
 
 var formvalidator = function (step) {
     var ret = false;
-    console.log(step);
+    var next = step + 1;
 
    if (step == 0) {
     var pass = $("#password");
@@ -59,15 +90,48 @@ var formvalidator = function (step) {
             ret= false;
         }   
    }
+  
+
    if (step == 1) {
-       ret = true;
+       var organisation = $("#utovare_organisation");
+       var organisation_error = $(".utovare_organisation_error");
+       if (organisation.val() != "") {
+           ret = true;           
+           $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
+           $('.kk_aj_verifystep' + next + '').removeClass('disabled');
+       } else {
+           organisation_error.css('display', 'block');
+           ret = false;
+       }
+               
+       
    }
    if (step == 2) {
-       ret = true;
+       var ArrRubrik = $("#arr_rubrik");
+       var ArrRubrik_error = $(".arr_rubrik_error");
+       if (ArrRubrik.val() != "") {
+           ret = true;
+           var next = step + 1;
+           $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
+       } else {
+           ArrRubrik_error.css('display', 'block');
+           ret = false;
+       }
    }
    if (step == 3) {
        ret = true;
    }
-    
+     if (step == 4) {
+       ret = true;
+     }
+     if (ret == false) {
+         $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
+         $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
+         
+     } else {
+         $('#panel2-' + step + ' small').hide();
+         $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
+         $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
+     }
    return ret;
 }

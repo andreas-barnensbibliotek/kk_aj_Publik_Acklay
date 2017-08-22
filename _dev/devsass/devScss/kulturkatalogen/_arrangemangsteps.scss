@@ -72,26 +72,33 @@
       @media #{$small-only} {
           font-size: 0.8rem;
       padding: .2rem .5rem;
-    }
+    }   
  }
  .tabs .tab-title > a:hover {
         background-color: transparent; }
+
+ .tabs .tab-title.disabled > a {
+        pointer-events: none; }
 
 #mainarrformcontainer{
     .formheader{
         margin-bottom:2em !important;
     }
     
-   .button {
-        
-            &:visited {
-            color: #fff;
-        
+   .button {       
+        &:visited {
+            color: #fff;        
+        }        
     }
-        
-    }
-
+   .kk_aj_form_befintligutovare{
+       display:none;
+   }        
+      small{
+          margin-top:-0.7rem;
+          display:none;
+      }
 }
+
 .valbaraRadiobuttons{
     label{
         & > input{
@@ -126,3 +133,23 @@
         margin-right:4rem;
     }
 }
+
+ .tabs.bottomtabs .tab-title > a {
+     color:$white;
+     background-color:$primary-color;
+     &.success{
+         background:$success-color;
+     }
+     &.error{
+         background:$alert-color;
+     }
+     
+      @media #{$small-only} {
+          font-size: 0.8rem;
+      padding: .2rem .5rem;
+    }   
+ }
+ .tabs.bottomtabs .tab-title > a:hover {
+        @include Opacity(.5); 
+
+ }

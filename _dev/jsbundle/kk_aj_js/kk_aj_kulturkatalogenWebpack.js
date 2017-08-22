@@ -47,8 +47,8 @@
 	
 	var appsettingsobject = __webpack_require__(1);
 	var msg = __webpack_require__(2);
-	var jqueryStarter = __webpack_require__(3);
-	var pagehandler = __webpack_require__(5);
+	var pagehandler = __webpack_require__(3);
+	var jqueryNavEvents = __webpack_require__(6);
 
 	var appsetting = appsettingsobject.config;
 	//  kulturkatalogen publik start
@@ -56,7 +56,7 @@
 	    $('body').foundation({
 	        tab: {
 	            callback: function (tab) {
-	                //console.log(tab.context.rel);
+	                console.log(tab.context.rel);
 	                
 	            }
 	        }
@@ -102,7 +102,7 @@
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	    // STOPP rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	    jqueryStarter.init();
+	    jqueryNavEvents.init();
 	   
 	   // $("#mainapp").attr('style','background:#fff;').html("funkar! eller");    
 	    //alert('Foundation Core Version: ' + appsettings.config.globalconfig.dnnURL);
@@ -173,19 +173,55 @@
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	
 	var $ = __webpack_require__(4);
 	var appsettings = __webpack_require__(1);
-
-
-	module.exports = {
-	    init: function () {
-
-	        $(function () {
-	           
-	        });
+	var arrformhandler = __webpack_require__(5);
+	module.exports = {    
+	    pageloader: function (pagetoload, val) {
+	       
+	        switch(pagetoload) {
+	            case "kk_aj_Publik_ArrangemangForm":
+	                arrformhandler.start();
+	                break;    
+	            default:               
+	                loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
+	                
+	                break;
+	        }        
 	    }
+	};
+
+	var loadtemplateTypes = function (pagetemplate, userid, sortera, val) {
+	  
+	    $.each(pagetemplate, function( obj, value ) {   
+	        ServiceHandler.injecttemplateDebug(value.templatedata, userid, val, function (data) {         
+	            loadpagetemplates(value, data, function (data) {
+	                if (data == "ja") {
+	                   // console.log("KLART");                    
+	                }
+	            });
+	        });     
+	    });
+	   
 	}
+
+
+	var loadpagetemplates = function (template, currentdata,callback) {
+	    
+	    $.get(appsettings.htmltemplateURL + "/" + template.filename, function (data) {
+	        var temptpl = Handlebars.compile(data);
+
+	        updatecountmenybox(currentdata);
+	        $(template.targetdiv).html(temptpl(currentdata));
+	        callback("ja");
+	    }, 'html');
+
+	}
+
+
+
+
+
 
 /***/ }),
 /* 4 */
@@ -10450,60 +10486,6 @@
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(4);
-	var appsettings = __webpack_require__(1);
-	var arrformhandler = __webpack_require__(6);
-	module.exports = {    
-	    pageloader: function (pagetoload, val) {
-	       
-	        switch(pagetoload) {
-	            case "kk_aj_Publik_ArrangemangForm":
-	                arrformhandler.start();
-	                break;    
-	            default:               
-	                loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
-	                
-	                break;
-	        }        
-	    }
-	};
-
-	var loadtemplateTypes = function (pagetemplate, userid, sortera, val) {
-	  
-	    $.each(pagetemplate, function( obj, value ) {   
-	        ServiceHandler.injecttemplateDebug(value.templatedata, userid, val, function (data) {         
-	            loadpagetemplates(value, data, function (data) {
-	                if (data == "ja") {
-	                   // console.log("KLART");                    
-	                }
-	            });
-	        });     
-	    });
-	   
-	}
-
-
-	var loadpagetemplates = function (template, currentdata,callback) {
-	    
-	    $.get(appsettings.htmltemplateURL + "/" + template.filename, function (data) {
-	        var temptpl = Handlebars.compile(data);
-
-	        updatecountmenybox(currentdata);
-	        $(template.targetdiv).html(temptpl(currentdata));
-	        callback("ja");
-	    }, 'html');
-
-	}
-
-
-
-
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
 	var appsettings = __webpack_require__(1);
@@ -10519,6 +10501,37 @@
 	            var storage = Storages.localStorage
 	            console.log("localstorage: " + storage.get('foo'))
 
+
+	            // Verify steg 1
+	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
+	                if (formvalidator(1)) {
+	                    return true
+	                }else{                
+	                    return false;
+	                }
+	            });
+	            // Verify steg 2
+	            $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
+	                if (formvalidator(2)) {
+	                    return true
+	                } else {                   
+	                    return false;
+	                }
+	            });
+
+	            //back to steg 1
+	            $('.kk_aj_btn_before_step1').on('click', function (e) {
+	                $('.tab-title[rel=1]').addClass('active').removeClass('done');
+	                $('.tab-title[rel=2]').addClass('disabled').removeClass('active');
+	                return true;                    
+	            });
+	            //back to steg 2
+	            $('.kk_aj_btn_before_step2').on('click', function (e) {
+	                $('.tab-title[rel=2]').addClass('active').removeClass('done');
+	                $('.tab-title[rel=3]').addClass('disabled').removeClass('active');
+	                return true;
+	            });
+	            
 	        });
 
 
@@ -10551,7 +10564,7 @@
 
 	var formvalidator = function (step) {
 	    var ret = false;
-	    console.log(step);
+	    var next = step + 1;
 
 	   if (step == 0) {
 	    var pass = $("#password");
@@ -10565,17 +10578,96 @@
 	            ret= false;
 	        }   
 	   }
+	  
+
 	   if (step == 1) {
-	       ret = true;
+	       var organisation = $("#utovare_organisation");
+	       var organisation_error = $(".utovare_organisation_error");
+	       if (organisation.val() != "") {
+	           ret = true;           
+	           $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
+	           $('.kk_aj_verifystep' + next + '').removeClass('disabled');
+	       } else {
+	           organisation_error.css('display', 'block');
+	           ret = false;
+	       }
+	               
+	       
 	   }
 	   if (step == 2) {
-	       ret = true;
+	       var ArrRubrik = $("#arr_rubrik");
+	       var ArrRubrik_error = $(".arr_rubrik_error");
+	       if (ArrRubrik.val() != "") {
+	           ret = true;
+	           var next = step + 1;
+	           $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
+	       } else {
+	           ArrRubrik_error.css('display', 'block');
+	           ret = false;
+	       }
 	   }
 	   if (step == 3) {
 	       ret = true;
 	   }
-	    
+	     if (step == 4) {
+	       ret = true;
+	     }
+	     if (ret == false) {
+	         $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
+	         $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
+	         
+	     } else {
+	         $('#panel2-' + step + ' small').hide();
+	         $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
+	         $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
+	     }
 	   return ret;
+	}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(4);
+	var appsettings = __webpack_require__(1);
+
+	module.exports = {
+	    init: function () {
+
+	        $(function () {
+	            var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
+	            var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');           
+	            
+	            // Nav Event
+	            $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
+	                btn_befintlig_utovareBlock.hide();
+	                btn_ny_utovareBlock.show();
+	                $(this).removeClass("secondary");
+	                $('.kk_aj_btnnyutovare').addClass("secondary");
+	                return false;
+	            });
+	            $('body').on('click', '.kk_aj_btnnyutovare', function () {
+	                btn_befintlig_utovareBlock.show();
+	                btn_ny_utovareBlock.hide();
+	                $(this).removeClass("secondary");
+	                $('.kk_aj_btnbefintligutovare').addClass("secondary");
+	                return false;
+	            });
+
+
+	            // function event
+	            
+	            $('body').on('click', '.kk_aj_btnHamtakontaktupg', function () {
+	                alert("söker...");
+	                return false;
+	            });
+
+
+	            // function Verify then next
+	           
+	            
+	        });
+	    }
 	}
 
 /***/ })
