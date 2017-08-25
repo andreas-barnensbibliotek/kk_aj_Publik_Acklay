@@ -18,7 +18,34 @@ $(function () {
 
 
     });
+    //////// History handler
+    //// ta hand om querystring parametrar och lagra dom i ett jsonobject urlparam.
+    var urlParams = {};
+    var checkparamsinurl = function () {
+        var match,
+            pl = /\+/g,  // Regex for replacing addition symbol with a space
+            search = /([^&=]+)=?([^&]*)/g,
+            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+            query = window.location.search.substring(1);
 
+        urlParams = {};
+        while (match = search.exec(query))
+            urlParams[decode(match[1])] = decode(match[2]);
+
+        if (!urlParams.tab) {
+            var sPageURL = window.location.href.split('/');
+            var index = sPageURL.indexOf("addarrtab");
+            if (index > 0) {
+                urlParams.tab = sPageURL[index + 1];
+            };
+            var index = sPageURL.indexOf("addarrtab");
+            if (index > 0) {
+                urlParams.id = sPageURL[index + 1];
+            };
+        }
+    };
+
+    //////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // START rangesliders för arrangemangformuläret-----------------------------------------------------------------------------
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,13 +95,13 @@ $(function () {
     appsetting.currentpage = $('.kk_aj_CurrentPageType').html();
 
     var init = function () {
+        //checkparamsinurl();
+        //appsetting.arrtab.currenttab = urlParams.tab;
 
         
 
-        
 
-
-        pagehandler.pageloader(appsetting.currentpage);
+        pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
 
     }
 

@@ -14,6 +14,9 @@
             userid: "",
             rollid: ""
         },
+        arrtab: {
+            currenttab: 0           
+        },
         currentpage: ""
     };
 

@@ -64,7 +64,34 @@
 
 
 	    });
+	    //////// History handler
+	    //// ta hand om querystring parametrar och lagra dom i ett jsonobject urlparam.
+	    var urlParams = {};
+	    var checkparamsinurl = function () {
+	        var match,
+	            pl = /\+/g,  // Regex for replacing addition symbol with a space
+	            search = /([^&=]+)=?([^&]*)/g,
+	            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+	            query = window.location.search.substring(1);
 
+	        urlParams = {};
+	        while (match = search.exec(query))
+	            urlParams[decode(match[1])] = decode(match[2]);
+
+	        if (!urlParams.tab) {
+	            var sPageURL = window.location.href.split('/');
+	            var index = sPageURL.indexOf("addarrtab");
+	            if (index > 0) {
+	                urlParams.tab = sPageURL[index + 1];
+	            };
+	            var index = sPageURL.indexOf("addarrtab");
+	            if (index > 0) {
+	                urlParams.id = sPageURL[index + 1];
+	            };
+	        }
+	    };
+
+	    //////////////////////////
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	    // START rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,13 +141,13 @@
 	    appsetting.currentpage = $('.kk_aj_CurrentPageType').html();
 
 	    var init = function () {
+	        //checkparamsinurl();
+	        //appsetting.arrtab.currenttab = urlParams.tab;
 
 	        
 
-	        
 
-
-	        pagehandler.pageloader(appsetting.currentpage);
+	        pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
 
 	    }
 
@@ -147,6 +174,9 @@
 	        userinfo: {
 	            userid: "",
 	            rollid: ""
+	        },
+	        arrtab: {
+	            currenttab: 0           
 	        },
 	        currentpage: ""
 	    };
@@ -181,7 +211,7 @@
 	       
 	        switch(pagetoload) {
 	            case "kk_aj_Publik_ArrangemangForm":
-	                arrformhandler.start();
+	                arrformhandler.start(val);
 	                break;    
 	            default:               
 	                loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
@@ -10488,12 +10518,12 @@
 
 	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
-	var appsettings = __webpack_require__(1);
+	var appsettingsobject = __webpack_require__(1);
 	//var jsJquerySteps = require("./externaljs/jquerySteps.js");
 
 	module.exports = {
-	    start: function () {
-	        
+	    start: function (tab) {
+	        var appsetting = appsettingsobject.config;
 	        $(function () {
 
 	            var storage = Storages.localStorage
@@ -10501,64 +10531,106 @@
 	            var storage = Storages.localStorage
 	            console.log("localstorage: " + storage.get('foo'))
 
-
+	            
 	            // Verify steg 1
 	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
 	                if (formvalidator(1)) {
-	                    return true
-	                }else{                
+	                    tabnavigator(2);
+	                    return true;
+	                } else {
+	                    tabnavigator(1);
+	                    return false;
+	                }
+	            });            
+	           
+	            // Verify steg 2
+	            $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
+	                if (formvalidator(2)) {
+	                    tabnavigator(3);
+	                    return true;
+	                } else {
+	                    tabnavigator(2);
 	                    return false;
 	                }
 	            });
 	            // Verify steg 2
-	            $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
-	                if (formvalidator(2)) {
-	                    return true
-	                } else {                   
-	                    return false;
-	                }
+	            $('.kk_aj_btn_next_step[rel=4]').on('click', function (e) {               
+	                    tabnavigator(4);
+	                //spara in allt i jsonobject och lägg i localstoragae
+	                    return true;                
 	            });
 
+	            //show step
+	            $('.kk_aj_tab[rel=1]').on('click', function (e) {               
+	                tabnavigator(1);
+	                if (appsettings.arrtab.currenttab > 1) {
+	                    formvalidator(1);
+	                }
+	                appsettings.arrtab.currenttab = 1;
+	                return true;
+	            });
+	            $('.kk_aj_tab[rel=2]').on('click', function (e) {                
+	                tabnavigator(2);
+	                if (appsettings.arrtab.currenttab > 1) {
+	                    formvalidator(2);
+	                }
+	                appsettings.arrtab.currenttab = 2;
+	                return true;
+	            });
+	            $('.kk_aj_tab[rel=3]').on('click', function (e) {
+	                tabnavigator(3);
+	                if (appsettings.arrtab.currenttab > 3) {
+	                    formvalidator(3);
+	                }
+	                appsettings.arrtab.currenttab = 3;
+	                return true;
+	            });
+	            $('.kk_aj_tab[rel=4]').on('click', function (e) {
+	                $('.tab-title[rel=4]').addClass('active').removeClass('done');               ;
+	                tabnavigator(4);
+	                appsettings.arrtab.currenttab = 4;
+	                return true;
+	            });
 	            //back to steg 1
-	            $('.kk_aj_btn_before_step1').on('click', function (e) {
-	                $('.tab-title[rel=1]').addClass('active').removeClass('done');
-	                $('.tab-title[rel=2]').addClass('disabled').removeClass('active');
+	            $('.kk_aj_btn_to_step1').on('click', function (e) {
+	                tabnavigator(1);
 	                return true;                    
 	            });
 	            //back to steg 2
-	            $('.kk_aj_btn_before_step2').on('click', function (e) {
-	                $('.tab-title[rel=2]').addClass('active').removeClass('done');
-	                $('.tab-title[rel=3]').addClass('disabled').removeClass('active');
+	            $('.kk_aj_btn_to_step2').on('click', function (e) {
+	                tabnavigator(2);
 	                return true;
 	            });
+
+	            $('.kk_aj_AvbrytSteps').on('click', function (e) {
+	                if (confirm('Är du säker på att du vill radera alla ifyllda uppgifter för arrangemanget? Raderade uppgifter går inte att ångra!')) {
+	                    clearForm();
+	                    tabnavigator(1);
+	                    return true;
+	                } else {
+	                    return false;
+	                };                
+	            })
 	            
 	        });
 
+	        var clearForm = function () {
+	            var addarrtab_1 = $('#addarrtab-1');
+	            var addarrtab_2 = $('#addarrtab-2');
+	            var addarrtab_3 = $('#addarrtab-3');
+	            var addarrtab_4 = $('#addarrtab-4');
+	            addarrtab_1.show();
+	            addarrtab_2.show();
+	            addarrtab_3.show();
+	            addarrtab_4.show();
+	            $('#mainarrformcontainer :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+	            $('#mainarrformcontainer :checkbox, #mainarrformcontainer :radio').prop('checked', false);
+	            addarrtab_1.hide();
+	            addarrtab_2.hide();
+	            addarrtab_3.hide();
+	            addarrtab_4.hide();
+	        }
 
-
-	//jsJquerySteps.init();
-	//        $(function () {
-	          
-	//            $("#mainarrformcontainer").steps({
-	//                headerTag: "h3",
-	//                bodyTag: "section",
-	//                transitionEffect: "slideLeft",
-	//                onStepChanging: function (event, currentIndex, newIndex) {
-	//                    alert("inne i steps1" + formvalidator(currentIndex));
-
-	//                    return formvalidator(currentIndex)
-	//                },
-	//                onFinishing: function (event, currentIndex) {
-	//                    alert("inne i steps2" + formvalidator(currentIndex));
-	//                    return formvalidator(currentIndex);
-	//                },
-	//                onFinished: function (event, currentIndex) {
-	//                    alert("inne i steps3" + formvalidator(currentIndex));
-	//                },
-	//                saveState:true
-	//            });
-
-	//        });
 	    }
 	};
 
@@ -10617,11 +10689,61 @@
 	         $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
 	         
 	     } else {
-	         $('#panel2-' + step + ' small').hide();
+	         $('#addarrtab-' + step + ' small').hide();
 	         $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
 	         $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
 	     }
 	   return ret;
+	}
+
+	var tabnavigator = function (tab) {
+	    var addarrtab_1 = $('#addarrtab-1');
+	    var addarrtab_2 = $('#addarrtab-2');
+	    var addarrtab_3 = $('#addarrtab-3');
+	    var addarrtab_4 = $('#addarrtab-4');
+
+	    addarrtab_1.hide();
+	    addarrtab_2.hide();
+	    addarrtab_3.hide();
+	    addarrtab_4.hide();
+
+	    switch (tab) {
+	        case 1:
+	            addarrtab_1.show();            
+	            break;
+	        case 2:
+	            addarrtab_2.show();            
+	            break;
+	        case 3:
+	            addarrtab_3.show();
+	            break;
+	        case 4:
+	            addarrtab_4.show();
+	            break;
+	        default:
+	            addarrtab_1.show();
+	    };
+	    changetabattr(tab)
+	}
+	var changetabattr = function (tab) {
+	    var curr = tab;
+	    var next = tab + 1;
+	    if (curr == 4) {
+	        next = curr;
+	    };
+	    
+
+	    if (curr == 4) {
+	        $('.tab-title[rel=' + curr + ']').addClass('active').removeClass('disabled');
+	        $('.tab-title[rel=3]').addClass('done').removeClass('active');
+	    } else {
+	        $('.tab-title[rel=' + tab + ']').addClass('active').removeClass('done');
+	        for (next; next <= 4; next++) {
+	            $('.tab-title[rel=' + next + ']').addClass('disabled').removeClass('active').removeClass('done');
+	        }
+	        //$('.tab-title[rel=' + next + ']').addClass('disabled').removeClass('active');
+	    }
+	    
 	}
 
 /***/ }),
@@ -10640,8 +10762,10 @@
 	            
 	            // Nav Event
 	            $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
+	                $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
 	                btn_befintlig_utovareBlock.hide();
 	                btn_ny_utovareBlock.show();
+
 	                $(this).removeClass("secondary");
 	                $('.kk_aj_btnnyutovare').addClass("secondary");
 	                return false;

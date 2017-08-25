@@ -10,8 +10,10 @@ module.exports = {
             
             // Nav Event
             $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
+                $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
                 btn_befintlig_utovareBlock.hide();
                 btn_ny_utovareBlock.show();
+
                 $(this).removeClass("secondary");
                 $('.kk_aj_btnnyutovare').addClass("secondary");
                 return false;

@@ -6,7 +6,7 @@ module.exports = {
        
         switch(pagetoload) {
             case "kk_aj_Publik_ArrangemangForm":
-                arrformhandler.start();
+                arrformhandler.start(val);
                 break;    
             default:               
                 loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
