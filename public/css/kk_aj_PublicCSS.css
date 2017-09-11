@@ -11821,8 +11821,7 @@ img .flip {
 
 /* line 96, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 #mainarrformcontainer small {
-  margin-top: -0.7rem;
-  display: none; }
+  margin-top: -0.7rem; }
 
 /* line 104, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .valbaraRadiobuttons label > input, .ArrangemangtypBlock label > input, .kontformBlock label > input {
@@ -11868,6 +11867,10 @@ img .flip {
   opacity: 0.5;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50); }
+
+/* line 157, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+label small {
+  text-transform: none; }
 
 /*@import 'foundation/components/grid';
 @import 'foundation/components/accordion';
@@ -12573,8 +12576,7 @@ textarea {
 
 /* line 96, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 #mainarrformcontainer small {
-  margin-top: -0.7rem;
-  display: none; }
+  margin-top: -0.7rem; }
 
 /* line 104, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .valbaraRadiobuttons label > input, .ArrangemangtypBlock label > input, .kontformBlock label > input {
@@ -12620,6 +12622,10 @@ textarea {
   opacity: 0.5;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50); }
+
+/* line 157, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+label small {
+  text-transform: none; }
 
 /* line 89, _dev/devsass/kk_aj_PublicCSS.scss */
 .h2 {

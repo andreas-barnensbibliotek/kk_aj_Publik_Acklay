@@ -144,11 +144,11 @@
 	        //checkparamsinurl();
 	        //appsetting.arrtab.currenttab = urlParams.tab;
 
-	        
+	        alert(unescape("NU funkar DEV p%E5 carros Devdator!!!!"));
 
 
 	        pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
-
+	        
 	    }
 
 	    init();
