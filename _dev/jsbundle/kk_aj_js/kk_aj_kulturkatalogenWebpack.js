@@ -143,12 +143,45 @@
 	    var init = function () {
 	        //checkparamsinurl();
 	        //appsetting.arrtab.currenttab = urlParams.tab;
+	        jQuery.fn.jplist.settings = {
 
-	        alert(unescape("NU funkar DEV p%E5 carros Devdator!!!!"));
+	            /**
+	            * LIKES: jquery ui range slider
+	            */
+	            likesSlider: function ($slider, $prev, $next) {
+	                $slider.slider({
+	                    min: 0
+	                   , max: 350
+	                   , range: true
+	                   , values: [0, 350]
+	                   , slide: function (event, ui) {
+	                       $prev.text(ui.values[0] + ' likes');
+	                       $next.text(ui.values[1] + ' likes');
+	                   }
+	                });
+	            }
+
+	            /**
+	            * LIKES: jquery ui set values
+	            */
+	              , likesValues: function ($slider, $prev, $next) {
+	                  $prev.text($slider.slider('values', 0) + ' likes');
+	                  $next.text($slider.slider('values', 1) + ' likes');
+	              }
+	        };
+
+	        $('.kk_aj_mainproductlistblock').jplist({
+	            itemsBox: '.kk_aj_arrlist',
+	            itemPath: '.kk_aj_arritem',
+	            panelPath: '.jplist-panel',
+	            storage: 'localstorage',
+	            storageName: 'storage-kk_aj_currentproductlist'
+	        });
+
 
 
 	        pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
-	        
+
 	    }
 
 	    init();
@@ -10757,6 +10790,14 @@
 	    init: function () {
 
 	        $(function () {
+
+
+	           
+
+
+
+
+
 	            var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
 	            var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');           
 	            

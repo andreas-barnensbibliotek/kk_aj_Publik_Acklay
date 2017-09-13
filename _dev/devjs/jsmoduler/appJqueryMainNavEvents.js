@@ -5,6 +5,14 @@ module.exports = {
     init: function () {
 
         $(function () {
+
+
+           
+
+
+
+
+
             var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
             var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');           
             
