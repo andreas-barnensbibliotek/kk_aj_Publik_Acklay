@@ -6,7 +6,7 @@
             //apiserver: "http://kulturkatalog.kivdev.se:8080",
             //dnnURL: "http://kulturkatalog.kivdev.se",
             localOrServerURL: this.apiserver + "/Api_v2",
-            htmltemplateURL: this.dnnURL + "/Portals/_default/Skins/kk_Admin_Acklay/htmltemplates",
+            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
             detailediturl: this.apiserver + "/Api_v3/updatearrangemang",
             basepageUri: "/KulturkatalogenAdmin",
         },

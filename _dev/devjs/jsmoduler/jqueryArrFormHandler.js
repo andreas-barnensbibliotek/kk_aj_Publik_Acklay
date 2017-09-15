@@ -1,7 +1,9 @@
 ﻿//här sätts alla pluggin och jquery.ready starters 
 var $ = require("jquery");
 var appsettingsobject = require("./appSettings.js");
-//var jsJquerySteps = require("./externaljs/jquerySteps.js");
+var arrformjsonBuilder = require("./arrformJsonBuilder.js");
+var handlebarTemplethandler = require("./HandlebarTemplethandler.js");
+var _exempellistobject = { "exempelitemlist": [] };
 
 module.exports = {
     start: function (tab) {
@@ -24,12 +26,13 @@ module.exports = {
                     return false;
                 }
             });            
-           
+            
             // Verify steg 2
             $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
                 if (formvalidator(2)) {
-                    tabnavigator(3);
-                    return true;
+                    tabnavigator(3);                                     
+                    return false;
+                    
                 } else {
                     tabnavigator(2);
                     return false;
@@ -84,6 +87,26 @@ module.exports = {
                 return true;
             });
 
+
+            $('.kk_aj_btn_SendArr').on('click', function (e) {
+                if (confirm('Är du säker på att du vill skicka in uppgifterna för arrangemanget?')) {
+
+                    arrformjsonBuilder.getArrFormJsonData(function (callback) {
+                        alert("uppgifterna är nu inskickade!");
+                        clearForm();
+                        tabnavigator(1);
+                        var jsondata = callback;
+                        return true;
+                    });
+                    return false;
+
+                } else {
+                    return false;
+                };
+            })
+
+
+
             $('.kk_aj_AvbrytSteps').on('click', function (e) {
                 if (confirm('Är du säker på att du vill radera alla ifyllda uppgifter för arrangemanget? Raderade uppgifter går inte att ångra!')) {
                     clearForm();
@@ -91,9 +114,30 @@ module.exports = {
                     return true;
                 } else {
                     return false;
-                };                
-            })
+                };
+            });
+
+            $('.kk_aj_btnnyttexemple').on('click', function (e) {                
+                $('.arrExempel').slideToggle("slow");
+                $(this).text(function (i, text) {
+                    return text === "Lägg till exempel" ? "Avbryt lägg till exempel" : "Lägg till exempel";
+                })
+                
+            });
             
+            
+            $('#kk_aj_addExempel').on('click', function (e) {               
+                saveexempeltolocalstorage();
+                $('.arrExempel').slideToggle("slow");
+                $('.kk_aj_btnnyttexemple').text("Lägg till exempel");
+                
+            });
+            $('body').on('click','.kk_aj_tabortexempel', function (e) {
+                var deletetitle = $(this).attr('rel');
+                tabortexempelfromJson(deletetitle);
+                return false;
+            });
+
         });
 
         var clearForm = function () {
@@ -213,7 +257,7 @@ var changetabattr = function (tab) {
     if (curr == 4) {
         next = curr;
     };
-    
+
 
     if (curr == 4) {
         $('.tab-title[rel=' + curr + ']').addClass('active').removeClass('disabled');
@@ -225,5 +269,46 @@ var changetabattr = function (tab) {
         }
         //$('.tab-title[rel=' + next + ']').addClass('disabled').removeClass('active');
     }
-    
+
+};
+
+
+// Arrangemangs exempel START!
+var saveexempeltolocalstorage = function () {
+    var val = $('#arr_ExempelRubrik').val()
+    var index = _exempellistobject.exempelitemlist.findIndex(function (item, i) {
+        return item.mediaTitle === val
+    });
+   
+    if (index>= 0){
+        alert("Exemplet finns redan!");
+        return false;
+    }
+    _exempellistobject.exempelitemlist.push(
+        {
+            "MediaUrl": $('#arr_Exempelbild').val(),
+            "MediaTyp": $('input[name=arr_ExempelTyp]:checked').val(),
+            "mediaTitle": $('#arr_ExempelRubrik').val(),
+            "mediaBeskrivning": $('#arr_Exempelbeskrivning').val(),
+            "mediaLink": $('#arr_ExempelUrl').val()            
+        }
+    );
+    handlebarTemplethandler.injecthtmltemplate(".arrExempellist", "kk_aj_arrformExempelList.txt", _exempellistobject);
+    tomexempelform();
 }
+
+var tomexempelform = function () {
+    $('#arr_Exempelbild').val("");       
+    $('#arr_ExempelRubrik').val("");
+    $('#arr_Exempelbeskrivning').val("");
+    $('#arr_ExempelUrl').val("");
+}
+
+var tabortexempelfromJson = function (delval) {
+    var index = _exempellistobject.exempelitemlist.findIndex(function (item, i) {
+        return item.mediaTitle === delval
+    });
+    _exempellistobject.exempelitemlist.splice(index, 1);    
+    handlebarTemplethandler.injecthtmltemplate(".arrExempellist", "kk_aj_arrformExempelList.txt", _exempellistobject);
+}
+// Arrangemangs exempel STOPP!

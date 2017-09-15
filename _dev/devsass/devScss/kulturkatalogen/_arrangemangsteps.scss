@@ -5,6 +5,7 @@
   #mainarrformcontainer-t-0 a span{
      text-align:center;
  }
+ 
  .steps{
     ul{
         li{
@@ -67,6 +68,7 @@
         }
     }          
 }
+
  .tabs .tab-title > a {
      background:transparent;
       @media #{$small-only} {
@@ -153,9 +155,7 @@
         @include Opacity(.5); 
 
  }
-
- .arrexempelblock{padding:2rem 0;}
-.arrExempellist li{margin-bottom:1rem; list-style:none;}
+ 
 hr.style14 { 
   border: 0; 
   height: 1px; 
@@ -167,7 +167,47 @@ hr.style14 {
 }
 .label-above{font-size:1.5rem !important; 
   font-weight:200 !important;
-  color: #f77136 !important;
-  
+  color: #f77136 !important;  
   text-transform: uppercase;
+}
+
+.arrExempel{   
+    display:none;
+    .addexempelblock  {       
+        background-color:#F9F9F9;
+        border-top:1px solid #F5F5F5;
+        padding-top:1rem;  
+    }
+    .addexempelbtn{
+        padding-top:.5rem;  
+    }
+}
+
+.arrExempellist{
+  margin-left: 0px;
+  h2{font-size: 1.3em}
+  li{   
+      margin-bottom:1rem; 
+      list-style:none;
+      background-color:#F9F9F9;
+      border-top:1px dashed #efefef;   
+    }
+}
+.tabs-content{
+     label{
+        font-weight: 600;
+    }
+}
+
+input[type=radio] + label {
+  font-weight: normal;  
+}
+.arrExempellist{
+    &:empty {
+       display: none;
+    }
+    label{font-weight:normal;}
+    .kk_aj_tabortexempel{
+         i{float:right;padding:4px; display: block; color:#8B0000;}
+    }
 }
