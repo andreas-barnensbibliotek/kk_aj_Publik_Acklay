@@ -90,13 +90,23 @@ module.exports = {
 
             $('.kk_aj_btn_SendArr').on('click', function (e) {
                 if (confirm('Är du säker på att du vill skicka in uppgifterna för arrangemanget?')) {
+                    console.log(_exempellistobject);
+                    arrformjsonBuilder.getArrFormJsonData( _exempellistobject, function (callback) {
+                       console.log(callback);
+                       var arrjson = callback;
 
-                    arrformjsonBuilder.getArrFormJsonData(function (callback) {
-                        alert("uppgifterna är nu inskickade!");
-                        clearForm();
-                        tabnavigator(1);
-                        var jsondata = callback;
-                        return true;
+                        arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
+                            console.log(callbackarrid);                            
+                            arrformjsonBuilder.tempuploadimage("uploadimg", callbackarrid, function (callback) {
+                                console.log("sista" + callback);
+                                alert("uppgifterna är nu inskickade!");
+                                clearForm();
+                                tabnavigator(1);
+                                var jsondata = callback;
+                                return true;
+                            });
+                        });
+                                                
                     });
                     return false;
 
@@ -139,7 +149,9 @@ module.exports = {
             });
 
             $('#kk_aj_laddatmpimg').on('click', function () {
-                arrformjsonBuilder.tempuploadimage(function (callback) {
+                var spinner = "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/public/ajax-loader.gif";
+                $('#kk_aj_tmpimg').attr('src', spinner);
+                arrformjsonBuilder.tempuploadimage("tmpimg","0", function (callback) {
                     console.log(callback);
                     $('#kk_aj_tmpimg').attr('src', callback);
                 });

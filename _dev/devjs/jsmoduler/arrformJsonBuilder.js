@@ -1,6 +1,7 @@
 ﻿//här sätts alla pluggin och jquery.ready starters 
 var $ = require("jquery");
 var appsettingsobject = require("./appSettings.js");
+var _appsetting = appsettingsobject.config;
 //var jsJquerySteps = require("./externaljs/jquerySteps.js");
 var _arrjsondata ={
     "Rubrik": "",
@@ -42,7 +43,7 @@ var _arrjsondata ={
 }
 module.exports = {
     getArrFormJsonData: function (mediaExempledata, callback) {
-        var appsetting = appsettingsobject.config;
+        
         $(function () {
 
             var arrformjsondata = _arrjsondata;
@@ -196,9 +197,10 @@ module.exports = {
                 "Faktarubrik": "" ,
                 "FaktaValue": $('#arr_resorovrigt').val(),
             });
-
-            if (mediaExempledata.exempelitemlist.length() >= 0) {
-                arrformjsondata.MediaList = mediaExempledata.exempelitemlist;
+            if (mediaExempledata.exempelitemlist) {
+                if (mediaExempledata.exempelitemlist.length >= 0) {
+                    arrformjsondata.MediaList = mediaExempledata.exempelitemlist;
+                }
             }
 
                 
@@ -212,8 +214,8 @@ module.exports = {
             //arrformjsondata.MediaList.mediaTitle = $('#arr_ExempelRubrik').val();
             //arrformjsondata.MediaList.mediaBeskrivning = $('#arr_Exempelbeskrivning').val();
             //arrformjsondata.MediaList.mediaLink= $('#arr_ExempelUrl').val();
-    
-            arrformjsondata.MainImage.MediaUrl = $('#arr_presentationsbild').val();
+            var filen = $("#arr_presentationsbild").get(0).files;
+            arrformjsondata.MainImage.MediaUrl = filen[0].name;
             arrformjsondata.MainImage.MediaSize = $('#arr_sizefoto').val();
             arrformjsondata.MainImage.MediaAlt = $('#arr_altfoto').val();
             arrformjsondata.MainImage.MediaFoto = $('#arr_fotograf').val();
@@ -237,31 +239,61 @@ module.exports = {
 
         });
     },
-    tempuploadimage: function (callback) {
-        var appsetting = appsettingsobject.config;
+    tempuploadimage: function (cmd, nyttarrid, callback) {
+       
                 var data = new FormData();
 
                 var files = $("#arr_presentationsbild").get(0).files;
-                data.append("cmd", "tmpimg");
+                data.append("cmd", cmd);
+
+                if (nyttarrid != "0") {
+                    data.append("arrid", nyttarrid);
+                };
+               
                 // Add the uploaded image content to the form data collection
                 if (files.length > 0) {
                     data.append("UploadedImage", files[0]);
+        
+                    // Make Ajax request with the contentType = false, and procesDate = false
+
+                    var ajaxRequest = $.ajax({
+                        type: "POST",
+                        url: _appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
+                        contentType: false,
+                        processData: false,
+                        data: data
+                    });
+
+                    ajaxRequest.done(function (xhr, textStatus) {
+                        var retfileurl = _appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
+                        callback(retfileurl)
+                    });
+       
+                } else {
+                    callback("Nofile");
                 }
+        
 
-                // Make Ajax request with the contentType = false, and procesDate = false
-                var ajaxRequest = $.ajax({
-                    type: "POST",
-                    url: appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
-                    contentType: false,
-                    processData: false,
-                    data: data
-                });
+    },
+    PostMainArrangemang: function (Arrjson, callback) {
 
-                ajaxRequest.done(function (xhr, textStatus) {
-                    var retfileurl = appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
-                    callback(retfileurl)
-                });
-       
-       
+        var currurl = _appsetting.globalconfig.apiserver + "/Api_v2/arrangemang/add/devkey/alf";
+
+        console.log("2. servicen POSTAR data");
+        $.ajax({
+            async: true,
+            type: "POST",
+            url: currurl,
+            data: Arrjson,
+            success: function (data) {
+                console.log("Parameter updaterad: ");
+                callback(data.kk_aj_admin.ansokningarlista.ansokningar[0].ansokningid);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //console.log(xhr + ":: " + ajaxOptions + ":: " + thrownError);
+                alert("Nått blev fel vid uppdatering av parametrarna!");
+            }
+        });
+
     }
 };

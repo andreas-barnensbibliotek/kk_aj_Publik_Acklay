@@ -192,18 +192,27 @@
 /* 1 */
 /***/ (function(module, exports) {
 
-	window.kk_aj_publikAppsettings= 
+	
+	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            apiserver: "http://localhost:60485",
-	            dnnURL: "http://dnndev.me",
-	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            //dnnURL: "http://kulturkatalog.kivdev.se",
-	            localOrServerURL: this.apiserver + "/Api_v2",
-	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: this.apiserver + "/Api_v3/updatearrangemang",
+	            //apiserver: "http://localhost:60485",
+	            //dnnURL: "http://dnndev.me",           
+	            //localOrServerURL: "http://localhost:60485/Api_v2",
+	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+
+	           //SERVERN
+	            apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            dnnURL: "http://kulturkatalog.kivdev.se",
+	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
 	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl:"http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+
 	        },
 	        userinfo: {
 	            userid: "",
@@ -10642,13 +10651,23 @@
 
 	            $('.kk_aj_btn_SendArr').on('click', function (e) {
 	                if (confirm('Är du säker på att du vill skicka in uppgifterna för arrangemanget?')) {
+	                    console.log(_exempellistobject);
+	                    arrformjsonBuilder.getArrFormJsonData( _exempellistobject, function (callback) {
+	                       console.log(callback);
+	                       var arrjson = callback;
 
-	                    arrformjsonBuilder.getArrFormJsonData(function (callback) {
-	                        alert("uppgifterna är nu inskickade!");
-	                        clearForm();
-	                        tabnavigator(1);
-	                        var jsondata = callback;
-	                        return true;
+	                        arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
+	                            console.log(callbackarrid);                            
+	                            arrformjsonBuilder.tempuploadimage("uploadimg", callbackarrid, function (callback) {
+	                                console.log("sista" + callback);
+	                                alert("uppgifterna är nu inskickade!");
+	                                clearForm();
+	                                tabnavigator(1);
+	                                var jsondata = callback;
+	                                return true;
+	                            });
+	                        });
+	                                                
 	                    });
 	                    return false;
 
@@ -10691,7 +10710,9 @@
 	            });
 
 	            $('#kk_aj_laddatmpimg').on('click', function () {
-	                arrformjsonBuilder.tempuploadimage(function (callback) {
+	                var spinner = "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/public/ajax-loader.gif";
+	                $('#kk_aj_tmpimg').attr('src', spinner);
+	                arrformjsonBuilder.tempuploadimage("tmpimg","0", function (callback) {
 	                    console.log(callback);
 	                    $('#kk_aj_tmpimg').attr('src', callback);
 	                });
@@ -10881,6 +10902,7 @@
 	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
 	var appsettingsobject = __webpack_require__(1);
+	var _appsetting = appsettingsobject.config;
 	//var jsJquerySteps = require("./externaljs/jquerySteps.js");
 	var _arrjsondata ={
 	    "Rubrik": "",
@@ -10922,7 +10944,7 @@
 	}
 	module.exports = {
 	    getArrFormJsonData: function (mediaExempledata, callback) {
-	        var appsetting = appsettingsobject.config;
+	        
 	        $(function () {
 
 	            var arrformjsondata = _arrjsondata;
@@ -11076,9 +11098,10 @@
 	                "Faktarubrik": "" ,
 	                "FaktaValue": $('#arr_resorovrigt').val(),
 	            });
-
-	            if (mediaExempledata.exempelitemlist.length() >= 0) {
-	                arrformjsondata.MediaList = mediaExempledata.exempelitemlist;
+	            if (mediaExempledata.exempelitemlist) {
+	                if (mediaExempledata.exempelitemlist.length >= 0) {
+	                    arrformjsondata.MediaList = mediaExempledata.exempelitemlist;
+	                }
 	            }
 
 	                
@@ -11092,8 +11115,8 @@
 	            //arrformjsondata.MediaList.mediaTitle = $('#arr_ExempelRubrik').val();
 	            //arrformjsondata.MediaList.mediaBeskrivning = $('#arr_Exempelbeskrivning').val();
 	            //arrformjsondata.MediaList.mediaLink= $('#arr_ExempelUrl').val();
-	    
-	            arrformjsondata.MainImage.MediaUrl = $('#arr_presentationsbild').val();
+	            var filen = $("#arr_presentationsbild").get(0).files;
+	            arrformjsondata.MainImage.MediaUrl = filen[0].name;
 	            arrformjsondata.MainImage.MediaSize = $('#arr_sizefoto').val();
 	            arrformjsondata.MainImage.MediaAlt = $('#arr_altfoto').val();
 	            arrformjsondata.MainImage.MediaFoto = $('#arr_fotograf').val();
@@ -11117,32 +11140,62 @@
 
 	        });
 	    },
-	    tempuploadimage: function (callback) {
-	        var appsetting = appsettingsobject.config;
+	    tempuploadimage: function (cmd, nyttarrid, callback) {
+	       
 	                var data = new FormData();
 
 	                var files = $("#arr_presentationsbild").get(0).files;
-	                data.append("cmd", "tmpimg");
+	                data.append("cmd", cmd);
+
+	                if (nyttarrid != "0") {
+	                    data.append("arrid", nyttarrid);
+	                };
+	               
 	                // Add the uploaded image content to the form data collection
 	                if (files.length > 0) {
 	                    data.append("UploadedImage", files[0]);
+	        
+	                    // Make Ajax request with the contentType = false, and procesDate = false
+
+	                    var ajaxRequest = $.ajax({
+	                        type: "POST",
+	                        url: _appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
+	                        contentType: false,
+	                        processData: false,
+	                        data: data
+	                    });
+
+	                    ajaxRequest.done(function (xhr, textStatus) {
+	                        var retfileurl = _appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
+	                        callback(retfileurl)
+	                    });
+	       
+	                } else {
+	                    callback("Nofile");
 	                }
+	        
 
-	                // Make Ajax request with the contentType = false, and procesDate = false
-	                var ajaxRequest = $.ajax({
-	                    type: "POST",
-	                    url: appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
-	                    contentType: false,
-	                    processData: false,
-	                    data: data
-	                });
+	    },
+	    PostMainArrangemang: function (Arrjson, callback) {
 
-	                ajaxRequest.done(function (xhr, textStatus) {
-	                    var retfileurl = appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
-	                    callback(retfileurl)
-	                });
-	       
-	       
+	        var currurl = _appsetting.globalconfig.apiserver + "/Api_v2/arrangemang/add/devkey/alf";
+
+	        console.log("2. servicen POSTAR data");
+	        $.ajax({
+	            async: true,
+	            type: "POST",
+	            url: currurl,
+	            data: Arrjson,
+	            success: function (data) {
+	                console.log("Parameter updaterad: ");
+	                callback(data.kk_aj_admin.ansokningarlista.ansokningar[0].ansokningid);
+	            },
+	            error: function (xhr, ajaxOptions, thrownError) {
+	                //console.log(xhr + ":: " + ajaxOptions + ":: " + thrownError);
+	                alert("Nått blev fel vid uppdatering av parametrarna!");
+	            }
+	        });
+
 	    }
 	};
 
