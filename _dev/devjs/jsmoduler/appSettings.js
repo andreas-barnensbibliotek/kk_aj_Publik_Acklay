@@ -9,6 +9,7 @@
             htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
             detailediturl: this.apiserver + "/Api_v3/updatearrangemang",
             basepageUri: "/KulturkatalogenAdmin",
+            arrtmpimgurl:"http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
         },
         userinfo: {
             userid: "",

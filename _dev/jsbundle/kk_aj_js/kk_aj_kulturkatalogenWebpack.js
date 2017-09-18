@@ -203,6 +203,7 @@
 	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
 	            detailediturl: this.apiserver + "/Api_v3/updatearrangemang",
 	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl:"http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 	        },
 	        userinfo: {
 	            userid: "",
@@ -10689,6 +10690,14 @@
 	                return false;
 	            });
 
+	            $('#kk_aj_laddatmpimg').on('click', function () {
+	                arrformjsonBuilder.tempuploadimage(function (callback) {
+	                    console.log(callback);
+	                    $('#kk_aj_tmpimg').attr('src', callback);
+	                });
+	            });
+
+
 	        });
 
 	        var clearForm = function () {
@@ -11107,6 +11116,33 @@
 
 
 	        });
+	    },
+	    tempuploadimage: function (callback) {
+	        var appsetting = appsettingsobject.config;
+	                var data = new FormData();
+
+	                var files = $("#arr_presentationsbild").get(0).files;
+	                data.append("cmd", "tmpimg");
+	                // Add the uploaded image content to the form data collection
+	                if (files.length > 0) {
+	                    data.append("UploadedImage", files[0]);
+	                }
+
+	                // Make Ajax request with the contentType = false, and procesDate = false
+	                var ajaxRequest = $.ajax({
+	                    type: "POST",
+	                    url: appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
+	                    contentType: false,
+	                    processData: false,
+	                    data: data
+	                });
+
+	                ajaxRequest.done(function (xhr, textStatus) {
+	                    var retfileurl = appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
+	                    callback(retfileurl)
+	                });
+	       
+	       
 	    }
 	};
 

@@ -138,6 +138,14 @@ module.exports = {
                 return false;
             });
 
+            $('#kk_aj_laddatmpimg').on('click', function () {
+                arrformjsonBuilder.tempuploadimage(function (callback) {
+                    console.log(callback);
+                    $('#kk_aj_tmpimg').attr('src', callback);
+                });
+            });
+
+
         });
 
         var clearForm = function () {
