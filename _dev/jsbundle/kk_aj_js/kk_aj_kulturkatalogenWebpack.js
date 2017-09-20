@@ -48,7 +48,7 @@
 	var appsettingsobject = __webpack_require__(1);
 	var msg = __webpack_require__(2);
 	var pagehandler = __webpack_require__(3);
-	var jqueryNavEvents = __webpack_require__(8);
+	var jqueryNavEvents = __webpack_require__(10);
 
 	var appsetting = appsettingsobject.config;
 	//  kulturkatalogen publik start
@@ -196,22 +196,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://kulturkatalog.kivdev.se",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://kulturkatalog.kivdev.se",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -221,7 +221,8 @@
 	        arrtab: {
 	            currenttab: 0           
 	        },
-	        currentpage: ""
+	        currentpage: "",
+	        debug: "true" // true / false
 	    };
 
 	module.exports = {  
@@ -10564,11 +10565,13 @@
 	var appsettingsobject = __webpack_require__(1);
 	var arrformjsonBuilder = __webpack_require__(6);
 	var handlebarTemplethandler = __webpack_require__(7);
+	var arrformValidator = __webpack_require__(8);
+	var arrGranskaVy = __webpack_require__(9);
 	var _exempellistobject = { "exempelitemlist": [] };
 
 	module.exports = {
 	    start: function (tab) {
-	        var appsetting = appsettingsobject.config;
+	        var appsettings = appsettingsobject.config;
 	        $(function () {
 
 	            var storage = Storages.localStorage
@@ -10579,7 +10582,7 @@
 	            
 	            // Verify steg 1
 	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
-	                if (formvalidator(1)) {
+	                if (arrformValidator.formvalidator(1)) {
 	                    tabnavigator(2);
 	                    return true;
 	                } else {
@@ -10590,7 +10593,18 @@
 	            
 	            // Verify steg 2
 	            $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
-	                if (formvalidator(2)) {
+	                if (arrformValidator.formvalidator(2)) {
+
+	                    // FYll på inmatade värden i granskavyn!   
+	                    arrformjsonBuilder.getArrFormJsonData(_exempellistobject, function (callback) {
+	                        console.log(callback);
+	                        var jsonmainobject = callback;
+	                        arrGranskaVy.getArrFormJsonData(jsonmainobject);
+
+	                    });
+
+	                    
+
 	                    tabnavigator(3);                                     
 	                    return false;
 	                    
@@ -10603,6 +10617,8 @@
 	            $('.kk_aj_btn_next_step[rel=4]').on('click', function (e) {               
 	                    tabnavigator(4);
 	                //spara in allt i jsonobject och lägg i localstoragae
+
+	                    console.log("finns:" + _exempellistobject);
 	                    return true;                
 	            });
 
@@ -10610,7 +10626,7 @@
 	            $('.kk_aj_tab[rel=1]').on('click', function (e) {               
 	                tabnavigator(1);
 	                if (appsettings.arrtab.currenttab > 1) {
-	                    formvalidator(1);
+	                    arrformValidator.formvalidator(1);
 	                }
 	                appsettings.arrtab.currenttab = 1;
 	                return true;
@@ -10618,7 +10634,7 @@
 	            $('.kk_aj_tab[rel=2]').on('click', function (e) {                
 	                tabnavigator(2);
 	                if (appsettings.arrtab.currenttab > 1) {
-	                    formvalidator(2);
+	                    arrformValidator.formvalidator(2);
 	                }
 	                appsettings.arrtab.currenttab = 2;
 	                return true;
@@ -10626,7 +10642,7 @@
 	            $('.kk_aj_tab[rel=3]').on('click', function (e) {
 	                tabnavigator(3);
 	                if (appsettings.arrtab.currenttab > 3) {
-	                    formvalidator(3);
+	                    arrformValidator.formvalidator(3);
 	                }
 	                appsettings.arrtab.currenttab = 3;
 	                return true;
@@ -10698,7 +10714,7 @@
 	            
 	            
 	            $('#kk_aj_addExempel').on('click', function (e) {               
-	                saveexempeltolocalstorage();
+	                saveArrExempel();
 	                $('.arrExempel').slideToggle("slow");
 	                $('.kk_aj_btnnyttexemple').text("Lägg till exempel");
 	                
@@ -10718,8 +10734,9 @@
 	                });
 	            });
 
-
+	            
 	        });
+	              
 
 	        var clearForm = function () {
 	            var addarrtab_1 = $('#addarrtab-1');
@@ -10741,67 +10758,6 @@
 	    }
 	};
 
-	var formvalidator = function (step) {
-	    var ret = false;
-	    var next = step + 1;
-
-	   if (step == 0) {
-	    var pass = $("#password");
-	        var passconfirm = $("#confirm");
-	        console.log("pass: " + pass);
-	        if (pass.val() != "" && pass.val() === passconfirm.val()) {
-	            pass.removeClass("formerror");
-	            ret= true;
-	        } else {        
-	            pass.addClass("formerror");
-	            ret= false;
-	        }   
-	   }
-	  
-
-	   if (step == 1) {
-	       var organisation = $("#utovare_organisation");
-	       var organisation_error = $(".utovare_organisation_error");
-	       if (organisation.val() != "") {
-	           ret = true;           
-	           $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
-	           $('.kk_aj_verifystep' + next + '').removeClass('disabled');
-	       } else {
-	           organisation_error.css('display', 'block');
-	           ret = false;
-	       }
-	               
-	       
-	   }
-	   if (step == 2) {
-	       var ArrRubrik = $("#arr_rubrik");
-	       var ArrRubrik_error = $(".arr_rubrik_error");
-	       if (ArrRubrik.val() != "") {
-	           ret = true;
-	           var next = step + 1;
-	           $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
-	       } else {
-	           ArrRubrik_error.css('display', 'block');
-	           ret = false;
-	       }
-	   }
-	   if (step == 3) {
-	       ret = true;
-	   }
-	     if (step == 4) {
-	       ret = true;
-	     }
-	     if (ret == false) {
-	         $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
-	         $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
-	         
-	     } else {
-	         $('#addarrtab-' + step + ' small').hide();
-	         $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
-	         $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
-	     }
-	   return ret;
-	}
 
 	var tabnavigator = function (tab) {
 	    var addarrtab_1 = $('#addarrtab-1');
@@ -10855,7 +10811,7 @@
 
 
 	// Arrangemangs exempel START!
-	var saveexempeltolocalstorage = function () {
+	var saveArrExempel = function () {
 	    var val = $('#arr_ExempelRubrik').val()
 	    var index = _exempellistobject.exempelitemlist.findIndex(function (item, i) {
 	        return item.mediaTitle === val
@@ -10954,158 +10910,220 @@
 	            arrformjsondata.Innehall = $('#arr_presentation').val();
 	            arrformjsondata.Arrangemangtyp = $('input[name=arr_radioValArrtyp]:checked').val();
 	            arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
-	            arrformjsondata.Faktalist.push({
+
+	            var arr_antalmedverkande = $('#arr_antalmedverkande')
+
+	            if (arr_antalmedverkande.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#arr_antalmedverkande').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#arr_antalmedverkande').val(),
-	            });
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": arr_antalmedverkande.attr('rel'),
+	                    "Faktarubrik": "Antal medverkande",
+	                    "FaktaValue": arr_antalmedverkande.val(),
+	                });
+	            }
+	            if ($('input[name=arr_laromedel]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
 	                    "FaktaTypID": $('input[name=arr_laromedel]:checked').attr('rel'),
-	                    "Faktarubrik": "" ,
+	                    "Faktarubrik": "Lärarmaterial ingår",
 	                    "FaktaValue": $('input[name=arr_laromedel]:checked').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                });
+	            }
+	            var formBuildTimeId = $('#formBuildTimeId')
+	            if (formBuildTimeId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#formBuildTimeId').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#formBuildTimeId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": formBuildTimeId.attr('rel'),
+	                    "Faktarubrik": "Byggtid",
+	                    "FaktaValue": formBuildTimeId.val(),
+	                });
+	            }
+	            var formDemolishTimeId = $('#formDemolishTimeId');
+	            if (formDemolishTimeId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
 	                    "FaktaTypID": $('#formDemolishTimeId').attr('rel'),
-	                    "Faktarubrik": "" ,
+	                    "Faktarubrik": "Rivtid",
 	                    "FaktaValue": $('#formDemolishTimeId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                });
+	            };
+	            var formVenueWidthId = $('#formVenueWidthId');
+	            if (formVenueWidthId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#formVenueWidthId').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#formVenueWidthId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": formVenueWidthId.attr('rel'),
+	                    "Faktarubrik": "Bredd på scen",
+	                    "FaktaValue": formVenueWidthId.val(),
+	                });
+	            };
+	            var formVenueDepthId = $('#formVenueDepthId');
+	            if (formVenueDepthId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#formVenueDepthId').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#formVenueDepthId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": formVenueDepthId.attr('rel'),
+	                    "Faktarubrik": "Djup på scen",
+	                    "FaktaValue": formVenueDepthId.val(),
+	                });
+	            }
+	            var formVenueHeightId = $('#formVenueHeightId');
+	            if (formVenueHeightId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#formVenueHeightId').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#formVenueHeightId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": formVenueHeightId.attr('rel'),
+	                    "Faktarubrik": "Takhöjd över scen",
+	                    "FaktaValue": formVenueHeightId.val(),
+	                });
+	            };            
+	            if ($('input[name=arr_ljud]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
 	                    "FaktaTypID": $('input[name=arr_ljud]:checked').attr('rel'),
-	                    "Faktarubrik": "" ,
+	                    "Faktarubrik": "Ljud",
 	                    "FaktaValue": $('input[name=arr_ljud]:checked').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                });
+	            };            
+	            if ($('input[name=arr_ljus]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
 	                    "FaktaTypID": $('input[name=arr_ljus]:checked').attr('rel'),
-	                    "Faktarubrik": "" ,
+	                    "Faktarubrik": "Ljus",
 	                    "FaktaValue": $('input[name=arr_ljus]:checked').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                });
+	            };
+	            if ($('input[name=arr_morklaggning]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
 	                    "FaktaTypID": $('input[name=arr_morklaggning]:checked').attr('rel'),
-	                    "Faktarubrik": "" ,
+	                    "Faktarubrik": "Mörkläggning krävs",
 	                    "FaktaValue": $('input[name=arr_morklaggning]:checked').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                });
+	            };
+	            var formCarriersId = $('#formCarriersId');
+	            if (formCarriersId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#formCarriersId').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#formCarriersId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": formCarriersId.attr('rel'),
+	                    "Faktarubrik": "Bärhjälp behövs",
+	                    "FaktaValue": formCarriersId.val(),
+	                });
+	            };
+	            var formElectricityId = $('#formElectricityId');
+	            if (formElectricityId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#formElectricityId').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#formElectricityId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": formElectricityId.attr('rel'),
+	                    "Faktarubrik": "El",
+	                    "FaktaValue": formElectricityId.val(),
+	                });
+	            };
+	            var formVenueRequiermentsId = $('#formVenueRequiermentsId');
+	            if (formVenueRequiermentsId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#formVenueRequiermentsId').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#formVenueRequiermentsId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": formVenueRequiermentsId.attr('rel'),
+	                    "Faktarubrik": "Övriga lokalkrav",
+	                    "FaktaValue": formVenueRequiermentsId.val(),
+	                });
+	            };
+	            var formMaxAudienceId = $('#formMaxAudienceId');
+	            if (formMaxAudienceId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#formMaxAudienceId').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#formMaxAudienceId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": formMaxAudienceId.attr('rel'),
+	                    "Faktarubrik": "Max publik",
+	                    "FaktaValue": formMaxAudienceId.val(),
+	                }); 
+	            };
+	            var formMaxParticipantsId = $('#formMaxParticipantsId');
+	            if (formMaxParticipantsId.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#formMaxParticipantsId').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#formMaxParticipantsId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
+	                    "FaktaTypID": formMaxParticipantsId.attr('rel'),
+	                    "Faktarubrik": "Max antal deltagare",
+	                    "FaktaValue": formMaxParticipantsId.val(),
+	                });
+	            };
+	            var kk_aj_yearspan = $('#kk_aj_yearspan');
+	            if (kk_aj_yearspan.val()) {
+	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": 0,
-	                    "FaktaTypID": $('#kk_aj_yearspan').attr('rel'),
-	                    "Faktarubrik": "" ,
-	                    "FaktaValue": $('#kk_aj_yearspan').html().replace(/år/g,'').split(" ").join("").split("-")[0]
-	            }); 
-	            arrformjsondata.Faktalist.push({
-	                "Faktaid": 0,
-	                "FaktaTypID": $('#kk_aj_yearspan').attr('rev'),
-	                "Faktarubrik": "" ,
-	                "FaktaValue": $('#kk_aj_yearspan').html().replace(/år/g,'').split(" ").join("").split("-")[1]
-	            }); 
-	            arrformjsondata.Faktalist.push({
-		            "Faktaid": 0,
-	                "FaktaTypID": $('#formMaxShowsId').attr('rel'),
-	                "Faktarubrik": "" ,
-	                "FaktaValue": $('#formMaxShowsId').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
-	                "Faktaid": 0,
-	                "FaktaTypID": $('#kk_aj_speltid').attr('rel'),
-	                "Faktarubrik": "" ,
-	                "FaktaValue": $('#kk_aj_speltid').html().replace(/min/g,''),
-	            }); 
-	            arrformjsondata.Faktalist.push({
-	                "Faktaid": 0,
-	                "FaktaTypID": $('#arr_ekonomikostnad').attr('rel'),
-	                "Faktarubrik": "" ,
-	                "FaktaValue": $('#arr_ekonomikostnad').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
-	                "Faktaid": 0,
-	                "FaktaTypID": $('input[name=arr_resor]:checked').attr('rel'),
-	                "Faktarubrik": "" ,
-	                "FaktaValue": $('input[name=arr_resor]:checked').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
-	                "Faktaid": 0,
-	                "FaktaTypID": $('input[name=arr_logi]:checked').attr('rel'),
-	                "Faktarubrik": "" ,
-	                "FaktaValue": $('input[name=arr_logi]:checked').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
-	                "Faktaid": 0,
-	                "FaktaTypID": $('input[name=arr_Traktamente]:checked').attr('rel'),
-	                "Faktarubrik": "" ,
-	                "FaktaValue": $('input[name=arr_Traktamente]:checked').val(),
-	            }); 
-	            arrformjsondata.Faktalist.push({
-	                "Faktaid": 0,
-	                "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
-	                "Faktarubrik": "" ,
-	                "FaktaValue": $('#arr_resorovrigt').val(),
-	            });
+	                    "FaktaTypID": kk_aj_yearspan.attr('rel'),
+	                    "Faktarubrik": "Ålder högst",
+	                    "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[0]
+	                });
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": 0,
+	                    "FaktaTypID": kk_aj_yearspan.attr('rev'),
+	                    "Faktarubrik": "Ålder lägst",
+	                    "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[1]
+	                });
+	            };
+	            var formMaxShowsId = $('#formMaxShowsId');
+	            if (formMaxShowsId.val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": 0,
+	                    "FaktaTypID": formMaxShowsId.attr('rel'),
+	                    "Faktarubrik": "Föreställningar per dag",
+	                    "FaktaValue": formMaxShowsId.val(),
+	                });
+	            };
+	            var kk_aj_speltid = $('#kk_aj_speltid');
+	            if (kk_aj_speltid.val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": 0,
+	                    "FaktaTypID": kk_aj_speltid.attr('rel'),
+	                    "Faktarubrik": "Speltid",
+	                    "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
+	                });
+	            };
+	            var arr_ekonomikostnad = $('#arr_ekonomikostnad');
+	            if (arr_ekonomikostnad.val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": 0,
+	                    "FaktaTypID": arr_ekonomikostnad.attr('rel'),
+	                    "Faktarubrik": "Kostnad",
+	                    "FaktaValue": arr_ekonomikostnad.val(),
+	                });
+	            };            
+	            if ($('input[name=arr_resor]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": 0,
+	                    "FaktaTypID": $('input[name=arr_resor]:checked').attr('rel'),
+	                    "Faktarubrik": "Resor",
+	                    "FaktaValue": $('input[name=arr_resor]:checked').val(),
+	                });
+	            };
+	            if ($('input[name=arr_logi]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": 0,
+	                    "FaktaTypID": $('input[name=arr_logi]:checked').attr('rel'),
+	                    "Faktarubrik": "Logi",
+	                    "FaktaValue": $('input[name=arr_logi]:checked').val(),
+	                }); 
+	            };
+	            if ($('input[name=arr_Traktamente]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": 0,
+	                    "FaktaTypID": $('input[name=arr_Traktamente]:checked').attr('rel'),
+	                    "Faktarubrik": "Traktamente",
+	                    "FaktaValue": $('input[name=arr_Traktamente]:checked').val(),
+	                }); 
+	            };
+	            var arr_ekonomikostnad = $('#arr_ekonomikostnad');
+	            if (arr_ekonomikostnad.val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": 0,
+	                    "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
+	                    "Faktarubrik": "Övrigt",
+	                    "FaktaValue": $('#arr_resorovrigt').val(),
+	                });
+	            };
 	            if (mediaExempledata.exempelitemlist) {
 	                if (mediaExempledata.exempelitemlist.length >= 0) {
 	                    arrformjsondata.MediaList = mediaExempledata.exempelitemlist;
 	                }
-	            }
-
-	                
-	            
+	            };
+	                           
 
 	            //arrformjsondata.MediaList.MediaUrl = $('#arr_Exempelbild').val();
 	            //arrformjsondata.MediaList.MediaFilename = $('#arr_antalmedverkande').val();
@@ -11235,6 +11253,192 @@
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//här sätts alla pluggin och jquery.ready starters 
+	var $ = __webpack_require__(4);
+	var appsettingsobject = __webpack_require__(1);
+	var _appsetting = appsettingsobject.config;
+
+	module.exports = {
+	    formvalidator:function (step) {
+	        var ret = false;
+	        var next = step + 1;
+
+	        //Break validation om app i debugläge
+	        if (_appsetting.debug == "true") {
+	            $('.kk_aj_verifystep' + next + '').removeClass('disabled');
+	            ret = true;
+	        } else {
+	            switch (step) {
+	                case 0:
+	                    ret = step0(next);
+	                    break;
+	                case 1:
+	                    ret = step1(next);
+	                    break;
+	                case 2:
+	                    ret = step2(next);
+	                    break;
+	                case 3:
+	                    ret = step3(next);
+	                    break;
+	                case 4:
+	                    ret = step3(next);
+	                    break;
+	            }
+	        }
+	        if (ret == false) {
+	            $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
+	            $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
+
+	        } else {
+	            $('#addarrtab-' + step + ' small').hide();
+	            $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
+	            $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
+	        }
+	        return ret;
+	    }
+
+	};
+
+
+	var step0 = function (next) {
+	    var pass = $("#password");
+	    var passconfirm = $("#confirm");
+	    console.log("pass: " + pass);
+	    if (pass.val() != "" && pass.val() === passconfirm.val()) {
+	        pass.removeClass("formerror");
+	        ret = true;
+	    } else {
+	        pass.addClass("formerror");
+	        ret = false;
+	    }
+	    return ret;
+	}
+
+	var step1 = function (next) {
+	    var validateobj = $('.kk_aj_requireValidation_step1');
+	    return validateinputs(validateobj, next);
+	}
+
+	var step2 = function (next) {
+	    var ret = true;
+
+	    var validateobj = $('.kk_aj_requireValidation_step2');
+	    ret = validateinputs(validateobj, next);
+
+	    $('.arr_radioValArrtyp_error').css('display', 'none');
+	    $('.arr_radioValkontstform_error').css('display', 'none');
+	    $('.kk_aj_search_arr_ljud_error').css('display', 'none');
+	    $('.ArrangemangtypBlock').removeClass('radioError');
+	    $('.kontformBlock').removeClass('radioError');
+
+	    if ($('input[name=arr_radioValArrtyp]:checked').length <= 0) {
+	        $('.arr_radioValArrtyp_error').css('display', 'block');
+	        $('.ArrangemangtypBlock').addClass('radioError');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_radioValkontstform]:checked').length <= 0) {
+	        $('.arr_radioValkontstform_error').css('display', 'block');
+	        $('.kontformBlock').addClass('radioError');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_ljud]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_ljud_error').css('display', 'block');        
+	        ret = false;
+	    }
+	    
+	    return ret;
+	}
+	var step3 = function (next) {
+	    ret = true;
+	    return ret;
+	}
+
+	var step4 = function (next) {
+	    ret = true;
+	    return ret;
+	}
+
+
+
+	var validateinputs = function (validateobj, next) {
+	    var ret = true;
+	    validateobj.each(function () {
+	        var current = $(this);
+	        var current_error = $("." + current.attr('id') + "_error");
+
+	        if (current.val() != "") {
+	            
+	            $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
+	            $('.kk_aj_verifystep' + next + '').removeClass('disabled');
+	            current_error.css('display', 'none');
+	        } else {
+	            current_error.css('display', 'block');
+	            ret = false;
+	        }
+
+	    });
+	    return ret;
+	}
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//här sätts alla pluggin och jquery.ready starters 
+	var $ = __webpack_require__(4);
+	var appsettingsobject = __webpack_require__(1);
+	var HandlebarTemplet = __webpack_require__(7);
+	var _appsetting = appsettingsobject.config;
+
+	module.exports = {
+	    getArrFormJsonData: function (arrJson) {
+
+	        
+	            maincontent(arrJson);
+	            faktaContent(arrJson);
+	            utovareContent(arrJson);
+	            
+	        
+	    }
+	};
+
+
+	var maincontent = function (arrJson) {
+	    $('.granska_rubrik').html( arrJson.Rubrik);
+	    $('.granska_underrubrik').html(arrJson.UnderRubrik);
+	    $('.granska_innehall').html(arrJson.Innehall);
+	    var imgsrc = _appsetting.globalconfig.arrtmpimgurl +'_'+ arrJson.MainImage.MediaUrl;
+	    $('.granska_pressentationsbild').attr('src', imgsrc);
+
+	    if (arrJson.MediaList.length > 0) {
+	        $('.granska_exempel').show();
+	    } else {
+	        $('.granska_exempel').hide();
+	    }
+
+	    //if (arrJson.MediaList.length < 0) {
+	    //    $('.granska_exempel').show();
+	    //} else {
+	    //    $('.granska_exempel').hide();
+	    //}
+
+	}
+	var faktaContent = function (fakalistJson) {
+
+	    HandlebarTemplet.injecthtmltemplate(".granska_Fakta_mainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
+
+	}
+	var utovareContent = function (utovareJson) {
+
+
+	}
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(4);

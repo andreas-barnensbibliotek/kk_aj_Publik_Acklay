@@ -11870,67 +11870,119 @@ img .flip {
   filter: alpha(opacity=50); }
 
 /* line 159, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
-hr.style14 {
+hr.linje {
   border: 0;
   height: 1px;
-  margin-bottom: 2rem;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
   background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
   background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); }
 
-/* line 168, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 169, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .label-above {
   font-size: 1.5rem !important;
   font-weight: 200 !important;
   color: #f77136 !important;
   text-transform: uppercase; }
 
-/* line 174, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 175, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempel {
   display: none; }
-  /* line 176, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 177, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrExempel .addexempelblock {
     background-color: #F9F9F9;
     border-top: 1px solid #F5F5F5;
     padding-top: 1rem; }
-  /* line 181, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 182, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrExempel .addexempelbtn {
     padding-top: .5rem; }
 
-/* line 186, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 187, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempellist {
   margin-left: 0px; }
-  /* line 188, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 189, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrExempellist h2 {
     font-size: 1.3em; }
-  /* line 189, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 190, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrExempellist li {
     margin-bottom: 1rem;
     list-style: none;
     background-color: #F9F9F9;
     border-top: 1px dashed #efefef; }
 
-/* line 197, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 198, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .tabs-content label {
   font-weight: 600; }
 
-/* line 202, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 203, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 input[type=radio] + label {
   font-weight: normal; }
 
-/* line 206, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 207, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempellist:empty {
   display: none; }
 
-/* line 209, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 210, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempellist label {
   font-weight: normal; }
 
-/* line 211, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 212, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempellist .kk_aj_tabortexempel i {
   float: right;
   padding: 4px;
   display: block;
   color: #8B0000; }
+
+/* line 215, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.radioError {
+  border: 2px solid #f04124; }
+
+/* line 221, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent h1 {
+  color: #f77136; }
+
+/* line 222, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent h2 {
+  color: #f77136; }
+
+/* line 223, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent .arrmainfoto {
+  font-size: 0.8rem; }
+  /* line 225, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .artikelwrapper .artmaincontent .arrmainfoto span {
+    font-weight: bold; }
+
+/* line 229, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent .granska_innehall {
+  margin-bottom: 4rem; }
+
+/* line 233, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent .granska_exempel .kk_aj_tabortexempel {
+  display: none; }
+
+/* line 239, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artsidecontainer {
+  padding-bottom: 1rem;
+  padding-left: 0.7rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+  margin-bottom: 1rem; }
+  /* line 245, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .artikelwrapper .artsidecontainer h3 {
+    font-weight: 100;
+    color: #f77136; }
+  /* line 249, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .artikelwrapper .artsidecontainer .faktalabel {
+    font-weight: bold;
+    font-size: .85rem; }
+  /* line 254, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .artikelwrapper .artsidecontainer #share-buttons img {
+    width: 35px;
+    padding: 5px;
+    border: 0;
+    -webkit-box-shadow: 0;
+            box-shadow: 0;
+    display: inline; }
 
 /*@import 'foundation/components/grid';
 @import 'foundation/components/accordion';
@@ -12685,67 +12737,119 @@ textarea {
   filter: alpha(opacity=50); }
 
 /* line 159, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
-hr.style14 {
+hr.linje {
   border: 0;
   height: 1px;
-  margin-bottom: 2rem;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
   background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
   background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); }
 
-/* line 168, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 169, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .label-above {
   font-size: 1.5rem !important;
   font-weight: 200 !important;
   color: #f77136 !important;
   text-transform: uppercase; }
 
-/* line 174, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 175, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempel {
   display: none; }
-  /* line 176, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 177, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrExempel .addexempelblock {
     background-color: #F9F9F9;
     border-top: 1px solid #F5F5F5;
     padding-top: 1rem; }
-  /* line 181, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 182, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrExempel .addexempelbtn {
     padding-top: .5rem; }
 
-/* line 186, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 187, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempellist {
   margin-left: 0px; }
-  /* line 188, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 189, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrExempellist h2 {
     font-size: 1.3em; }
-  /* line 189, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  /* line 190, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrExempellist li {
     margin-bottom: 1rem;
     list-style: none;
     background-color: #F9F9F9;
     border-top: 1px dashed #efefef; }
 
-/* line 197, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 198, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .tabs-content label {
   font-weight: 600; }
 
-/* line 202, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 203, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 input[type=radio] + label {
   font-weight: normal; }
 
-/* line 206, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 207, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempellist:empty {
   display: none; }
 
-/* line 209, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 210, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempellist label {
   font-weight: normal; }
 
-/* line 211, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 212, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrExempellist .kk_aj_tabortexempel i {
   float: right;
   padding: 4px;
   display: block;
   color: #8B0000; }
+
+/* line 215, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.radioError {
+  border: 2px solid #f04124; }
+
+/* line 221, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent h1 {
+  color: #f77136; }
+
+/* line 222, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent h2 {
+  color: #f77136; }
+
+/* line 223, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent .arrmainfoto {
+  font-size: 0.8rem; }
+  /* line 225, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .artikelwrapper .artmaincontent .arrmainfoto span {
+    font-weight: bold; }
+
+/* line 229, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent .granska_innehall {
+  margin-bottom: 4rem; }
+
+/* line 233, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artmaincontent .granska_exempel .kk_aj_tabortexempel {
+  display: none; }
+
+/* line 239, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.artikelwrapper .artsidecontainer {
+  padding-bottom: 1rem;
+  padding-left: 0.7rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+  margin-bottom: 1rem; }
+  /* line 245, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .artikelwrapper .artsidecontainer h3 {
+    font-weight: 100;
+    color: #f77136; }
+  /* line 249, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .artikelwrapper .artsidecontainer .faktalabel {
+    font-weight: bold;
+    font-size: .85rem; }
+  /* line 254, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .artikelwrapper .artsidecontainer #share-buttons img {
+    width: 35px;
+    padding: 5px;
+    border: 0;
+    -webkit-box-shadow: 0;
+            box-shadow: 0;
+    display: inline; }
 
 /* line 89, _dev/devsass/kk_aj_PublicCSS.scss */
 .h2 {

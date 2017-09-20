@@ -3,11 +3,13 @@ var $ = require("jquery");
 var appsettingsobject = require("./appSettings.js");
 var arrformjsonBuilder = require("./arrformJsonBuilder.js");
 var handlebarTemplethandler = require("./HandlebarTemplethandler.js");
+var arrformValidator = require("./arrFormValidator.js");
+var arrGranskaVy = require("./arrGranskaVy.js");
 var _exempellistobject = { "exempelitemlist": [] };
 
 module.exports = {
     start: function (tab) {
-        var appsetting = appsettingsobject.config;
+        var appsettings = appsettingsobject.config;
         $(function () {
 
             var storage = Storages.localStorage
@@ -18,7 +20,7 @@ module.exports = {
             
             // Verify steg 1
             $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
-                if (formvalidator(1)) {
+                if (arrformValidator.formvalidator(1)) {
                     tabnavigator(2);
                     return true;
                 } else {
@@ -29,7 +31,18 @@ module.exports = {
             
             // Verify steg 2
             $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
-                if (formvalidator(2)) {
+                if (arrformValidator.formvalidator(2)) {
+
+                    // FYll på inmatade värden i granskavyn!   
+                    arrformjsonBuilder.getArrFormJsonData(_exempellistobject, function (callback) {
+                        console.log(callback);
+                        var jsonmainobject = callback;
+                        arrGranskaVy.getArrFormJsonData(jsonmainobject);
+
+                    });
+
+                    
+
                     tabnavigator(3);                                     
                     return false;
                     
@@ -42,6 +55,8 @@ module.exports = {
             $('.kk_aj_btn_next_step[rel=4]').on('click', function (e) {               
                     tabnavigator(4);
                 //spara in allt i jsonobject och lägg i localstoragae
+
+                    console.log("finns:" + _exempellistobject);
                     return true;                
             });
 
@@ -49,7 +64,7 @@ module.exports = {
             $('.kk_aj_tab[rel=1]').on('click', function (e) {               
                 tabnavigator(1);
                 if (appsettings.arrtab.currenttab > 1) {
-                    formvalidator(1);
+                    arrformValidator.formvalidator(1);
                 }
                 appsettings.arrtab.currenttab = 1;
                 return true;
@@ -57,7 +72,7 @@ module.exports = {
             $('.kk_aj_tab[rel=2]').on('click', function (e) {                
                 tabnavigator(2);
                 if (appsettings.arrtab.currenttab > 1) {
-                    formvalidator(2);
+                    arrformValidator.formvalidator(2);
                 }
                 appsettings.arrtab.currenttab = 2;
                 return true;
@@ -65,7 +80,7 @@ module.exports = {
             $('.kk_aj_tab[rel=3]').on('click', function (e) {
                 tabnavigator(3);
                 if (appsettings.arrtab.currenttab > 3) {
-                    formvalidator(3);
+                    arrformValidator.formvalidator(3);
                 }
                 appsettings.arrtab.currenttab = 3;
                 return true;
@@ -137,7 +152,7 @@ module.exports = {
             
             
             $('#kk_aj_addExempel').on('click', function (e) {               
-                saveexempeltolocalstorage();
+                saveArrExempel();
                 $('.arrExempel').slideToggle("slow");
                 $('.kk_aj_btnnyttexemple').text("Lägg till exempel");
                 
@@ -157,8 +172,9 @@ module.exports = {
                 });
             });
 
-
+            
         });
+              
 
         var clearForm = function () {
             var addarrtab_1 = $('#addarrtab-1');
@@ -180,67 +196,6 @@ module.exports = {
     }
 };
 
-var formvalidator = function (step) {
-    var ret = false;
-    var next = step + 1;
-
-   if (step == 0) {
-    var pass = $("#password");
-        var passconfirm = $("#confirm");
-        console.log("pass: " + pass);
-        if (pass.val() != "" && pass.val() === passconfirm.val()) {
-            pass.removeClass("formerror");
-            ret= true;
-        } else {        
-            pass.addClass("formerror");
-            ret= false;
-        }   
-   }
-  
-
-   if (step == 1) {
-       var organisation = $("#utovare_organisation");
-       var organisation_error = $(".utovare_organisation_error");
-       if (organisation.val() != "") {
-           ret = true;           
-           $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
-           $('.kk_aj_verifystep' + next + '').removeClass('disabled');
-       } else {
-           organisation_error.css('display', 'block');
-           ret = false;
-       }
-               
-       
-   }
-   if (step == 2) {
-       var ArrRubrik = $("#arr_rubrik");
-       var ArrRubrik_error = $(".arr_rubrik_error");
-       if (ArrRubrik.val() != "") {
-           ret = true;
-           var next = step + 1;
-           $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
-       } else {
-           ArrRubrik_error.css('display', 'block');
-           ret = false;
-       }
-   }
-   if (step == 3) {
-       ret = true;
-   }
-     if (step == 4) {
-       ret = true;
-     }
-     if (ret == false) {
-         $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
-         $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
-         
-     } else {
-         $('#addarrtab-' + step + ' small').hide();
-         $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
-         $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
-     }
-   return ret;
-}
 
 var tabnavigator = function (tab) {
     var addarrtab_1 = $('#addarrtab-1');
@@ -294,7 +249,7 @@ var changetabattr = function (tab) {
 
 
 // Arrangemangs exempel START!
-var saveexempeltolocalstorage = function () {
+var saveArrExempel = function () {
     var val = $('#arr_ExempelRubrik').val()
     var index = _exempellistobject.exempelitemlist.findIndex(function (item, i) {
         return item.mediaTitle === val

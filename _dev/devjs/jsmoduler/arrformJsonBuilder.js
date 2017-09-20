@@ -53,158 +53,220 @@ module.exports = {
             arrformjsondata.Innehall = $('#arr_presentation').val();
             arrformjsondata.Arrangemangtyp = $('input[name=arr_radioValArrtyp]:checked').val();
             arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
-            arrformjsondata.Faktalist.push({
+
+            var arr_antalmedverkande = $('#arr_antalmedverkande')
+
+            if (arr_antalmedverkande.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#arr_antalmedverkande').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#arr_antalmedverkande').val(),
-            });
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": arr_antalmedverkande.attr('rel'),
+                    "Faktarubrik": "Antal medverkande",
+                    "FaktaValue": arr_antalmedverkande.val(),
+                });
+            }
+            if ($('input[name=arr_laromedel]:checked').val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
                     "FaktaTypID": $('input[name=arr_laromedel]:checked').attr('rel'),
-                    "Faktarubrik": "" ,
+                    "Faktarubrik": "Lärarmaterial ingår",
                     "FaktaValue": $('input[name=arr_laromedel]:checked').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                });
+            }
+            var formBuildTimeId = $('#formBuildTimeId')
+            if (formBuildTimeId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#formBuildTimeId').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#formBuildTimeId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": formBuildTimeId.attr('rel'),
+                    "Faktarubrik": "Byggtid",
+                    "FaktaValue": formBuildTimeId.val(),
+                });
+            }
+            var formDemolishTimeId = $('#formDemolishTimeId');
+            if (formDemolishTimeId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
                     "FaktaTypID": $('#formDemolishTimeId').attr('rel'),
-                    "Faktarubrik": "" ,
+                    "Faktarubrik": "Rivtid",
                     "FaktaValue": $('#formDemolishTimeId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                });
+            };
+            var formVenueWidthId = $('#formVenueWidthId');
+            if (formVenueWidthId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#formVenueWidthId').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#formVenueWidthId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": formVenueWidthId.attr('rel'),
+                    "Faktarubrik": "Bredd på scen",
+                    "FaktaValue": formVenueWidthId.val(),
+                });
+            };
+            var formVenueDepthId = $('#formVenueDepthId');
+            if (formVenueDepthId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#formVenueDepthId').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#formVenueDepthId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": formVenueDepthId.attr('rel'),
+                    "Faktarubrik": "Djup på scen",
+                    "FaktaValue": formVenueDepthId.val(),
+                });
+            }
+            var formVenueHeightId = $('#formVenueHeightId');
+            if (formVenueHeightId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#formVenueHeightId').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#formVenueHeightId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": formVenueHeightId.attr('rel'),
+                    "Faktarubrik": "Takhöjd över scen",
+                    "FaktaValue": formVenueHeightId.val(),
+                });
+            };            
+            if ($('input[name=arr_ljud]:checked').val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
                     "FaktaTypID": $('input[name=arr_ljud]:checked').attr('rel'),
-                    "Faktarubrik": "" ,
+                    "Faktarubrik": "Ljud",
                     "FaktaValue": $('input[name=arr_ljud]:checked').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                });
+            };            
+            if ($('input[name=arr_ljus]:checked').val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
                     "FaktaTypID": $('input[name=arr_ljus]:checked').attr('rel'),
-                    "Faktarubrik": "" ,
+                    "Faktarubrik": "Ljus",
                     "FaktaValue": $('input[name=arr_ljus]:checked').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                });
+            };
+            if ($('input[name=arr_morklaggning]:checked').val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
                     "FaktaTypID": $('input[name=arr_morklaggning]:checked').attr('rel'),
-                    "Faktarubrik": "" ,
+                    "Faktarubrik": "Mörkläggning krävs",
                     "FaktaValue": $('input[name=arr_morklaggning]:checked').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                });
+            };
+            var formCarriersId = $('#formCarriersId');
+            if (formCarriersId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#formCarriersId').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#formCarriersId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": formCarriersId.attr('rel'),
+                    "Faktarubrik": "Bärhjälp behövs",
+                    "FaktaValue": formCarriersId.val(),
+                });
+            };
+            var formElectricityId = $('#formElectricityId');
+            if (formElectricityId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#formElectricityId').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#formElectricityId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": formElectricityId.attr('rel'),
+                    "Faktarubrik": "El",
+                    "FaktaValue": formElectricityId.val(),
+                });
+            };
+            var formVenueRequiermentsId = $('#formVenueRequiermentsId');
+            if (formVenueRequiermentsId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#formVenueRequiermentsId').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#formVenueRequiermentsId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": formVenueRequiermentsId.attr('rel'),
+                    "Faktarubrik": "Övriga lokalkrav",
+                    "FaktaValue": formVenueRequiermentsId.val(),
+                });
+            };
+            var formMaxAudienceId = $('#formMaxAudienceId');
+            if (formMaxAudienceId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#formMaxAudienceId').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#formMaxAudienceId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": formMaxAudienceId.attr('rel'),
+                    "Faktarubrik": "Max publik",
+                    "FaktaValue": formMaxAudienceId.val(),
+                }); 
+            };
+            var formMaxParticipantsId = $('#formMaxParticipantsId');
+            if (formMaxParticipantsId.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#formMaxParticipantsId').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#formMaxParticipantsId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
+                    "FaktaTypID": formMaxParticipantsId.attr('rel'),
+                    "Faktarubrik": "Max antal deltagare",
+                    "FaktaValue": formMaxParticipantsId.val(),
+                });
+            };
+            var kk_aj_yearspan = $('#kk_aj_yearspan');
+            if (kk_aj_yearspan.val()) {
+                arrformjsondata.Faktalist.push({
                     "Faktaid": 0,
-                    "FaktaTypID": $('#kk_aj_yearspan').attr('rel'),
-                    "Faktarubrik": "" ,
-                    "FaktaValue": $('#kk_aj_yearspan').html().replace(/år/g,'').split(" ").join("").split("-")[0]
-            }); 
-            arrformjsondata.Faktalist.push({
-                "Faktaid": 0,
-                "FaktaTypID": $('#kk_aj_yearspan').attr('rev'),
-                "Faktarubrik": "" ,
-                "FaktaValue": $('#kk_aj_yearspan').html().replace(/år/g,'').split(" ").join("").split("-")[1]
-            }); 
-            arrformjsondata.Faktalist.push({
-	            "Faktaid": 0,
-                "FaktaTypID": $('#formMaxShowsId').attr('rel'),
-                "Faktarubrik": "" ,
-                "FaktaValue": $('#formMaxShowsId').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
-                "Faktaid": 0,
-                "FaktaTypID": $('#kk_aj_speltid').attr('rel'),
-                "Faktarubrik": "" ,
-                "FaktaValue": $('#kk_aj_speltid').html().replace(/min/g,''),
-            }); 
-            arrformjsondata.Faktalist.push({
-                "Faktaid": 0,
-                "FaktaTypID": $('#arr_ekonomikostnad').attr('rel'),
-                "Faktarubrik": "" ,
-                "FaktaValue": $('#arr_ekonomikostnad').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
-                "Faktaid": 0,
-                "FaktaTypID": $('input[name=arr_resor]:checked').attr('rel'),
-                "Faktarubrik": "" ,
-                "FaktaValue": $('input[name=arr_resor]:checked').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
-                "Faktaid": 0,
-                "FaktaTypID": $('input[name=arr_logi]:checked').attr('rel'),
-                "Faktarubrik": "" ,
-                "FaktaValue": $('input[name=arr_logi]:checked').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
-                "Faktaid": 0,
-                "FaktaTypID": $('input[name=arr_Traktamente]:checked').attr('rel'),
-                "Faktarubrik": "" ,
-                "FaktaValue": $('input[name=arr_Traktamente]:checked').val(),
-            }); 
-            arrformjsondata.Faktalist.push({
-                "Faktaid": 0,
-                "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
-                "Faktarubrik": "" ,
-                "FaktaValue": $('#arr_resorovrigt').val(),
-            });
+                    "FaktaTypID": kk_aj_yearspan.attr('rel'),
+                    "Faktarubrik": "Ålder högst",
+                    "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[0]
+                });
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": 0,
+                    "FaktaTypID": kk_aj_yearspan.attr('rev'),
+                    "Faktarubrik": "Ålder lägst",
+                    "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[1]
+                });
+            };
+            var formMaxShowsId = $('#formMaxShowsId');
+            if (formMaxShowsId.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": 0,
+                    "FaktaTypID": formMaxShowsId.attr('rel'),
+                    "Faktarubrik": "Föreställningar per dag",
+                    "FaktaValue": formMaxShowsId.val(),
+                });
+            };
+            var kk_aj_speltid = $('#kk_aj_speltid');
+            if (kk_aj_speltid.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": 0,
+                    "FaktaTypID": kk_aj_speltid.attr('rel'),
+                    "Faktarubrik": "Speltid",
+                    "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
+                });
+            };
+            var arr_ekonomikostnad = $('#arr_ekonomikostnad');
+            if (arr_ekonomikostnad.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": 0,
+                    "FaktaTypID": arr_ekonomikostnad.attr('rel'),
+                    "Faktarubrik": "Kostnad",
+                    "FaktaValue": arr_ekonomikostnad.val(),
+                });
+            };            
+            if ($('input[name=arr_resor]:checked').val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": 0,
+                    "FaktaTypID": $('input[name=arr_resor]:checked').attr('rel'),
+                    "Faktarubrik": "Resor",
+                    "FaktaValue": $('input[name=arr_resor]:checked').val(),
+                });
+            };
+            if ($('input[name=arr_logi]:checked').val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": 0,
+                    "FaktaTypID": $('input[name=arr_logi]:checked').attr('rel'),
+                    "Faktarubrik": "Logi",
+                    "FaktaValue": $('input[name=arr_logi]:checked').val(),
+                }); 
+            };
+            if ($('input[name=arr_Traktamente]:checked').val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": 0,
+                    "FaktaTypID": $('input[name=arr_Traktamente]:checked').attr('rel'),
+                    "Faktarubrik": "Traktamente",
+                    "FaktaValue": $('input[name=arr_Traktamente]:checked').val(),
+                }); 
+            };
+            var arr_ekonomikostnad = $('#arr_ekonomikostnad');
+            if (arr_ekonomikostnad.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": 0,
+                    "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
+                    "Faktarubrik": "Övrigt",
+                    "FaktaValue": $('#arr_resorovrigt').val(),
+                });
+            };
             if (mediaExempledata.exempelitemlist) {
                 if (mediaExempledata.exempelitemlist.length >= 0) {
                     arrformjsondata.MediaList = mediaExempledata.exempelitemlist;
                 }
-            }
-
-                
-            
+            };
+                           
 
             //arrformjsondata.MediaList.MediaUrl = $('#arr_Exempelbild').val();
             //arrformjsondata.MediaList.MediaFilename = $('#arr_antalmedverkande').val();

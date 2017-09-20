@@ -156,10 +156,11 @@
 
  }
  
-hr.style14 { 
+hr.linje { 
   border: 0; 
   height: 1px; 
-  margin-bottom:2rem;
+   margin-top:0rem;
+  margin-bottom:1rem;
   background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
   background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
   background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
@@ -211,3 +212,53 @@ input[type=radio] + label {
          i{float:right;padding:4px; display: block; color:#8B0000;}
     }
 }
+.radioError{
+    border:2px solid $alert-color;
+}
+
+.artikelwrapper{
+    .artmaincontent{
+        h1{color: $orange; }
+        h2{color:$orange; }
+        .arrmainfoto{
+             font-size: 0.8rem;
+            span{
+                 font-weight: bold;
+            }
+        }
+        .granska_innehall{
+            margin-bottom:4rem;
+        }
+        .granska_exempel{
+             .kk_aj_tabortexempel{ 
+                display:none;
+            }
+        }
+
+    }
+    .artsidecontainer{        
+        padding-bottom: 1rem;
+        padding-left: 0.7rem;
+        padding-right: 2rem;
+        padding-top: 0.5rem;
+        margin-bottom: 1rem;
+        h3 {
+            font-weight: 100;
+            color: $orange;
+        }
+        .faktalabel{
+            font-weight:bold;
+            font-size:.85rem;
+        }
+        #share-buttons{
+            img {
+                width: 35px;
+                padding: 5px;
+                border: 0;
+                box-shadow: 0;
+                display: inline;
+            }
+        }
+    }
+}
+
