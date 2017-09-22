@@ -2,7 +2,7 @@
 var appsettingsobject = require("./jsmoduler/appSettings.js");
 var msg = require("./jsmoduler/main.js");
 var pagehandler = require("./jsmoduler/pageloadhandler.js");
-var jqueryNavEvents = require("./jsmoduler/appJqueryMainNavEvents.js");
+//var jqueryNavEvents = require("./jsmoduler/appJqueryMainNavEvents.js");
 
 var appsetting = appsettingsobject.config;
 //  kulturkatalogen publik start
@@ -83,7 +83,7 @@ $(function () {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // STOPP rangesliders för arrangemangformuläret-----------------------------------------------------------------------------
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    jqueryNavEvents.init();
+    //jqueryNavEvents.init();
    
    // $("#mainapp").attr('style','background:#fff;').html("funkar! eller");    
     //alert('Foundation Core Version: ' + appsettings.config.globalconfig.dnnURL);

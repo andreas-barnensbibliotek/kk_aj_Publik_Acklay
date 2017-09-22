@@ -48,7 +48,7 @@
 	var appsettingsobject = __webpack_require__(1);
 	var msg = __webpack_require__(2);
 	var pagehandler = __webpack_require__(3);
-	var jqueryNavEvents = __webpack_require__(10);
+	//var jqueryNavEvents = require("./jsmoduler/appJqueryMainNavEvents.js");
 
 	var appsetting = appsettingsobject.config;
 	//  kulturkatalogen publik start
@@ -129,7 +129,7 @@
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	    // STOPP rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	    jqueryNavEvents.init();
+	    //jqueryNavEvents.init();
 	   
 	   // $("#mainapp").attr('style','background:#fff;').html("funkar! eller");    
 	    //alert('Foundation Core Version: ' + appsettings.config.globalconfig.dnnURL);
@@ -196,22 +196,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            apiserver: "http://localhost:60485",
-	            dnnURL: "http://dnndev.me",           
-	            localOrServerURL: "http://localhost:60485/Api_v2",
-	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://localhost:60485",
+	            //dnnURL: "http://dnndev.me",           
+	            //localOrServerURL: "http://localhost:60485/Api_v2",
+	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            //dnnURL: "http://kulturkatalog.kivdev.se",
-	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            dnnURL: "http://kulturkatalog.kivdev.se",
+	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -10567,6 +10567,7 @@
 	var handlebarTemplethandler = __webpack_require__(7);
 	var arrformValidator = __webpack_require__(8);
 	var arrGranskaVy = __webpack_require__(9);
+	var arrformAutocompleteHandler = __webpack_require__(10);
 	var _exempellistobject = { "exempelitemlist": [] };
 
 	module.exports = {
@@ -10579,7 +10580,78 @@
 	            var storage = Storages.localStorage
 	            console.log("localstorage: " + storage.get('foo'))
 
-	            
+	            var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
+	            var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
+
+	            // Nav Event
+	            $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
+	                $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+	                btn_befintlig_utovareBlock.hide();
+	                btn_ny_utovareBlock.show();
+	                $('.kk_aj_verifystep2').hide();
+
+	                $(this).removeClass("secondary");
+	                $('.kk_aj_btnnyutovare').addClass("secondary");
+	                return false;
+	            });
+	            $('body').on('click', '.kk_aj_btnnyutovare', function () {
+	                arrformAutocompleteHandler.emptyutovareform();
+	                btn_befintlig_utovareBlock.removeClass('successborder').show();
+	                btn_ny_utovareBlock.hide();
+	                $('.kk_aj_verifystep2').show();
+	                $(this).removeClass("secondary");
+	                $('.kk_aj_btnbefintligutovare').addClass("secondary");
+
+	                return false;
+	            });
+
+	            // Get befintlig arrangör
+	            $('body').on('click', '.kk_aj_btnHamtakontaktupg', function () {
+
+	                var epost = $('.kk_aj_search_utovareEpost');
+	                var postnr = $('.kk_aj_search_utovarePostnr');
+	                var kk_aj_search_utovarePostnr_error = $('.kk_aj_search_utovarePostnr_error');
+	                var kk_aj_search_utovareEpost_error = $('.kk_aj_search_utovareEpost_error');
+	                var kk_aj_search_Nothingtoshow = $('.kk_aj_search_Nothingtoshow');
+	                var kk_aj_search_Nothingtoshow_error = $('.kk_aj_search_Nothingtoshow_error').hide();
+	                var kk_aj_form_utovareuppgifter = $('.kk_aj_form_utovareuppgifter');
+	                var kk_aj_btnHamtakontaktupg = $('.kk_aj_btnHamtakontaktupg');
+	                var kk_aj_verifystep2 = $('.kk_aj_verifystep2');
+
+	                kk_aj_search_utovarePostnr_error.hide();
+	                kk_aj_search_utovareEpost_error.hide();
+	                kk_aj_search_Nothingtoshow.hide();
+	                kk_aj_search_Nothingtoshow_error.hide();
+	                                            
+	                kk_aj_btnHamtakontaktupg.removeClass('success').addClass('secondary');
+	                kk_aj_form_utovareuppgifter.removeClass('successborder').hide();
+
+	                if (epost.val() && postnr.val()) {
+	                    arrformAutocompleteHandler.getBefintligutovare(epost.val(), postnr.val(), function (data) {
+	                        if (!data == false) {
+
+	                            kk_aj_btnHamtakontaktupg.removeClass('secondary').addClass('success');
+
+	                            kk_aj_form_utovareuppgifter.addClass('successborder').show();
+	                            
+	                            kk_aj_verifystep2.show();                           
+	                        } else {
+	                            kk_aj_search_Nothingtoshow.show();
+	                            kk_aj_search_Nothingtoshow_error.show().attr("style","display:block");
+	                            kk_aj_verifystep2.hide();
+	                        }                        
+	                    });
+
+	                } else {
+	                    kk_aj_search_utovarePostnr_error.show();
+	                    kk_aj_search_utovareEpost_error.show();
+	                    kk_aj_verifystep2.hide();
+	                }               
+	                return false;
+	            });
+
+
+
 	            // Verify steg 1
 	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
 	                if (arrformValidator.formvalidator(1)) {
@@ -10912,10 +10984,10 @@
 	            arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
 
 	            var arr_antalmedverkande = $('#arr_antalmedverkande')
-
+	            arrformjsondata.Faktalist = [];
 	            if (arr_antalmedverkande.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "1",
 	                    "FaktaTypID": arr_antalmedverkande.attr('rel'),
 	                    "Faktarubrik": "Antal medverkande",
 	                    "FaktaValue": arr_antalmedverkande.val(),
@@ -10923,7 +10995,7 @@
 	            }
 	            if ($('input[name=arr_laromedel]:checked').val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "1",
 	                    "FaktaTypID": $('input[name=arr_laromedel]:checked').attr('rel'),
 	                    "Faktarubrik": "Lärarmaterial ingår",
 	                    "FaktaValue": $('input[name=arr_laromedel]:checked').val(),
@@ -10932,7 +11004,7 @@
 	            var formBuildTimeId = $('#formBuildTimeId')
 	            if (formBuildTimeId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": formBuildTimeId.attr('rel'),
 	                    "Faktarubrik": "Byggtid",
 	                    "FaktaValue": formBuildTimeId.val(),
@@ -10941,7 +11013,7 @@
 	            var formDemolishTimeId = $('#formDemolishTimeId');
 	            if (formDemolishTimeId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": $('#formDemolishTimeId').attr('rel'),
 	                    "Faktarubrik": "Rivtid",
 	                    "FaktaValue": $('#formDemolishTimeId').val(),
@@ -10950,7 +11022,7 @@
 	            var formVenueWidthId = $('#formVenueWidthId');
 	            if (formVenueWidthId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": formVenueWidthId.attr('rel'),
 	                    "Faktarubrik": "Bredd på scen",
 	                    "FaktaValue": formVenueWidthId.val(),
@@ -10959,7 +11031,7 @@
 	            var formVenueDepthId = $('#formVenueDepthId');
 	            if (formVenueDepthId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": formVenueDepthId.attr('rel'),
 	                    "Faktarubrik": "Djup på scen",
 	                    "FaktaValue": formVenueDepthId.val(),
@@ -10968,7 +11040,7 @@
 	            var formVenueHeightId = $('#formVenueHeightId');
 	            if (formVenueHeightId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": formVenueHeightId.attr('rel'),
 	                    "Faktarubrik": "Takhöjd över scen",
 	                    "FaktaValue": formVenueHeightId.val(),
@@ -10976,7 +11048,7 @@
 	            };            
 	            if ($('input[name=arr_ljud]:checked').val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": $('input[name=arr_ljud]:checked').attr('rel'),
 	                    "Faktarubrik": "Ljud",
 	                    "FaktaValue": $('input[name=arr_ljud]:checked').val(),
@@ -10984,7 +11056,7 @@
 	            };            
 	            if ($('input[name=arr_ljus]:checked').val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": $('input[name=arr_ljus]:checked').attr('rel'),
 	                    "Faktarubrik": "Ljus",
 	                    "FaktaValue": $('input[name=arr_ljus]:checked').val(),
@@ -10992,7 +11064,7 @@
 	            };
 	            if ($('input[name=arr_morklaggning]:checked').val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": $('input[name=arr_morklaggning]:checked').attr('rel'),
 	                    "Faktarubrik": "Mörkläggning krävs",
 	                    "FaktaValue": $('input[name=arr_morklaggning]:checked').val(),
@@ -11001,7 +11073,7 @@
 	            var formCarriersId = $('#formCarriersId');
 	            if (formCarriersId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": formCarriersId.attr('rel'),
 	                    "Faktarubrik": "Bärhjälp behövs",
 	                    "FaktaValue": formCarriersId.val(),
@@ -11010,7 +11082,7 @@
 	            var formElectricityId = $('#formElectricityId');
 	            if (formElectricityId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": formElectricityId.attr('rel'),
 	                    "Faktarubrik": "El",
 	                    "FaktaValue": formElectricityId.val(),
@@ -11019,7 +11091,7 @@
 	            var formVenueRequiermentsId = $('#formVenueRequiermentsId');
 	            if (formVenueRequiermentsId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "2",
 	                    "FaktaTypID": formVenueRequiermentsId.attr('rel'),
 	                    "Faktarubrik": "Övriga lokalkrav",
 	                    "FaktaValue": formVenueRequiermentsId.val(),
@@ -11028,7 +11100,7 @@
 	            var formMaxAudienceId = $('#formMaxAudienceId');
 	            if (formMaxAudienceId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "3",
 	                    "FaktaTypID": formMaxAudienceId.attr('rel'),
 	                    "Faktarubrik": "Max publik",
 	                    "FaktaValue": formMaxAudienceId.val(),
@@ -11037,7 +11109,7 @@
 	            var formMaxParticipantsId = $('#formMaxParticipantsId');
 	            if (formMaxParticipantsId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "3",
 	                    "FaktaTypID": formMaxParticipantsId.attr('rel'),
 	                    "Faktarubrik": "Max antal deltagare",
 	                    "FaktaValue": formMaxParticipantsId.val(),
@@ -11046,13 +11118,13 @@
 	            var kk_aj_yearspan = $('#kk_aj_yearspan');
 	            if (kk_aj_yearspan.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "3",
 	                    "FaktaTypID": kk_aj_yearspan.attr('rel'),
 	                    "Faktarubrik": "Ålder högst",
 	                    "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[0]
 	                });
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "3",
 	                    "FaktaTypID": kk_aj_yearspan.attr('rev'),
 	                    "Faktarubrik": "Ålder lägst",
 	                    "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[1]
@@ -11061,7 +11133,7 @@
 	            var formMaxShowsId = $('#formMaxShowsId');
 	            if (formMaxShowsId.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "3",
 	                    "FaktaTypID": formMaxShowsId.attr('rel'),
 	                    "Faktarubrik": "Föreställningar per dag",
 	                    "FaktaValue": formMaxShowsId.val(),
@@ -11070,7 +11142,7 @@
 	            var kk_aj_speltid = $('#kk_aj_speltid');
 	            if (kk_aj_speltid.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "3",
 	                    "FaktaTypID": kk_aj_speltid.attr('rel'),
 	                    "Faktarubrik": "Speltid",
 	                    "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
@@ -11079,7 +11151,7 @@
 	            var arr_ekonomikostnad = $('#arr_ekonomikostnad');
 	            if (arr_ekonomikostnad.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "4",
 	                    "FaktaTypID": arr_ekonomikostnad.attr('rel'),
 	                    "Faktarubrik": "Kostnad",
 	                    "FaktaValue": arr_ekonomikostnad.val(),
@@ -11087,7 +11159,7 @@
 	            };            
 	            if ($('input[name=arr_resor]:checked').val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "4",
 	                    "FaktaTypID": $('input[name=arr_resor]:checked').attr('rel'),
 	                    "Faktarubrik": "Resor",
 	                    "FaktaValue": $('input[name=arr_resor]:checked').val(),
@@ -11095,7 +11167,7 @@
 	            };
 	            if ($('input[name=arr_logi]:checked').val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "4",
 	                    "FaktaTypID": $('input[name=arr_logi]:checked').attr('rel'),
 	                    "Faktarubrik": "Logi",
 	                    "FaktaValue": $('input[name=arr_logi]:checked').val(),
@@ -11103,7 +11175,7 @@
 	            };
 	            if ($('input[name=arr_Traktamente]:checked').val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "4",
 	                    "FaktaTypID": $('input[name=arr_Traktamente]:checked').attr('rel'),
 	                    "Faktarubrik": "Traktamente",
 	                    "FaktaValue": $('input[name=arr_Traktamente]:checked').val(),
@@ -11112,7 +11184,7 @@
 	            var arr_ekonomikostnad = $('#arr_ekonomikostnad');
 	            if (arr_ekonomikostnad.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": 0,
+	                    "Faktaid": "4",
 	                    "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
 	                    "Faktarubrik": "Övrigt",
 	                    "FaktaValue": $('#arr_resorovrigt').val(),
@@ -11250,6 +11322,86 @@
 	        return '<iframe width="auto" height="auto" src="' + url + '" frameborder="0" allowfullscreen="true" style="max-width:100%;"></iframe>';
 	    }
 	});
+
+
+	Handlebars.registerHelper('faktatyp', function (Faktaid, Faktarubrik, FaktaValue) {
+	    var ret = "";
+	    if (Faktaid === "1") {
+	        ret+= "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+	        ret += Faktarubrik;
+	        ret += "</div><div class='small-12 medium-6 columns'>";
+	        ret += FaktaValue + "</div></div>";
+	        
+	    }
+	    return ret;
+	});
+
+	Handlebars.registerHelper('lokaltyp', function (Faktaid, Faktarubrik, FaktaValue) {
+	    var ret = "";
+	    if (Faktaid === "2") {
+	        
+	        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+	        ret += Faktarubrik;
+	        ret += "</div><div class='small-12 medium-6 columns'>";
+	        ret += FaktaValue
+	        if (!isNaN(FaktaValue)) {
+	            ret += faktavalueextention(Faktarubrik);
+	        };
+	        ret += "</div></div>";
+
+	    }
+	    return ret;
+	});
+	Handlebars.registerHelper('publiktyp', function (Faktaid, Faktarubrik, FaktaValue) {
+	    var ret = "";
+	    if (Faktaid === "3") {
+	        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+	        ret += Faktarubrik
+	        ret += "</div><div class='small-12 medium-6 columns'>"
+	        ret += FaktaValue + "</div></div>";
+	    }
+	    return ret;
+	});
+	Handlebars.registerHelper('ekonomityp', function (Faktaid, Faktarubrik, FaktaValue) {
+	    var ret = "";
+	    if (Faktaid === "4") {
+	        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+	        ret += Faktarubrik
+	        ret += "</div><div class='small-12 medium-6 columns'>"
+	        ret += FaktaValue;
+	        if (!isNaN(FaktaValue)) {
+	            ret += faktavalueextention(Faktarubrik);
+	        };
+	        ret += "</div></div>";
+	    }
+	    return ret;
+	});
+
+	var faktavalueextention =function(typ){
+	   
+	    switch(typ){
+	        case "Takhöjd över scen":
+	            return " m";
+	            break;
+	        case "Bredd på scen":
+	            return " m";
+	            break;
+	        case "Djup på scen":
+	            return " m";
+	            break;
+	        case "Byggtid":
+	            return " min";
+	            break;
+	        case "Rivtid":
+	            return " min";
+	            break;
+	        case "Kostnad":
+	            return " kr";
+	            break;
+	        default:
+	            return " min";
+	    }
+	}
 
 /***/ }),
 /* 8 */
@@ -11396,13 +11548,9 @@
 
 	module.exports = {
 	    getArrFormJsonData: function (arrJson) {
-
-	        
-	            maincontent(arrJson);
-	            faktaContent(arrJson);
-	            utovareContent(arrJson);
-	            
-	        
+	        maincontent(arrJson);
+	        faktaContent(arrJson);
+	        utovareContent(arrJson);        
 	    }
 	};
 
@@ -11429,7 +11577,7 @@
 	}
 	var faktaContent = function (fakalistJson) {
 
-	    HandlebarTemplet.injecthtmltemplate(".granska_Fakta_mainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
+	    HandlebarTemplet.injecthtmltemplate(".granskaFaktaMainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
 
 	}
 	var utovareContent = function (utovareJson) {
@@ -11441,57 +11589,101 @@
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
-	var appsettings = __webpack_require__(1);
+	var appsettingsobject = __webpack_require__(1);
+	var _appsetting = appsettingsobject.config;
 
 	module.exports = {
-	    init: function () {
+	    getBefintligutovare: function (epost, postnr, callback) {
+	        var requesturl = "";
+	        var ok = "false";
 
-	        $(function () {
+	        if (epost) {
+	            ok = true;
+	        }
+	        if (!postnr) {
+	            ok = false;
+	        }
 
+	        if (ok) {
+	            epost = epost.replace(/\s+/g, '');
+	            postnr = postnr.replace(/\s+/g, '');
+	       
+	            requesturl = _appsetting.globalconfig.apiserver + "/Api_v3/utovare/searchForm/user/" + epost + "/val/" + postnr + "/devkey/alf?type=json";
 
-	           
+	            servercall(requesturl, function (data, retmess) {
+	                if (retmess) {                    
+	                    callback(fyllutovaredata(data));
+	                    
+	                } else {
+	                    callback(false);
+	                    console.log("fel vid hämtning av befintlig utövardata");
+	                };
 
-
-
-
-
-	            var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
-	            var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');           
-	            
-	            // Nav Event
-	            $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
-	                $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
-	                btn_befintlig_utovareBlock.hide();
-	                btn_ny_utovareBlock.show();
-
-	                $(this).removeClass("secondary");
-	                $('.kk_aj_btnnyutovare').addClass("secondary");
-	                return false;
 	            });
-	            $('body').on('click', '.kk_aj_btnnyutovare', function () {
-	                btn_befintlig_utovareBlock.show();
-	                btn_ny_utovareBlock.hide();
-	                $(this).removeClass("secondary");
-	                $('.kk_aj_btnbefintligutovare').addClass("secondary");
-	                return false;
-	            });
-
-
-	            // function event
-	            
-	            $('body').on('click', '.kk_aj_btnHamtakontaktupg', function () {
-	                alert("söker...");
-	                return false;
-	            });
-
-
-	            // function Verify then next
-	           
-	            
-	        });
+	          }             
+	        
+	    },
+	    emptyutovareform: function () {
+	        tomutovarefield();
 	    }
+
+	};
+	var fyllutovaredata = function (data) {
+	    var utovare = data.kk_aj_admin.Utovarelist[0];
+	    tomutovarefield();
+	    if (utovare) {
+	        $('.kk_aj_form_befintligutovare').attr('rel', utovare.UtovarID);
+	        $('#utovare_aktor_grupp').val(utovare.Organisation);
+	        $('#utovare_orghemsida').val(utovare.Weburl);
+	        $('#utovare_adress').val(utovare.Adress);
+	        $('#utovare_postnummer').val(utovare.Postnr);
+	        $('#utovare_ort').val(utovare.Ort);
+	        $('#utovare_kommun').val(utovare.Kommun);
+	        $('#utovare_fornamn').val(utovare.Fornamn);
+	        $('#utovare_efternamn').val(utovare.Efternamn);
+	        $('#utovare_telefonnr').val(utovare.Telefon);
+	        $('#utovare_epost').val(utovare.Epost);
+	        return true;
+	    } else {
+	        return false;
+	    }; 
+	    
 	}
+
+	var servercall = function (currurl, callback) {
+	    
+	    $.ajax({
+	        async: true,
+	        type: "GET",
+	        url: currurl,
+	        dataType: "json",            
+	        success: function (data) {
+	            console.log("utövardata hämtad: ");
+	            callback(data,"funkar");
+	        },
+	        error: function (xhr, ajaxOptions, thrownError) {
+	            console.log("Nått blev fel hämtning utövardata!");
+	            alert("Nått blev fel hämtning utövardata!");
+	        }
+	    });
+
+	}
+
+	var tomutovarefield = function () {
+	    $('.kk_aj_form_befintligutovare').attr('rel', '0');
+	    $('#utovare_aktor_grupp').val("");
+	    $('#utovare_orghemsida').val("");
+	    $('#utovare_adress').val("");
+	    $('#utovare_postnummer').val("");
+	    $('#utovare_ort').val("");
+	    $('#utovare_kommun').val("");
+	    $('#utovare_fornamn').val("");
+	    $('#utovare_efternamn').val("");
+	    $('#utovare_telefonnr').val("");
+	    $('#utovare_epost').val("");
+	};
 
 /***/ })
 /******/ ]);

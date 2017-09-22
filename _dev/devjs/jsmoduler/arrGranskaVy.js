@@ -6,13 +6,9 @@ var _appsetting = appsettingsobject.config;
 
 module.exports = {
     getArrFormJsonData: function (arrJson) {
-
-        
-            maincontent(arrJson);
-            faktaContent(arrJson);
-            utovareContent(arrJson);
-            
-        
+        maincontent(arrJson);
+        faktaContent(arrJson);
+        utovareContent(arrJson);        
     }
 };
 
@@ -39,7 +35,7 @@ var maincontent = function (arrJson) {
 }
 var faktaContent = function (fakalistJson) {
 
-    HandlebarTemplet.injecthtmltemplate(".granska_Fakta_mainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
+    HandlebarTemplet.injecthtmltemplate(".granskaFaktaMainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
 
 }
 var utovareContent = function (utovareJson) {

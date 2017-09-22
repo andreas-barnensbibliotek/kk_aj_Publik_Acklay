@@ -1,222 +1,37 @@
-﻿<!-- item loop START -->
-<h3>Fakta</h3>
+﻿
+<!-- item loop START -->
+<div class="artsidecontainer granska_Fakta_mainblock">
+         <h3>Fakta</h3>  
+	{{#each Faktalist}}	 
+		{{#faktatyp Faktaid Faktarubrik FaktaValue}}	
+		{{/faktatyp}} 	      
+	{{/each}}
+</div> 
+<!-- item loop STOP -->
 
-	{{#if Faktalist.FaktaValue}}
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				{{Faktalist.Faktarubrik}}
-			</div>
-			<div class="small-12 medium-7 columns">     
-				{{Faktalist.FaktaValue}}
-			</div>
-		</div>
-	{{/if}}        
+<!-- item loop START -->
+<div class="artsidecontainer granska_lokal_mainblock">
+	<h3>Lokal</h3>  
+	{{#each Faktalist}}	 
+		{{#lokaltyp Faktaid Faktarubrik FaktaValue}}		      
+		{{/lokaltyp}} 	      
+	{{/each}}
+</div> 
 
+<!-- item loop START -->
+<div class="artsidecontainer granska_Publik_mainblock">
+	<h3>Publik</h3>  
+	{{#each Faktalist}}	 
+		{{#publiktyp Faktaid Faktarubrik FaktaValue}}		      
+		{{/publiktyp}} 	      
+	{{/each}}
+</div> 
 
-	 <div class="artsidecontainer granska_Fakta_mainblock">
-		<h3>Fakta</h3>                                
-		{{#if Faktalist.FaktaValue == 'Lokal'}}
-			<div class="row">
-				<div class="small-12 medium-5 columns faktalabel">     
-					{{Faktalist.Faktarubrik}}
-				</div>
-				<div class="small-12 medium-7 columns">     
-					{{Faktalist.FaktaValue}}
-				</div>
-			</div>
-		{{/if}}        
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns ">     
-				Arrangören betalar 50%
-			</div>
-		</div>   
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>   
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>   
-                                     
-	</div>
-	<div class="artsidecontainer granska_lokal_mainblock">
-		<h3>Lokal</h3>
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>        
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns ">     
-				Arrangören betalar 50%
-			</div>
-		</div>   
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>   
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>
-	</div>
-	<div class="artsidecontainer granska_Publik_mainblock">
-		<h3>Publik</h3>
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>        
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns ">     
-				Arrangören betalar 50%
-			</div>
-		</div>   
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>   
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>
-	</div>
-	<div class="artsidecontainer granska_Ekonomi_mainblock">
-		<h3>Ekonomi</h3>
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>        
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns ">     
-				Arrangören betalar 50%
-			</div>
-		</div>   
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>   
-		<div class="row">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Arrangörsstöd
-			</div>
-			<div class="small-12 medium-7 columns">     
-				Arrangören betalar 50%
-			</div>
-		</div>
-	</div>
-
-	<div class="artsidecontainer granska_Kontakt_mainblock">
-		<h3>Kontakt</h3>                                             
-		<div class="row granska_Utovare_Organisation_block">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Organisation
-			</div>
-			<div class="small-12 medium-7 columns">     
-				<span class="granska_Utovare_Organisation">testorg</span>
-			</div>
-		</div>
-		<div class="row granska_Utovare_namn_block">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Kontaktperson
-			</div>
-			<div class="small-12 medium-7 columns">     
-				<span class="granska_Utovare_namn">Andreas Josefsson</span>
-			</div>
-		</div>
-		<div class="row granska_Utovare_Adress_block">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Adress
-			</div>
-			<div class="small-12 medium-7 columns">     
-				<span class="granska_Utovare_Adress">Sturegatan 12</span>
-			</div>
-		</div>
-			<div class="row granska_Utovare_postort_block">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Postort
-			</div>
-			<div class="small-12 medium-7 columns">     
-				<span class="granska_Utovare_postort">534 90 Ulricehamn</span>
-			</div>
-		</div>                                          
-		<div class="row granska_Utovare_tfn_block">
-			<div class="small-12 medium-5 columns faktalabel">     
-				Telefon
-			</div>
-			<div class="small-12 medium-7 columns">     
-				<span class="granska_Utovare_tfn">070- 18 32 15</span>
-			</div>
-		</div>
-		<div class="row granska_Utovare_epost_block">
-			<div class="small-12 medium-12 columns faktalabel">     
-				E-post
-			</div>
-			<div class="small-12 medium-12 columns">     
-				<span class="granska_Utovare_epost">
-					<a href="mailto:andreas.josefsson@kulturivast.se">andreas.josefsson@kulturivast.se</a>
-				</span>
-			</div>
-		</div>         
-		<div class="row granska_Utovare_hemsida_block">
-			<div class="small-12 medium-12 columns faktalabel">     
-				Hemsida
-			</div>
-			<div class="small-12 medium-12 columns">     
-				<span class="granska_Utovare_hemsida">
-					<a href="www.minegenhemsida.se">www.minegenhemsida.se</a>
-				</span>
-			</div>
-		</div>                                                              
-	</div>
+<!-- item loop START -->
+<div class="artsidecontainer granska_Ekonomi_mainblock">
+	<h3>Ekononi</h3>  
+	{{#each Faktalist}}	 
+		{{#ekonomityp Faktaid Faktarubrik FaktaValue}}		      
+		{{/ekonomityp}} 	      
+	{{/each}}
+</div> 

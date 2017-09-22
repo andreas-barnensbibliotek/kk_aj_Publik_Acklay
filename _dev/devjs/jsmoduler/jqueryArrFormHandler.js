@@ -5,6 +5,7 @@ var arrformjsonBuilder = require("./arrformJsonBuilder.js");
 var handlebarTemplethandler = require("./HandlebarTemplethandler.js");
 var arrformValidator = require("./arrFormValidator.js");
 var arrGranskaVy = require("./arrGranskaVy.js");
+var arrformAutocompleteHandler = require("./arrformAutocompleteHandler.js");
 var _exempellistobject = { "exempelitemlist": [] };
 
 module.exports = {
@@ -17,7 +18,78 @@ module.exports = {
             var storage = Storages.localStorage
             console.log("localstorage: " + storage.get('foo'))
 
-            
+            var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
+            var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
+
+            // Nav Event
+            $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
+                $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+                btn_befintlig_utovareBlock.hide();
+                btn_ny_utovareBlock.show();
+                $('.kk_aj_verifystep2').hide();
+
+                $(this).removeClass("secondary");
+                $('.kk_aj_btnnyutovare').addClass("secondary");
+                return false;
+            });
+            $('body').on('click', '.kk_aj_btnnyutovare', function () {
+                arrformAutocompleteHandler.emptyutovareform();
+                btn_befintlig_utovareBlock.removeClass('successborder').show();
+                btn_ny_utovareBlock.hide();
+                $('.kk_aj_verifystep2').show();
+                $(this).removeClass("secondary");
+                $('.kk_aj_btnbefintligutovare').addClass("secondary");
+
+                return false;
+            });
+
+            // Get befintlig arrangör
+            $('body').on('click', '.kk_aj_btnHamtakontaktupg', function () {
+
+                var epost = $('.kk_aj_search_utovareEpost');
+                var postnr = $('.kk_aj_search_utovarePostnr');
+                var kk_aj_search_utovarePostnr_error = $('.kk_aj_search_utovarePostnr_error');
+                var kk_aj_search_utovareEpost_error = $('.kk_aj_search_utovareEpost_error');
+                var kk_aj_search_Nothingtoshow = $('.kk_aj_search_Nothingtoshow');
+                var kk_aj_search_Nothingtoshow_error = $('.kk_aj_search_Nothingtoshow_error').hide();
+                var kk_aj_form_utovareuppgifter = $('.kk_aj_form_utovareuppgifter');
+                var kk_aj_btnHamtakontaktupg = $('.kk_aj_btnHamtakontaktupg');
+                var kk_aj_verifystep2 = $('.kk_aj_verifystep2');
+
+                kk_aj_search_utovarePostnr_error.hide();
+                kk_aj_search_utovareEpost_error.hide();
+                kk_aj_search_Nothingtoshow.hide();
+                kk_aj_search_Nothingtoshow_error.hide();
+                                            
+                kk_aj_btnHamtakontaktupg.removeClass('success').addClass('secondary');
+                kk_aj_form_utovareuppgifter.removeClass('successborder').hide();
+
+                if (epost.val() && postnr.val()) {
+                    arrformAutocompleteHandler.getBefintligutovare(epost.val(), postnr.val(), function (data) {
+                        if (!data == false) {
+
+                            kk_aj_btnHamtakontaktupg.removeClass('secondary').addClass('success');
+
+                            kk_aj_form_utovareuppgifter.addClass('successborder').show();
+                            
+                            kk_aj_verifystep2.show();                           
+                        } else {
+                            kk_aj_search_Nothingtoshow.show();
+                            kk_aj_search_Nothingtoshow_error.show().attr("style","display:block");
+                            kk_aj_verifystep2.hide();
+                        }                        
+                    });
+
+                } else {
+                    kk_aj_search_utovarePostnr_error.show();
+                    kk_aj_search_utovareEpost_error.show();
+                    kk_aj_verifystep2.hide();
+                }               
+                return false;
+            });
+
+
+
             // Verify steg 1
             $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
                 if (arrformValidator.formvalidator(1)) {

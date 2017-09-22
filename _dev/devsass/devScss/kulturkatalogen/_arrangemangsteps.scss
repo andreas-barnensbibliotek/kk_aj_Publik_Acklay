@@ -94,7 +94,14 @@
     }
    .kk_aj_form_befintligutovare{
        display:none;
-   }        
+   } 
+   .kk_aj_form_utovareuppgifter{
+       &.successborder{
+           border:2px solid $success-color;
+           padding-left:.5rem;
+
+       }
+   }       
       small{
           margin-top:-0.7rem;
           display:none;

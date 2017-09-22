@@ -27,3 +27,83 @@ Handlebars.registerHelper('iffilm', function (object, url) {
         return '<iframe width="auto" height="auto" src="' + url + '" frameborder="0" allowfullscreen="true" style="max-width:100%;"></iframe>';
     }
 });
+
+
+Handlebars.registerHelper('faktatyp', function (Faktaid, Faktarubrik, FaktaValue) {
+    var ret = "";
+    if (Faktaid === "1") {
+        ret+= "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+        ret += Faktarubrik;
+        ret += "</div><div class='small-12 medium-6 columns'>";
+        ret += FaktaValue + "</div></div>";
+        
+    }
+    return ret;
+});
+
+Handlebars.registerHelper('lokaltyp', function (Faktaid, Faktarubrik, FaktaValue) {
+    var ret = "";
+    if (Faktaid === "2") {
+        
+        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+        ret += Faktarubrik;
+        ret += "</div><div class='small-12 medium-6 columns'>";
+        ret += FaktaValue
+        if (!isNaN(FaktaValue)) {
+            ret += faktavalueextention(Faktarubrik);
+        };
+        ret += "</div></div>";
+
+    }
+    return ret;
+});
+Handlebars.registerHelper('publiktyp', function (Faktaid, Faktarubrik, FaktaValue) {
+    var ret = "";
+    if (Faktaid === "3") {
+        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+        ret += Faktarubrik
+        ret += "</div><div class='small-12 medium-6 columns'>"
+        ret += FaktaValue + "</div></div>";
+    }
+    return ret;
+});
+Handlebars.registerHelper('ekonomityp', function (Faktaid, Faktarubrik, FaktaValue) {
+    var ret = "";
+    if (Faktaid === "4") {
+        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+        ret += Faktarubrik
+        ret += "</div><div class='small-12 medium-6 columns'>"
+        ret += FaktaValue;
+        if (!isNaN(FaktaValue)) {
+            ret += faktavalueextention(Faktarubrik);
+        };
+        ret += "</div></div>";
+    }
+    return ret;
+});
+
+var faktavalueextention =function(typ){
+   
+    switch(typ){
+        case "Takhöjd över scen":
+            return " m";
+            break;
+        case "Bredd på scen":
+            return " m";
+            break;
+        case "Djup på scen":
+            return " m";
+            break;
+        case "Byggtid":
+            return " min";
+            break;
+        case "Rivtid":
+            return " min";
+            break;
+        case "Kostnad":
+            return " kr";
+            break;
+        default:
+            return " min";
+    }
+}

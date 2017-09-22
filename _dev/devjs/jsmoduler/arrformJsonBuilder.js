@@ -55,10 +55,10 @@ module.exports = {
             arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
 
             var arr_antalmedverkande = $('#arr_antalmedverkande')
-
+            arrformjsondata.Faktalist = [];
             if (arr_antalmedverkande.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "1",
                     "FaktaTypID": arr_antalmedverkande.attr('rel'),
                     "Faktarubrik": "Antal medverkande",
                     "FaktaValue": arr_antalmedverkande.val(),
@@ -66,7 +66,7 @@ module.exports = {
             }
             if ($('input[name=arr_laromedel]:checked').val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "1",
                     "FaktaTypID": $('input[name=arr_laromedel]:checked').attr('rel'),
                     "Faktarubrik": "Lärarmaterial ingår",
                     "FaktaValue": $('input[name=arr_laromedel]:checked').val(),
@@ -75,7 +75,7 @@ module.exports = {
             var formBuildTimeId = $('#formBuildTimeId')
             if (formBuildTimeId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": formBuildTimeId.attr('rel'),
                     "Faktarubrik": "Byggtid",
                     "FaktaValue": formBuildTimeId.val(),
@@ -84,7 +84,7 @@ module.exports = {
             var formDemolishTimeId = $('#formDemolishTimeId');
             if (formDemolishTimeId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": $('#formDemolishTimeId').attr('rel'),
                     "Faktarubrik": "Rivtid",
                     "FaktaValue": $('#formDemolishTimeId').val(),
@@ -93,7 +93,7 @@ module.exports = {
             var formVenueWidthId = $('#formVenueWidthId');
             if (formVenueWidthId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": formVenueWidthId.attr('rel'),
                     "Faktarubrik": "Bredd på scen",
                     "FaktaValue": formVenueWidthId.val(),
@@ -102,7 +102,7 @@ module.exports = {
             var formVenueDepthId = $('#formVenueDepthId');
             if (formVenueDepthId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": formVenueDepthId.attr('rel'),
                     "Faktarubrik": "Djup på scen",
                     "FaktaValue": formVenueDepthId.val(),
@@ -111,7 +111,7 @@ module.exports = {
             var formVenueHeightId = $('#formVenueHeightId');
             if (formVenueHeightId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": formVenueHeightId.attr('rel'),
                     "Faktarubrik": "Takhöjd över scen",
                     "FaktaValue": formVenueHeightId.val(),
@@ -119,7 +119,7 @@ module.exports = {
             };            
             if ($('input[name=arr_ljud]:checked').val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": $('input[name=arr_ljud]:checked').attr('rel'),
                     "Faktarubrik": "Ljud",
                     "FaktaValue": $('input[name=arr_ljud]:checked').val(),
@@ -127,7 +127,7 @@ module.exports = {
             };            
             if ($('input[name=arr_ljus]:checked').val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": $('input[name=arr_ljus]:checked').attr('rel'),
                     "Faktarubrik": "Ljus",
                     "FaktaValue": $('input[name=arr_ljus]:checked').val(),
@@ -135,7 +135,7 @@ module.exports = {
             };
             if ($('input[name=arr_morklaggning]:checked').val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": $('input[name=arr_morklaggning]:checked').attr('rel'),
                     "Faktarubrik": "Mörkläggning krävs",
                     "FaktaValue": $('input[name=arr_morklaggning]:checked').val(),
@@ -144,7 +144,7 @@ module.exports = {
             var formCarriersId = $('#formCarriersId');
             if (formCarriersId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": formCarriersId.attr('rel'),
                     "Faktarubrik": "Bärhjälp behövs",
                     "FaktaValue": formCarriersId.val(),
@@ -153,7 +153,7 @@ module.exports = {
             var formElectricityId = $('#formElectricityId');
             if (formElectricityId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": formElectricityId.attr('rel'),
                     "Faktarubrik": "El",
                     "FaktaValue": formElectricityId.val(),
@@ -162,7 +162,7 @@ module.exports = {
             var formVenueRequiermentsId = $('#formVenueRequiermentsId');
             if (formVenueRequiermentsId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "2",
                     "FaktaTypID": formVenueRequiermentsId.attr('rel'),
                     "Faktarubrik": "Övriga lokalkrav",
                     "FaktaValue": formVenueRequiermentsId.val(),
@@ -171,7 +171,7 @@ module.exports = {
             var formMaxAudienceId = $('#formMaxAudienceId');
             if (formMaxAudienceId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "3",
                     "FaktaTypID": formMaxAudienceId.attr('rel'),
                     "Faktarubrik": "Max publik",
                     "FaktaValue": formMaxAudienceId.val(),
@@ -180,7 +180,7 @@ module.exports = {
             var formMaxParticipantsId = $('#formMaxParticipantsId');
             if (formMaxParticipantsId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "3",
                     "FaktaTypID": formMaxParticipantsId.attr('rel'),
                     "Faktarubrik": "Max antal deltagare",
                     "FaktaValue": formMaxParticipantsId.val(),
@@ -189,13 +189,13 @@ module.exports = {
             var kk_aj_yearspan = $('#kk_aj_yearspan');
             if (kk_aj_yearspan.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "3",
                     "FaktaTypID": kk_aj_yearspan.attr('rel'),
                     "Faktarubrik": "Ålder högst",
                     "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[0]
                 });
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "3",
                     "FaktaTypID": kk_aj_yearspan.attr('rev'),
                     "Faktarubrik": "Ålder lägst",
                     "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[1]
@@ -204,7 +204,7 @@ module.exports = {
             var formMaxShowsId = $('#formMaxShowsId');
             if (formMaxShowsId.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "3",
                     "FaktaTypID": formMaxShowsId.attr('rel'),
                     "Faktarubrik": "Föreställningar per dag",
                     "FaktaValue": formMaxShowsId.val(),
@@ -213,7 +213,7 @@ module.exports = {
             var kk_aj_speltid = $('#kk_aj_speltid');
             if (kk_aj_speltid.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "3",
                     "FaktaTypID": kk_aj_speltid.attr('rel'),
                     "Faktarubrik": "Speltid",
                     "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
@@ -222,7 +222,7 @@ module.exports = {
             var arr_ekonomikostnad = $('#arr_ekonomikostnad');
             if (arr_ekonomikostnad.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "4",
                     "FaktaTypID": arr_ekonomikostnad.attr('rel'),
                     "Faktarubrik": "Kostnad",
                     "FaktaValue": arr_ekonomikostnad.val(),
@@ -230,7 +230,7 @@ module.exports = {
             };            
             if ($('input[name=arr_resor]:checked').val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "4",
                     "FaktaTypID": $('input[name=arr_resor]:checked').attr('rel'),
                     "Faktarubrik": "Resor",
                     "FaktaValue": $('input[name=arr_resor]:checked').val(),
@@ -238,7 +238,7 @@ module.exports = {
             };
             if ($('input[name=arr_logi]:checked').val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "4",
                     "FaktaTypID": $('input[name=arr_logi]:checked').attr('rel'),
                     "Faktarubrik": "Logi",
                     "FaktaValue": $('input[name=arr_logi]:checked').val(),
@@ -246,7 +246,7 @@ module.exports = {
             };
             if ($('input[name=arr_Traktamente]:checked').val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "4",
                     "FaktaTypID": $('input[name=arr_Traktamente]:checked').attr('rel'),
                     "Faktarubrik": "Traktamente",
                     "FaktaValue": $('input[name=arr_Traktamente]:checked').val(),
@@ -255,7 +255,7 @@ module.exports = {
             var arr_ekonomikostnad = $('#arr_ekonomikostnad');
             if (arr_ekonomikostnad.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": 0,
+                    "Faktaid": "4",
                     "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
                     "Faktarubrik": "Övrigt",
                     "FaktaValue": $('#arr_resorovrigt').val(),
