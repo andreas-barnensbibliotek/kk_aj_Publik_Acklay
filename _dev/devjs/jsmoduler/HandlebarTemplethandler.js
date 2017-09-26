@@ -82,6 +82,15 @@ Handlebars.registerHelper('ekonomityp', function (Faktaid, Faktarubrik, FaktaVal
     return ret;
 });
 
+Handlebars.registerHelper('faktatypvisas', function (faktalist, val, opts) {
+    var ret = false;
+    var langd = faktalist.filter(function (lista) { return lista.Faktaid == val }).length;
+    if (langd) {
+        return opts.fn(this);
+    }
+    
+});
+
 var faktavalueextention =function(typ){
    
     switch(typ){

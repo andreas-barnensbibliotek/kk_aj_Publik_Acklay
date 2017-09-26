@@ -196,22 +196,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://kulturkatalog.kivdev.se",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://kulturkatalog.kivdev.se",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -10872,7 +10872,7 @@
 	        $('.tab-title[rel=' + curr + ']').addClass('active').removeClass('disabled');
 	        $('.tab-title[rel=3]').addClass('done').removeClass('active');
 	    } else {
-	        $('.tab-title[rel=' + tab + ']').addClass('active').removeClass('done');
+	        $('.tab-title[rel=' + tab + ']').addClass('active').removeClass('done').removeClass('disabled');
 	        for (next; next <= 4; next++) {
 	            $('.tab-title[rel=' + next + ']').addClass('disabled').removeClass('active').removeClass('done');
 	        }
@@ -11375,6 +11375,15 @@
 	        ret += "</div></div>";
 	    }
 	    return ret;
+	});
+
+	Handlebars.registerHelper('faktatypvisas', function (faktalist, val, opts) {
+	    var ret = false;
+	    var langd = faktalist.filter(function (lista) { return lista.Faktaid == val }).length;
+	    if (langd) {
+	        return opts.fn(this);
+	    }
+	    
 	});
 
 	var faktavalueextention =function(typ){

@@ -310,7 +310,7 @@ var changetabattr = function (tab) {
         $('.tab-title[rel=' + curr + ']').addClass('active').removeClass('disabled');
         $('.tab-title[rel=3]').addClass('done').removeClass('active');
     } else {
-        $('.tab-title[rel=' + tab + ']').addClass('active').removeClass('done');
+        $('.tab-title[rel=' + tab + ']').addClass('active').removeClass('done').removeClass('disabled');
         for (next; next <= 4; next++) {
             $('.tab-title[rel=' + next + ']').addClass('disabled').removeClass('active').removeClass('done');
         }
