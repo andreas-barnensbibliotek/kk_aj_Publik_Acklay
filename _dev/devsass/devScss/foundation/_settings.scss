@@ -281,6 +281,14 @@ $h1-font-size: rem-calc(60); //44 50
  $h5-font-reduction: 0;
  $h6-font-reduction: 0;
 
+ // arrangemang listning
+ $h1arr-font-size: rem-calc(22); //44 50
+ $h2arr-font-size: rem-calc(20); //37 44
+ $h3arr-font-size: rem-calc(17);//27 23
+ $h4arr-font-size: rem-calc(12); //23 18
+ $h5arr-font-size: rem-calc(10); //18 16
+
+
 // These control how subheaders are styled.
  $subheader-line-height: 1.4;
  $subheader-font-color: scale-color($header-font-color, $lightness: 35%);

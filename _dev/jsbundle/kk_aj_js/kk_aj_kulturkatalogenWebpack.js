@@ -171,13 +171,13 @@
 	        };
 
 	        $('.kk_aj_mainproductlistblock').jplist({
-	            itemsBox: '.kk_aj_arrlist',
+	            itemsBox: '.kk_aj_productlist',
 	            itemPath: '.kk_aj_arritem',
 	            panelPath: '.jplist-panel',
 	            storage: 'localstorage',
 	            storageName: 'storage-kk_aj_currentproductlist'
 	        });
-
+	        
 
 
 	        pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
