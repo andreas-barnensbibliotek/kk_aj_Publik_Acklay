@@ -151,12 +151,12 @@
 	            likesSlider: function ($slider, $prev, $next) {
 	                $slider.slider({
 	                    min: 0
-	                   , max: 350
+	                   , max: 30
 	                   , range: true
-	                   , values: [0, 350]
+	                   , values: [0, 10]
 	                   , slide: function (event, ui) {
-	                       $prev.text(ui.values[0] + ' likes');
-	                       $next.text(ui.values[1] + ' likes');
+	                       $prev.text(ui.values[0] + ' �r');
+	                       $next.text(ui.values[1] + ' �r');
 	                   }
 	                });
 	            }
@@ -165,8 +165,8 @@
 	            * LIKES: jquery ui set values
 	            */
 	              , likesValues: function ($slider, $prev, $next) {
-	                  $prev.text($slider.slider('values', 0) + ' likes');
-	                  $next.text($slider.slider('values', 1) + ' likes');
+	                  $prev.text($slider.slider('values', 0) + ' �r');
+	                  $next.text($slider.slider('values', 1) + ' pr');
 	              }
 	        };
 
@@ -175,8 +175,31 @@
 	            itemPath: '.kk_aj_arritem',
 	            panelPath: '.jplist-panel',
 	            storage: 'localstorage',
-	            storageName: 'storage-kk_aj_currentproductlist'
-	        });
+	            //storageName: 'storage-kk_aj_currentproductlist',
+	            //controlTypes: {
+
+	            //        likesSlider: function ($slider, $prev, $next) {
+	            //            $slider.slider({
+	            //                min: 0
+	            //               , max: 350
+	            //               , range: true
+	            //               , values: [0, 350]
+	            //               , slide: function (event, ui) {
+	            //                   $prev.text(ui.values[0] + ' likes');
+	            //                   $next.text(ui.values[1] + ' likes');
+	            //               }
+	            //            });
+	            //        }
+
+	            //        /**
+	            //        * LIKES: jquery ui set values
+	            //        */
+	            //      , likesValues: function ($slider, $prev, $next) {
+	            //          $prev.text($slider.slider('values', 0) + ' likes');
+	            //          $next.text($slider.slider('values', 1) + ' likes');
+	            //      }
+	            //    }
+	            });
 	        
 
 
