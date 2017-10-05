@@ -1,7 +1,7 @@
 ﻿.menybreadcrumb{
     height:26px;
 
-    background-color:#b64400;
+    background-color:$orange;
 
     .mbc_navlinklist{
         li{
@@ -21,7 +21,7 @@
                 padding-left:3px;
             }
             a{  
-                color: $jumbo  !important;
+                color: $white  !important;
                 padding-right:4px;
                 padding-left:2px;
                 &:hover{color: $jet !important;}                

@@ -1,24 +1,26 @@
 ﻿.columns{
     @media #{$small-only} {
-        padding-left: 0.375rem;
-        padding-right: 0.375rem;
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
     }
 }
 .column{
     @media #{$small-only} {
-        padding-left: 0.375rem;
-        padding-right: 0.375rem;
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
     }
 }
 .kk_aj_mainFreetextSearchblock{
-    
+   
     .kk_aj_searchHeader{
         h1{font-size:3.5rem;padding-bottom:1.5rem;}
         @media #{$small-only} {
-
             h1{font-size:2.5rem;padding-bottom:1.5rem;}
         }
-        p{padding-left:2.6rem; padding-right:2.6rem;}
+        p{
+            padding-left:2.6rem; 
+            padding-right:2.6rem;
+        }
         margin-top:6rem;
         margin-bottom:2rem;
     }
@@ -34,11 +36,14 @@
     }
 }
 .kk_aj_superProductListBlock{
+     .row{margin:0rem!important;}
     /* Superblock globals */
     .kk_aj_coloredblocks{
         margin-top:2rem;                
-         background:$orange;
-         h2{ color:$white;}
+        background:$orange;
+        h2{
+            color:$white;
+        }
     }
 
     /*Sök form --------------------------------------*/
@@ -146,6 +151,11 @@
                 &.info{
                     color:$white;
                 }
+                .kk_aj_searchRensaformbutton{
+                    &:hover{
+                       background: $smoke!important;
+                    }
+                }
             } /*END button*/
         }
     }/* END Sök form ---------------------------------*/
@@ -171,17 +181,20 @@
             
             .kk_aj_productlist{
                 .kk_aj_arritem{
+                    border:1px solid transparent;
                     border-top:1px solid $smoke; 
                     padding-top: 1rem;
                     margin-bottom: 1rem !important;
                     text-align:left; 
                     &:hover{                                                
-                        background: #fdfdfd;
+                         background-color:$white;                                    
+                               border-color: $orange;
+                               
                     }
+                   
                     .kk_aj_arr_item_thumbnail {                         
-                        display:block;
-                        
-                        _background-color:$smoke;
+                        display:block;         
+                                             
                         min-height:100%;    
                         padding:.1rem;
                         text-align:center; 
@@ -190,9 +203,23 @@
                             text-align:center; 
                         }                                                  
                         img{max-height: 150px;}
+                        .kk_aj_arr_item_thumbnail_color{
+                            background-color:$black;
+                            /*background-color:transparent;*/
+                        }   
                         .kk_aj_arr_item_thumbnail_img {                            
                             width: 100%;
                             height: 100%;
+                        }
+                        .kk_aj_arr_item_minneslista{text-decoration:none;
+                              color:$jumbo;
+                              font-size:small;                              
+                              &.minnesadded{
+                                  color:$success-color;
+                              }
+                              &:hover{
+                              text-decoration:underline;                                    
+                            }
                         }
                     }
                     .kk_aj_arr_item_contentblock{
@@ -202,6 +229,8 @@
                         }
                         h2{
                             font-size:$h2arr-font-size;
+                            color:$black;
+                            font-weight:bold;
                         }
                         h3{
                             font-size:$h3arr-font-size;
@@ -211,20 +240,21 @@
                         }
                     }
                     .kk_aj_arr_item_buttonblock{
-                        .button {
-                             @media #{$small-only} {
-                                padding:.5rem .7rem;
-                            }
-
+                        .button { 
+                            border:1px solid transparent;
                             background-color:$orange;
+                            @media #{$small-only} {
+                                padding:.5rem .7rem;                            
+                            }                           
                             &.round{
-                                border-radius: 6px;
+                                border-radius: 0px; /*6px;*/
                             }
-                            &:hover{opacity:0.5;
-                                    
-                            }
-                            
-                        }
+                            &:hover{
+                               background-color:$white;                                    
+                               border:1px solid $orange;
+                               color:$orange;
+                            }                            
+                        }                       
                     }
                     .kk_aj_arr_item_Utovare{}
                     .kk_aj_arr_item_konstform{}
