@@ -48,7 +48,7 @@
 	var appsettingsobject = __webpack_require__(1);
 	var msg = __webpack_require__(2);
 	var pagehandler = __webpack_require__(3);
-	//var jqueryNavEvents = require("./jsmoduler/appJqueryMainNavEvents.js");
+	var jqueryNavEvents = __webpack_require__(11);
 
 	var appsetting = appsettingsobject.config;
 	//  kulturkatalogen publik start
@@ -129,7 +129,7 @@
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	    // STOPP rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	    //jqueryNavEvents.init();
+	    jqueryNavEvents.init();
 	   
 	   // $("#mainapp").attr('style','background:#fff;').html("funkar! eller");    
 	    //alert('Foundation Core Version: ' + appsettings.config.globalconfig.dnnURL);
@@ -170,12 +170,12 @@
 	              }
 	        };
 
-	        $('.kk_aj_mainproductlistblock').jplist({
+	        $('.kk_aj_superProductListBlock').jplist({
 	            itemsBox: '.kk_aj_productlist',
 	            itemPath: '.kk_aj_arritem',
 	            panelPath: '.jplist-panel',
 	            storage: 'localstorage',
-	            //storageName: 'storage-kk_aj_currentproductlist',
+	            storageName: 'kk_aj_storage',
 	            //controlTypes: {
 
 	            //        likesSlider: function ($slider, $prev, $next) {
@@ -201,14 +201,21 @@
 	            //    }
 	            });
 	        
-
+	        //for (i = 0; i < localStorage.length; i++) {
+	        //    console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
+	        //}
+	       
+	        console.log('STORE: ' + localStorage.getItem('kk_aj_storage'));
 
 	        pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
 
 	    }
 
+
 	    init();
 	});
+	 
+
 
 
 /***/ }),
@@ -11716,6 +11723,34 @@
 	    $('#utovare_telefonnr').val("");
 	    $('#utovare_epost').val("");
 	};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(4);
+	var appsettings = __webpack_require__(1);
+
+	module.exports = {
+	    init: function () {
+
+	        $(function () {
+	            $('.kk_aj_searchRensaformbutton').on('click', function () {
+	                //console.log("clearat!")
+	                //alert("test");
+	                //localStorage.clear('kk_aj_storage');
+	                //return false;
+	            });
+
+	            // function event
+	           
+
+	            // function Verify then next
+	           
+	            
+	        });
+	    }
+	}
 
 /***/ })
 /******/ ]);

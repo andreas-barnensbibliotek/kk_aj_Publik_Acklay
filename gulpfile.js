@@ -91,6 +91,7 @@ gulp.task('jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
                 srcPath.jsbundle + '/jplist_pagination/jplist.sort-bundle.min.js',
                 srcPath.jsbundle + '/jplist_pagination/jplist.filter-dropdown-bundle.min.js',
                 srcPath.jsbundle + '/jplist_pagination/jplist.jquery-ui-bundle.min.js',
+                srcPath.jsbundle + '/jplist_pagination/jplist.history-bundle.min.js',
 				srcPath.jsbundle + '/foundation/foundation.min.js',                
                 srcPath.jsbundle + '/handelbars/handlebars.js',				
                 //srcPath.jsbundle + '/autocomplete/jquery.easy-autocomplete.js',

@@ -2,7 +2,7 @@
 var appsettingsobject = require("./jsmoduler/appSettings.js");
 var msg = require("./jsmoduler/main.js");
 var pagehandler = require("./jsmoduler/pageloadhandler.js");
-//var jqueryNavEvents = require("./jsmoduler/appJqueryMainNavEvents.js");
+var jqueryNavEvents = require("./jsmoduler/appJqueryMainNavEvents.js");
 
 var appsetting = appsettingsobject.config;
 //  kulturkatalogen publik start
@@ -83,7 +83,7 @@ $(function () {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // STOPP rangesliders för arrangemangformuläret-----------------------------------------------------------------------------
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //jqueryNavEvents.init();
+    jqueryNavEvents.init();
    
    // $("#mainapp").attr('style','background:#fff;').html("funkar! eller");    
     //alert('Foundation Core Version: ' + appsettings.config.globalconfig.dnnURL);
@@ -124,12 +124,12 @@ $(function () {
               }
         };
 
-        $('.kk_aj_mainproductlistblock').jplist({
+        $('.kk_aj_superProductListBlock').jplist({
             itemsBox: '.kk_aj_productlist',
             itemPath: '.kk_aj_arritem',
             panelPath: '.jplist-panel',
             storage: 'localstorage',
-            //storageName: 'storage-kk_aj_currentproductlist',
+            storageName: 'kk_aj_storage',
             //controlTypes: {
 
             //        likesSlider: function ($slider, $prev, $next) {
@@ -155,11 +155,18 @@ $(function () {
             //    }
             });
         
-
+        //for (i = 0; i < localStorage.length; i++) {
+        //    console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
+        //}
+       
+        console.log('STORE: ' + localStorage.getItem('kk_aj_storage'));
 
         pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
 
     }
 
+
     init();
 });
+ 
+

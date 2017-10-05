@@ -1,4 +1,28 @@
-﻿.kk_aj_mainFreetextSearchblock{
+﻿.columns{
+    @media #{$small-only} {
+        padding-left: 0.375rem;
+        padding-right: 0.375rem;
+    }
+}
+.column{
+    @media #{$small-only} {
+        padding-left: 0.375rem;
+        padding-right: 0.375rem;
+    }
+}
+.kk_aj_mainFreetextSearchblock{
+    
+    .kk_aj_searchHeader{
+        h1{font-size:3.5rem;padding-bottom:1.5rem;}
+        @media #{$small-only} {
+
+            h1{font-size:2.5rem;padding-bottom:1.5rem;}
+        }
+        p{padding-left:2.6rem; padding-right:2.6rem;}
+        margin-top:6rem;
+        margin-bottom:2rem;
+    }
+
     .kk_aj_freetextSearch{
         border-radius:10px 0px 0px 10px !important;
         margin-right:0px;
@@ -19,6 +43,7 @@
 
     /*Sök form --------------------------------------*/
     .kk_aj_mainsearchblock{
+          padding-top: 4rem;
         .ui-state-active{background:#fff !important; border-color:#f77136 !important;}
         .searchformblock{
             margin-top:4rem;
@@ -102,7 +127,15 @@
             .button{
                 margin-left:1rem;  
                 margin-right:1rem;
-                width:30%;                          
+                width:30%;
+                @media #{$small-only} {
+                   width:40%;
+                    margin-left: 0.5rem;
+                    margin-right: .5rem;   
+                    padding-left: .1rem;
+                    padding-right: .1rem;
+                }
+                                          
                 &.round{
                     border-radius: 6px;
                 }
@@ -120,8 +153,17 @@
   
 
     /*produktlista ----------------------------------*/
+    .kk_aj_filterRubrikBlock{
+        @media #{$small-only} {
+            h3{font-size:$h4-font-size;
+               font-weight: bold;
+            }
+        }
+    }
     .kk_aj_mainproductlistblock{
-
+        .kk_aj_filterblock{margin-bottom: 1rem;}
+        .like{display: none;
+        }
 
 
         /*START Produktlistningen sökresultat-----------*/ 
@@ -133,6 +175,9 @@
                     padding-top: 1rem;
                     margin-bottom: 1rem !important;
                     text-align:left; 
+                    &:hover{                                                
+                        background: #fdfdfd;
+                    }
                     .kk_aj_arr_item_thumbnail {                         
                         display:block;
                         
@@ -152,6 +197,9 @@
                     }
                     .kk_aj_arr_item_contentblock{
                         min-height:8.2rem;
+                        @media #{$small-only} {
+                            min-height:4.2rem;
+                        }
                         h2{
                             font-size:$h2arr-font-size;
                         }
@@ -164,10 +212,18 @@
                     }
                     .kk_aj_arr_item_buttonblock{
                         .button {
+                             @media #{$small-only} {
+                                padding:.5rem .7rem;
+                            }
+
                             background-color:$orange;
                             &.round{
                                 border-radius: 6px;
                             }
+                            &:hover{opacity:0.5;
+                                    
+                            }
+                            
                         }
                     }
                     .kk_aj_arr_item_Utovare{}
@@ -223,4 +279,34 @@
                 border:2px solid transparent;
         }
     }
+}
+.jplist-panel{
+
+    .jplist-pagination{
+        
+        
+         button {
+            font-family:$kiv-header-font-family;
+            text-shadow:none;
+            font-weight:$kiv-header-font-style;           
+            color: $steel !important;           
+            background: $ingressbggrey;
+            
+            &.jplist-current{
+                font-weight:normal;
+                color: $white !important;
+                background:$success-color;
+                &:hover{opacity:1;
+                    color:inherit;
+                    background: $success-color;
+                }
+            }
+            &:hover{
+                    color:$white!important;
+                    opacity:0.5;
+                    color:inherit;
+                    background: $success-color;
+            }
+        }
+    } 
 }
