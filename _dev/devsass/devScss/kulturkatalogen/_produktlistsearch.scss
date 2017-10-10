@@ -171,7 +171,15 @@
         }
     }
     .kk_aj_mainproductlistblock{
-        .kk_aj_filterblock{margin-bottom: 1rem;}
+        .kk_aj_filterblock{
+            margin-bottom: 1rem;
+            /* START Filter tillvänster --------------------*/
+            .jplist-range-slider{width:190px;}
+            .kk_aj_searchfilterblock{margin-left:.5rem;}
+           
+            /* STOPP Filter tillvänster -------------------*/
+
+        }
         .like{display: none;
         }
 
@@ -188,10 +196,8 @@
                     text-align:left; 
                     &:hover{                                                
                          background-color:$white;                                    
-                               border-color: $orange;
-                               
-                    }
-                   
+                         border-color: $orange;                               
+                    }                   
                     .kk_aj_arr_item_thumbnail {                         
                         display:block;         
                                              
@@ -275,12 +281,7 @@
         /*STOPP Produktlistningen sökresultat ----------*/ 
 
 
-        /* START Filter tillvänster --------------------*/
-        .kk_aj_searchfilterblock{
-
-        }
-        /* STOPP Filter tillvänster -------------------*/
-
+       
 
     }
     

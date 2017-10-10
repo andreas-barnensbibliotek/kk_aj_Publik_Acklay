@@ -26,20 +26,24 @@ module.exports = {
                 $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
                 btn_befintlig_utovareBlock.hide();
                 btn_ny_utovareBlock.show();
-                $('.kk_aj_verifystep2').hide();
-
+                $('.kk_aj_verifystep2').hide();                
+                $('small.error').hide();
                 $(this).removeClass("secondary");
                 $('.kk_aj_btnnyutovare').addClass("secondary");
+                $('#utovare_epost').addClass('befintligutovare')
+                
                 return false;
             });
             $('body').on('click', '.kk_aj_btnnyutovare', function () {
                 arrformAutocompleteHandler.emptyutovareform();
                 btn_befintlig_utovareBlock.removeClass('successborder').show();
                 btn_ny_utovareBlock.hide();
+                $('.kk_aj_befintlignotme').hide();
                 $('.kk_aj_verifystep2').show();
                 $(this).removeClass("secondary");
                 $('.kk_aj_btnbefintligutovare').addClass("secondary");
-
+                $('#utovare_epost').removeClass('befintligutovare')
+                $('.utovare_epost_errorutovareexeists').hide();
                 return false;
             });
 
@@ -54,6 +58,9 @@ module.exports = {
                 var kk_aj_search_Nothingtoshow_error = $('.kk_aj_search_Nothingtoshow_error').hide();
                 var kk_aj_form_utovareuppgifter = $('.kk_aj_form_utovareuppgifter');
                 var kk_aj_btnHamtakontaktupg = $('.kk_aj_btnHamtakontaktupg');
+                $('#utovare_epost').removeClass('notYouTest');                
+                $('.utovare_epost_errorNotYou').hide();
+                
                 var kk_aj_verifystep2 = $('.kk_aj_verifystep2');
 
                 kk_aj_search_utovarePostnr_error.hide();
@@ -71,11 +78,12 @@ module.exports = {
                             kk_aj_btnHamtakontaktupg.removeClass('secondary').addClass('success');
 
                             kk_aj_form_utovareuppgifter.addClass('successborder').show();
-                            
+                            $('.kk_aj_befintlignotme').show();
                             kk_aj_verifystep2.show();                           
                         } else {
                             kk_aj_search_Nothingtoshow.show();
-                            kk_aj_search_Nothingtoshow_error.show().attr("style","display:block");
+                            kk_aj_search_Nothingtoshow_error.show().attr("style", "display:block");
+                            $('.kk_aj_befintlignotme').hide();
                             kk_aj_verifystep2.hide();
                         }                        
                     });
@@ -92,13 +100,63 @@ module.exports = {
 
             // Verify steg 1
             $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
-                if (arrformValidator.formvalidator(1)) {
-                    tabnavigator(2);
-                    return true;
+                
+
+                if (!$('#utovare_epost').val() || !$('#utovare_postnummer').val()) {
+                    if (arrformValidator.formvalidator(1) == true && ret == true) {
+
+                        if ($('#utovare_epost').hasClass('notYouTest')) {
+                            if ($('#utovare_epost').val() == $('.kk_aj_search_utovareEpost').val()) {
+                                isnotme();
+                                ret = false;
+                            }
+                        }
+
+                        if (ret) {
+                            tabnavigator(2);
+                        }
+
+
+                        return ret;
+
+
+                    } else {
+                        tabnavigator(1);
+                        return false;
+                    }
+                }
+                
+               arrformAutocompleteHandler.allreadyExistsutovare($('#utovare_epost').val(), $('#utovare_postnummer').val(), function (data) {
+                   var ret = true
+                   if(!$('#utovare_epost').hasClass('befintligutovare')){
+                       if (data) {
+                            utovareexeists();
+                            ret= false;
+                        }
+                    }
+
+                if (arrformValidator.formvalidator(1)== true && ret==true ) {
+                    
+                    if ($('#utovare_epost').hasClass('notYouTest')) {
+                        if ($('#utovare_epost').val() == $('.kk_aj_search_utovareEpost').val()) {
+                            isnotme();
+                            ret = false;
+                        }
+                    }
+
+                    if (ret) {
+                        tabnavigator(2);
+                    }
+                    
+                   
+                    return ret;
+                    
+                   
                 } else {
                     tabnavigator(1);
                     return false;
                 }
+              });
             });            
             
             // Verify steg 2
@@ -144,6 +202,7 @@ module.exports = {
             $('.kk_aj_tab[rel=2]').on('click', function (e) {                
                 tabnavigator(2);
                 if (appsettings.arrtab.currenttab > 1) {
+                    
                     arrformValidator.formvalidator(2);
                 }
                 appsettings.arrtab.currenttab = 2;
@@ -242,8 +301,13 @@ module.exports = {
                     console.log(callback);
                     $('#kk_aj_tmpimg').attr('src', callback);
                 });
+                return false;
             });
 
+            $('.kk_aj_befintlignotme').on('click', function () {
+                isnotme();
+                return false;
+            });
             
         });
               
@@ -262,7 +326,14 @@ module.exports = {
             addarrtab_1.hide();
             addarrtab_2.hide();
             addarrtab_3.hide();
-            addarrtab_4.hide();
+            addarrtab_4;
+            $('#kk_aj_tmpimg').attr('src', 'https://www2.visitumea.se/sv//Content/img/missingimage.jpg');
+            $('.kk_aj_form_befintligutovare').hide();
+            $('.kk_aj_form_utovareuppgifter').removeClass('successborder').show();           
+            $('.kk_aj_verifystep2').show();
+            $('.kk_aj_btnnyutovare').removeClass("secondary");
+            $('.kk_aj_btnbefintligutovare').addClass("secondary");
+            $('.kk_aj_form_befintligutovare').attr('rel','0');
         }
 
     }
@@ -359,3 +430,13 @@ var tabortexempelfromJson = function (delval) {
     handlebarTemplethandler.injecthtmltemplate(".arrExempellist", "kk_aj_arrformExempelList.txt", _exempellistobject);
 }
 // Arrangemangs exempel STOPP!
+var isnotme = function () {
+    $('#utovare_epost').val("").addClass('notYouTest');
+    $('.kk_aj_form_befintligutovare').attr('rel', '0');
+    $('.utovare_epost_errorNotYou').show();
+}
+var utovareexeists = function () {
+   
+    $('.utovare_epost_errorutovareexeists').show();
+    $('#utovare_epost').val("")
+}

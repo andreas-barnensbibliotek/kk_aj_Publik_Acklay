@@ -34,6 +34,37 @@ module.exports = {
           }             
         
     },
+    allreadyExistsutovare: function (epost, postnr, callback) {
+        var requesturl = "";
+        var ok = "false";
+
+        if (epost) {
+            ok = true;
+        }
+        if (!postnr) {
+            ok = false;
+        }
+
+        if (ok) {
+            epost = epost.replace(/\s+/g, '');
+            postnr = postnr.replace(/\s+/g, '');
+
+            requesturl = _appsetting.globalconfig.apiserver + "/Api_v3/utovare/searchForm/user/" + epost + "/val/" + postnr + "/devkey/alf?type=json";
+
+            servercall(requesturl, function (data, retmess) {
+                console.log("detta är REtmess " +retmess);
+                if (data.kk_aj_admin.antalutovare >0) {
+                    callback(true);
+
+                } else {
+                    callback(false);
+                    console.log("fel vid hämtning av befintlig utövardata");
+                };
+
+            });
+        }
+
+    },
     emptyutovareform: function () {
         tomutovarefield();
     }

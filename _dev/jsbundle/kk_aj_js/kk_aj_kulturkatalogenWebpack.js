@@ -48,7 +48,7 @@
 	var appsettingsobject = __webpack_require__(1);
 	var msg = __webpack_require__(2);
 	var pagehandler = __webpack_require__(3);
-	var jqueryNavEvents = __webpack_require__(11);
+	var publiksearch = __webpack_require__(11);
 
 	var appsetting = appsettingsobject.config;
 	//  kulturkatalogen publik start
@@ -129,7 +129,7 @@
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	    // STOPP rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	    jqueryNavEvents.init();
+	    publiksearch.search();
 	   
 	   // $("#mainapp").attr('style','background:#fff;').html("funkar! eller");    
 	    //alert('Foundation Core Version: ' + appsettings.config.globalconfig.dnnURL);
@@ -155,8 +155,8 @@
 	                   , range: true
 	                   , values: [0, 10]
 	                   , slide: function (event, ui) {
-	                       $prev.text(ui.values[0] + ' �r');
-	                       $next.text(ui.values[1] + ' �r');
+	                       $prev.text(ui.values[0] + unescape("%E5") + "r");
+	                       $next.text(ui.values[1] + unescape("%E5") + "r");
 	                   }
 	                });
 	            }
@@ -165,8 +165,8 @@
 	            * LIKES: jquery ui set values
 	            */
 	              , likesValues: function ($slider, $prev, $next) {
-	                  $prev.text($slider.slider('values', 0) + ' �r');
-	                  $next.text($slider.slider('values', 1) + ' pr');
+	                  $prev.text($slider.slider('values', 0) +  unescape("%E5") + "r");
+	                  $next.text($slider.slider('values', 1) + unescape("%E5") + "r");
 	              }
 	        };
 
@@ -226,22 +226,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            apiserver: "http://localhost:60485",
-	            dnnURL: "http://dnndev.me",           
-	            localOrServerURL: "http://localhost:60485/Api_v2",
-	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://localhost:60485",
+	            //dnnURL: "http://dnndev.me",           
+	            //localOrServerURL: "http://localhost:60485/Api_v2",
+	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            //dnnURL: "http://kulturkatalog.kivdev.se",
-	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            dnnURL: "http://kulturkatalog.kivdev.se",
+	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -252,7 +252,7 @@
 	            currenttab: 0           
 	        },
 	        currentpage: "",
-	        debug: "true" // true / false
+	        debug: "false" // true / false
 	    };
 
 	module.exports = {  
@@ -10618,20 +10618,24 @@
 	                $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
 	                btn_befintlig_utovareBlock.hide();
 	                btn_ny_utovareBlock.show();
-	                $('.kk_aj_verifystep2').hide();
-
+	                $('.kk_aj_verifystep2').hide();                
+	                $('small.error').hide();
 	                $(this).removeClass("secondary");
 	                $('.kk_aj_btnnyutovare').addClass("secondary");
+	                $('#utovare_epost').addClass('befintligutovare')
+	                
 	                return false;
 	            });
 	            $('body').on('click', '.kk_aj_btnnyutovare', function () {
 	                arrformAutocompleteHandler.emptyutovareform();
 	                btn_befintlig_utovareBlock.removeClass('successborder').show();
 	                btn_ny_utovareBlock.hide();
+	                $('.kk_aj_befintlignotme').hide();
 	                $('.kk_aj_verifystep2').show();
 	                $(this).removeClass("secondary");
 	                $('.kk_aj_btnbefintligutovare').addClass("secondary");
-
+	                $('#utovare_epost').removeClass('befintligutovare')
+	                $('.utovare_epost_errorutovareexeists').hide();
 	                return false;
 	            });
 
@@ -10646,6 +10650,9 @@
 	                var kk_aj_search_Nothingtoshow_error = $('.kk_aj_search_Nothingtoshow_error').hide();
 	                var kk_aj_form_utovareuppgifter = $('.kk_aj_form_utovareuppgifter');
 	                var kk_aj_btnHamtakontaktupg = $('.kk_aj_btnHamtakontaktupg');
+	                $('#utovare_epost').removeClass('notYouTest');                
+	                $('.utovare_epost_errorNotYou').hide();
+	                
 	                var kk_aj_verifystep2 = $('.kk_aj_verifystep2');
 
 	                kk_aj_search_utovarePostnr_error.hide();
@@ -10663,11 +10670,12 @@
 	                            kk_aj_btnHamtakontaktupg.removeClass('secondary').addClass('success');
 
 	                            kk_aj_form_utovareuppgifter.addClass('successborder').show();
-	                            
+	                            $('.kk_aj_befintlignotme').show();
 	                            kk_aj_verifystep2.show();                           
 	                        } else {
 	                            kk_aj_search_Nothingtoshow.show();
-	                            kk_aj_search_Nothingtoshow_error.show().attr("style","display:block");
+	                            kk_aj_search_Nothingtoshow_error.show().attr("style", "display:block");
+	                            $('.kk_aj_befintlignotme').hide();
 	                            kk_aj_verifystep2.hide();
 	                        }                        
 	                    });
@@ -10684,13 +10692,63 @@
 
 	            // Verify steg 1
 	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
-	                if (arrformValidator.formvalidator(1)) {
-	                    tabnavigator(2);
-	                    return true;
+	                
+
+	                if (!$('#utovare_epost').val() || !$('#utovare_postnummer').val()) {
+	                    if (arrformValidator.formvalidator(1) == true && ret == true) {
+
+	                        if ($('#utovare_epost').hasClass('notYouTest')) {
+	                            if ($('#utovare_epost').val() == $('.kk_aj_search_utovareEpost').val()) {
+	                                isnotme();
+	                                ret = false;
+	                            }
+	                        }
+
+	                        if (ret) {
+	                            tabnavigator(2);
+	                        }
+
+
+	                        return ret;
+
+
+	                    } else {
+	                        tabnavigator(1);
+	                        return false;
+	                    }
+	                }
+	                
+	               arrformAutocompleteHandler.allreadyExistsutovare($('#utovare_epost').val(), $('#utovare_postnummer').val(), function (data) {
+	                   var ret = true
+	                   if(!$('#utovare_epost').hasClass('befintligutovare')){
+	                       if (data) {
+	                            utovareexeists();
+	                            ret= false;
+	                        }
+	                    }
+
+	                if (arrformValidator.formvalidator(1)== true && ret==true ) {
+	                    
+	                    if ($('#utovare_epost').hasClass('notYouTest')) {
+	                        if ($('#utovare_epost').val() == $('.kk_aj_search_utovareEpost').val()) {
+	                            isnotme();
+	                            ret = false;
+	                        }
+	                    }
+
+	                    if (ret) {
+	                        tabnavigator(2);
+	                    }
+	                    
+	                   
+	                    return ret;
+	                    
+	                   
 	                } else {
 	                    tabnavigator(1);
 	                    return false;
 	                }
+	              });
 	            });            
 	            
 	            // Verify steg 2
@@ -10736,6 +10794,7 @@
 	            $('.kk_aj_tab[rel=2]').on('click', function (e) {                
 	                tabnavigator(2);
 	                if (appsettings.arrtab.currenttab > 1) {
+	                    
 	                    arrformValidator.formvalidator(2);
 	                }
 	                appsettings.arrtab.currenttab = 2;
@@ -10834,8 +10893,13 @@
 	                    console.log(callback);
 	                    $('#kk_aj_tmpimg').attr('src', callback);
 	                });
+	                return false;
 	            });
 
+	            $('.kk_aj_befintlignotme').on('click', function () {
+	                isnotme();
+	                return false;
+	            });
 	            
 	        });
 	              
@@ -10854,7 +10918,14 @@
 	            addarrtab_1.hide();
 	            addarrtab_2.hide();
 	            addarrtab_3.hide();
-	            addarrtab_4.hide();
+	            addarrtab_4;
+	            $('#kk_aj_tmpimg').attr('src', 'https://www2.visitumea.se/sv//Content/img/missingimage.jpg');
+	            $('.kk_aj_form_befintligutovare').hide();
+	            $('.kk_aj_form_utovareuppgifter').removeClass('successborder').show();           
+	            $('.kk_aj_verifystep2').show();
+	            $('.kk_aj_btnnyutovare').removeClass("secondary");
+	            $('.kk_aj_btnbefintligutovare').addClass("secondary");
+	            $('.kk_aj_form_befintligutovare').attr('rel','0');
 	        }
 
 	    }
@@ -10951,7 +11022,16 @@
 	    handlebarTemplethandler.injecthtmltemplate(".arrExempellist", "kk_aj_arrformExempelList.txt", _exempellistobject);
 	}
 	// Arrangemangs exempel STOPP!
-
+	var isnotme = function () {
+	    $('#utovare_epost').val("").addClass('notYouTest');
+	    $('.kk_aj_form_befintligutovare').attr('rel', '0');
+	    $('.utovare_epost_errorNotYou').show();
+	}
+	var utovareexeists = function () {
+	   
+	    $('.utovare_epost_errorutovareexeists').show();
+	    $('#utovare_epost').val("")
+	}
 
 /***/ }),
 /* 6 */
@@ -11145,8 +11225,10 @@
 	                    "FaktaValue": formMaxParticipantsId.val(),
 	                });
 	            };
+	           
+
 	            var kk_aj_yearspan = $('#kk_aj_yearspan');
-	            if (kk_aj_yearspan.val()) {
+	            if (kk_aj_yearspan.html()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "3",
 	                    "FaktaTypID": kk_aj_yearspan.attr('rel'),
@@ -11217,7 +11299,7 @@
 	                    "Faktaid": "4",
 	                    "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
 	                    "Faktarubrik": "Övrigt",
-	                    "FaktaValue": $('#arr_resorovrigt').val(),
+	                    "FaktaValue": $('#arr_resorovrigt').html(),
 	                });
 	            };
 	            if (mediaExempledata.exempelitemlist) {
@@ -11240,20 +11322,26 @@
 	            arrformjsondata.MainImage.MediaSize = $('#arr_sizefoto').val();
 	            arrformjsondata.MainImage.MediaAlt = $('#arr_altfoto').val();
 	            arrformjsondata.MainImage.MediaFoto = $('#arr_fotograf').val();
-	    
-	            arrformjsondata.Utovare = "0";
-	            arrformjsondata.UtovareData.UtovarID = "0";
-	            arrformjsondata.UtovareData.Organisation = $('#utovare_aktor_grupp').val();
-	            arrformjsondata.UtovareData.Fornamn = $('#utovare_fornamn').val();
-	            arrformjsondata.UtovareData.Efternamn = $('#utovare_efternamn').val();
-	            arrformjsondata.UtovareData.Telefon = $('#utovare_telefonnr').val();
-	            arrformjsondata.UtovareData.Adress = $('#utovare_adress').val();
-	            arrformjsondata.UtovareData.Postnr = $('#utovare_postnummer').val();
-	            arrformjsondata.UtovareData.Ort = $('#utovare_ort').val();
-	            arrformjsondata.UtovareData.Epost = $('#utovare_epost').val();
-	            arrformjsondata.UtovareData.Kommun = $('#utovare_kommun').val();
-	            arrformjsondata.UtovareData.Weburl = $('#utovare_orghemsida').val();
-		
+
+	            var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
+	            
+	            if (isbefintligutovare > 0) {
+	                arrformjsondata.Utovare = isbefintligutovare;
+	                arrformjsondata.UtovareData.UtovarID = isbefintligutovare;
+	            } else {           
+	                arrformjsondata.Utovare = "0";
+	                arrformjsondata.UtovareData.UtovarID = "0";
+	                arrformjsondata.UtovareData.Organisation = $('#utovare_aktor_grupp').val();
+	                arrformjsondata.UtovareData.Fornamn = $('#utovare_fornamn').val();
+	                arrformjsondata.UtovareData.Efternamn = $('#utovare_efternamn').val();
+	                arrformjsondata.UtovareData.Telefon = $('#utovare_telefonnr').val();
+	                arrformjsondata.UtovareData.Adress = $('#utovare_adress').val();
+	                arrformjsondata.UtovareData.Postnr = $('#utovare_postnummer').val();
+	                arrformjsondata.UtovareData.Ort = $('#utovare_ort').val();
+	                arrformjsondata.UtovareData.Epost = $('#utovare_epost').val();
+	                arrformjsondata.UtovareData.Kommun = $('#utovare_kommun').val();
+	                arrformjsondata.UtovareData.Weburl = $('#utovare_orghemsida').val();
+	            }
 
 	            callback(arrformjsondata);
 
@@ -11664,6 +11752,37 @@
 	          }             
 	        
 	    },
+	    allreadyExistsutovare: function (epost, postnr, callback) {
+	        var requesturl = "";
+	        var ok = "false";
+
+	        if (epost) {
+	            ok = true;
+	        }
+	        if (!postnr) {
+	            ok = false;
+	        }
+
+	        if (ok) {
+	            epost = epost.replace(/\s+/g, '');
+	            postnr = postnr.replace(/\s+/g, '');
+
+	            requesturl = _appsetting.globalconfig.apiserver + "/Api_v3/utovare/searchForm/user/" + epost + "/val/" + postnr + "/devkey/alf?type=json";
+
+	            servercall(requesturl, function (data, retmess) {
+	                console.log("detta är REtmess " +retmess);
+	                if (data.kk_aj_admin.antalutovare >0) {
+	                    callback(true);
+
+	                } else {
+	                    callback(false);
+	                    console.log("fel vid hämtning av befintlig utövardata");
+	                };
+
+	            });
+	        }
+
+	    },
 	    emptyutovareform: function () {
 	        tomutovarefield();
 	    }
@@ -11729,25 +11848,15 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(4);
-	var appsettings = __webpack_require__(1);
+	var appsettingsobject = __webpack_require__(1);
 
 	module.exports = {
-	    init: function () {
-
+	    search: function () {
+	        var appsettings = appsettingsobject.config;
 	        $(function () {
-	            $('.kk_aj_searchRensaformbutton').on('click', function () {
-	                //console.log("clearat!")
-	                //alert("test");
-	                //localStorage.clear('kk_aj_storage');
-	                //return false;
-	            });
 
-	            // function event
-	           
 
-	            // function Verify then next
-	           
-	            
+
 	        });
 	    }
 	}

@@ -186,8 +186,10 @@ module.exports = {
                     "FaktaValue": formMaxParticipantsId.val(),
                 });
             };
+           
+
             var kk_aj_yearspan = $('#kk_aj_yearspan');
-            if (kk_aj_yearspan.val()) {
+            if (kk_aj_yearspan.html()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "3",
                     "FaktaTypID": kk_aj_yearspan.attr('rel'),
@@ -258,7 +260,7 @@ module.exports = {
                     "Faktaid": "4",
                     "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
                     "Faktarubrik": "Övrigt",
-                    "FaktaValue": $('#arr_resorovrigt').val(),
+                    "FaktaValue": $('#arr_resorovrigt').html(),
                 });
             };
             if (mediaExempledata.exempelitemlist) {
@@ -281,20 +283,26 @@ module.exports = {
             arrformjsondata.MainImage.MediaSize = $('#arr_sizefoto').val();
             arrformjsondata.MainImage.MediaAlt = $('#arr_altfoto').val();
             arrformjsondata.MainImage.MediaFoto = $('#arr_fotograf').val();
-    
-            arrformjsondata.Utovare = "0";
-            arrformjsondata.UtovareData.UtovarID = "0";
-            arrformjsondata.UtovareData.Organisation = $('#utovare_aktor_grupp').val();
-            arrformjsondata.UtovareData.Fornamn = $('#utovare_fornamn').val();
-            arrformjsondata.UtovareData.Efternamn = $('#utovare_efternamn').val();
-            arrformjsondata.UtovareData.Telefon = $('#utovare_telefonnr').val();
-            arrformjsondata.UtovareData.Adress = $('#utovare_adress').val();
-            arrformjsondata.UtovareData.Postnr = $('#utovare_postnummer').val();
-            arrformjsondata.UtovareData.Ort = $('#utovare_ort').val();
-            arrformjsondata.UtovareData.Epost = $('#utovare_epost').val();
-            arrformjsondata.UtovareData.Kommun = $('#utovare_kommun').val();
-            arrformjsondata.UtovareData.Weburl = $('#utovare_orghemsida').val();
-	
+
+            var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
+            
+            if (isbefintligutovare > 0) {
+                arrformjsondata.Utovare = isbefintligutovare;
+                arrformjsondata.UtovareData.UtovarID = isbefintligutovare;
+            } else {           
+                arrformjsondata.Utovare = "0";
+                arrformjsondata.UtovareData.UtovarID = "0";
+                arrformjsondata.UtovareData.Organisation = $('#utovare_aktor_grupp').val();
+                arrformjsondata.UtovareData.Fornamn = $('#utovare_fornamn').val();
+                arrformjsondata.UtovareData.Efternamn = $('#utovare_efternamn').val();
+                arrformjsondata.UtovareData.Telefon = $('#utovare_telefonnr').val();
+                arrformjsondata.UtovareData.Adress = $('#utovare_adress').val();
+                arrformjsondata.UtovareData.Postnr = $('#utovare_postnummer').val();
+                arrformjsondata.UtovareData.Ort = $('#utovare_ort').val();
+                arrformjsondata.UtovareData.Epost = $('#utovare_epost').val();
+                arrformjsondata.UtovareData.Kommun = $('#utovare_kommun').val();
+                arrformjsondata.UtovareData.Weburl = $('#utovare_orghemsida').val();
+            }
 
             callback(arrformjsondata);
 

@@ -2,7 +2,7 @@
 var appsettingsobject = require("./jsmoduler/appSettings.js");
 var msg = require("./jsmoduler/main.js");
 var pagehandler = require("./jsmoduler/pageloadhandler.js");
-var jqueryNavEvents = require("./jsmoduler/appJqueryMainNavEvents.js");
+var publiksearch = require("./jsmoduler/publiksearch.js");
 
 var appsetting = appsettingsobject.config;
 //  kulturkatalogen publik start
@@ -83,7 +83,7 @@ $(function () {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // STOPP rangesliders för arrangemangformuläret-----------------------------------------------------------------------------
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    jqueryNavEvents.init();
+    publiksearch.search();
    
    // $("#mainapp").attr('style','background:#fff;').html("funkar! eller");    
     //alert('Foundation Core Version: ' + appsettings.config.globalconfig.dnnURL);
@@ -109,8 +109,8 @@ $(function () {
                    , range: true
                    , values: [0, 10]
                    , slide: function (event, ui) {
-                       $prev.text(ui.values[0] + ' år');
-                       $next.text(ui.values[1] + ' år');
+                       $prev.text(ui.values[0] + unescape("%E5") + "r");
+                       $next.text(ui.values[1] + unescape("%E5") + "r");
                    }
                 });
             }
@@ -119,8 +119,8 @@ $(function () {
             * LIKES: jquery ui set values
             */
               , likesValues: function ($slider, $prev, $next) {
-                  $prev.text($slider.slider('values', 0) + ' år');
-                  $next.text($slider.slider('values', 1) + ' pr');
+                  $prev.text($slider.slider('values', 0) +  unescape("%E5") + "r");
+                  $next.text($slider.slider('values', 1) + unescape("%E5") + "r");
               }
         };
 
