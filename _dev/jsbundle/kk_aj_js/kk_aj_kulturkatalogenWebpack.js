@@ -226,22 +226,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://kulturkatalog.kivdev.se",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://kulturkatalog.kivdev.se",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -10615,6 +10615,7 @@
 
 	            // Nav Event
 	            $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
+	                tidigareutovaredisable(true);
 	                $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
 	                btn_befintlig_utovareBlock.hide();
 	                btn_ny_utovareBlock.show();
@@ -10627,6 +10628,7 @@
 	                return false;
 	            });
 	            $('body').on('click', '.kk_aj_btnnyutovare', function () {
+	                tidigareutovaredisable(false);
 	                arrformAutocompleteHandler.emptyutovareform();
 	                btn_befintlig_utovareBlock.removeClass('successborder').show();
 	                btn_ny_utovareBlock.hide();
@@ -10641,7 +10643,7 @@
 
 	            // Get befintlig arrangör
 	            $('body').on('click', '.kk_aj_btnHamtakontaktupg', function () {
-
+	                tidigareutovaredisable(true);
 	                var epost = $('.kk_aj_search_utovareEpost');
 	                var postnr = $('.kk_aj_search_utovarePostnr');
 	                var kk_aj_search_utovarePostnr_error = $('.kk_aj_search_utovarePostnr_error');
@@ -10762,9 +10764,6 @@
 	                        arrGranskaVy.getArrFormJsonData(jsonmainobject);
 
 	                    });
-
-	                    
-
 	                    tabnavigator(3);                                     
 	                    return false;
 	                    
@@ -10897,6 +10896,7 @@
 	            });
 
 	            $('.kk_aj_befintlignotme').on('click', function () {
+	                tidigareutovaredisable(false);
 	                isnotme();
 	                return false;
 	            });
@@ -11031,6 +11031,32 @@
 	   
 	    $('.utovare_epost_errorutovareexeists').show();
 	    $('#utovare_epost').val("")
+	}
+	var tidigareutovaredisable = function (dodisable) {
+	    if (dodisable == true) {
+	        $('#utovare_aktor_grupp').attr('disabled', 'disabled');
+	        $('#utovare_orghemsida').attr('disabled', 'disabled');
+	        $('#utovare_adress').attr('disabled', 'disabled');
+	        $('#utovare_postnummer').attr('disabled', 'disabled');
+	        $('#utovare_ort').attr('disabled', 'disabled');
+	        $('#utovare_kommun').attr('disabled', 'disabled');
+	        $('#utovare_fornamn').attr('disabled', 'disabled');
+	        $('#utovare_efternamn').attr('disabled', 'disabled');
+	        $('#utovare_telefonnr').attr('disabled', 'disabled');
+	        $('#utovare_epost').attr('disabled', 'disabled');
+	    } else {
+	        $('#utovare_aktor_grupp').removeAttr('disabled');       
+	        $('#utovare_orghemsida').removeAttr('disabled');
+	        $('#utovare_adress').removeAttr('disabled');
+	        $('#utovare_postnummer').removeAttr('disabled');
+	        $('#utovare_ort').removeAttr('disabled');
+	        $('#utovare_kommun').removeAttr('disabled');
+	        $('#utovare_fornamn').removeAttr('disabled');
+	        $('#utovare_efternamn').removeAttr('disabled');
+	        $('#utovare_telefonnr').removeAttr('disabled');
+	        $('#utovare_epost').removeAttr('disabled');
+	    }
+	    
 	}
 
 /***/ }),
@@ -11232,13 +11258,13 @@
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "3",
 	                    "FaktaTypID": kk_aj_yearspan.attr('rel'),
-	                    "Faktarubrik": "Ålder högst",
+	                    "Faktarubrik": "Ålder lägst",
 	                    "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[0]
 	                });
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "3",
 	                    "FaktaTypID": kk_aj_yearspan.attr('rev'),
-	                    "Faktarubrik": "Ålder lägst",
+	                    "Faktarubrik": "Ålder högst",
 	                    "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[1]
 	                });
 	            };
@@ -11627,7 +11653,7 @@
 	        $('.kk_aj_search_arr_ljud_error').css('display', 'block');        
 	        ret = false;
 	    }
-	    
+	   
 	    return ret;
 	}
 	var step3 = function (next) {
@@ -11662,6 +11688,15 @@
 	    return ret;
 	}
 
+	var konstforminputs ={
+	    forestallningtune: "kk_aj_ft",   
+	    foresallningfastscen: "kk_aj_ff",
+	    forfattarbesok: "kk_aj_fb",
+	    kulturpedagogiskaprojekt: "kk_aj_kp",
+	    fortbildningar: "kk_aj_fob",
+	    resmal: "kk_aj_rm",
+	    museielador:"kk_aj_ml"    
+	}
 
 /***/ }),
 /* 9 */

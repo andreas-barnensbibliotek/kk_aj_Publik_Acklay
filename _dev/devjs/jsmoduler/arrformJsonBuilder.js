@@ -193,13 +193,13 @@ module.exports = {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "3",
                     "FaktaTypID": kk_aj_yearspan.attr('rel'),
-                    "Faktarubrik": "Ålder högst",
+                    "Faktarubrik": "Ålder lägst",
                     "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[0]
                 });
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "3",
                     "FaktaTypID": kk_aj_yearspan.attr('rev'),
-                    "Faktarubrik": "Ålder lägst",
+                    "Faktarubrik": "Ålder högst",
                     "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[1]
                 });
             };

@@ -15990,3 +15990,7 @@ a.ui-button:active,
 /* line 1651, _dev/devsass/kk_aj_PublicCSS.scss */
 .kk_aj_searchfilterblock {
   margin-left: 0rem !important; }
+
+/* line 1653, _dev/devsass/kk_aj_PublicCSS.scss */
+#kk_aj_conf {
+  display: none; }

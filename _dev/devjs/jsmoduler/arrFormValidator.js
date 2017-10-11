@@ -91,7 +91,7 @@ var step2 = function (next) {
         $('.kk_aj_search_arr_ljud_error').css('display', 'block');        
         ret = false;
     }
-    
+   
     return ret;
 }
 var step3 = function (next) {
@@ -124,4 +124,14 @@ var validateinputs = function (validateobj, next) {
 
     });
     return ret;
+}
+
+var konstforminputs ={
+    forestallningtune: "kk_aj_ft",   
+    foresallningfastscen: "kk_aj_ff",
+    forfattarbesok: "kk_aj_fb",
+    kulturpedagogiskaprojekt: "kk_aj_kp",
+    fortbildningar: "kk_aj_fob",
+    resmal: "kk_aj_rm",
+    museielador:"kk_aj_ml"    
 }

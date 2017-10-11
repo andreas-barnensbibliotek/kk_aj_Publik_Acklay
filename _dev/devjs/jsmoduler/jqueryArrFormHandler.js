@@ -23,6 +23,7 @@ module.exports = {
 
             // Nav Event
             $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
+                tidigareutovaredisable(true);
                 $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
                 btn_befintlig_utovareBlock.hide();
                 btn_ny_utovareBlock.show();
@@ -35,6 +36,7 @@ module.exports = {
                 return false;
             });
             $('body').on('click', '.kk_aj_btnnyutovare', function () {
+                tidigareutovaredisable(false);
                 arrformAutocompleteHandler.emptyutovareform();
                 btn_befintlig_utovareBlock.removeClass('successborder').show();
                 btn_ny_utovareBlock.hide();
@@ -49,7 +51,7 @@ module.exports = {
 
             // Get befintlig arrangör
             $('body').on('click', '.kk_aj_btnHamtakontaktupg', function () {
-
+                tidigareutovaredisable(true);
                 var epost = $('.kk_aj_search_utovareEpost');
                 var postnr = $('.kk_aj_search_utovarePostnr');
                 var kk_aj_search_utovarePostnr_error = $('.kk_aj_search_utovarePostnr_error');
@@ -170,9 +172,6 @@ module.exports = {
                         arrGranskaVy.getArrFormJsonData(jsonmainobject);
 
                     });
-
-                    
-
                     tabnavigator(3);                                     
                     return false;
                     
@@ -305,6 +304,7 @@ module.exports = {
             });
 
             $('.kk_aj_befintlignotme').on('click', function () {
+                tidigareutovaredisable(false);
                 isnotme();
                 return false;
             });
@@ -439,4 +439,30 @@ var utovareexeists = function () {
    
     $('.utovare_epost_errorutovareexeists').show();
     $('#utovare_epost').val("")
+}
+var tidigareutovaredisable = function (dodisable) {
+    if (dodisable == true) {
+        $('#utovare_aktor_grupp').attr('disabled', 'disabled');
+        $('#utovare_orghemsida').attr('disabled', 'disabled');
+        $('#utovare_adress').attr('disabled', 'disabled');
+        $('#utovare_postnummer').attr('disabled', 'disabled');
+        $('#utovare_ort').attr('disabled', 'disabled');
+        $('#utovare_kommun').attr('disabled', 'disabled');
+        $('#utovare_fornamn').attr('disabled', 'disabled');
+        $('#utovare_efternamn').attr('disabled', 'disabled');
+        $('#utovare_telefonnr').attr('disabled', 'disabled');
+        $('#utovare_epost').attr('disabled', 'disabled');
+    } else {
+        $('#utovare_aktor_grupp').removeAttr('disabled');       
+        $('#utovare_orghemsida').removeAttr('disabled');
+        $('#utovare_adress').removeAttr('disabled');
+        $('#utovare_postnummer').removeAttr('disabled');
+        $('#utovare_ort').removeAttr('disabled');
+        $('#utovare_kommun').removeAttr('disabled');
+        $('#utovare_fornamn').removeAttr('disabled');
+        $('#utovare_efternamn').removeAttr('disabled');
+        $('#utovare_telefonnr').removeAttr('disabled');
+        $('#utovare_epost').removeAttr('disabled');
+    }
+    
 }
