@@ -13,6 +13,8 @@ module.exports = {
         var appsettings = appsettingsobject.config;
         $(function () {
 
+            arrformValidator.arrShowforminputs("0");
+
             var storage = Storages.localStorage
             storage.set('foo', 'Detta funkar bra detta!');
             var storage = Storages.localStorage
@@ -20,7 +22,16 @@ module.exports = {
 
             var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
             var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
-
+                       
+            $('.ArrangemangtypBlock input').on('change', function () {
+                var vald = $('input[name=arr_radioValArrtyp]:checked', '.ArrangemangtypBlock').val();
+                arrformValidator.arrShowforminputs(vald);
+                    arrformValidator.arrtypimg(vald);                    
+                });
+            $('.kontformBlock input').on('change', function () {
+                var vald = $('input[name=arr_radioValkontstform]:checked', '.kontformBlock').val();
+                arrformValidator.konsttypimg(vald);                
+            });
             // Nav Event
             $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
                 tidigareutovaredisable(true);
@@ -55,9 +66,10 @@ module.exports = {
                 var epost = $('.kk_aj_search_utovareEpost');
                 var postnr = $('.kk_aj_search_utovarePostnr');
                 var kk_aj_search_utovarePostnr_error = $('.kk_aj_search_utovarePostnr_error');
-                var kk_aj_search_utovareEpost_error = $('.kk_aj_search_utovareEpost_error');
-                var kk_aj_search_Nothingtoshow = $('.kk_aj_search_Nothingtoshow');
+                var kk_aj_search_utovareEpost_error = $('.kk_aj_search_utovareEpost_error');                
                 var kk_aj_search_Nothingtoshow_error = $('.kk_aj_search_Nothingtoshow_error').hide();
+
+                var kk_aj_search_Nothingtoshow = $('.kk_aj_search_Nothingtoshow');
                 var kk_aj_form_utovareuppgifter = $('.kk_aj_form_utovareuppgifter');
                 var kk_aj_btnHamtakontaktupg = $('.kk_aj_btnHamtakontaktupg');
                 $('#utovare_epost').removeClass('notYouTest');                
@@ -98,11 +110,8 @@ module.exports = {
                 return false;
             });
 
-
-
             // Verify steg 1
-            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
-                
+            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {                
 
                 if (!$('#utovare_epost').val() || !$('#utovare_postnummer').val()) {
                     if (arrformValidator.formvalidator(1) == true && ret == true) {
@@ -118,9 +127,7 @@ module.exports = {
                             tabnavigator(2);
                         }
 
-
                         return ret;
-
 
                     } else {
                         tabnavigator(1);
@@ -148,8 +155,7 @@ module.exports = {
 
                     if (ret) {
                         tabnavigator(2);
-                    }
-                    
+                    }                    
                    
                     return ret;
                     
@@ -164,7 +170,7 @@ module.exports = {
             // Verify steg 2
             $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
                 if (arrformValidator.formvalidator(2)) {
-
+                    console.log("_exempellistobject " +_exempellistobject);
                     // FYll på inmatade värden i granskavyn!   
                     arrformjsonBuilder.getArrFormJsonData(_exempellistobject, function (callback) {
                         console.log(callback);

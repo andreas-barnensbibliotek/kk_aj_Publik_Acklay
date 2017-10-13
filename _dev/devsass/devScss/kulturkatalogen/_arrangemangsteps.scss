@@ -115,14 +115,15 @@
             position: absolute;
                 &:checked{
                     & + img{ 
-                        border:2px solid #f00;
+                        border:0px solid #f00;
+                        background-image:url("http://dnndev.me/DesktopModules/kk_aj_Publik_ArrangemangForm/images/kulturpedagogiskaprojekt_invert.png");
                 }
             }
  
         }
         & + img{ /* IMAGE STYLES */
               cursor:pointer;
-              border:2px solid transparent;
+              border:0px solid transparent;
         }
 
     }

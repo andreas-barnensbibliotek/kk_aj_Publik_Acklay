@@ -39,6 +39,11 @@ var faktaContent = function (fakalistJson) {
 
 }
 var utovareContent = function (utovareJson) {
-
-
+    $('.granska_Utovare_Organisation').html($('#utovare_aktor_grupp').val());
+    $('.granska_Utovare_namn').html($('#utovare_fornamn').val() + " " + $('#utovare_efternamn').val());
+    $('.granska_Utovare_Adress').html($('#utovare_adress').val());
+    $('.granska_Utovare_postort').html($('#utovare_postnummer').val() + " " + $('#utovare_ort').val());
+    $('.granska_Utovare_tfn').html($('#utovare_telefonnr').val());
+    $('.granska_Utovare_epost').html($('#utovare_epost').val());
+    $('.granska_Utovare_hemsida').html($('#utovare_orghemsida').val());
 }

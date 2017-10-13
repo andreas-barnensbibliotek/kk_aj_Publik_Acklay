@@ -10605,6 +10605,8 @@
 	        var appsettings = appsettingsobject.config;
 	        $(function () {
 
+	            arrformValidator.arrShowforminputs("0");
+
 	            var storage = Storages.localStorage
 	            storage.set('foo', 'Detta funkar bra detta!');
 	            var storage = Storages.localStorage
@@ -10612,7 +10614,16 @@
 
 	            var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
 	            var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
-
+	                       
+	            $('.ArrangemangtypBlock input').on('change', function () {
+	                var vald = $('input[name=arr_radioValArrtyp]:checked', '.ArrangemangtypBlock').val();
+	                arrformValidator.arrShowforminputs(vald);
+	                    arrformValidator.arrtypimg(vald);                    
+	                });
+	            $('.kontformBlock input').on('change', function () {
+	                var vald = $('input[name=arr_radioValkontstform]:checked', '.kontformBlock').val();
+	                arrformValidator.konsttypimg(vald);                
+	            });
 	            // Nav Event
 	            $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
 	                tidigareutovaredisable(true);
@@ -10647,9 +10658,10 @@
 	                var epost = $('.kk_aj_search_utovareEpost');
 	                var postnr = $('.kk_aj_search_utovarePostnr');
 	                var kk_aj_search_utovarePostnr_error = $('.kk_aj_search_utovarePostnr_error');
-	                var kk_aj_search_utovareEpost_error = $('.kk_aj_search_utovareEpost_error');
-	                var kk_aj_search_Nothingtoshow = $('.kk_aj_search_Nothingtoshow');
+	                var kk_aj_search_utovareEpost_error = $('.kk_aj_search_utovareEpost_error');                
 	                var kk_aj_search_Nothingtoshow_error = $('.kk_aj_search_Nothingtoshow_error').hide();
+
+	                var kk_aj_search_Nothingtoshow = $('.kk_aj_search_Nothingtoshow');
 	                var kk_aj_form_utovareuppgifter = $('.kk_aj_form_utovareuppgifter');
 	                var kk_aj_btnHamtakontaktupg = $('.kk_aj_btnHamtakontaktupg');
 	                $('#utovare_epost').removeClass('notYouTest');                
@@ -10690,11 +10702,8 @@
 	                return false;
 	            });
 
-
-
 	            // Verify steg 1
-	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {
-	                
+	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {                
 
 	                if (!$('#utovare_epost').val() || !$('#utovare_postnummer').val()) {
 	                    if (arrformValidator.formvalidator(1) == true && ret == true) {
@@ -10710,9 +10719,7 @@
 	                            tabnavigator(2);
 	                        }
 
-
 	                        return ret;
-
 
 	                    } else {
 	                        tabnavigator(1);
@@ -10740,8 +10747,7 @@
 
 	                    if (ret) {
 	                        tabnavigator(2);
-	                    }
-	                    
+	                    }                    
 	                   
 	                    return ret;
 	                    
@@ -10756,7 +10762,7 @@
 	            // Verify steg 2
 	            $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
 	                if (arrformValidator.formvalidator(2)) {
-
+	                    console.log("_exempellistobject " +_exempellistobject);
 	                    // FYll på inmatade värden i granskavyn!   
 	                    arrformjsonBuilder.getArrFormJsonData(_exempellistobject, function (callback) {
 	                        console.log(callback);
@@ -11564,6 +11570,7 @@
 	var $ = __webpack_require__(4);
 	var appsettingsobject = __webpack_require__(1);
 	var _appsetting = appsettingsobject.config;
+	var _basesrc = "/DesktopModules/kk_aj_Publik_ArrangemangForm/images/";
 
 	module.exports = {
 	    formvalidator:function (step) {
@@ -11603,8 +11610,134 @@
 	            $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
 	        }
 	        return ret;
-	    }
+	    },
+	    arrtypimg: function (vald) {
+	        var basesrc = _basesrc;
+	        
+	        $('.img_forestallningtune').attr("src", basesrc + "forestallningpatune.png");
+	        $('.img_foresallningfastscen').attr("src", basesrc + "Skolbio.png");
+	        $('.img_forfattarbesok').attr("src", basesrc + "forfattarbesok.png");
+	        $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "kulturpedagogiskaprojekt.png");
+	        $('.img_Fortbildningar').attr("src", basesrc + "Fortbildningar.png");
+	        $('.img_museielador').attr("src", basesrc + "resmalsbesok.png");
 
+
+	        switch (vald) {
+	            case "1":
+	                $('.img_forestallningtune').attr("src", basesrc + "forestallningpatune_invert.png");
+	                break;
+	            case "8":
+	                $('.img_foresallningfastscen').attr("src", basesrc + "Skolbio_invert.png");
+	                break;
+	            case "3":
+	                $('.img_forfattarbesok').attr("src", basesrc + "forfattarbesok_invert.png");
+	                break;
+	            case "4":
+	                $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "kulturpedagogiskaprojekt_invert.png");
+	                break;
+	            case "5":
+	                $('.img_Fortbildningar').attr("src", basesrc + "Fortbildningar_invert.png");
+	                break;
+	            case "6":
+	                $('.img_museielador').attr("src", basesrc + "resmalsbesok_invert.png");
+	                break;
+	        }
+	        return false;
+
+	    },
+	    konsttypimg: function (vald) {
+	        var basesrc = _basesrc;
+	        var img_arkitektur = $('.img_arkitektur');
+	        var img_dans = $('.img_dans');
+	        var img_film = $('.img_film');
+	        var img_konst = $('.img_konst');
+	        var img_litteratur = $('.img_litteratur');
+	        var img_musik = $('.img_musik');
+	        var img_naturochkultruarv = $('.img_naturochkultruarv');
+	        var img_nycirkus = $('.img_nycirkus');
+	        var img_slojd = $('.img_slojd');
+	        var img_teater = $('.img_teater');
+	        var img_teknik = $('.img_teknik');
+	        var img_annascenkonst = $('.img_annascenkonst');
+
+	        img_arkitektur.attr("src", basesrc + "Arkitekturochdesign.png");
+	        img_dans.attr("src", basesrc + "dans.png");
+	        img_film.attr("src", basesrc + "Filmochmedia.png");
+	        img_konst.attr("src", basesrc + "Konstformochdesign.png");
+	        img_litteratur.attr("src", basesrc + "Litteraturberattandeskrivande.png");
+	        img_musik.attr("src", basesrc + "musik.png");
+	        img_naturochkultruarv.attr("src", basesrc + "Naturochkulturarv.png");
+	        img_nycirkus.attr("src", basesrc + "Nycirkus_cirkus.png");
+	        img_slojd.attr("src", basesrc + "Slojd.png");
+	        img_teater.attr("src", basesrc + "teater.png");
+	        img_teknik.attr("src", basesrc + "Teknikochmultimedia.png");
+	        img_annascenkonst.attr("src", basesrc + "Annanscenkonst.png");
+
+
+	        switch (vald) {
+	            case "1":
+	                img_arkitektur.attr("src", basesrc + "Arkitekturochdesign_invert.png");
+	                break;
+	            case "2":
+	                img_dans.attr("src", basesrc + "dans_invert.png");
+	                break;
+	            case "3":
+	                img_film.attr("src", basesrc + "Filmochmedia_invert.png");
+	                break;
+	            case "4":
+	                img_konst.attr("src", basesrc + "Konstformochdesign_invert.png")
+	                break;
+	            case "5":
+	                img_litteratur.attr("src", basesrc + "Litteraturberattandeskrivande_invert.png");
+	                break;
+	            case "6":
+	                img_musik.attr("src", basesrc + "musik_invert.png");
+	                break;
+	            case "7":
+	                img_naturochkultruarv.attr("src", basesrc + "Naturochkulturarv_invert.png");
+	                break;
+	            case "8":
+	                img_nycirkus.attr("src", basesrc + "Nycirkus_cirkus_invert.png");
+	                break;
+	            case "9":
+	                img_slojd.attr("src", basesrc + "Slojd_invert.png");
+	                break;
+	            case "10":
+	                img_teater.attr("src", basesrc + "teater_invert.png");
+	                break;
+	            case "11":
+	                img_teknik.attr("src", basesrc + "Teknikochmultimedia_invert.png");
+	                break;
+	            case "12":
+	                img_annascenkonst.attr("src", basesrc + "Annanscenkonst_invert.png");
+	                break;
+	        }
+	        return false;
+	    },
+	    arrShowforminputs: function (arrtypid) {
+	        
+	        switch (arrtypid) {
+	            case "0":
+	                hideformfields();
+	                break;
+	            case "1":
+	                konstforminputs.forestallningtune.kontroller();
+	                $('.kk_aj_form_Arrangemang').show(500);
+	                break;
+	            case "3":
+	                konstforminputs.forfattarbesok.kontroller();
+	                $('.kk_aj_form_Arrangemang').show(500);
+	                break;
+	            case "5":
+	                konstforminputs.fortbildningar.kontroller();
+	                $('.kk_aj_form_Arrangemang').show(500);
+	                break;
+	            default:
+	                hideformfields();
+	                $('.kk_aj_form_Arrangemang').show(500);
+	                break;
+	        }
+	    }
 	};
 
 
@@ -11688,14 +11821,63 @@
 	    return ret;
 	}
 
+
+	var hideformfields = function(){
+	    //lokalblock
+	    $('.kk_aj_form_Arrangemang').hide();
+	    
+	    $('.kk_aj_ft').hide();  //forestallningtune
+	    $('.kk_aj_fb').hide();  //forfattarbesok
+	    $('.kk_aj_fob').hide(); //fortbildningar      
+	        
+	}
+
 	var konstforminputs ={
-	    forestallningtune: "kk_aj_ft",   
-	    foresallningfastscen: "kk_aj_ff",
-	    forfattarbesok: "kk_aj_fb",
-	    kulturpedagogiskaprojekt: "kk_aj_kp",
-	    fortbildningar: "kk_aj_fob",
-	    resmal: "kk_aj_rm",
-	    museielador:"kk_aj_ml"    
+	    forestallningtune:{
+	        block:"kk_aj_ft",
+	        kontroller: function () {
+	            hideformfields();            
+	            $('.kk_aj_ft').show();                
+	       }
+	    },
+	    foresallningfastscen:{
+	        block: "kk_aj_ff",
+	        kontroller: function () {
+	            hideformfields();
+	        }
+	    }, 
+	    forfattarbesok:{
+	        block: "kk_aj_fb",
+	        kontroller: function () {
+	            hideformfields();
+	            $('.kk_aj_fb').show();
+	        }
+	    },
+	    kulturpedagogiskaprojektforesallningfastscen:{
+	        block: "kk_aj_kp",
+	        kontroller: function () {
+	            hideformfields();
+	        }
+	    },  
+	    fortbildningar:{
+	        block: "kk_aj_fob",
+	        kontroller: function () {
+	            hideformfields();
+	            $('.kk_aj_fob').show();
+	        }
+	    },   
+	    resmal:{
+	        block: "kk_aj_rm",
+	        kontroller: function () {
+	            hideformfields();
+	        }
+	    },   
+	    museielador:{
+	        block: "kk_aj_ml",
+	        kontroller: function () {
+	            hideformfields();
+	        }
+	    }   
 	}
 
 /***/ }),
@@ -11743,8 +11925,13 @@
 
 	}
 	var utovareContent = function (utovareJson) {
-
-
+	    $('.granska_Utovare_Organisation').html($('#utovare_aktor_grupp').val());
+	    $('.granska_Utovare_namn').html($('#utovare_fornamn').val() + " " + $('#utovare_efternamn').val());
+	    $('.granska_Utovare_Adress').html($('#utovare_adress').val());
+	    $('.granska_Utovare_postort').html($('#utovare_postnummer').val() + " " + $('#utovare_ort').val());
+	    $('.granska_Utovare_tfn').html($('#utovare_telefonnr').val());
+	    $('.granska_Utovare_epost').html($('#utovare_epost').val());
+	    $('.granska_Utovare_hemsida').html($('#utovare_orghemsida').val());
 	}
 
 /***/ }),
