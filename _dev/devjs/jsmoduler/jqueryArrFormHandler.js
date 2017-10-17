@@ -112,7 +112,7 @@ module.exports = {
 
             // Verify steg 1
             $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {                
-
+                var ret = true;
                 if (!$('#utovare_epost').val() || !$('#utovare_postnummer').val()) {
                     if (arrformValidator.formvalidator(1) == true && ret == true) {
 
@@ -136,7 +136,7 @@ module.exports = {
                 }
                 
                arrformAutocompleteHandler.allreadyExistsutovare($('#utovare_epost').val(), $('#utovare_postnummer').val(), function (data) {
-                   var ret = true
+                   var ret = true;
                    if(!$('#utovare_epost').hasClass('befintligutovare')){
                        if (data) {
                             utovareexeists();
@@ -314,7 +314,12 @@ module.exports = {
                 isnotme();
                 return false;
             });
-            
+            $('.info').on('click', function (e) {
+               
+                var classen = $(this).attr('rel');
+                $('.' + classen +'text').toggle();
+                return false;
+            });
         });
               
 

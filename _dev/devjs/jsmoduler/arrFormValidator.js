@@ -214,11 +214,9 @@ var step2 = function (next) {
         $('.kontformBlock').addClass('radioError');
         ret = false;
     }
-    if ($('input[name=arr_ljud]:checked').length <= 0) {
-        $('.kk_aj_search_arr_ljud_error').css('display', 'block');        
-        ret = false;
-    }
-   
+        
+    ret = validatearrtyp(validateobj, next, ret);
+
     return ret;
 }
 var step3 = function (next) {
@@ -253,6 +251,36 @@ var validateinputs = function (validateobj, next) {
     return ret;
 }
 
+var validatearrtyp = function(validateobj, next, ret) {   
+    var obj;
+    var arrtypid = $('input[name=arr_radioValArrtyp]').val();
+    switch (arrtypid) {
+        case "1": {
+            obj = $('.kk_aj_ft');
+            ret = validateinputs(obj, next);
+
+            if ($('input[name=arr_ljud]:checked').length <= 0) {
+                $('.kk_aj_search_arr_ljud_error').css('display', 'block');
+                ret = false;
+            }            
+            break;
+        }
+        case "3": {
+            obj = $('.kk_aj_fb');
+            ret = validateinputs(obj, next);
+            break;
+        }
+        case "5": {
+            obj = $('.kk_aj_fob');
+            ret = validateinputs(obj, next);
+            break;
+        }
+    }
+
+    return ret;
+
+}
+       
 
 var hideformfields = function(){
     //lokalblock

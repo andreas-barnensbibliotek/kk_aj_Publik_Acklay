@@ -101,6 +101,12 @@
            padding-left:.5rem;
 
        }
+       .kk_aj_befintlignotme{
+            display:none; 
+            margin-bottom:1rem; 
+            color:#f77136; 
+            text-decoration:underline;   
+        }
    }       
       small{
           margin-top:-0.7rem;
@@ -270,3 +276,15 @@ input[type=radio] + label {
     }
 }
 
+.arrpressentationbild{
+    legend{
+        margin-left:-.8rem;  
+    }
+    background-color: #F9F9F9;
+    border-top: 1px solid #F5F5F5;
+    padding-top: 1rem;
+    padding: .5rem;
+    margin-bottom: 1rem;
+}
+.infotext{display:none;  background-color:#008CBA; color:#fff;padding:4px;margin-bottom:2px;}
+.kk_aj_exempelblock{/*display:none;*/}

@@ -226,22 +226,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            apiserver: "http://localhost:60485",
-	            dnnURL: "http://dnndev.me",           
-	            localOrServerURL: "http://localhost:60485/Api_v2",
-	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://localhost:60485",
+	            //dnnURL: "http://dnndev.me",           
+	            //localOrServerURL: "http://localhost:60485/Api_v2",
+	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            //dnnURL: "http://kulturkatalog.kivdev.se",
-	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            dnnURL: "http://kulturkatalog.kivdev.se",
+	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -252,7 +252,7 @@
 	            currenttab: 0           
 	        },
 	        currentpage: "",
-	        debug: "false" // true / false
+	        debug: "true" // true / false
 	    };
 
 	module.exports = {  
@@ -10704,7 +10704,7 @@
 
 	            // Verify steg 1
 	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {                
-
+	                var ret = true;
 	                if (!$('#utovare_epost').val() || !$('#utovare_postnummer').val()) {
 	                    if (arrformValidator.formvalidator(1) == true && ret == true) {
 
@@ -10728,7 +10728,7 @@
 	                }
 	                
 	               arrformAutocompleteHandler.allreadyExistsutovare($('#utovare_epost').val(), $('#utovare_postnummer').val(), function (data) {
-	                   var ret = true
+	                   var ret = true;
 	                   if(!$('#utovare_epost').hasClass('befintligutovare')){
 	                       if (data) {
 	                            utovareexeists();
@@ -10906,7 +10906,12 @@
 	                isnotme();
 	                return false;
 	            });
-	            
+	            $('.info').on('click', function (e) {
+	               
+	                var classen = $(this).attr('rel');
+	                $('.' + classen +'text').toggle();
+	                return false;
+	            });
 	        });
 	              
 
@@ -11366,9 +11371,9 @@
 	                arrformjsondata.UtovareData.Organisation = $('#utovare_aktor_grupp').val();
 	                arrformjsondata.UtovareData.Fornamn = $('#utovare_fornamn').val();
 	                arrformjsondata.UtovareData.Efternamn = $('#utovare_efternamn').val();
-	                arrformjsondata.UtovareData.Telefon = $('#utovare_telefonnr').val();
+	                arrformjsondata.UtovareData.Telefon = $('#utovare_telefonnr').val().replace(/\s/g, '');
 	                arrformjsondata.UtovareData.Adress = $('#utovare_adress').val();
-	                arrformjsondata.UtovareData.Postnr = $('#utovare_postnummer').val();
+	                arrformjsondata.UtovareData.Postnr = $('#utovare_postnummer').val().replace(/\s/g, '');
 	                arrformjsondata.UtovareData.Ort = $('#utovare_ort').val();
 	                arrformjsondata.UtovareData.Epost = $('#utovare_epost').val();
 	                arrformjsondata.UtovareData.Kommun = $('#utovare_kommun').val();
@@ -11782,11 +11787,9 @@
 	        $('.kontformBlock').addClass('radioError');
 	        ret = false;
 	    }
-	    if ($('input[name=arr_ljud]:checked').length <= 0) {
-	        $('.kk_aj_search_arr_ljud_error').css('display', 'block');        
-	        ret = false;
-	    }
-	   
+	        
+	    ret = validatearrtyp(validateobj, next, ret);
+
 	    return ret;
 	}
 	var step3 = function (next) {
@@ -11821,6 +11824,36 @@
 	    return ret;
 	}
 
+	var validatearrtyp = function(validateobj, next, ret) {   
+	    var obj;
+	    var arrtypid = $('input[name=arr_radioValArrtyp]').val();
+	    switch (arrtypid) {
+	        case "1": {
+	            obj = $('.kk_aj_ft');
+	            ret = validateinputs(obj, next);
+
+	            if ($('input[name=arr_ljud]:checked').length <= 0) {
+	                $('.kk_aj_search_arr_ljud_error').css('display', 'block');
+	                ret = false;
+	            }            
+	            break;
+	        }
+	        case "3": {
+	            obj = $('.kk_aj_fb');
+	            ret = validateinputs(obj, next);
+	            break;
+	        }
+	        case "5": {
+	            obj = $('.kk_aj_fob');
+	            ret = validateinputs(obj, next);
+	            break;
+	        }
+	    }
+
+	    return ret;
+
+	}
+	       
 
 	var hideformfields = function(){
 	    //lokalblock
@@ -11905,6 +11938,7 @@
 	    $('.granska_innehall').html(arrJson.Innehall);
 	    var imgsrc = _appsetting.globalconfig.arrtmpimgurl +'_'+ arrJson.MainImage.MediaUrl;
 	    $('.granska_pressentationsbild').attr('src', imgsrc);
+	    $('.arrmainfoto').html('<span>Foto: </span> ' + arrJson.MainImage.MediaFoto);
 
 	    if (arrJson.MediaList.length > 0) {
 	        $('.granska_exempel').show();

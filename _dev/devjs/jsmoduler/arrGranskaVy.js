@@ -19,6 +19,7 @@ var maincontent = function (arrJson) {
     $('.granska_innehall').html(arrJson.Innehall);
     var imgsrc = _appsetting.globalconfig.arrtmpimgurl +'_'+ arrJson.MainImage.MediaUrl;
     $('.granska_pressentationsbild').attr('src', imgsrc);
+    $('.arrmainfoto').html('<span>Foto: </span> ' + arrJson.MainImage.MediaFoto);
 
     if (arrJson.MediaList.length > 0) {
         $('.granska_exempel').show();
