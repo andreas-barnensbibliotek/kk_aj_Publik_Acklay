@@ -64,6 +64,33 @@ module.exports = {
                     "FaktaValue": arr_antalmedverkande.val(),
                 });
             }
+            var arr_medverkande = $('#arr_medverkande')
+            if (arr_medverkande.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "2",
+                    "FaktaTypID": arr_medverkande.attr('rel'),
+                    "Faktarubrik": "Medverkande",
+                    "FaktaValue": arr_medverkande.val(),
+                });
+            }
+            var arr_Bokningsbar = $('#arr_Bokningsbar')
+            if (arr_Bokningsbar.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "2",
+                    "FaktaTypID": arr_Bokningsbar.attr('rel'),
+                    "Faktarubrik": "Bokningsbar",
+                    "FaktaValue": arr_Bokningsbar.val(),
+                });
+            }
+            var formBuildTimeId = $('#formBuildTimeId')
+            if (formBuildTimeId.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "2",
+                    "FaktaTypID": formBuildTimeId.attr('rel'),
+                    "Faktarubrik": "Byggtid",
+                    "FaktaValue": formBuildTimeId.val(),
+                });
+            }
             if ($('input[name=arr_laromedel]:checked').val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "1",
@@ -254,8 +281,9 @@ module.exports = {
                     "FaktaValue": $('input[name=arr_Traktamente]:checked').val(),
                 }); 
             };
-            var arr_ekonomikostnad = $('#arr_ekonomikostnad');
-            if (arr_ekonomikostnad.val()) {
+
+            var arr_resorovrigt = $('#arr_resorovrigt');
+            if (arr_resorovrigt.html()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "4",
                     "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
@@ -263,6 +291,16 @@ module.exports = {
                     "FaktaValue": $('#arr_resorovrigt').html(),
                 });
             };
+
+            //var arr_ekonomikostnad = $('#arr_ekonomikostnad');
+            //if (arr_ekonomikostnad.val()) {
+            //    arrformjsondata.Faktalist.push({
+            //        "Faktaid": "4",
+            //        "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
+            //        "Faktarubrik": "Övrigt",
+            //        "FaktaValue": $('#arr_resorovrigt').html(),
+            //    });
+            //};
             if (mediaExempledata.exempelitemlist) {
                 if (mediaExempledata.exempelitemlist.length >= 0) {
                     arrformjsondata.MediaList = mediaExempledata.exempelitemlist;

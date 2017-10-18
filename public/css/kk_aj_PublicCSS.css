@@ -11844,7 +11844,7 @@ img .flip {
   /* line 123, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .valbaraRadiobuttons label > input:checked + img, .ArrangemangtypBlock label > input:checked + img, .kontformBlock label > input:checked + img, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label > input:checked + img {
     border: 0px solid #f00;
-    background-image: url("http://dnndev.me/DesktopModules/kk_aj_Publik_ArrangemangForm/images/kulturpedagogiskaprojekt_invert.png"); }
+    background-image: url("http://kulturkatalog.kivdev.se/DesktopModules/kk_aj_Publik_ArrangemangForm/images/kulturpedagogiskaprojekt_invert.png"); }
 
 /* line 130, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .valbaraRadiobuttons label + img, .ArrangemangtypBlock label + img, .kontformBlock label + img, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label + img {
@@ -12003,12 +12003,16 @@ input[type=radio] + label {
   border-top: 1px solid #F5F5F5;
   padding-top: 1rem;
   padding: .5rem;
-  margin-bottom: 1rem; }
+  margin-bottom: 0rem; }
   /* line 280, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrpressentationbild legend {
     margin-left: -.8rem; }
 
 /* line 289, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.granska_pressentationsbild {
+  max-height: 400px; }
+
+/* line 290, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .infotext {
   display: none;
   background-color: #008CBA;
@@ -12016,9 +12020,23 @@ input[type=radio] + label {
   padding: 4px;
   margin-bottom: 2px; }
 
-/* line 290, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 291, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .kk_aj_exempelblock {
   /*display:none;*/ }
+
+/* line 292, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.medverkandeblock {
+  margin-bottom: 2rem; }
+
+/* line 296, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.kk_aj_form_Arrangemang #kk_aj_speltid {
+  margin-top: .5rem;
+  margin-bottom: 1rem; }
+
+/* line 300, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.kk_aj_form_Arrangemang #kk_aj_yearspan {
+  margin-top: .5rem;
+  margin-bottom: 1rem; }
 
 @media only screen and (max-width: 40em) {
   /* line 1, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
@@ -13064,7 +13082,7 @@ textarea {
   /* line 123, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .valbaraRadiobuttons label > input:checked + img, .ArrangemangtypBlock label > input:checked + img, .kontformBlock label > input:checked + img, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label > input:checked + img {
     border: 0px solid #f00;
-    background-image: url("http://dnndev.me/DesktopModules/kk_aj_Publik_ArrangemangForm/images/kulturpedagogiskaprojekt_invert.png"); }
+    background-image: url("http://kulturkatalog.kivdev.se/DesktopModules/kk_aj_Publik_ArrangemangForm/images/kulturpedagogiskaprojekt_invert.png"); }
 
 /* line 130, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .valbaraRadiobuttons label + img, .ArrangemangtypBlock label + img, .kontformBlock label + img, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label + img {
@@ -13223,12 +13241,16 @@ input[type=radio] + label {
   border-top: 1px solid #F5F5F5;
   padding-top: 1rem;
   padding: .5rem;
-  margin-bottom: 1rem; }
+  margin-bottom: 0rem; }
   /* line 280, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
   .arrpressentationbild legend {
     margin-left: -.8rem; }
 
 /* line 289, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.granska_pressentationsbild {
+  max-height: 400px; }
+
+/* line 290, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .infotext {
   display: none;
   background-color: #008CBA;
@@ -13236,9 +13258,23 @@ input[type=radio] + label {
   padding: 4px;
   margin-bottom: 2px; }
 
-/* line 290, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 291, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .kk_aj_exempelblock {
   /*display:none;*/ }
+
+/* line 292, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.medverkandeblock {
+  margin-bottom: 2rem; }
+
+/* line 296, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.kk_aj_form_Arrangemang #kk_aj_speltid {
+  margin-top: .5rem;
+  margin-bottom: 1rem; }
+
+/* line 300, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.kk_aj_form_Arrangemang #kk_aj_yearspan {
+  margin-top: .5rem;
+  margin-bottom: 1rem; }
 
 /* line 90, _dev/devsass/kk_aj_PublicCSS.scss */
 .h2 {

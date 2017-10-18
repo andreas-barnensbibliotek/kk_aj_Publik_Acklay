@@ -164,6 +164,10 @@ module.exports = {
                 konstforminputs.fortbildningar.kontroller();
                 $('.kk_aj_form_Arrangemang').show(500);
                 break;
+            case "8":
+                konstforminputs.skolbio.kontroller();
+                $('.kk_aj_form_Arrangemang').show(500);
+                break;
             default:
                 hideformfields();
                 $('.kk_aj_form_Arrangemang').show(500);
@@ -237,7 +241,7 @@ var validateinputs = function (validateobj, next) {
         var current = $(this);
         var current_error = $("." + current.attr('id') + "_error");
 
-        if (current.val() != "") {
+        if (current.val() != "" || current.html() != "" || current.hasClass('novalidate')) {
             
             $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
             $('.kk_aj_verifystep' + next + '').removeClass('disabled');
@@ -253,7 +257,8 @@ var validateinputs = function (validateobj, next) {
 
 var validatearrtyp = function(validateobj, next, ret) {   
     var obj;
-    var arrtypid = $('input[name=arr_radioValArrtyp]').val();
+    var currentret = ret;
+    var arrtypid = $('input[name=arr_radioValArrtyp]:checked').val();
     switch (arrtypid) {
         case "1": {
             obj = $('.kk_aj_ft');
@@ -268,11 +273,25 @@ var validatearrtyp = function(validateobj, next, ret) {
         case "3": {
             obj = $('.kk_aj_fb');
             ret = validateinputs(obj, next);
+            if (currentret== false) {
+                ret = currentret;
+            }
             break;
         }
         case "5": {
             obj = $('.kk_aj_fob');
             ret = validateinputs(obj, next);
+            if (currentret == false) {
+                ret = currentret;
+            }
+            break;
+        }
+        case "8": {
+            obj = $('.kk_aj_sb');
+            ret = validateinputs(obj, next);
+            if (currentret == false) {
+                ret = currentret;
+            }
             break;
         }
     }
@@ -288,7 +307,8 @@ var hideformfields = function(){
     
     $('.kk_aj_ft').hide();  //forestallningtune
     $('.kk_aj_fb').hide();  //forfattarbesok
-    $('.kk_aj_fob').hide(); //fortbildningar      
+    $('.kk_aj_fob').hide(); //fortbildningar  
+    $('.kk_aj_sb').hide();  //skolbio
         
 }
 
@@ -305,7 +325,14 @@ var konstforminputs ={
         kontroller: function () {
             hideformfields();
         }
-    }, 
+    },
+    skolbio: {
+        block: "kk_aj_sb",
+        kontroller: function () {
+            hideformfields();
+            $('.kk_aj_sb').show();
+        }
+    },
     forfattarbesok:{
         block: "kk_aj_fb",
         kontroller: function () {

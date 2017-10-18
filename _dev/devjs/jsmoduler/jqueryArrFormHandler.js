@@ -222,7 +222,7 @@ module.exports = {
                 return true;
             });
             $('.kk_aj_tab[rel=4]').on('click', function (e) {
-                $('.tab-title[rel=4]').addClass('active').removeClass('done');               ;
+                $('.tab-title[rel=4]').addClass('active').removeClass('done'); 
                 tabnavigator(4);
                 appsettings.arrtab.currenttab = 4;
                 return true;
@@ -338,13 +338,15 @@ module.exports = {
             addarrtab_2.hide();
             addarrtab_3.hide();
             addarrtab_4;
-            $('#kk_aj_tmpimg').attr('src', 'https://www2.visitumea.se/sv//Content/img/missingimage.jpg');
+            $('#kk_aj_tmpimg').attr('src', 'http://kulturkatalog.kivdev.se/DesktopModules/kk_aj_Publik_ArrangemangForm/images/missingimage.jpg');
             $('.kk_aj_form_befintligutovare').hide();
             $('.kk_aj_form_utovareuppgifter').removeClass('successborder').show();           
             $('.kk_aj_verifystep2').show();
             $('.kk_aj_btnnyutovare').removeClass("secondary");
             $('.kk_aj_btnbefintligutovare').addClass("secondary");
-            $('.kk_aj_form_befintligutovare').attr('rel','0');
+            $('.kk_aj_form_befintligutovare').attr('rel', '0');
+            $('.kk_aj_befintlignotme').hide();
+            
         }
 
     }

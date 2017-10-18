@@ -28,7 +28,7 @@ window.kk_aj_publikAppsettings =
             currenttab: 0           
         },
         currentpage: "",
-        debug: "true" // true / false
+        debug: "false" // true / false
     };
 
 module.exports = {  

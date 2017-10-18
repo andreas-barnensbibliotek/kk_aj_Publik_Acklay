@@ -122,7 +122,7 @@
                 &:checked{
                     & + img{ 
                         border:0px solid #f00;
-                        background-image:url("http://dnndev.me/DesktopModules/kk_aj_Publik_ArrangemangForm/images/kulturpedagogiskaprojekt_invert.png");
+                        background-image:url("http://kulturkatalog.kivdev.se/DesktopModules/kk_aj_Publik_ArrangemangForm/images/kulturpedagogiskaprojekt_invert.png");
                 }
             }
  
@@ -284,7 +284,22 @@ input[type=radio] + label {
     border-top: 1px solid #F5F5F5;
     padding-top: 1rem;
     padding: .5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
 }
+.granska_pressentationsbild{max-height: 400px;}
 .infotext{display:none;  background-color:#008CBA; color:#fff;padding:4px;margin-bottom:2px;}
 .kk_aj_exempelblock{/*display:none;*/}
+.medverkandeblock{
+  margin-bottom: 2rem;
+}
+.kk_aj_form_Arrangemang{
+    #kk_aj_speltid{
+        margin-top:.5rem;
+        margin-bottom:1rem;
+    }
+    #kk_aj_yearspan{
+        margin-top:.5rem;
+        margin-bottom:1rem;
+    }
+
+}
