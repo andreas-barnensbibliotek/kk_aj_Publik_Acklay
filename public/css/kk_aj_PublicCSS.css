@@ -12132,8 +12132,9 @@ input[type=radio] + label {
             color: #FFFFFF; }
       /* line 79, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .button-group.even-2 li .button {
-        width: 94%; }
-      /* line 86, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        width: 94%;
+        padding: .8rem; }
+      /* line 87, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock fieldset {
         /*#kk_aj_yearspan{
                     margin-top: 0.5rem;
@@ -12146,16 +12147,16 @@ input[type=radio] + label {
                     padding-bottom:.5rem; 
                     font-size: 0.9rem;
                 }*/ }
-        /* line 87, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 88, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock fieldset legend {
           margin-bottom: 0.5rem; }
-        /* line 96, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 97, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock fieldset.arralder {
           padding: 0 1.7rem; }
-          /* line 98, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+          /* line 99, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
           .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock fieldset.arralder .ui-widget-header {
             background: #f77136 !important; }
-        /* line 113, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 114, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock fieldset #kk_aj_yearspan {
           margin-top: 0.5rem;
           _background-color: #f77136;
@@ -12166,193 +12167,193 @@ input[type=radio] + label {
           padding-top: .0rem;
           padding-bottom: .5rem;
           font-size: 0.9rem; }
-    /* line 129, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+    /* line 130, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .kk_aj_superProductListBlock .kk_aj_mainsearchblock .kk_aj_searchbuttonblock {
       margin-top: 2rem;
       margin-bottom: 4rem;
       /*END button*/ }
-      /* line 132, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 133, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainsearchblock .kk_aj_searchbuttonblock .button {
         margin-left: 1rem;
         margin-right: 1rem;
         width: 30%; }
         @media only screen and (max-width: 40em) {
-          /* line 132, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+          /* line 133, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
           .kk_aj_superProductListBlock .kk_aj_mainsearchblock .kk_aj_searchbuttonblock .button {
             width: 40%;
             margin-left: 0.5rem;
             margin-right: .5rem;
             padding-left: .1rem;
             padding-right: .1rem; } }
-        /* line 144, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 145, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainsearchblock .kk_aj_searchbuttonblock .button.round {
           -webkit-border-radius: 6px;
                   border-radius: 6px; }
-        /* line 147, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 148, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainsearchblock .kk_aj_searchbuttonblock .button.small {
           padding-left: .2rem;
           padding-right: .2rem; }
-        /* line 151, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 152, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainsearchblock .kk_aj_searchbuttonblock .button.info {
           color: #FFFFFF; }
-        /* line 155, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 156, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainsearchblock .kk_aj_searchbuttonblock .button .kk_aj_searchRensaformbutton:hover {
           background: #EEEEEE !important; }
   @media only screen and (max-width: 40em) {
-    /* line 168, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+    /* line 169, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .kk_aj_superProductListBlock .kk_aj_filterRubrikBlock h3 {
       font-size: 0.9375rem;
       font-weight: bold; } }
-  /* line 173, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+  /* line 174, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
   .kk_aj_superProductListBlock .kk_aj_mainproductlistblock {
     /*START Produktlistningen sökresultat-----------*/
     /*STOPP Produktlistningen sökresultat ----------*/ }
-    /* line 174, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+    /* line 175, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_filterblock {
       margin-bottom: 1rem;
       /* START Filter tillvänster --------------------*/
       /* STOPP Filter tillvänster -------------------*/ }
-      /* line 177, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 178, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_filterblock .jplist-range-slider {
         width: 190px; }
-      /* line 178, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 179, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_filterblock .kk_aj_searchfilterblock {
         margin-left: .5rem; }
-      /* line 181, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 182, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_filterblock .resetbox {
         margin-top: 1rem; }
-    /* line 183, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+    /* line 184, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .like {
       display: none; }
-    /* line 191, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+    /* line 192, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem {
       border: 1px solid transparent;
       border-top: 1px solid #EEEEEE;
       padding-top: 1rem;
       margin-bottom: 1rem !important;
       text-align: left; }
-      /* line 198, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 199, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem:hover {
         background-color: #FFFFFF;
         border-color: #f77136; }
-      /* line 202, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 203, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_thumbnail {
         display: block;
         min-height: 100%;
         padding: .1rem;
         text-align: center; }
         @media only screen and (min-width: 40.0625em) {
-          /* line 202, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+          /* line 203, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
           .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_thumbnail {
             __padding-right: 0px;
             text-align: center; } }
-        /* line 212, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 213, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_thumbnail img {
           max-height: 150px; }
-        /* line 213, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 214, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_thumbnail .kk_aj_arr_item_thumbnail_color {
           background-color: #000000;
           /*background-color:transparent;*/ }
-        /* line 217, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 218, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_thumbnail .kk_aj_arr_item_thumbnail_img {
           width: 100%;
           height: 100%; }
-        /* line 221, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 222, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_thumbnail .kk_aj_arr_item_minneslista {
           text-decoration: none;
           color: #888888;
           font-size: small; }
-          /* line 224, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+          /* line 225, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
           .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_thumbnail .kk_aj_arr_item_minneslista.minnesadded {
             color: #43AC6A; }
-          /* line 227, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+          /* line 228, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
           .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_thumbnail .kk_aj_arr_item_minneslista:hover {
             text-decoration: underline; }
-      /* line 232, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 233, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_contentblock {
         min-height: 8.2rem; }
         @media only screen and (max-width: 40em) {
-          /* line 232, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+          /* line 233, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
           .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_contentblock {
             min-height: 4.2rem; } }
-        /* line 237, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 238, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_contentblock h2 {
           font-size: 1.25rem;
           color: #000000;
           font-weight: bold; }
-        /* line 242, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 243, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_contentblock h3 {
           font-size: 1.0625rem; }
-        /* line 245, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 246, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_contentblock h4 {
           font-size: 0.625rem; }
-      /* line 250, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 251, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_buttonblock .button {
         border: 1px solid transparent;
         background-color: #f77136;
         color: #FFFFFF; }
         @media only screen and (max-width: 40em) {
-          /* line 250, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+          /* line 251, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
           .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_buttonblock .button {
             padding: .5rem .7rem; } }
-        /* line 257, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 258, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_buttonblock .button.round {
           -webkit-border-radius: 0px;
                   border-radius: 0px;
           /*6px;*/ }
-        /* line 260, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+        /* line 261, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
         .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .kk_aj_arr_item_buttonblock .button:hover {
           background-color: #FFFFFF;
           border: 1px solid #f77136;
           color: #f77136; }
-    /* line 274, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+    /* line 275, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productPagerblock {
       border-top: 1px solid #EEEEEE;
       padding-bottom: 1rem; }
-      /* line 277, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 278, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productPagerblock .jplist-panel {
         display: table;
         margin: 0 auto; }
 
 /*Multifunktioner*/
-/* line 293, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 294, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 .centerfields, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock fieldset.arrkonstform, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock fieldset.arrpublik {
   text-align: center; }
 
-/* line 298, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 299, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 .valbaraRadiobuttons label > input, .ArrangemangtypBlock label > input, .kontformBlock label > input, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label > input {
   visibility: hidden;
   /* Makes input not-clickable */
   position: absolute; }
-  /* line 302, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+  /* line 303, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
   .valbaraRadiobuttons label > input:checked + span, .ArrangemangtypBlock label > input:checked + span, .kontformBlock label > input:checked + span, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label > input:checked + span {
     color: #FFFFFF;
     background: #f77136 !important; }
 
-/* line 310, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 311, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 .valbaraRadiobuttons label + button, .ArrangemangtypBlock label + button, .kontformBlock label + button, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label + button {
   /* IMAGE STYLES */
   cursor: pointer;
   border: 2px solid transparent; }
 
-/* line 321, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 322, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 .jplist-panel .jplist-pagination button {
   font-family: "acumin-pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   text-shadow: none;
   font-weight: normal;
   color: #666666 !important;
   background: #ebeae9; }
-  /* line 328, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+  /* line 329, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
   .jplist-panel .jplist-pagination button.jplist-current {
     font-weight: normal;
     color: #FFFFFF !important;
     background: #43AC6A; }
-    /* line 332, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+    /* line 333, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .jplist-panel .jplist-pagination button.jplist-current:hover {
       opacity: 1;
       color: inherit;
       background: #43AC6A; }
-  /* line 337, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+  /* line 338, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
   .jplist-panel .jplist-pagination button:hover {
     color: #FFFFFF !important;
     opacity: 0.5;

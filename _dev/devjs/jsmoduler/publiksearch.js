@@ -1,5 +1,5 @@
 ﻿var $ = require("jquery");
-//var jplists = require("./externaljs/jplist_moduleexport.js");
+var jplists = require("./externaljs/jplist_moduleexport.js");
 var handlebarTemplethandler = require("./HandlebarTemplethandler.js");
 var appsettingsobject = require("./appSettings.js");
 
@@ -17,70 +17,27 @@ var searchdataContainer = {
 
 module.exports = {
     search: function () {
-        var appsettings = appsettingsobject.config;
-        $(function () {
-
-            
-
-        });
+        //var appsettings = appsettingsobject.config;       
     },
     init: function (val) {
         var appsettings = appsettingsobject.config;
-        //jplists.init();
-        $(function () {
+        jplists.init();
+        //$(function () {
             
-            //jQuery.fn.jplist.settings = {
+        var initlist = function () {
 
-            //    /**
-            //    * LIKES: jquery ui range slider
-            //    */
-            //    likesSlider: function ($slider, $prev, $next) {
-            //        $slider.slider({
-            //            min: 0
-            //           , max: 30
-            //           , range: true
-            //           , values: [0, 10]
-            //           , slide: function (event, ui) {
-            //               $prev.text(ui.values[0] + unescape("%E5") + "r");
-            //               $next.text(ui.values[1] + unescape("%E5") + "r");
-            //           }
-            //        });
-            //    }
+            arrdataservice("", searchdataContainer, function (data) {
+                handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
 
-            //    /**
-            //    * LIKES: jquery ui set values
-            //    */
-            // , likesValues: function ($slider, $prev, $next) {
-            //     $prev.text($slider.slider('values', 0) + unescape("%E5") + "r");
-            //     $next.text($slider.slider('values', 1) + unescape("%E5") + "r");
-            // }
-            //};
+                    return(returtext)
 
-            //$('.kk_aj_superProductListBlock').jplist({
-            //    itemsBox: '.kk_aj_productlist',
-            //    itemPath: '.kk_aj_arritem',
-            //    panelPath: '.jplist-panel',
-            //    storage: 'localstorage',
-            //    storageName: 'kk_aj_storage',
-                
-            //});
+                });
+            });
 
-
-
-            //var initlist = function () {
-
-            //    arrdataservice("", searchdataContainer, function (data) {
-            //        handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-
-            //            return(returtext)
-
-            //        });
-            //    });
-                
-            //}
-            //initlist();
-
-        });
+        }
+        initlist();
+        
+        publiksearchEvents()
     }
 }
 
@@ -91,9 +48,20 @@ var handlebartempletService = function(targetClass, usetemplateName, currentdata
         var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
 
         $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
-            var temptpl = Handlebars.compile(data);
-            $(targetClass).html(temptpl(currentdata));
-            var test = "ska funka";
+            var temptpl = Handlebars.compile(data);           
+            var test = "ska funka";            
+            $('#kk_aj_productlist').html(temptpl(currentdata));
+            
+            $('#kk_aj_mainproductlistblock').jplist({
+                command: 'empty'
+            });
+
+            $('#kk_aj_mainproductlistblock').jplist({
+                itemsBox: ' #kk_aj_productlist ',
+                itemPath: '.kk_aj_arritem',
+                panelPath: '.jplist-panel',
+
+            });
             callback(test);
         }, 'html');
     
@@ -135,3 +103,67 @@ var arrdataservice = function (callTyp, searchdata, callback) {
         }
     });
 };
+
+// EVENTS
+var publiksearchEvents = function () {
+
+    $('.kk_aj_searchformbutton').on('click', function (e) {
+
+        var tempsearchformcollector = searchformcollector();
+        
+        arrdataservice("mainsearch", tempsearchformcollector, function (data) {
+            handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
+
+                return false;
+
+            });
+        });
+
+        return false;
+    });
+
+    $('.kk_aj_searchRensaformbutton').on('click', function (e) {
+        return resetsearchform();
+        
+
+    })
+
+}
+
+
+//HELPER
+var searchformcollector = function () {
+    var tmparrtypid = $('input[name=arr_radioValArrangemang]:checked').val();
+    var tmpkonstartid = $('input[name=arr_radioValkontstform]:checked').val();
+    var tmpstartyear= $("#kk_aj_yearspan").attr("rel");
+    var tmpstopyear =$("#kk_aj_yearspan").attr("rev");
+
+    searchdataContainer.arrtypid = "0";
+    searchdataContainer.konstartid = "0";
+    searchdataContainer.startyear = "0";
+    searchdataContainer.stopyear="0";
+
+    if (tmparrtypid !== undefined) {
+        searchdataContainer.arrtypid = tmparrtypid;
+    }
+    if (tmpkonstartid !== undefined) {
+        searchdataContainer.konstartid = tmpkonstartid;
+    }
+    if (tmpstartyear !== undefined) {
+        searchdataContainer.startyear = tmpstartyear;
+    }
+    if (tmpstopyear !== undefined) {
+        searchdataContainer.stopyear = tmpstopyear;
+    }
+
+    return searchdataContainer;
+    
+}
+
+var resetsearchform = function () {
+    $(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+    $(':checkbox, :radio').prop('checked', false);
+    $("#kk_aj_yearspan").attr("rel", "0");
+    $("#kk_aj_yearspan").attr("rev", "0");
+    return false;
+}

@@ -49,6 +49,37 @@ $(function () {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // START rangesliders för arrangemangformuläret-----------------------------------------------------------------------------
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $("#kk_aj_slider-range").slider({
+        range: true,
+        min: 0,
+        max: 30,
+        values: [6, 12],
+        slide: function (event, ui) {
+            $("#kk_aj_yearspan").html(ui.values[0] + unescape("%E5") + "r  - " + ui.values[1] + unescape("%E5") + "r");
+            $("#kk_aj_yearspan").attr("rel", ui.values[0]);
+            $("#kk_aj_yearspan").attr("rev",ui.values[1]);
+        }
+    });
+    $("#kk_aj_yearspan").html($("#kk_aj_slider-range").slider("values", 0) +
+       unescape("%E5") + "r -" + $("#kk_aj_slider-range").slider("values", 1) + unescape("%E5") + "r");
+
+
+    // rangeslider för arrangemangformuläret för speltid
+    var kk_aj_speltid_range = $("#kk_aj_speltid_range");
+    var kk_aj_speltidLabel = $("#kk_aj_speltid");
+
+    kk_aj_speltid_range.slider({
+        create: function () {
+            kk_aj_speltidLabel.html($(this).slider("value") + "min");
+        },
+        range: "max",
+        min: 1,
+        max: 180,
+        value: 10,
+        slide: function (event, ui) {
+            kk_aj_speltidLabel.html(ui.value + "min");
+        }
+    });
 
     
 
@@ -66,151 +97,50 @@ $(function () {
     appsetting.userinfo.rollid = $('.kk_aj_CurrentRollid').html();
     appsetting.currentpage = $('.kk_aj_CurrentPageType').html();
 
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    var listatemp = function (vad) {
+    ////----------------------------------------------------------------------------
+    ////----------------------------------------------------------------------------
+    ////----------------------------------------------------------------------------
+    //var listatemp = function (vad) {
 
-        var temp = ""
-        $.get(vad, function (data) {
-            var temptpl = Handlebars.compile(data);
-            $('#kk_aj_productlist').html(temptpl);
-            //callback(htmltemplate)
-            $('#kk_aj_mainproductlistblock').jplist({
-                command: 'empty'
-            });
+    //    var temp = ""
+    //    $.get(vad, function (data) {
+    //        var temptpl = Handlebars.compile(data);
+    //        $('#kk_aj_productlist').html(temptpl);
+    //        //callback(htmltemplate)
+    //        $('#kk_aj_mainproductlistblock').jplist({
+    //            command: 'empty'
+    //        });
 
-            $('#kk_aj_mainproductlistblock').jplist({
-                itemsBox: ' #kk_aj_productlist ',
-                itemPath: '.kk_aj_arritem',
-                panelPath: '.jplist-panel',
+    //        $('#kk_aj_mainproductlistblock').jplist({
+    //            itemsBox: ' #kk_aj_productlist ',
+    //            itemPath: '.kk_aj_arritem',
+    //            panelPath: '.jplist-panel',
 
-            });
+    //        });
 
+    //    }, 'html');
 
-
-
-        }, 'html');
-
-    }
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
+    //}
+    ////----------------------------------------------------------------------------
+    ////----------------------------------------------------------------------------
+    ////----------------------------------------------------------------------------
 
 
     var init = function (val, callback) {
 
-        listatemp("http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates/kk_aj_test.txt");
-        //checkparamsinurl();
-        //appsetting.arrtab.currenttab = urlParams.tab;
-        //jQuery.fn.jplist.settings = {
-
-        //    /**
-        //    * LIKES: jquery ui range slider
-        //    */
-        //    likesSlider: function ($slider, $prev, $next) {
-        //        $slider.slider({
-        //            min: 0
-        //           , max: 30
-        //           , range: true
-        //           , values: [0, 10]
-        //           , slide: function (event, ui) {
-        //               $prev.text(ui.values[0] + unescape("%E5") + "r");
-        //               $next.text(ui.values[1] + unescape("%E5") + "r");
-        //           }
-        //        });
-        //    }
-
-        //    /**
-        //    * LIKES: jquery ui set values
-        //    */
-        //      , likesValues: function ($slider, $prev, $next) {
-        //          $prev.text($slider.slider('values', 0) +  unescape("%E5") + "r");
-        //          $next.text($slider.slider('values', 1) + unescape("%E5") + "r");
-        //      }
-        //};
-       
-
-        //$('.kk_aj_superProductListBlock').jplist({
-        //    itemsBox: '.kk_aj_productlist',
-        //    itemPath: '.kk_aj_arritem',
-        //    panelPath: '.jplist-panel',
-        //    storage: 'localstorage',
-        //    storageName: 'kk_aj_storage',
-        //    //controlTypes: {
-
-        //    //        likesSlider: function ($slider, $prev, $next) {
-        //    //            $slider.slider({
-        //    //                min: 0
-        //    //               , max: 350
-        //    //               , range: true
-        //    //               , values: [0, 350]
-        //    //               , slide: function (event, ui) {
-        //    //                   $prev.text(ui.values[0] + ' likes');
-        //    //                   $next.text(ui.values[1] + ' likes');
-        //    //               }
-        //    //            });
-        //    //        }
-
-        //    //        /**
-        //    //        * LIKES: jquery ui set values
-        //    //        */
-        //    //      , likesValues: function ($slider, $prev, $next) {
-        //    //          $prev.text($slider.slider('values', 0) + ' likes');
-        //    //          $next.text($slider.slider('values', 1) + ' likes');
-        //    //      }
-        //    //    }
-        //    });
         
-        //for (i = 0; i < localStorage.length; i++) {
-        //    console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
-        //}
-       
+        
         console.log('STORE: ' + localStorage.getItem('kk_aj_storage'));
 
         pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
-        
-        
-        //$("#kk_aj_slider-range").slider({
-        //    range: true,
-        //    min: 0,
-        //    max: 30,
-        //    values: [6, 12],
-        //    slide: function (event, ui) {
-        //        $("#kk_aj_yearspan").html(ui.values[0] + unescape("%E5") + "r  - " + ui.values[1] + unescape("%E5") + "r");
-        //    }
-        //});
-        //$("#kk_aj_yearspan").html($("#kk_aj_slider-range").slider("values", 0) +
-        //   unescape("%E5") + "r -" + $("#kk_aj_slider-range").slider("values", 1) + unescape("%E5") + "r");
-
-
-        //// rangeslider för arrangemangformuläret för speltid
-        //var kk_aj_speltid_range = $("#kk_aj_speltid_range");
-        //var kk_aj_speltidLabel = $("#kk_aj_speltid");
-
-        //kk_aj_speltid_range.slider({
-        //    create: function () {
-        //        kk_aj_speltidLabel.html($(this).slider("value") + "min");
-        //    },
-        //    range: "max",
-        //    min: 1,
-        //    max: 180,
-        //    value: 10,
-        //    slide: function (event, ui) {
-        //        kk_aj_speltidLabel.html(ui.value + "min");
-        //    }
-        //});
-
+       
        
     }
 
     
     init()
 
-    $(".kk_aj_searchRensaformbutton").on('click', function (e) {
-        listatemp("http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates/kk_aj_test2.txt");
-        return false;
-    });
+    
 });
  
 

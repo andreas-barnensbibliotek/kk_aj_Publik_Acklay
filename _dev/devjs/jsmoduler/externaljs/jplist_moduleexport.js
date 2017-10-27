@@ -1,7 +1,8 @@
-﻿
+﻿var jQuery = require("jquery");
+
 module.exports = {
     init: function () {
-        alert("INNE");
+        //alert("INNE");
         /**
          * jPList - jQuery Data Grid Controls 5.2.0.287 - http://jplist.com 
          * Copyright 2016 Miriam Zusin
