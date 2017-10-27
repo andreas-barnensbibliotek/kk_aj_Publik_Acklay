@@ -3,5 +3,5 @@ module.exports = {
     output: {
         path: __dirname,
         filename: "./kk_aj_js/kk_aj_kulturkatalogenWebpack.js"
-    }    
+    }
 };

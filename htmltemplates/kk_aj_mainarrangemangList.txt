@@ -1,0 +1,42 @@
+﻿<!-- item loop START -->
+{{#each kk_aj_admin.ansokningarlista.ansokningar}}
+	<div class="row kk_aj_arritem konstform_{{ansokningkonstformid}}" rel="{{ansokningdate}}">
+		<div class="small-3 columns kk_aj_arr_item_thumbnail">
+			<div class="row kk_aj_arr_item_thumbnail_color">
+				<div class="small-12">
+					<a href="#" class="kk_aj_arr_item_thumbnail_img">
+						<img src="/Portals/0/kulturkatalogenArrImages/{{ansokningid}}_{{ansokningMediaImage.MediaUrl}}" alt="{{ansokningtitle}}">
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-12">
+					<a href="#" class="kk_aj_arr_item_minneslista " title="Lägg till i minneslistan" rel="{{ansokningid}}"><i class="fa fa-plus-square"></i> Minneslista</a>
+                </div>
+			</div>
+		</div>
+		<div class="small-9 columns ">
+			<div class="row">
+				<div class="kk_aj_arr_item_contentblock small-12  medium-8 columns">
+					<a href="#">
+						<h2 class="kk_aj_title">{{ansokningtitle}}</h2>
+						<h3>{{ansokningsubtitle}}</h3>
+					</a>
+				</div>
+				<div class="kk_aj_arr_item_buttonblock small-12 medium-4 columns">
+					<div class="row">
+						<div class="small-12">
+							<a href="" class="button right small round " rel="{{ansokningid}}">Läs mer</a>
+						</div>
+					</div>                               
+				</div>
+			</div>
+			<div class="row">
+				<div class="kk_aj_arr_item_Utovare small-4 columns" rel="{{ansokningUtovarid}}"><h4>{{ansokningutovare}}</h4></div>
+				<div class="kk_aj_arr_item_konstform small-4 columns"><h4>{{ansokningkonstform}}</h4></div>
+				<div class="kk_aj_arr_item_age small-4 columns age"><h4>Ålder {{ansokningAgespan}} år</h4></div>				
+			</div>
+		</div>
+	</div>
+{{/each}}
+<!-- item loop STOP -->

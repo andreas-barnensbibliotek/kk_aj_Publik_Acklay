@@ -96,35 +96,7 @@
 	    // START rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	    $("#kk_aj_slider-range").slider({
-	        range: true,
-	        min: 0,
-	        max: 30,
-	        values: [6, 12],
-	        slide: function (event, ui) {
-	            $("#kk_aj_yearspan").html(ui.values[0] + unescape("%E5") + "r  - " + ui.values[1] + unescape("%E5") + "r");
-	        }
-	    });
-	    $("#kk_aj_yearspan").html($("#kk_aj_slider-range").slider("values", 0) +
-	       unescape("%E5") + "r -" + $("#kk_aj_slider-range").slider("values", 1) + unescape("%E5") + "r");
-
-
-	    // rangeslider f�r arrangemangformul�ret f�r speltid
-	    var kk_aj_speltid_range = $("#kk_aj_speltid_range");
-	    var kk_aj_speltidLabel = $("#kk_aj_speltid");
-
-	    kk_aj_speltid_range.slider({
-	        create: function() {
-	            kk_aj_speltidLabel.html($(this).slider("value") + "min");
-	        },
-	        range: "max",
-	        min: 1,
-	        max: 180,
-	        value: 10,
-	        slide: function( event, ui ) {
-	            kk_aj_speltidLabel.html(ui.value + "min");
-	        }
-	    });
+	    
 
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	    // STOPP rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
@@ -140,66 +112,101 @@
 	    appsetting.userinfo.rollid = $('.kk_aj_CurrentRollid').html();
 	    appsetting.currentpage = $('.kk_aj_CurrentPageType').html();
 
-	    var init = function () {
+	    //----------------------------------------------------------------------------
+	    //----------------------------------------------------------------------------
+	    //----------------------------------------------------------------------------
+	    var listatemp = function (vad) {
+
+	        var temp = ""
+	        $.get(vad, function (data) {
+	            var temptpl = Handlebars.compile(data);
+	            $('#kk_aj_productlist').html(temptpl);
+	            //callback(htmltemplate)
+	            $('#kk_aj_mainproductlistblock').jplist({
+	                command: 'empty'
+	            });
+
+	            $('#kk_aj_mainproductlistblock').jplist({
+	                itemsBox: ' #kk_aj_productlist ',
+	                itemPath: '.kk_aj_arritem',
+	                panelPath: '.jplist-panel',
+
+	            });
+
+
+
+
+	        }, 'html');
+
+	    }
+	    //----------------------------------------------------------------------------
+	    //----------------------------------------------------------------------------
+	    //----------------------------------------------------------------------------
+
+
+	    var init = function (val, callback) {
+
+	        listatemp("http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates/kk_aj_test.txt");
 	        //checkparamsinurl();
 	        //appsetting.arrtab.currenttab = urlParams.tab;
-	        jQuery.fn.jplist.settings = {
+	        //jQuery.fn.jplist.settings = {
 
-	            /**
-	            * LIKES: jquery ui range slider
-	            */
-	            likesSlider: function ($slider, $prev, $next) {
-	                $slider.slider({
-	                    min: 0
-	                   , max: 30
-	                   , range: true
-	                   , values: [0, 10]
-	                   , slide: function (event, ui) {
-	                       $prev.text(ui.values[0] + unescape("%E5") + "r");
-	                       $next.text(ui.values[1] + unescape("%E5") + "r");
-	                   }
-	                });
-	            }
+	        //    /**
+	        //    * LIKES: jquery ui range slider
+	        //    */
+	        //    likesSlider: function ($slider, $prev, $next) {
+	        //        $slider.slider({
+	        //            min: 0
+	        //           , max: 30
+	        //           , range: true
+	        //           , values: [0, 10]
+	        //           , slide: function (event, ui) {
+	        //               $prev.text(ui.values[0] + unescape("%E5") + "r");
+	        //               $next.text(ui.values[1] + unescape("%E5") + "r");
+	        //           }
+	        //        });
+	        //    }
 
-	            /**
-	            * LIKES: jquery ui set values
-	            */
-	              , likesValues: function ($slider, $prev, $next) {
-	                  $prev.text($slider.slider('values', 0) +  unescape("%E5") + "r");
-	                  $next.text($slider.slider('values', 1) + unescape("%E5") + "r");
-	              }
-	        };
+	        //    /**
+	        //    * LIKES: jquery ui set values
+	        //    */
+	        //      , likesValues: function ($slider, $prev, $next) {
+	        //          $prev.text($slider.slider('values', 0) +  unescape("%E5") + "r");
+	        //          $next.text($slider.slider('values', 1) + unescape("%E5") + "r");
+	        //      }
+	        //};
+	       
 
-	        $('.kk_aj_superProductListBlock').jplist({
-	            itemsBox: '.kk_aj_productlist',
-	            itemPath: '.kk_aj_arritem',
-	            panelPath: '.jplist-panel',
-	            storage: 'localstorage',
-	            storageName: 'kk_aj_storage',
-	            //controlTypes: {
+	        //$('.kk_aj_superProductListBlock').jplist({
+	        //    itemsBox: '.kk_aj_productlist',
+	        //    itemPath: '.kk_aj_arritem',
+	        //    panelPath: '.jplist-panel',
+	        //    storage: 'localstorage',
+	        //    storageName: 'kk_aj_storage',
+	        //    //controlTypes: {
 
-	            //        likesSlider: function ($slider, $prev, $next) {
-	            //            $slider.slider({
-	            //                min: 0
-	            //               , max: 350
-	            //               , range: true
-	            //               , values: [0, 350]
-	            //               , slide: function (event, ui) {
-	            //                   $prev.text(ui.values[0] + ' likes');
-	            //                   $next.text(ui.values[1] + ' likes');
-	            //               }
-	            //            });
-	            //        }
+	        //    //        likesSlider: function ($slider, $prev, $next) {
+	        //    //            $slider.slider({
+	        //    //                min: 0
+	        //    //               , max: 350
+	        //    //               , range: true
+	        //    //               , values: [0, 350]
+	        //    //               , slide: function (event, ui) {
+	        //    //                   $prev.text(ui.values[0] + ' likes');
+	        //    //                   $next.text(ui.values[1] + ' likes');
+	        //    //               }
+	        //    //            });
+	        //    //        }
 
-	            //        /**
-	            //        * LIKES: jquery ui set values
-	            //        */
-	            //      , likesValues: function ($slider, $prev, $next) {
-	            //          $prev.text($slider.slider('values', 0) + ' likes');
-	            //          $next.text($slider.slider('values', 1) + ' likes');
-	            //      }
-	            //    }
-	            });
+	        //    //        /**
+	        //    //        * LIKES: jquery ui set values
+	        //    //        */
+	        //    //      , likesValues: function ($slider, $prev, $next) {
+	        //    //          $prev.text($slider.slider('values', 0) + ' likes');
+	        //    //          $next.text($slider.slider('values', 1) + ' likes');
+	        //    //      }
+	        //    //    }
+	        //    });
 	        
 	        //for (i = 0; i < localStorage.length; i++) {
 	        //    console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
@@ -208,11 +215,48 @@
 	        console.log('STORE: ' + localStorage.getItem('kk_aj_storage'));
 
 	        pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
+	        
+	        
+	        //$("#kk_aj_slider-range").slider({
+	        //    range: true,
+	        //    min: 0,
+	        //    max: 30,
+	        //    values: [6, 12],
+	        //    slide: function (event, ui) {
+	        //        $("#kk_aj_yearspan").html(ui.values[0] + unescape("%E5") + "r  - " + ui.values[1] + unescape("%E5") + "r");
+	        //    }
+	        //});
+	        //$("#kk_aj_yearspan").html($("#kk_aj_slider-range").slider("values", 0) +
+	        //   unescape("%E5") + "r -" + $("#kk_aj_slider-range").slider("values", 1) + unescape("%E5") + "r");
 
+
+	        //// rangeslider f�r arrangemangformul�ret f�r speltid
+	        //var kk_aj_speltid_range = $("#kk_aj_speltid_range");
+	        //var kk_aj_speltidLabel = $("#kk_aj_speltid");
+
+	        //kk_aj_speltid_range.slider({
+	        //    create: function () {
+	        //        kk_aj_speltidLabel.html($(this).slider("value") + "min");
+	        //    },
+	        //    range: "max",
+	        //    min: 1,
+	        //    max: 180,
+	        //    value: 10,
+	        //    slide: function (event, ui) {
+	        //        kk_aj_speltidLabel.html(ui.value + "min");
+	        //    }
+	        //});
+
+	       
 	    }
 
+	    
+	    init()
 
-	    init();
+	    $(".kk_aj_searchRensaformbutton").on('click', function (e) {
+	        listatemp("http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates/kk_aj_test2.txt");
+	        return false;
+	    });
 	});
 	 
 
@@ -226,22 +270,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://kulturkatalog.kivdev.se",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://kulturkatalog.kivdev.se",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -280,13 +324,17 @@
 	var $ = __webpack_require__(4);
 	var appsettings = __webpack_require__(1);
 	var arrformhandler = __webpack_require__(5);
+	var arrsearchhandler = __webpack_require__(11);
 	module.exports = {    
 	    pageloader: function (pagetoload, val) {
 	       
 	        switch(pagetoload) {
 	            case "kk_aj_Publik_ArrangemangForm":
 	                arrformhandler.start(val);
-	                break;    
+	                break;
+	            case "Dnn_module_kk_aj_Publik_productlist":
+	                arrsearchhandler.init(val)
+	                break;
 	            default:               
 	                loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
 	                
@@ -12171,18 +12219,143 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(4);
+	//var jplists = require("./externaljs/jplist_moduleexport.js");
+	var handlebarTemplethandler = __webpack_require__(7);
 	var appsettingsobject = __webpack_require__(1);
+
+
+	var searchdataContainer = {
+		"arrtypid": "",
+		"cmdtyp": "",
+		"konstartid": "",
+		"publiceradJaNej": "",
+		"searchstr": "",
+		"startyear": "",
+		"stopyear": ""	
+	}
+
 
 	module.exports = {
 	    search: function () {
 	        var appsettings = appsettingsobject.config;
 	        $(function () {
 
+	            
 
+	        });
+	    },
+	    init: function (val) {
+	        var appsettings = appsettingsobject.config;
+	        //jplists.init();
+	        $(function () {
+	            
+	            //jQuery.fn.jplist.settings = {
+
+	            //    /**
+	            //    * LIKES: jquery ui range slider
+	            //    */
+	            //    likesSlider: function ($slider, $prev, $next) {
+	            //        $slider.slider({
+	            //            min: 0
+	            //           , max: 30
+	            //           , range: true
+	            //           , values: [0, 10]
+	            //           , slide: function (event, ui) {
+	            //               $prev.text(ui.values[0] + unescape("%E5") + "r");
+	            //               $next.text(ui.values[1] + unescape("%E5") + "r");
+	            //           }
+	            //        });
+	            //    }
+
+	            //    /**
+	            //    * LIKES: jquery ui set values
+	            //    */
+	            // , likesValues: function ($slider, $prev, $next) {
+	            //     $prev.text($slider.slider('values', 0) + unescape("%E5") + "r");
+	            //     $next.text($slider.slider('values', 1) + unescape("%E5") + "r");
+	            // }
+	            //};
+
+	            //$('.kk_aj_superProductListBlock').jplist({
+	            //    itemsBox: '.kk_aj_productlist',
+	            //    itemPath: '.kk_aj_arritem',
+	            //    panelPath: '.jplist-panel',
+	            //    storage: 'localstorage',
+	            //    storageName: 'kk_aj_storage',
+	                
+	            //});
+
+
+
+	            //var initlist = function () {
+
+	            //    arrdataservice("", searchdataContainer, function (data) {
+	            //        handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
+
+	            //            return(returtext)
+
+	            //        });
+	            //    });
+	                
+	            //}
+	            //initlist();
 
 	        });
 	    }
 	}
+
+	var handlebartempletService = function(targetClass, usetemplateName, currentdata, callback){
+	    
+	        var appsetting = appsettingsobject.config;
+
+	        var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
+
+	        $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
+	            var temptpl = Handlebars.compile(data);
+	            $(targetClass).html(temptpl(currentdata));
+	            var test = "ska funka";
+	            callback(test);
+	        }, 'html');
+	    
+
+	}
+
+
+	var arrdataservice = function (callTyp, searchdata, callback) {
+	    var appsettings = appsettingsobject.config;
+	    var currurl = "";
+	    switch (callTyp) {
+	        case "mainsearch":
+	            currurl = appsettings.globalconfig.apiserver + "/Api_v2/search/mainsearch/devkey/alf?type=json&callback=testar";
+	            break;
+	        case "freesearch":
+	            currurl = appsettings.globalconfig.apiserver + "/Api_v2/search/freesearch/devkey/alf?type=json&callback=testar";
+	            break;
+	        default:
+	            currurl = appsettings.globalconfig.apiserver + "/Api_v2/search/mainsearch/devkey/alf?type=json&callback=testar";
+	            // list all arrangemang
+	            searchdata.arrtypid = "0";
+	            searchdata.konstartid = "0";
+	            searchdata.startyear = "0";
+	            break;
+	    }
+
+	    //console.log("Searchservicen hämtar Arrangemangdata");
+	    $.ajax({
+	        async: true,
+	        type: "POST",
+	        url: currurl,
+	        data: searchdata,
+	        success: function (data) {
+	            console.log("Search arrangemang hämtat: ");
+	            callback(data);
+	        },
+	        error: function (xhr, ajaxOptions, thrownError) {
+	            alert("Nått blev fel vid hämtning av arrangemang!");
+	        }
+	    });
+	};
+
 
 /***/ })
 /******/ ]);
