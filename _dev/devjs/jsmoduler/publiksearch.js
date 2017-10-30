@@ -1,6 +1,7 @@
 ﻿var $ = require("jquery");
 var jplists = require("./externaljs/jplist_moduleexport.js");
 var handlebarTemplethandler = require("./HandlebarTemplethandler.js");
+
 var appsettingsobject = require("./appSettings.js");
 
 
@@ -22,6 +23,7 @@ module.exports = {
     init: function (val) {
         var appsettings = appsettingsobject.config;
         jplists.init();
+       
         //$(function () {
             
         var initlist = function () {
@@ -50,7 +52,7 @@ var handlebartempletService = function(targetClass, usetemplateName, currentdata
         $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
             var temptpl = Handlebars.compile(data);           
             var test = "ska funka";            
-            $('#kk_aj_productlist').html(temptpl(currentdata));
+            $('#kk_aj_productlist').html(temptpl(currentdata)).hide().slideDown(2000);            
             
             $('#kk_aj_mainproductlistblock').jplist({
                 command: 'empty'
@@ -106,14 +108,17 @@ var arrdataservice = function (callTyp, searchdata, callback) {
 
 // EVENTS
 var publiksearchEvents = function () {
-
+        
     $('.kk_aj_searchformbutton').on('click', function (e) {
 
         var tempsearchformcollector = searchformcollector();
         
         arrdataservice("mainsearch", tempsearchformcollector, function (data) {
             handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-
+                //scrolla till resultatlistan
+                $('html, body').animate({
+                    scrollTop: $(".kk_aj_searchbuttonblock").offset().top
+                }, 1000);
                 return false;
 
             });
@@ -121,12 +126,75 @@ var publiksearchEvents = function () {
 
         return false;
     });
+    $('.jplist-pagination button').on('click', function (e) {
+       
+        $('html, body').animate({
+            scrollTop: $(".kk_aj_searchbuttonblock").offset().top
+        }, 1000);
 
+    });
+    
     $('.kk_aj_searchRensaformbutton').on('click', function (e) {
         return resetsearchform();
-        
+    });
+    $('#kk_aj_freetextSearch').keypress(function (event) {
+        if (event.which === 13) {
+            event.preventDefault(); // Stop the default behaviour
+            freesearch();
+        }
+              
+    });
 
-    })
+    $('#kk_aj_btnfreetextSearch').on('click', function (e) {
+        freesearch();
+        return false;
+    });
+
+    $('input:radio').bind('click mousedown', (function () {
+        //Capture radio button status within its handler scope,
+        //so we do not use any global vars and every radio button keeps its own status.
+        //This required to uncheck them later.
+        //We need to store status separately as browser updates checked status before click handler called,
+        //so radio button will always be checked.
+        var isChecked;
+
+        return function (event) {
+            //console.log(event.type + ": " + this.checked);
+
+            if (event.type == 'click') {
+                //console.log(isChecked);
+
+                if (isChecked) {
+                    //Uncheck and update status
+                    isChecked = this.checked = false;
+                } else {
+                    //Update status
+                    //Browser will check the button by itself
+                    isChecked = true;
+
+                    //Do something else if radio button selected
+                    /*
+                    if(this.value == 'somevalue') {
+                        doSomething();
+                    } else {
+                        doSomethingElse();
+                    }
+                    */
+                }
+            } else {
+                //Get the right status before browser sets it
+                //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
+                isChecked = this.checked;
+            }
+        }
+    })());
+
+    // AUTOCOMPLETE Freetextsearch
+    $('body').on('keydown', '#kk_aj_freetextSearch', function (event) {
+       
+           
+
+    });
 
 }
 
@@ -166,4 +234,30 @@ var resetsearchform = function () {
     $("#kk_aj_yearspan").attr("rel", "0");
     $("#kk_aj_yearspan").attr("rev", "0");
     return false;
+}
+
+
+var freesearch = function () {
+    var freetextinput = $('#kk_aj_freetextSearch');
+    console.log("freetextinput" + freetextinput.val())
+    if (freetextinput.val()) {
+        var tempfreesearchcollector = searchdataContainer;
+        tempfreesearchcollector.arrtypid = "0";
+        tempfreesearchcollector.konstartid = "0";
+        tempfreesearchcollector.startyear = "0";
+        tempfreesearchcollector.stopyear = "0";
+        tempfreesearchcollector.searchstr = freetextinput.val();
+
+
+        arrdataservice("freesearch", tempfreesearchcollector, function (data) {
+            handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
+                //scrolla till resultatlistan
+                $('html, body').animate({
+                    scrollTop: $(".kk_aj_searchbuttonblock").offset().top
+                }, 1000);
+                return false;
+
+            });
+        });
+    };
 }

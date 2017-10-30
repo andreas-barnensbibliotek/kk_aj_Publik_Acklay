@@ -73,6 +73,15 @@ module.exports = {
                     "FaktaValue": arr_medverkande.val(),
                 });
             }
+            var arr_Premiardatum = $('#arr_Premiardatum')
+            if (arr_Premiardatum.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "2",
+                    "FaktaTypID": arr_Premiardatum.attr('rel'),
+                    "Faktarubrik": "Premiärdatum",
+                    "FaktaValue": arr_Premiardatum.val(),
+                });
+            }
             var arr_Bokningsbar = $('#arr_Bokningsbar')
             if (arr_Bokningsbar.val()) {
                 arrformjsondata.Faktalist.push({
@@ -291,6 +300,16 @@ module.exports = {
                     "FaktaValue": $('#arr_resorovrigt').html(),
                 });
             };
+            var arr_overiganoter = $('#arr_overiganoter');
+            if (arr_overiganoter.html()) {
+                arr_overiganoter.Faktalist.push({
+                    "Faktaid": "4",
+                    "FaktaTypID": $('#arr_overiganoter').attr('rel'),
+                    "Faktarubrik": "Övriga noteringar",
+                    "FaktaValue": $('#arr_overiganoter').html(),
+                });
+            };
+            
 
             //var arr_ekonomikostnad = $('#arr_ekonomikostnad');
             //if (arr_ekonomikostnad.val()) {

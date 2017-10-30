@@ -11129,6 +11129,15 @@
 	                    "FaktaValue": arr_medverkande.val(),
 	                });
 	            }
+	            var arr_Premiardatum = $('#arr_Premiardatum')
+	            if (arr_Premiardatum.val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": "2",
+	                    "FaktaTypID": arr_Premiardatum.attr('rel'),
+	                    "Faktarubrik": "Premiärdatum",
+	                    "FaktaValue": arr_Premiardatum.val(),
+	                });
+	            }
 	            var arr_Bokningsbar = $('#arr_Bokningsbar')
 	            if (arr_Bokningsbar.val()) {
 	                arrformjsondata.Faktalist.push({
@@ -11347,6 +11356,16 @@
 	                    "FaktaValue": $('#arr_resorovrigt').html(),
 	                });
 	            };
+	            var arr_overiganoter = $('#arr_overiganoter');
+	            if (arr_overiganoter.html()) {
+	                arr_overiganoter.Faktalist.push({
+	                    "Faktaid": "4",
+	                    "FaktaTypID": $('#arr_overiganoter').attr('rel'),
+	                    "Faktarubrik": "Övriga noteringar",
+	                    "FaktaValue": $('#arr_overiganoter').html(),
+	                });
+	            };
+	            
 
 	            //var arr_ekonomikostnad = $('#arr_ekonomikostnad');
 	            //if (arr_ekonomikostnad.val()) {
@@ -12151,6 +12170,7 @@
 	var $ = __webpack_require__(4);
 	var jplists = __webpack_require__(12);
 	var handlebarTemplethandler = __webpack_require__(7);
+
 	var appsettingsobject = __webpack_require__(1);
 
 
@@ -12172,6 +12192,7 @@
 	    init: function (val) {
 	        var appsettings = appsettingsobject.config;
 	        jplists.init();
+	       
 	        //$(function () {
 	            
 	        var initlist = function () {
@@ -12200,7 +12221,7 @@
 	        $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
 	            var temptpl = Handlebars.compile(data);           
 	            var test = "ska funka";            
-	            $('#kk_aj_productlist').html(temptpl(currentdata));
+	            $('#kk_aj_productlist').html(temptpl(currentdata)).hide().slideDown(2000);            
 	            
 	            $('#kk_aj_mainproductlistblock').jplist({
 	                command: 'empty'
@@ -12256,14 +12277,17 @@
 
 	// EVENTS
 	var publiksearchEvents = function () {
-
+	        
 	    $('.kk_aj_searchformbutton').on('click', function (e) {
 
 	        var tempsearchformcollector = searchformcollector();
 	        
 	        arrdataservice("mainsearch", tempsearchformcollector, function (data) {
 	            handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-
+	                //scrolla till resultatlistan
+	                $('html, body').animate({
+	                    scrollTop: $(".kk_aj_searchbuttonblock").offset().top
+	                }, 1000);
 	                return false;
 
 	            });
@@ -12271,12 +12295,75 @@
 
 	        return false;
 	    });
+	    $('.jplist-pagination button').on('click', function (e) {
+	       
+	        $('html, body').animate({
+	            scrollTop: $(".kk_aj_searchbuttonblock").offset().top
+	        }, 1000);
 
+	    });
+	    
 	    $('.kk_aj_searchRensaformbutton').on('click', function (e) {
 	        return resetsearchform();
-	        
+	    });
+	    $('#kk_aj_freetextSearch').keypress(function (event) {
+	        if (event.which === 13) {
+	            event.preventDefault(); // Stop the default behaviour
+	            freesearch();
+	        }
+	              
+	    });
 
-	    })
+	    $('#kk_aj_btnfreetextSearch').on('click', function (e) {
+	        freesearch();
+	        return false;
+	    });
+
+	    $('input:radio').bind('click mousedown', (function () {
+	        //Capture radio button status within its handler scope,
+	        //so we do not use any global vars and every radio button keeps its own status.
+	        //This required to uncheck them later.
+	        //We need to store status separately as browser updates checked status before click handler called,
+	        //so radio button will always be checked.
+	        var isChecked;
+
+	        return function (event) {
+	            //console.log(event.type + ": " + this.checked);
+
+	            if (event.type == 'click') {
+	                //console.log(isChecked);
+
+	                if (isChecked) {
+	                    //Uncheck and update status
+	                    isChecked = this.checked = false;
+	                } else {
+	                    //Update status
+	                    //Browser will check the button by itself
+	                    isChecked = true;
+
+	                    //Do something else if radio button selected
+	                    /*
+	                    if(this.value == 'somevalue') {
+	                        doSomething();
+	                    } else {
+	                        doSomethingElse();
+	                    }
+	                    */
+	                }
+	            } else {
+	                //Get the right status before browser sets it
+	                //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
+	                isChecked = this.checked;
+	            }
+	        }
+	    })());
+
+	    // AUTOCOMPLETE Freetextsearch
+	    $('body').on('keydown', '#kk_aj_freetextSearch', function (event) {
+	       
+	           
+
+	    });
 
 	}
 
@@ -12316,6 +12403,32 @@
 	    $("#kk_aj_yearspan").attr("rel", "0");
 	    $("#kk_aj_yearspan").attr("rev", "0");
 	    return false;
+	}
+
+
+	var freesearch = function () {
+	    var freetextinput = $('#kk_aj_freetextSearch');
+	    console.log("freetextinput" + freetextinput.val())
+	    if (freetextinput.val()) {
+	        var tempfreesearchcollector = searchdataContainer;
+	        tempfreesearchcollector.arrtypid = "0";
+	        tempfreesearchcollector.konstartid = "0";
+	        tempfreesearchcollector.startyear = "0";
+	        tempfreesearchcollector.stopyear = "0";
+	        tempfreesearchcollector.searchstr = freetextinput.val();
+
+
+	        arrdataservice("freesearch", tempfreesearchcollector, function (data) {
+	            handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
+	                //scrolla till resultatlistan
+	                $('html, body').animate({
+	                    scrollTop: $(".kk_aj_searchbuttonblock").offset().top
+	                }, 1000);
+	                return false;
+
+	            });
+	        });
+	    };
 	}
 
 /***/ }),
