@@ -1,9 +1,9 @@
 ﻿var $ = require("jquery");
+require('jquery-ui-dist/jquery-ui.js');
 var jplists = require("./externaljs/jplist_moduleexport.js");
 var handlebarTemplethandler = require("./HandlebarTemplethandler.js");
 
 var appsettingsobject = require("./appSettings.js");
-
 
 var searchdataContainer = {
 	"arrtypid": "",
@@ -23,8 +23,6 @@ module.exports = {
     init: function (val) {
         var appsettings = appsettingsobject.config;
         jplists.init();
-       
-        //$(function () {
             
         var initlist = function () {
 
@@ -45,29 +43,27 @@ module.exports = {
 
 var handlebartempletService = function(targetClass, usetemplateName, currentdata, callback){
     
-        var appsetting = appsettingsobject.config;
+    var appsetting = appsettingsobject.config;
 
-        var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
+    var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
 
-        $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
-            var temptpl = Handlebars.compile(data);           
-            var test = "ska funka";            
-            $('#kk_aj_productlist').html(temptpl(currentdata)).hide().slideDown(2000);            
+    $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
+        var temptpl = Handlebars.compile(data);           
+        var test = "ska funka";            
+        $('#kk_aj_productlist').html(temptpl(currentdata)).hide().slideDown(2000);            
             
-            $('#kk_aj_mainproductlistblock').jplist({
-                command: 'empty'
-            });
+        $('#kk_aj_mainproductlistblock').jplist({
+            command: 'empty'
+        });
 
-            $('#kk_aj_mainproductlistblock').jplist({
-                itemsBox: ' #kk_aj_productlist ',
-                itemPath: '.kk_aj_arritem',
-                panelPath: '.jplist-panel',
+        $('#kk_aj_mainproductlistblock').jplist({
+            itemsBox: ' #kk_aj_productlist ',
+            itemPath: '.kk_aj_arritem',
+            panelPath: '.jplist-panel',
 
-            });
-            callback(test);
-        }, 'html');
-    
-
+        });
+        callback(test);
+    }, 'html');    
 }
 
 
@@ -108,7 +104,7 @@ var arrdataservice = function (callTyp, searchdata, callback) {
 
 // EVENTS
 var publiksearchEvents = function () {
-        
+    var appsettings = appsettingsobject.config;
     $('.kk_aj_searchformbutton').on('click', function (e) {
 
         var tempsearchformcollector = searchformcollector();
@@ -142,7 +138,6 @@ var publiksearchEvents = function () {
             event.preventDefault(); // Stop the default behaviour
             freesearch();
         }
-              
     });
 
     $('#kk_aj_btnfreetextSearch').on('click', function (e) {
@@ -191,9 +186,33 @@ var publiksearchEvents = function () {
 
     // AUTOCOMPLETE Freetextsearch
     $('body').on('keydown', '#kk_aj_freetextSearch', function (event) {
-       
-           
 
+        $(this).autocomplete({
+            source: function (request, response) {
+                searchdata = searchdataContainer;
+                searchdata.searchstr = $.trim(request.term);
+
+                $.ajax({
+                    async: true,
+                    type: "POST",
+                    url: appsettings.globalconfig.apiserver + "/Api_v2/search/freesearch/devkey/alf?type=json&callback=testar",
+                    data: searchdata,
+                    success: function (data) {
+                        response(data.kk_aj_admin.ansokningarlista.ansokningar);
+                    }
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                $('#kk_aj_freetextSearch').val(ui.item.ansokningtitle);
+
+                return false;
+            }
+        }).autocomplete("instance")._renderItem = function (ul, item) {
+            return $("<li>")
+              .append("<div>" + item.ansokningtitle + " <i>(" + item.ansokningutovare + ")</i></div>")
+              .appendTo(ul);
+        };
     });
 
 }
@@ -224,8 +243,7 @@ var searchformcollector = function () {
         searchdataContainer.stopyear = tmpstopyear;
     }
 
-    return searchdataContainer;
-    
+    return searchdataContainer;    
 }
 
 var resetsearchform = function () {
@@ -247,7 +265,6 @@ var freesearch = function () {
         tempfreesearchcollector.startyear = "0";
         tempfreesearchcollector.stopyear = "0";
         tempfreesearchcollector.searchstr = freetextinput.val();
-
 
         arrdataservice("freesearch", tempfreesearchcollector, function (data) {
             handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
