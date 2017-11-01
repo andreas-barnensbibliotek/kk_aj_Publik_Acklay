@@ -99,37 +99,30 @@ $(function () {
 
     ////----------------------------------------------------------------------------
     ////----------------------------------------------------------------------------
-    ////----------------------------------------------------------------------------
-    //var listatemp = function (vad) {
+    ////----------------------------------------------------------------------------      
+    var scrolltotop = function () {
+   
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 250) {
+                $('#myBtn').fadeIn('slow');
+            } else {
+                $('#myBtn').fadeOut('slow');
+            }
+        });
+        $('#myBtn').click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 500);
+            //$("html, body").scrollTop(0); //For without animation
+            return false;
+        });
 
-    //    var temp = ""
-    //    $.get(vad, function (data) {
-    //        var temptpl = Handlebars.compile(data);
-    //        $('#kk_aj_productlist').html(temptpl);
-    //        //callback(htmltemplate)
-    //        $('#kk_aj_mainproductlistblock').jplist({
-    //            command: 'empty'
-    //        });
-
-    //        $('#kk_aj_mainproductlistblock').jplist({
-    //            itemsBox: ' #kk_aj_productlist ',
-    //            itemPath: '.kk_aj_arritem',
-    //            panelPath: '.jplist-panel',
-
-    //        });
-
-    //    }, 'html');
-
-    //}
+    }
     ////----------------------------------------------------------------------------
     ////----------------------------------------------------------------------------
     ////----------------------------------------------------------------------------
-
 
     var init = function (val, callback) {
-
-        
-        
+                
+        scrolltotop();
         console.log('STORE: ' + localStorage.getItem('kk_aj_storage'));
 
         pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);

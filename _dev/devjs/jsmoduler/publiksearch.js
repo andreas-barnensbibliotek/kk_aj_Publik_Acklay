@@ -114,7 +114,7 @@ var publiksearchEvents = function () {
                 //scrolla till resultatlistan
                 $('html, body').animate({
                     scrollTop: $(".kk_aj_searchbuttonblock").offset().top
-                }, 1000);
+                }, 500);
                 return false;
 
             });
@@ -122,12 +122,11 @@ var publiksearchEvents = function () {
 
         return false;
     });
-    $('.jplist-pagination button').on('click', function (e) {
-       
+    $('.jplist-pagination').on('click', '> *', function (e) {
+        var searchbox = $(".kk_aj_searchbuttonblock").offset().top;
         $('html, body').animate({
-            scrollTop: $(".kk_aj_searchbuttonblock").offset().top
-        }, 1000);
-
+            scrollTop: searchbox
+        }, 500);        
     });
     
     $('.kk_aj_searchRensaformbutton').on('click', function (e) {

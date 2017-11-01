@@ -127,18 +127,11 @@
              </div>
          </div>
 
-         <!-- Navigerings breadcrumb START -->
+          <!-- Navigerings breadcrumb START -->
          <div class="small-12 columns">
              <div class="row">
                  <div class="menybreadcrumb">
-                     <ul class="mbc_navlinklist">
-                         <li>
-                             <a href="">START</a>
-                         </li>
-                         <li>
-                             <a href="">Arkitektur &aring;&auml;&ouml;</a>
-                         </li>
-                     </ul>
+                     <dnn:BREADCRUMB ID="dnnBreadcrumb" runat="server" CssClass="mbc_navlinklist" RootLevel="0" Separator=" | " HideWithNoBreadCrumb="false" />           
                  </div>
              </div>
          </div>
@@ -159,7 +152,11 @@
                 <!-- /.content-wrapper -->
 
                 <!-- ################################################################################################ -->
-             
+              
+             <a href="#" id="myBtn" title="Go to top">
+                <i class="fa fa-arrow-up"></i>
+             </a>
+
          </div>
 
 <!-- CONTENTPANE END ################################################################################################ -->  
