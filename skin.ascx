@@ -56,7 +56,7 @@
              </section>
 
              <section class="right-small">
-                 <a href="#"><span>S&Ouml;K</span></a>
+                 <a href="http://www.kulturivast.se/search?query="><span>S&Ouml;K</span></a>
              </section>
          </nav>
          <!-- ### MENYBALK END (NAV) ################################################################################################ -->
