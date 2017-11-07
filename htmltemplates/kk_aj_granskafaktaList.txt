@@ -46,3 +46,15 @@
 </div>
 {{/faktatypvisas}}
 <!-- item loop STOP --> 
+
+<!-- item loop START -->
+{{#faktatypvisas Faktalist 5}}
+<div class="artsidecontainer granska_Ovrigt_mainblock">
+	<h3>Övrigt</h3>  
+	{{#each Faktalist}}	 
+		{{#ovrigttyp Faktaid Faktarubrik FaktaValue}}		      
+		{{/ovrigttyp}} 	      
+	{{/each}}
+</div>
+{{/faktatypvisas}}
+<!-- item loop STOP --> 

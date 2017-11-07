@@ -4,7 +4,7 @@
 		<div class="small-3 columns kk_aj_arr_item_thumbnail">
 			<div class="row kk_aj_arr_item_thumbnail_color">
 				<div class="small-12">
-					<a href="#" class="kk_aj_arr_item_thumbnail_img">
+					<a href="/Kulturkatalogen/ArrangemangDetail/id/{{ansokningid}}" class="kk_aj_arr_item_thumbnail_img">
 						<img src="/Portals/0/kulturkatalogenArrImages/{{ansokningid}}_{{ansokningMediaImage.MediaUrl}}" alt="{{ansokningtitle}}">
 					</a>
 				</div>
@@ -18,7 +18,7 @@
 		<div class="small-9 columns ">
 			<div class="row">
 				<div class="kk_aj_arr_item_contentblock small-12  medium-8 columns">
-					<a href="#">
+					<a href="/Kulturkatalogen/ArrangemangDetail/id/{{ansokningid}}">
 						<h2 class="kk_aj_title">{{ansokningtitle}}</h2>
 						<h3>{{ansokningsubtitle}}</h3>
 					</a>
@@ -26,7 +26,7 @@
 				<div class="kk_aj_arr_item_buttonblock small-12 medium-4 columns">
 					<div class="row">
 						<div class="small-12">
-							<a href="" class="button right small round " rel="{{ansokningid}}">Läs mer</a>
+							<a href="/Kulturkatalogen/ArrangemangDetail/id/{{ansokningid}}" class="button right small round " rel="{{ansokningid}}">Läs mer</a>
 						</div>
 					</div>                               
 				</div>

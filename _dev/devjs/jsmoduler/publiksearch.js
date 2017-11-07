@@ -60,7 +60,8 @@ var handlebartempletService = function(targetClass, usetemplateName, currentdata
             itemsBox: ' #kk_aj_productlist ',
             itemPath: '.kk_aj_arritem',
             panelPath: '.jplist-panel',
-
+            storage: 'localstorage',		
+            storageName: 'KulturkatalogenStorage'
         });
         callback(test);
     }, 'html');    

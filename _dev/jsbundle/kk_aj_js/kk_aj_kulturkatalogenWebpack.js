@@ -48,7 +48,8 @@
 	var appsettingsobject = __webpack_require__(1);
 	var msg = __webpack_require__(2);
 	var pagehandler = __webpack_require__(3);
-	var publiksearch = __webpack_require__(11);
+	var publiksearch = __webpack_require__(12);
+	//var audioplayer = require("./jsmoduler/audioplayer.js")
 
 	var appsetting = appsettingsobject.config;
 	//  kulturkatalogen publik start
@@ -88,9 +89,13 @@
 	            if (index > 0) {
 	                urlParams.id = sPageURL[index + 1];
 	            };
+	            var index = sPageURL.indexOf("id");
+	            if (index > 0) {
+	                urlParams.arrid = sPageURL[index + 1];
+	            };
 	        }
 	    };
-
+	    checkparamsinurl();
 	    //////////////////////////
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	    // START rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
@@ -127,7 +132,7 @@
 	        }
 	    });
 
-	    
+	    //audioplayer.initaudioplayer();
 
 	    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	    // STOPP rangesliders f�r arrangemangformul�ret-----------------------------------------------------------------------------
@@ -167,12 +172,24 @@
 	    ////----------------------------------------------------------------------------
 
 	    var init = function (val, callback) {
-	                
+
+	      
+
 	        scrolltotop();
 	        console.log('STORE: ' + localStorage.getItem('kk_aj_storage'));
-
-	        pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
-	       
+	        if (appsetting.currentpage == "Dnn_module_kk_aj_Publik_detail") {
+	            //if (urlParams.arrid > 0) {
+	            //    pagehandler.pageloader(appsetting.currentpage, urlParams.arrid);
+	            //} else {
+	                
+	            //        window.location.href = "/404";
+	                
+	            //}
+	            pagehandler.pageloader(appsetting.currentpage, urlParams.arrid);
+	            
+	        } else {
+	            pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
+	        }
 	       
 	    }
 
@@ -247,7 +264,8 @@
 	var $ = __webpack_require__(4);
 	var appsettings = __webpack_require__(1);
 	var arrformhandler = __webpack_require__(5);
-	var arrsearchhandler = __webpack_require__(11);
+	var arrsearchhandler = __webpack_require__(12);
+	var arrDetailvyHandler =__webpack_require__(15)
 	module.exports = {    
 	    pageloader: function (pagetoload, val) {
 	       
@@ -258,6 +276,10 @@
 	            case "Dnn_module_kk_aj_Publik_productlist":
 	                arrsearchhandler.init(val)
 	                break;
+	            case "Dnn_module_kk_aj_Publik_detail":
+	                arrDetailvyHandler.DetailVy(val);
+	                break;
+
 	            default:               
 	                loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
 	                
@@ -10568,7 +10590,7 @@
 	var handlebarTemplethandler = __webpack_require__(7);
 	var arrformValidator = __webpack_require__(8);
 	var arrGranskaVy = __webpack_require__(9);
-	var arrformAutocompleteHandler = __webpack_require__(10);
+	var arrformAutocompleteHandler = __webpack_require__(11);
 	var _exempellistobject = { "exempelitemlist": [] };
 
 	module.exports = {
@@ -10813,7 +10835,7 @@
 	                            console.log(callbackarrid);                            
 	                            arrformjsonBuilder.tempuploadimage("uploadimg", callbackarrid, function (callback) {
 	                                console.log("sista" + callback);
-	                                alert("uppgifterna är nu inskickade!");
+	                                alert("Uppgifterna är nu inskickade!");
 	                                clearForm();
 	                                tabnavigator(1);
 	                                var jsondata = callback;
@@ -11116,7 +11138,7 @@
 	            var arr_medverkande = $('#arr_medverkande')
 	            if (arr_medverkande.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": "2",
+	                    "Faktaid": "1",
 	                    "FaktaTypID": arr_medverkande.attr('rel'),
 	                    "Faktarubrik": "Medverkande",
 	                    "FaktaValue": arr_medverkande.val(),
@@ -11125,7 +11147,7 @@
 	            var arr_Premiardatum = $('#arr_Premiardatum')
 	            if (arr_Premiardatum.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": "2",
+	                    "Faktaid": "1",
 	                    "FaktaTypID": arr_Premiardatum.attr('rel'),
 	                    "Faktarubrik": "Premiärdatum",
 	                    "FaktaValue": arr_Premiardatum.val(),
@@ -11134,7 +11156,7 @@
 	            var arr_Bokningsbar = $('#arr_Bokningsbar')
 	            if (arr_Bokningsbar.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": "2",
+	                    "Faktaid": "1",
 	                    "FaktaTypID": arr_Bokningsbar.attr('rel'),
 	                    "Faktarubrik": "Bokningsbar",
 	                    "FaktaValue": arr_Bokningsbar.val(),
@@ -11341,25 +11363,24 @@
 	            };
 
 	            var arr_resorovrigt = $('#arr_resorovrigt');
-	            if (arr_resorovrigt.html()) {
+	            if (arr_resorovrigt.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "4",
-	                    "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
+	                    "FaktaTypID": arr_resorovrigt.attr('rel'),
 	                    "Faktarubrik": "Övrigt",
-	                    "FaktaValue": $('#arr_resorovrigt').html(),
+	                    "FaktaValue": arr_resorovrigt.val(),
 	                });
 	            };
 	            var arr_overiganoter = $('#arr_overiganoter');
-	            if (arr_overiganoter.html()) {
-	                arr_overiganoter.Faktalist.push({
-	                    "Faktaid": "4",
-	                    "FaktaTypID": $('#arr_overiganoter').attr('rel'),
+	            if (arr_overiganoter.val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": "5",
+	                    "FaktaTypID": arr_overiganoter.attr('rel'),
 	                    "Faktarubrik": "Övriga noteringar",
-	                    "FaktaValue": $('#arr_overiganoter').html(),
+	                    "FaktaValue": arr_overiganoter.val(),
 	                });
 	            };
-	            
-
+	           
 	            //var arr_ekonomikostnad = $('#arr_ekonomikostnad');
 	            //if (arr_ekonomikostnad.val()) {
 	            //    arrformjsondata.Faktalist.push({
@@ -11501,11 +11522,22 @@
 
 	// kollar om ansökningar är lästa eller ej
 	Handlebars.registerHelper('iffilm', function (object, url) {
-	    if (object === "1") {
-	        return '<img src="' + url + '" />';
-	    } else {
-	        return '<iframe width="auto" height="auto" src="' + url + '" frameborder="0" allowfullscreen="true" style="max-width:100%;"></iframe>';
+	    
+	    var rettext = "";
+	    switch (object) {
+	        case "1":
+	            rettext = '<img src="' + url + '" />';
+	            break;
+	        case "2":
+	            rettext = '<iframe width="auto" height="auto" src="https://www.youtube.com/embed/' + url + '" frameborder="0" allowfullscreen="true" style="max-width:100%;"></iframe>';;
+	            break;
+	        case "3":
+	            //rettext = '<audio name="ljudspelare" src="' + url + '" preload />';
+	            rettext = '<audio preload id="audio1" src="' + url + '" controls="controls">Your browser does not support HTML5 Audio!</audio>'
+	            break;
 	    }
+
+	    return rettext;
 	});
 
 
@@ -11569,6 +11601,23 @@
 	        return opts.fn(this);
 	    }
 	    
+	});
+
+	Handlebars.registerHelper('ovrigttyp', function (Faktaid, Faktarubrik, FaktaValue) {
+	    var ret = "";
+	    if (Faktaid === "5") {
+
+	        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+	        ret += Faktarubrik;
+	        ret += "</div><div class='small-12 medium-6 columns'>";
+	        ret += FaktaValue
+	        if (!isNaN(FaktaValue)) {
+	            ret += faktavalueextention(Faktarubrik);
+	        };
+	        ret += "</div></div>";
+
+	    }
+	    return ret;
 	});
 
 	var faktavalueextention =function(typ){
@@ -11975,25 +12024,48 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	//här sätts alla pluggin och jquery.ready starters 
+	var detailhandler = __webpack_require__(10);
+
+	module.exports = {
+	    getArrFormJsonData: function (arrJson) {
+	        detailhandler.RenderMainContent(arrJson);
+	        detailhandler.RendeFaktaContent(arrJson);
+	        detailhandler.RenderUtovareContent(arrJson);
+	    }
+	};
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
 	var appsettingsobject = __webpack_require__(1);
 	var HandlebarTemplet = __webpack_require__(7);
 	var _appsetting = appsettingsobject.config;
 
 	module.exports = {
-	    getArrFormJsonData: function (arrJson) {
-	        maincontent(arrJson);
+	    RenderMainContent: function (arrJson) {
+	        maincontent(arrJson);       
+	    },
+	    RendeFaktaContent: function (arrJson) {       
 	        faktaContent(arrJson);
-	        utovareContent(arrJson);        
+	    },
+	    RenderUtovareContent: function (arrJson) {       
+	        utovareContent(arrJson);
+	    },
+	    RenderUtovareContentJson: function (arrJson) {
+	        utovareContentJson(arrJson);
 	    }
 	};
 
 
 	var maincontent = function (arrJson) {
-	    $('.granska_rubrik').html( arrJson.Rubrik);
+	    $('.granska_rubrik').html(arrJson.Rubrik);
 	    $('.granska_underrubrik').html(arrJson.UnderRubrik);
 	    $('.granska_innehall').html(arrJson.Innehall);
-	    var imgsrc = _appsetting.globalconfig.arrtmpimgurl +'_'+ arrJson.MainImage.MediaUrl;
+	    var imgsrc = _appsetting.globalconfig.arrtmpimgurl + '_' + arrJson.MainImage.MediaUrl;
 	    $('.granska_pressentationsbild').attr('src', imgsrc);
 	    $('.arrmainfoto').html('<span>Foto: </span> ' + arrJson.MainImage.MediaFoto);
 
@@ -12002,19 +12074,14 @@
 	    } else {
 	        $('.granska_exempel').hide();
 	    }
+	};
 
-	    //if (arrJson.MediaList.length < 0) {
-	    //    $('.granska_exempel').show();
-	    //} else {
-	    //    $('.granska_exempel').hide();
-	    //}
-
-	}
 	var faktaContent = function (fakalistJson) {
 
 	    HandlebarTemplet.injecthtmltemplate(".granskaFaktaMainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
 
-	}
+	};
+
 	var utovareContent = function (utovareJson) {
 	    $('.granska_Utovare_Organisation').html($('#utovare_aktor_grupp').val());
 	    $('.granska_Utovare_namn').html($('#utovare_fornamn').val() + " " + $('#utovare_efternamn').val());
@@ -12023,10 +12090,22 @@
 	    $('.granska_Utovare_tfn').html($('#utovare_telefonnr').val());
 	    $('.granska_Utovare_epost').html($('#utovare_epost').val());
 	    $('.granska_Utovare_hemsida').html($('#utovare_orghemsida').val());
-	}
+	};
+
+	var utovareContentJson = function (utovareJson) {
+	    $('.granska_Utovare_Organisation').html(utovareJson.UtovareData.Organisation);
+	    $('.granska_Utovare_namn').html(utovareJson.UtovareData.Fornamn + " " + utovareJson.UtovareData.Efternamn);
+	    $('.granska_Utovare_Adress').html(utovareJson.UtovareData.Adress);
+	    $('.granska_Utovare_postort').html(utovareJson.UtovareData.Postnr + " " + utovareJson.UtovareData.Ort);
+	    $('.granska_Utovare_tfn').html(utovareJson.UtovareData.Telefon);
+	    $('.granska_Utovare_epost').html(utovareJson.UtovareData.Epost);
+	    $('.granska_Utovare_hemsida').html(utovareJson.UtovareData.Weburl);
+	};
+
+
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//här sätts alla pluggin och jquery.ready starters 
@@ -12157,12 +12236,12 @@
 	};
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(4);
-	__webpack_require__(12);
-	var jplists = __webpack_require__(13);
+	__webpack_require__(13);
+	var jplists = __webpack_require__(14);
 	var handlebarTemplethandler = __webpack_require__(7);
 
 	var appsettingsobject = __webpack_require__(1);
@@ -12222,7 +12301,8 @@
 	            itemsBox: ' #kk_aj_productlist ',
 	            itemPath: '.kk_aj_arritem',
 	            panelPath: '.jplist-panel',
-
+	            storage: 'localstorage',		
+	            storageName: 'KulturkatalogenStorage'
 	        });
 	        callback(test);
 	    }, 'html');    
@@ -12441,7 +12521,7 @@
 	}
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! jQuery UI - v1.12.1 - 2016-09-14
@@ -31152,7 +31232,7 @@
 	}));
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var jQuery = __webpack_require__(4);
@@ -31649,6 +31729,212 @@
 	        })(); (function () { jQuery.fn.jplist.controls.TextboxDTO = function (e, g, f, h, d, a, b) { return { path: e, ignore: f, value: g, mode: h, not: d, and: a, or: b, filterType: "TextFilter" } } })();
 
 	    } //module.export.init STOPP
+	}
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//här sätts alla pluggin och jquery.ready starters 
+	var $ = __webpack_require__(4);
+	var appsettingsobject = __webpack_require__(1);
+	var detailhandler = __webpack_require__(10);
+	var _appsetting = appsettingsobject.config;
+
+	module.exports = {
+	    DetailVy: function (arrid) {
+
+	        fillDetaildata(arrid);
+
+	        
+	    }
+	};
+
+	var renderDetails = function (arrJson) {
+	    detailhandler.RenderMainContent(arrJson);
+	    detailhandler.RendeFaktaContent(arrJson);
+	    detailhandler.RenderUtovareContentJson(arrJson);
+	}
+
+
+	var fillDetaildata = function (arrid) {
+
+	    Servicehandler(arrid, function (data) {
+	        if (data.kk_aj_admin.ansokningarlista.ansokningarcount == "0") {
+	            window.location.href = "/404";
+	            return false;
+	        };
+	        fyllArrJson(data, function (json) {
+
+	            renderDetails(json);
+	            
+	        });
+	    })
+
+	}
+
+
+	var Servicehandler = function (arrid, callback) {
+	    var arrurl = "/Api_v2/arrangemang/details/uid/0/typ/" + arrid + "/devkey/alf?type=json&callback=testar";
+	    var serverurl = _appsetting.globalconfig.apiserver + arrurl;
+
+	    $.ajax({
+	        async: true,
+	        type: "GET",
+	        url: serverurl,
+	        dataType: "json",
+	        success: function (data) {
+	            console.log("utövardata hämtad: ");
+	            callback(data, "funkar");
+	        },
+	        error: function (xhr, ajaxOptions, thrownError) {
+	            console.log("Nått blev fel hämtning utövardata!");
+	            alert("Nått blev fel hämtning utövardata!");
+	        }
+	    });   
+	}
+
+	var fyllArrJson = function (data, callback) {
+	    var arrdata = data.kk_aj_admin.ansokningarlista.ansokningar[0];
+
+	    // MAINBLOCK
+	    _arrjsondata.Arrid = arrdata.ansokningid;
+	    _arrjsondata.Rubrik = arrdata.ansokningtitle;
+	    _arrjsondata.UnderRubrik = arrdata.ansokningsubtitle;
+	    _arrjsondata.Innehall = arrdata.ansokningContent;
+	    _arrjsondata.Arrangemangtyp = arrdata.ansokningtyp;
+	    _arrjsondata.Konstform = arrdata.ansokningkonstform;
+	    _arrjsondata.MainImage.MediaUrl = arrdata.ansokningMediaImage.MediaUrl;
+	    _arrjsondata.MainImage.MediaAlt = arrdata.ansokningMediaImage.MediaAlt;
+	    _arrjsondata.MainImage.MediaFoto = arrdata.ansokningMediaImage.MediaFoto;
+
+	    //UTÖVAREBLOCK
+	    _arrjsondata.UtovareData.UtovarID = arrdata.ansokningUtovardata.UtovarID;
+	    _arrjsondata.UtovareData.Organisation = arrdata.ansokningUtovardata.Organisation;
+	    _arrjsondata.UtovareData.Fornamn = arrdata.ansokningUtovardata.Fornamn;
+	    _arrjsondata.UtovareData.Efternamn = arrdata.ansokningUtovardata.Efternamn;
+	    _arrjsondata.UtovareData.Telefon = arrdata.ansokningUtovardata.Telefon;
+	    _arrjsondata.UtovareData.Adress = arrdata.ansokningUtovardata.Adress;
+	    _arrjsondata.UtovareData.Postnr = arrdata.ansokningUtovardata.Postnr;
+	    _arrjsondata.UtovareData.Ort = arrdata.ansokningUtovardata.Ort;
+	    _arrjsondata.UtovareData.Epost = arrdata.ansokningUtovardata.Epost;
+	    _arrjsondata.UtovareData.Kommun = arrdata.ansokningUtovardata.Kommun;
+	    _arrjsondata.UtovareData.Weburl = arrdata.ansokningUtovardata.Weburl;
+	    
+	    // FAKTA BLOCK
+	    //_arrformjsondata.Faktalist = [];
+	    $.each(arrdata.ansokningFaktalist, function (itm, val) {
+	        
+	        switch (val.FaktaTypID) {
+	            // FAKTA 1
+	            case 1: case 2: case 3: case 4: case 5: case 25:  case 41:
+	                _arrjsondata.Faktalist.push({
+	                    "Faktaid": "1",
+	                    "FaktaTypID": val.FaktaTypID,
+	                    "Faktarubrik": val.Faktarubrik,
+	                    "FaktaValue": val.FaktaValue
+	                });
+	                break;
+
+	                // LOKAL 2
+	            case 10: case 11: case 12: case 13: case 14: case 15: case 16: case 17: case 18: case 33: case 34:
+	                _arrjsondata.Faktalist.push({
+	                    "Faktaid": "2",
+	                    "FaktaTypID": val.FaktaTypID,
+	                    "Faktarubrik": val.Faktarubrik,
+	                    "FaktaValue": val.FaktaValue
+	                });
+	                break;
+
+	                // PUBLIK 3
+	            case 6: case 7: case 8: case 9: case 32: case 42:
+
+	                if (val.FaktaTypID == 7 || val.FaktaTypID == 8) {
+	                    val.FaktaValue = val.FaktaValue + " år"
+	                };
+
+	                _arrjsondata.Faktalist.push({
+	                    "Faktaid": "3",
+	                    "FaktaTypID": val.FaktaTypID,
+	                    "Faktarubrik": val.Faktarubrik,
+	                    "FaktaValue": val.FaktaValue
+	                });
+	                break;
+
+	                // EKONOMI 4
+	            case 19: case 20: case 21: case 22: case 23: case 24: case 35: case 36: case 37: case 38: case 40:
+	                _arrjsondata.Faktalist.push({
+	                    "Faktaid": "4",
+	                    "FaktaTypID": val.FaktaTypID,
+	                    "Faktarubrik": val.Faktarubrik,
+	                    "FaktaValue": val.FaktaValue
+	                });
+	                break;
+	                // ÖVRIGT 5
+	            case 39:
+	                _arrjsondata.Faktalist.push({
+	                    "Faktaid": "5",
+	                    "FaktaTypID": val.FaktaTypID,
+	                    "Faktarubrik": val.Faktarubrik,
+	                    "FaktaValue": val.FaktaValue
+	                });
+	                break;
+
+	                // default är ÖVRIGT
+	            default:
+	                _arrjsondata.Faktalist.push({
+	                    "Faktaid": "5",
+	                    "FaktaTypID": val.FaktaTypID,
+	                    "Faktarubrik": val.Faktarubrik,
+	                    "FaktaValue": val.FaktaValue
+	                });
+	                break;
+	        };
+
+	    });
+
+	    callback(_arrjsondata)
+
+
+	}
+	var _arrjsondata = {
+	    "Arrid" :"",
+	    "Rubrik": "",
+	    "UnderRubrik": "",
+	    "Innehall": "",
+	    "Arrangemangtyp": "",
+	    "Konstform": "",
+	    "Faktalist": [],
+	    "MediaList": [],
+	    "Username": "",
+	    "MainImage": {
+	        "MediaID": 0,
+	        "MediaUrl": "",
+	        "MediaFilename": "",
+	        "MediaSize": "",
+	        "MediaAlt": "",
+	        "MediaFoto": "",
+	        "MediaTyp": "",
+	        "MediaVald": "nej",
+	        "mediaTitle": "",
+	        "mediaBeskrivning": "",
+	        "mediaLink": "",
+	        "sortering": "0"
+	    },
+	    "Utovare": "0",
+	    "UtovareData": {
+	        "UtovarID": "0",
+	        "Organisation": "",
+	        "Fornamn": "",
+	        "Efternamn": "",
+	        "Telefon": "",
+	        "Adress": "",
+	        "Postnr": "",
+	        "Ort": "",
+	        "Epost": "",
+	        "Kommun": "",
+	        "Weburl": ""
+	    }
 	}
 
 /***/ })

@@ -67,7 +67,7 @@ module.exports = {
             var arr_medverkande = $('#arr_medverkande')
             if (arr_medverkande.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": "2",
+                    "Faktaid": "1",
                     "FaktaTypID": arr_medverkande.attr('rel'),
                     "Faktarubrik": "Medverkande",
                     "FaktaValue": arr_medverkande.val(),
@@ -76,7 +76,7 @@ module.exports = {
             var arr_Premiardatum = $('#arr_Premiardatum')
             if (arr_Premiardatum.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": "2",
+                    "Faktaid": "1",
                     "FaktaTypID": arr_Premiardatum.attr('rel'),
                     "Faktarubrik": "Premiärdatum",
                     "FaktaValue": arr_Premiardatum.val(),
@@ -85,7 +85,7 @@ module.exports = {
             var arr_Bokningsbar = $('#arr_Bokningsbar')
             if (arr_Bokningsbar.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": "2",
+                    "Faktaid": "1",
                     "FaktaTypID": arr_Bokningsbar.attr('rel'),
                     "Faktarubrik": "Bokningsbar",
                     "FaktaValue": arr_Bokningsbar.val(),
@@ -292,25 +292,24 @@ module.exports = {
             };
 
             var arr_resorovrigt = $('#arr_resorovrigt');
-            if (arr_resorovrigt.html()) {
+            if (arr_resorovrigt.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "4",
-                    "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
+                    "FaktaTypID": arr_resorovrigt.attr('rel'),
                     "Faktarubrik": "Övrigt",
-                    "FaktaValue": $('#arr_resorovrigt').html(),
+                    "FaktaValue": arr_resorovrigt.val(),
                 });
             };
             var arr_overiganoter = $('#arr_overiganoter');
-            if (arr_overiganoter.html()) {
-                arr_overiganoter.Faktalist.push({
-                    "Faktaid": "4",
-                    "FaktaTypID": $('#arr_overiganoter').attr('rel'),
+            if (arr_overiganoter.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "5",
+                    "FaktaTypID": arr_overiganoter.attr('rel'),
                     "Faktarubrik": "Övriga noteringar",
-                    "FaktaValue": $('#arr_overiganoter').html(),
+                    "FaktaValue": arr_overiganoter.val(),
                 });
             };
-            
-
+           
             //var arr_ekonomikostnad = $('#arr_ekonomikostnad');
             //if (arr_ekonomikostnad.val()) {
             //    arrformjsondata.Faktalist.push({

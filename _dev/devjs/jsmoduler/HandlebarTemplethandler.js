@@ -21,11 +21,22 @@ module.exports = {
 
 // kollar om ansökningar är lästa eller ej
 Handlebars.registerHelper('iffilm', function (object, url) {
-    if (object === "1") {
-        return '<img src="' + url + '" />';
-    } else {
-        return '<iframe width="auto" height="auto" src="' + url + '" frameborder="0" allowfullscreen="true" style="max-width:100%;"></iframe>';
+    
+    var rettext = "";
+    switch (object) {
+        case "1":
+            rettext = '<img src="' + url + '" />';
+            break;
+        case "2":
+            rettext = '<iframe width="auto" height="auto" src="https://www.youtube.com/embed/' + url + '" frameborder="0" allowfullscreen="true" style="max-width:100%;"></iframe>';;
+            break;
+        case "3":
+            //rettext = '<audio name="ljudspelare" src="' + url + '" preload />';
+            rettext = '<audio preload id="audio1" src="' + url + '" controls="controls">Your browser does not support HTML5 Audio!</audio>'
+            break;
     }
+
+    return rettext;
 });
 
 
@@ -89,6 +100,23 @@ Handlebars.registerHelper('faktatypvisas', function (faktalist, val, opts) {
         return opts.fn(this);
     }
     
+});
+
+Handlebars.registerHelper('ovrigttyp', function (Faktaid, Faktarubrik, FaktaValue) {
+    var ret = "";
+    if (Faktaid === "5") {
+
+        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
+        ret += Faktarubrik;
+        ret += "</div><div class='small-12 medium-6 columns'>";
+        ret += FaktaValue
+        if (!isNaN(FaktaValue)) {
+            ret += faktavalueextention(Faktarubrik);
+        };
+        ret += "</div></div>";
+
+    }
+    return ret;
 });
 
 var faktavalueextention =function(typ){

@@ -2,6 +2,7 @@
 var appsettings = require("./appSettings.js");
 var arrformhandler = require("./jqueryArrFormHandler.js");
 var arrsearchhandler = require("./publiksearch.js");
+var arrDetailvyHandler =require("./arrDetailVy.js")
 module.exports = {    
     pageloader: function (pagetoload, val) {
        
@@ -12,6 +13,10 @@ module.exports = {
             case "Dnn_module_kk_aj_Publik_productlist":
                 arrsearchhandler.init(val)
                 break;
+            case "Dnn_module_kk_aj_Publik_detail":
+                arrDetailvyHandler.DetailVy(val);
+                break;
+
             default:               
                 loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
                 

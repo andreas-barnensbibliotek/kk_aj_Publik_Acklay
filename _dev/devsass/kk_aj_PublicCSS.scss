@@ -44,6 +44,8 @@
 @import 'devScss/kulturkatalogen/_kulturkatalog_Mainmeny';
 @import 'devScss/kulturkatalogen/_kulturkatalogenArtikel';
 @import 'devScss/kulturkatalogen/_kulturkatalogMain';
+@import 'devScss/kulturkatalogen/_arrPublicDetails';
+
 //@import 'devScss/vendors/_animateSlider';
 // Behold, here are all the Foundation components.
 
@@ -215,6 +217,25 @@ $font-path: "../fonts/foundation-icons/foundation-icons";
     width:100%;
 }
 
+.kk_aj_loader {
+  border: 16px solid #cccccc;
+  border-radius: 50%;
+  border-top: 16px solid #333333;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 .loader {
   display: none;

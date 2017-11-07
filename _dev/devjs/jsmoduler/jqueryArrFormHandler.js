@@ -250,7 +250,7 @@ module.exports = {
                             console.log(callbackarrid);                            
                             arrformjsonBuilder.tempuploadimage("uploadimg", callbackarrid, function (callback) {
                                 console.log("sista" + callback);
-                                alert("uppgifterna är nu inskickade!");
+                                alert("Uppgifterna är nu inskickade!");
                                 clearForm();
                                 tabnavigator(1);
                                 var jsondata = callback;

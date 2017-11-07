@@ -3,6 +3,7 @@ var appsettingsobject = require("./jsmoduler/appSettings.js");
 var msg = require("./jsmoduler/main.js");
 var pagehandler = require("./jsmoduler/pageloadhandler.js");
 var publiksearch = require("./jsmoduler/publiksearch.js");
+//var audioplayer = require("./jsmoduler/audioplayer.js")
 
 var appsetting = appsettingsobject.config;
 //  kulturkatalogen publik start
@@ -42,9 +43,13 @@ $(function () {
             if (index > 0) {
                 urlParams.id = sPageURL[index + 1];
             };
+            var index = sPageURL.indexOf("id");
+            if (index > 0) {
+                urlParams.arrid = sPageURL[index + 1];
+            };
         }
     };
-
+    checkparamsinurl();
     //////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // START rangesliders för arrangemangformuläret-----------------------------------------------------------------------------
@@ -81,7 +86,7 @@ $(function () {
         }
     });
 
-    
+    //audioplayer.initaudioplayer();
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // STOPP rangesliders för arrangemangformuläret-----------------------------------------------------------------------------
@@ -121,12 +126,24 @@ $(function () {
     ////----------------------------------------------------------------------------
 
     var init = function (val, callback) {
-                
+
+      
+
         scrolltotop();
         console.log('STORE: ' + localStorage.getItem('kk_aj_storage'));
-
-        pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
-       
+        if (appsetting.currentpage == "Dnn_module_kk_aj_Publik_detail") {
+            //if (urlParams.arrid > 0) {
+            //    pagehandler.pageloader(appsetting.currentpage, urlParams.arrid);
+            //} else {
+                
+            //        window.location.href = "/404";
+                
+            //}
+            pagehandler.pageloader(appsetting.currentpage, urlParams.arrid);
+            
+        } else {
+            pagehandler.pageloader(appsetting.currentpage, appsetting.arrtab.currenttab);
+        }
        
     }
 
