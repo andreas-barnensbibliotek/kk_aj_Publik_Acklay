@@ -12455,7 +12455,15 @@ input[type=radio] + label {
     .mega-menu .menyrightblock li a:hover {
       background-color: #fff;
       color: #f77136 !important; }
-  /* line 43, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+    /* line 42, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+    .mega-menu .menyrightblock button, .mega-menu .menyrightblock .button {
+      padding-left: 0px;
+      padding-right: 0px; }
+      @media only screen and (max-width: 40em) {
+        /* line 42, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+        .mega-menu .menyrightblock button, .mega-menu .menyrightblock .button {
+          font-size: .8rem; } }
+  /* line 50, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
   .mega-menu .contact {
     display: block;
     font-family: "acumin-pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -12499,31 +12507,31 @@ input[type=radio] + label {
         font-size: 0.875rem;
         font-weight: bold;
         text-transform: uppercase; }
-  /* line 46, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+  /* line 53, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
   .mega-menu i {
     padding-right: .5rem; }
-  /* line 49, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+  /* line 56, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
   .mega-menu h2 {
     margin-left: 1rem;
     color: #FFFFFF; }
-  /* line 53, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+  /* line 60, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
   .mega-menu .mega-menu-content {
     color: #808080; }
-    /* line 55, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+    /* line 62, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
     .mega-menu .mega-menu-content h4 {
       font-weight: bold; }
-    /* line 59, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+    /* line 66, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
     .mega-menu .mega-menu-content .faktureringtjanster p {
       margin-bottom: 0px; }
-    /* line 62, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+    /* line 69, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
     .mega-menu .mega-menu-content .faktureringtjanster ul {
       list-style: none;
       margin-left: 0px; }
-      /* line 65, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+      /* line 72, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
       .mega-menu .mega-menu-content .faktureringtjanster ul ul {
         list-style: none;
         margin-left: 1rem; }
-      /* line 69, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
+      /* line 76, _dev/devsass/devScss/kulturkatalogen/_kulturkatalog_Mainmeny.scss */
       .mega-menu .mega-menu-content .faktureringtjanster ul li a {
         list-style: none;
         padding-left: 0px;

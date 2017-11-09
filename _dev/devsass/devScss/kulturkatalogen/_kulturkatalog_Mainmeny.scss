@@ -39,6 +39,13 @@
                 }
             }
         }
+        button, .button {
+            padding-left:0px;
+            padding-right: 0px;
+            @media #{$small-only} {
+                font-size:.8rem;
+            }
+        }
     } 
 	.contact {
 		@include side-nav;

@@ -407,9 +407,24 @@ var changetabattr = function (tab) {
 // Arrangemangs exempel START!
 var saveArrExempel = function () {
     var val = $('#arr_ExempelRubrik').val()
+    var bild_film_url =$('#arr_Exempelbild').val();
+    var mediatyp= $('input[name=arr_ExempelTyp]:checked').val();
+    
+    if (mediatyp == "2") {
+        var urltest = bild_film_url.indexOf("https://youtu.be/");
+        if (urltest < 0) {
+            alert("Du måste ange en korrekt youtubelänk (ex: https://youtu.be/######)");
+            return false;
+        }
+        var fixurl = bild_film_url.replace("https://youtu.be/", "");
+        bild_film_url = fixurl;
+    };
+
     var index = _exempellistobject.exempelitemlist.findIndex(function (item, i) {
         return item.mediaTitle === val
     });
+
+
    
     if (index>= 0){
         alert("Exemplet finns redan!");
@@ -417,8 +432,8 @@ var saveArrExempel = function () {
     }
     _exempellistobject.exempelitemlist.push(
         {
-            "MediaUrl": $('#arr_Exempelbild').val(),
-            "MediaTyp": $('input[name=arr_ExempelTyp]:checked').val(),
+            "MediaUrl": bild_film_url,
+            "MediaTyp": mediatyp,
             "mediaTitle": $('#arr_ExempelRubrik').val(),
             "mediaBeskrivning": $('#arr_Exempelbeskrivning').val(),
             "mediaLink": $('#arr_ExempelUrl').val()            
