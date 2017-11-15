@@ -82,6 +82,24 @@
  .tabs .tab-title.disabled > a {
         pointer-events: none; }
 
+ .kk_aj_tabs{
+     .tab-title{
+         background-color:$smoke;
+         a{
+            font-size: .8rem;
+            padding: .5rem 1rem;
+         }          
+         &.active > a{
+            background-color:$gainsboro;
+         }
+     }
+ }
+ .fileupload{
+    background-color:#f2f2f2;
+    padding-top: 2px;
+    padding-left:.2rem; 
+    vertical-align:middle;
+}
 #mainarrformcontainer{
     .formheader{
         margin-bottom:2em !important;

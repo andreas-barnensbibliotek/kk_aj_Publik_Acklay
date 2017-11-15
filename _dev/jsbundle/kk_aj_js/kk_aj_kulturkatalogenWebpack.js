@@ -210,22 +210,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            apiserver: "http://localhost:60485",
-	            dnnURL: "http://dnndev.me",           
-	            localOrServerURL: "http://localhost:60485/Api_v2",
-	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://localhost:60485",
+	            //dnnURL: "http://dnndev.me",           
+	            //localOrServerURL: "http://localhost:60485/Api_v2",
+	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            //dnnURL: "http://kulturkatalog.kivdev.se",
-	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            dnnURL: "http://kulturkatalog.kivdev.se",
+	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -236,7 +236,7 @@
 	            currenttab: 0           
 	        },
 	        currentpage: "",
-	        debug: "false" // true / false
+	        debug: "true" // true / false
 	    };
 
 	module.exports = {  
@@ -10600,10 +10600,10 @@
 
 	            arrformValidator.arrShowforminputs("0");
 
-	            var storage = Storages.localStorage
-	            storage.set('foo', 'Detta funkar bra detta!');
-	            var storage = Storages.localStorage
-	            console.log("localstorage: " + storage.get('foo'))
+	            //var storage = Storages.localStorage
+	            //storage.set('foo', 'Detta funkar bra detta!');
+	            //var storage = Storages.localStorage
+	            //console.log("localstorage: " + storage.get('foo'))
 
 	            var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
 	            var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
@@ -10831,18 +10831,30 @@
 	                       console.log(callback);
 	                       var arrjson = callback;
 
-	                        arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
-	                            console.log(callbackarrid);                            
-	                            arrformjsonBuilder.tempuploadimage("uploadimg", callbackarrid, function (callback) {
-	                                console.log("sista" + callback);
-	                                alert("Uppgifterna är nu inskickade!");
-	                                clearForm();
-	                                tabnavigator(1);
-	                                var jsondata = callback;
-	                                return true;
-	                            });
-	                        });
-	                                                
+	                       arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
+	                           console.log(callbackarrid);
+	                           let bildfil = $("#arr_presentationsbild").get(0).files;
+	                           arrformjsonBuilder.tempuploadimage("uploadimg", bildfil, callbackarrid, function (callback) {
+	                               let arr_cvmedverkande = $('#arr_cvmedverkande_file').get(0).files;
+	                               if (arr_cvmedverkande.length > 0) {
+	                                   arrformjsonBuilder.tempuploadimage("uploadimg", arr_cvmedverkande, callbackarrid, function (callback) {
+
+	                                       alert("Uppgifterna är nu inskickade!");
+	                                       clearForm();
+	                                       tabnavigator(1);
+	                                       var jsondata = callback;
+	                                       return true;
+	                                   });
+	                               } else {
+	                                   alert("Uppgifterna är nu inskickade!");
+	                                   clearForm();
+	                                   tabnavigator(1);
+	                                   var jsondata = callback;
+	                                   return true;
+	                               };
+	                               
+	                           });
+	                       });
 	                    });
 	                    return false;
 
@@ -10886,14 +10898,27 @@
 
 	            $('#kk_aj_laddatmpimg').on('click', function () {
 	                var spinner = "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/public/ajax-loader.gif";
-	                $('#kk_aj_tmpimg').attr('src', spinner);
-	                arrformjsonBuilder.tempuploadimage("tmpimg","0", function (callback) {
+	                let spinnerobj = $('#kk_aj_tmpimg');
+	                spinnerobj.attr('src', spinner);
+	                let files = $("#arr_presentationsbild").get(0).files;
+	                arrformjsonBuilder.tempuploadimage("tmpimg",files,"0", function (callback) {
 	                    console.log(callback);
-	                    $('#kk_aj_tmpimg').attr('src', callback);
+	                    spinnerobj.attr('src', callback);
 	                });
 	                return false;
 	            });
 
+	            //$('#kk_aj_arr_laromedel_fileupload').on('click', function () {
+	            //    arrformjsonBuilder.tempuploadpdf("tmpimg", "0", function (callback) {
+	            //        console.log(callback);
+	            //        $('#arr_laromedel_file').attr('src', callback);
+	            //    });
+	            //    var filen = $("#arr_laromedel_file").get(0).files;
+	            //    alert(filen[0].name);
+	            //    return false;
+	            //});
+
+	           
 	            $('.kk_aj_befintlignotme').on('click', function () {
 	                tidigareutovaredisable(false);
 	                isnotme();
@@ -10965,6 +10990,7 @@
 	        default:
 	            addarrtab_1.show();
 	    };
+	    scrollup();
 	    changetabattr(tab)
 	}
 	var changetabattr = function (tab) {
@@ -11079,6 +11105,10 @@
 	    }
 	    
 	}
+	let scrollup = function () {
+	    $("html, body").animate({ scrollTop: 100 }, 500);
+	    return false;
+	};
 
 /***/ }),
 /* 6 */
@@ -11132,7 +11162,7 @@
 	        
 	        $(function () {
 
-	            var arrformjsondata = _arrjsondata;
+	            let arrformjsondata = _arrjsondata;
 
 	            arrformjsondata.Rubrik = $('#arr_rubrik').val();
 	            arrformjsondata.UnderRubrik = $('#arr_underrubrik').val();
@@ -11140,7 +11170,7 @@
 	            arrformjsondata.Arrangemangtyp = $('input[name=arr_radioValArrtyp]:checked').val();
 	            arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
 
-	            var arr_antalmedverkande = $('#arr_antalmedverkande')
+	            let arr_antalmedverkande = $('#arr_antalmedverkande');
 	            arrformjsondata.Faktalist = [];
 	            if (arr_antalmedverkande.val()) {
 	                arrformjsondata.Faktalist.push({
@@ -11149,8 +11179,8 @@
 	                    "Faktarubrik": "Antal medverkande",
 	                    "FaktaValue": arr_antalmedverkande.val(),
 	                });
-	            }
-	            var arr_medverkande = $('#arr_medverkande')
+	            };
+	            let arr_medverkande = $('#arr_medverkande');
 	            if (arr_medverkande.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "1",
@@ -11158,8 +11188,8 @@
 	                    "Faktarubrik": "Medverkande",
 	                    "FaktaValue": arr_medverkande.val(),
 	                });
-	            }
-	            var arr_Premiardatum = $('#arr_Premiardatum')
+	            };
+	            let arr_Premiardatum = $('#arr_Premiardatum');
 	            if (arr_Premiardatum.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "1",
@@ -11167,8 +11197,8 @@
 	                    "Faktarubrik": "Premiärdatum",
 	                    "FaktaValue": arr_Premiardatum.val(),
 	                });
-	            }
-	            var arr_Bokningsbar = $('#arr_Bokningsbar')
+	            };
+	            let arr_Bokningsbar = $('#arr_Bokningsbar');
 	            if (arr_Bokningsbar.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "1",
@@ -11176,25 +11206,18 @@
 	                    "Faktarubrik": "Bokningsbar",
 	                    "FaktaValue": arr_Bokningsbar.val(),
 	                });
-	            }
-	            var formBuildTimeId = $('#formBuildTimeId')
-	            if (formBuildTimeId.val()) {
-	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": "2",
-	                    "FaktaTypID": formBuildTimeId.attr('rel'),
-	                    "Faktarubrik": "Byggtid",
-	                    "FaktaValue": formBuildTimeId.val(),
-	                });
-	            }
-	            if ($('input[name=arr_laromedel]:checked').val()) {
+	            };
+	            let arr_laromedel = $('#arr_laromedel');
+	            if (arr_laromedel.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "1",
-	                    "FaktaTypID": $('input[name=arr_laromedel]:checked').attr('rel'),
-	                    "Faktarubrik": "Lärarmaterial ingår",
-	                    "FaktaValue": $('input[name=arr_laromedel]:checked').val(),
+	                    "FaktaTypID": arr_laromedel.attr('rel'),
+	                    "Faktarubrik": "Lärarhandledning",
+	                    "FaktaValue": arr_laromedel.val(),
 	                });
-	            }
-	            var formBuildTimeId = $('#formBuildTimeId')
+	            };
+
+	            let formBuildTimeId = $('#formBuildTimeId');
 	            if (formBuildTimeId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
@@ -11202,8 +11225,8 @@
 	                    "Faktarubrik": "Byggtid",
 	                    "FaktaValue": formBuildTimeId.val(),
 	                });
-	            }
-	            var formDemolishTimeId = $('#formDemolishTimeId');
+	            };                        
+	            let formDemolishTimeId = $('#formDemolishTimeId');
 	            if (formDemolishTimeId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
@@ -11212,7 +11235,7 @@
 	                    "FaktaValue": $('#formDemolishTimeId').val(),
 	                });
 	            };
-	            var formVenueWidthId = $('#formVenueWidthId');
+	            let formVenueWidthId = $('#formVenueWidthId');
 	            if (formVenueWidthId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
@@ -11221,7 +11244,7 @@
 	                    "FaktaValue": formVenueWidthId.val(),
 	                });
 	            };
-	            var formVenueDepthId = $('#formVenueDepthId');
+	            let formVenueDepthId = $('#formVenueDepthId');
 	            if (formVenueDepthId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
@@ -11229,8 +11252,8 @@
 	                    "Faktarubrik": "Djup på scen",
 	                    "FaktaValue": formVenueDepthId.val(),
 	                });
-	            }
-	            var formVenueHeightId = $('#formVenueHeightId');
+	            };
+	            let formVenueHeightId = $('#formVenueHeightId');
 	            if (formVenueHeightId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
@@ -11263,7 +11286,7 @@
 	                    "FaktaValue": $('input[name=arr_morklaggning]:checked').val(),
 	                });
 	            };
-	            var formCarriersId = $('#formCarriersId');
+	            let formCarriersId = $('#formCarriersId');
 	            if (formCarriersId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
@@ -11272,7 +11295,7 @@
 	                    "FaktaValue": formCarriersId.val(),
 	                });
 	            };
-	            var formElectricityId = $('#formElectricityId');
+	            let formElectricityId = $('#formElectricityId');
 	            if (formElectricityId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
@@ -11281,7 +11304,7 @@
 	                    "FaktaValue": formElectricityId.val(),
 	                });
 	            };
-	            var formVenueRequiermentsId = $('#formVenueRequiermentsId');
+	            let formVenueRequiermentsId = $('#formVenueRequiermentsId');
 	            if (formVenueRequiermentsId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
@@ -11290,7 +11313,8 @@
 	                    "FaktaValue": formVenueRequiermentsId.val(),
 	                });
 	            };
-	            var formMaxAudienceId = $('#formMaxAudienceId');
+
+	            let formMaxAudienceId = $('#formMaxAudienceId');
 	            if (formMaxAudienceId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "3",
@@ -11299,7 +11323,7 @@
 	                    "FaktaValue": formMaxAudienceId.val(),
 	                }); 
 	            };
-	            var formMaxParticipantsId = $('#formMaxParticipantsId');
+	            let formMaxParticipantsId = $('#formMaxParticipantsId');
 	            if (formMaxParticipantsId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "3",
@@ -11307,10 +11331,8 @@
 	                    "Faktarubrik": "Max antal deltagare",
 	                    "FaktaValue": formMaxParticipantsId.val(),
 	                });
-	            };
-	           
-
-	            var kk_aj_yearspan = $('#kk_aj_yearspan');
+	            };           
+	            let kk_aj_yearspan = $('#kk_aj_yearspan');
 	            if (kk_aj_yearspan.html()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "3",
@@ -11325,7 +11347,7 @@
 	                    "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[1]
 	                });
 	            };
-	            var formMaxShowsId = $('#formMaxShowsId');
+	            let formMaxShowsId = $('#formMaxShowsId');
 	            if (formMaxShowsId.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "3",
@@ -11334,7 +11356,7 @@
 	                    "FaktaValue": formMaxShowsId.val(),
 	                });
 	            };
-	            var kk_aj_speltid = $('#kk_aj_speltid');
+	            let kk_aj_speltid = $('#kk_aj_speltid');
 	            if (kk_aj_speltid.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "3",
@@ -11343,7 +11365,8 @@
 	                    "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
 	                });
 	            };
-	            var arr_ekonomikostnad = $('#arr_ekonomikostnad');
+
+	            let arr_ekonomikostnad = $('#arr_ekonomikostnad');
 	            if (arr_ekonomikostnad.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "4",
@@ -11377,7 +11400,7 @@
 	                }); 
 	            };
 
-	            var arr_resorovrigt = $('#arr_resorovrigt');
+	            let arr_resorovrigt = $('#arr_resorovrigt');
 	            if (arr_resorovrigt.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "4",
@@ -11386,7 +11409,7 @@
 	                    "FaktaValue": arr_resorovrigt.val(),
 	                });
 	            };
-	            var arr_overiganoter = $('#arr_overiganoter');
+	            let arr_overiganoter = $('#arr_overiganoter');
 	            if (arr_overiganoter.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "5",
@@ -11395,38 +11418,73 @@
 	                    "FaktaValue": arr_overiganoter.val(),
 	                });
 	            };
-	           
-	            //var arr_ekonomikostnad = $('#arr_ekonomikostnad');
-	            //if (arr_ekonomikostnad.val()) {
-	            //    arrformjsondata.Faktalist.push({
-	            //        "Faktaid": "4",
-	            //        "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
-	            //        "Faktarubrik": "Övrigt",
-	            //        "FaktaValue": $('#arr_resorovrigt').html(),
-	            //    });
-	            //};
+	            
+	            // övrig info            
+	            let arr_cvmedverkande_url = $('#arr_cvmedverkande_url');
+	            let arr_cvmedverkande_file = $('#arr_cvmedverkande_file').get(0).files;
+	            if (arr_cvmedverkande_url.val() || arr_cvmedverkande_file.length > 0) {
+	                let filval = "";
+	                if (arr_cvmedverkande_url.val()) {
+	                    filval = arr_cvmedverkande_url.val();
+	                } else {
+	                    if (arr_cvmedverkande_file.length > 0) {
+	                        filval = arr_cvmedverkande_file[0].name;
+	                    };
+	                };
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": "0",
+	                    "FaktaTypID": $('.arr_cvmedverkande').attr('rel'),
+	                    "Faktarubrik": "CV",
+	                    "FaktaValue": filval,
+	                });
+	            };
+	            if ($('input[name=arr_statligtstodjanej]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": "0",
+	                    "FaktaTypID": $('input[name=arr_statligtstodjanej]:checked').attr('rel'),
+	                    "Faktarubrik": "Bidrag/stöd",
+	                    "FaktaValue": $('input[name=arr_statligtstodjanej]:checked').val(),
+	                });
+	            };            
+	            let arr_statligtstodtxt = $('#arr_statligtstodtxt');
+	            if (arr_statligtstodtxt.val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": "0",
+	                    "FaktaTypID": arr_statligtstodtxt.attr('rel'),
+	                    "Faktarubrik": "Bidrag/stöd från",
+	                    "FaktaValue": arr_statligtstodtxt.val(),
+	                });
+	            };
+	            if ($('input[name=arr_fskattsedeljanej]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": "0",
+	                    "FaktaTypID": $('input[name=arr_fskattsedeljanej]:checked').attr('rel'),
+	                    "Faktarubrik": "F-skattsedel",
+	                    "FaktaValue": $('input[name=arr_fskattsedeljanej]:checked').val(),
+	                });
+	            };
+	            if ($('input[name=arr_centrumbildningjanej]:checked').val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": "0",
+	                    "FaktaTypID": $('input[name=arr_centrumbildningjanej]:checked').attr('rel'),
+	                    "Faktarubrik": "Medlem i centrumbildning",
+	                    "FaktaValue": $('input[name=arr_centrumbildningjanej]:checked').val(),
+	                });
+	            };
+
 	            if (mediaExempledata.exempelitemlist) {
 	                if (mediaExempledata.exempelitemlist.length >= 0) {
 	                    arrformjsondata.MediaList = mediaExempledata.exempelitemlist;
 	                }
 	            };
-	                           
-
-	            //arrformjsondata.MediaList.MediaUrl = $('#arr_Exempelbild').val();
-	            //arrformjsondata.MediaList.MediaFilename = $('#arr_antalmedverkande').val();
-	            //arrformjsondata.MediaList.MediaSize = $('#arr_antalmedverkande').val();
-	            //arrformjsondata.MediaList.MediaTyp= $('input[name=arr_ExempelTyp]:checked').val();
-	    
-	            //arrformjsondata.MediaList.mediaTitle = $('#arr_ExempelRubrik').val();
-	            //arrformjsondata.MediaList.mediaBeskrivning = $('#arr_Exempelbeskrivning').val();
-	            //arrformjsondata.MediaList.mediaLink= $('#arr_ExempelUrl').val();
-	            var filen = $("#arr_presentationsbild").get(0).files;
+	            
+	            let filen = $("#arr_presentationsbild").get(0).files;
 	            arrformjsondata.MainImage.MediaUrl = filen[0].name;
 	            arrformjsondata.MainImage.MediaSize = $('#arr_sizefoto').val();
 	            arrformjsondata.MainImage.MediaAlt = $('#arr_altfoto').val();
 	            arrformjsondata.MainImage.MediaFoto = $('#arr_fotograf').val();
 
-	            var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
+	            let isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
 	            
 	            if (isbefintligutovare > 0) {
 	                arrformjsondata.Utovare = isbefintligutovare;
@@ -11448,14 +11506,12 @@
 
 	            callback(arrformjsondata);
 
-
 	        });
 	    },
-	    tempuploadimage: function (cmd, nyttarrid, callback) {
+	    tempuploadimage: function (cmd, files, nyttarrid, callback) {
 	       
 	                var data = new FormData();
-
-	                var files = $("#arr_presentationsbild").get(0).files;
+	                       
 	                data.append("cmd", cmd);
 
 	                if (nyttarrid != "0") {
@@ -11506,8 +11562,44 @@
 	                alert("Nått blev fel vid uppdatering av parametrarna!");
 	            }
 	        });
-
 	    }
+	    //,
+	    //tempuploadpdf: function (cmd, nyttarrid, callback) {
+	       
+	    //    var data = new FormData();
+
+	    //    var files = $('#arr_laromedel_file').get(0).files;
+	    //    data.append("cmd", cmd);
+
+	    //    if (nyttarrid != "0") {
+	    //        data.append("arrid", nyttarrid);
+	    //    };
+	               
+	    //    // Add the uploaded image content to the form data collection
+	    //    if (files.length > 0) {
+	    //        data.append("UploadedImage", files[0]);
+	        
+	    //        // Make Ajax request with the contentType = false, and procesDate = false
+
+	    //        var ajaxRequest = $.ajax({
+	    //            type: "POST",
+	    //            url: _appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
+	    //            contentType: false,
+	    //            processData: false,
+	    //            data: data
+	    //        });
+
+	    //        ajaxRequest.done(function (xhr, textStatus) {
+	    //            var retfileurl = _appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
+	    //            callback(retfileurl)
+	    //        });
+	       
+	    //    } else {
+	    //        callback("Nofile");
+	    //    }
+	        
+
+	    //}
 	};
 
 /***/ }),

@@ -46,7 +46,7 @@ module.exports = {
         
         $(function () {
 
-            var arrformjsondata = _arrjsondata;
+            let arrformjsondata = _arrjsondata;
 
             arrformjsondata.Rubrik = $('#arr_rubrik').val();
             arrformjsondata.UnderRubrik = $('#arr_underrubrik').val();
@@ -54,7 +54,7 @@ module.exports = {
             arrformjsondata.Arrangemangtyp = $('input[name=arr_radioValArrtyp]:checked').val();
             arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
 
-            var arr_antalmedverkande = $('#arr_antalmedverkande')
+            let arr_antalmedverkande = $('#arr_antalmedverkande');
             arrformjsondata.Faktalist = [];
             if (arr_antalmedverkande.val()) {
                 arrformjsondata.Faktalist.push({
@@ -63,8 +63,8 @@ module.exports = {
                     "Faktarubrik": "Antal medverkande",
                     "FaktaValue": arr_antalmedverkande.val(),
                 });
-            }
-            var arr_medverkande = $('#arr_medverkande')
+            };
+            let arr_medverkande = $('#arr_medverkande');
             if (arr_medverkande.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "1",
@@ -72,8 +72,8 @@ module.exports = {
                     "Faktarubrik": "Medverkande",
                     "FaktaValue": arr_medverkande.val(),
                 });
-            }
-            var arr_Premiardatum = $('#arr_Premiardatum')
+            };
+            let arr_Premiardatum = $('#arr_Premiardatum');
             if (arr_Premiardatum.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "1",
@@ -81,8 +81,8 @@ module.exports = {
                     "Faktarubrik": "Premiärdatum",
                     "FaktaValue": arr_Premiardatum.val(),
                 });
-            }
-            var arr_Bokningsbar = $('#arr_Bokningsbar')
+            };
+            let arr_Bokningsbar = $('#arr_Bokningsbar');
             if (arr_Bokningsbar.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "1",
@@ -90,25 +90,18 @@ module.exports = {
                     "Faktarubrik": "Bokningsbar",
                     "FaktaValue": arr_Bokningsbar.val(),
                 });
-            }
-            var formBuildTimeId = $('#formBuildTimeId')
-            if (formBuildTimeId.val()) {
-                arrformjsondata.Faktalist.push({
-                    "Faktaid": "2",
-                    "FaktaTypID": formBuildTimeId.attr('rel'),
-                    "Faktarubrik": "Byggtid",
-                    "FaktaValue": formBuildTimeId.val(),
-                });
-            }
-            if ($('input[name=arr_laromedel]:checked').val()) {
+            };
+            let arr_laromedel = $('#arr_laromedel');
+            if (arr_laromedel.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "1",
-                    "FaktaTypID": $('input[name=arr_laromedel]:checked').attr('rel'),
-                    "Faktarubrik": "Lärarmaterial ingår",
-                    "FaktaValue": $('input[name=arr_laromedel]:checked').val(),
+                    "FaktaTypID": arr_laromedel.attr('rel'),
+                    "Faktarubrik": "Lärarhandledning",
+                    "FaktaValue": arr_laromedel.val(),
                 });
-            }
-            var formBuildTimeId = $('#formBuildTimeId')
+            };
+
+            let formBuildTimeId = $('#formBuildTimeId');
             if (formBuildTimeId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
@@ -116,8 +109,8 @@ module.exports = {
                     "Faktarubrik": "Byggtid",
                     "FaktaValue": formBuildTimeId.val(),
                 });
-            }
-            var formDemolishTimeId = $('#formDemolishTimeId');
+            };                        
+            let formDemolishTimeId = $('#formDemolishTimeId');
             if (formDemolishTimeId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
@@ -126,7 +119,7 @@ module.exports = {
                     "FaktaValue": $('#formDemolishTimeId').val(),
                 });
             };
-            var formVenueWidthId = $('#formVenueWidthId');
+            let formVenueWidthId = $('#formVenueWidthId');
             if (formVenueWidthId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
@@ -135,7 +128,7 @@ module.exports = {
                     "FaktaValue": formVenueWidthId.val(),
                 });
             };
-            var formVenueDepthId = $('#formVenueDepthId');
+            let formVenueDepthId = $('#formVenueDepthId');
             if (formVenueDepthId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
@@ -143,8 +136,8 @@ module.exports = {
                     "Faktarubrik": "Djup på scen",
                     "FaktaValue": formVenueDepthId.val(),
                 });
-            }
-            var formVenueHeightId = $('#formVenueHeightId');
+            };
+            let formVenueHeightId = $('#formVenueHeightId');
             if (formVenueHeightId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
@@ -177,7 +170,7 @@ module.exports = {
                     "FaktaValue": $('input[name=arr_morklaggning]:checked').val(),
                 });
             };
-            var formCarriersId = $('#formCarriersId');
+            let formCarriersId = $('#formCarriersId');
             if (formCarriersId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
@@ -186,7 +179,7 @@ module.exports = {
                     "FaktaValue": formCarriersId.val(),
                 });
             };
-            var formElectricityId = $('#formElectricityId');
+            let formElectricityId = $('#formElectricityId');
             if (formElectricityId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
@@ -195,7 +188,7 @@ module.exports = {
                     "FaktaValue": formElectricityId.val(),
                 });
             };
-            var formVenueRequiermentsId = $('#formVenueRequiermentsId');
+            let formVenueRequiermentsId = $('#formVenueRequiermentsId');
             if (formVenueRequiermentsId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
@@ -204,7 +197,8 @@ module.exports = {
                     "FaktaValue": formVenueRequiermentsId.val(),
                 });
             };
-            var formMaxAudienceId = $('#formMaxAudienceId');
+
+            let formMaxAudienceId = $('#formMaxAudienceId');
             if (formMaxAudienceId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "3",
@@ -213,7 +207,7 @@ module.exports = {
                     "FaktaValue": formMaxAudienceId.val(),
                 }); 
             };
-            var formMaxParticipantsId = $('#formMaxParticipantsId');
+            let formMaxParticipantsId = $('#formMaxParticipantsId');
             if (formMaxParticipantsId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "3",
@@ -221,10 +215,8 @@ module.exports = {
                     "Faktarubrik": "Max antal deltagare",
                     "FaktaValue": formMaxParticipantsId.val(),
                 });
-            };
-           
-
-            var kk_aj_yearspan = $('#kk_aj_yearspan');
+            };           
+            let kk_aj_yearspan = $('#kk_aj_yearspan');
             if (kk_aj_yearspan.html()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "3",
@@ -239,7 +231,7 @@ module.exports = {
                     "FaktaValue": kk_aj_yearspan.html().replace(/år/g, '').split(" ").join("").split("-")[1]
                 });
             };
-            var formMaxShowsId = $('#formMaxShowsId');
+            let formMaxShowsId = $('#formMaxShowsId');
             if (formMaxShowsId.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "3",
@@ -248,7 +240,7 @@ module.exports = {
                     "FaktaValue": formMaxShowsId.val(),
                 });
             };
-            var kk_aj_speltid = $('#kk_aj_speltid');
+            let kk_aj_speltid = $('#kk_aj_speltid');
             if (kk_aj_speltid.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "3",
@@ -257,7 +249,8 @@ module.exports = {
                     "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
                 });
             };
-            var arr_ekonomikostnad = $('#arr_ekonomikostnad');
+
+            let arr_ekonomikostnad = $('#arr_ekonomikostnad');
             if (arr_ekonomikostnad.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "4",
@@ -291,7 +284,7 @@ module.exports = {
                 }); 
             };
 
-            var arr_resorovrigt = $('#arr_resorovrigt');
+            let arr_resorovrigt = $('#arr_resorovrigt');
             if (arr_resorovrigt.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "4",
@@ -300,7 +293,7 @@ module.exports = {
                     "FaktaValue": arr_resorovrigt.val(),
                 });
             };
-            var arr_overiganoter = $('#arr_overiganoter');
+            let arr_overiganoter = $('#arr_overiganoter');
             if (arr_overiganoter.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "5",
@@ -309,38 +302,73 @@ module.exports = {
                     "FaktaValue": arr_overiganoter.val(),
                 });
             };
-           
-            //var arr_ekonomikostnad = $('#arr_ekonomikostnad');
-            //if (arr_ekonomikostnad.val()) {
-            //    arrformjsondata.Faktalist.push({
-            //        "Faktaid": "4",
-            //        "FaktaTypID": $('#arr_resorovrigt').attr('rel'),
-            //        "Faktarubrik": "Övrigt",
-            //        "FaktaValue": $('#arr_resorovrigt').html(),
-            //    });
-            //};
+            
+            // övrig info            
+            let arr_cvmedverkande_url = $('#arr_cvmedverkande_url');
+            let arr_cvmedverkande_file = $('#arr_cvmedverkande_file').get(0).files;
+            if (arr_cvmedverkande_url.val() || arr_cvmedverkande_file.length > 0) {
+                let filval = "";
+                if (arr_cvmedverkande_url.val()) {
+                    filval = arr_cvmedverkande_url.val();
+                } else {
+                    if (arr_cvmedverkande_file.length > 0) {
+                        filval = arr_cvmedverkande_file[0].name;
+                    };
+                };
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "0",
+                    "FaktaTypID": $('.arr_cvmedverkande').attr('rel'),
+                    "Faktarubrik": "CV",
+                    "FaktaValue": filval,
+                });
+            };
+            if ($('input[name=arr_statligtstodjanej]:checked').val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "0",
+                    "FaktaTypID": $('input[name=arr_statligtstodjanej]:checked').attr('rel'),
+                    "Faktarubrik": "Bidrag/stöd",
+                    "FaktaValue": $('input[name=arr_statligtstodjanej]:checked').val(),
+                });
+            };            
+            let arr_statligtstodtxt = $('#arr_statligtstodtxt');
+            if (arr_statligtstodtxt.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "0",
+                    "FaktaTypID": arr_statligtstodtxt.attr('rel'),
+                    "Faktarubrik": "Bidrag/stöd från",
+                    "FaktaValue": arr_statligtstodtxt.val(),
+                });
+            };
+            if ($('input[name=arr_fskattsedeljanej]:checked').val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "0",
+                    "FaktaTypID": $('input[name=arr_fskattsedeljanej]:checked').attr('rel'),
+                    "Faktarubrik": "F-skattsedel",
+                    "FaktaValue": $('input[name=arr_fskattsedeljanej]:checked').val(),
+                });
+            };
+            if ($('input[name=arr_centrumbildningjanej]:checked').val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "0",
+                    "FaktaTypID": $('input[name=arr_centrumbildningjanej]:checked').attr('rel'),
+                    "Faktarubrik": "Medlem i centrumbildning",
+                    "FaktaValue": $('input[name=arr_centrumbildningjanej]:checked').val(),
+                });
+            };
+
             if (mediaExempledata.exempelitemlist) {
                 if (mediaExempledata.exempelitemlist.length >= 0) {
                     arrformjsondata.MediaList = mediaExempledata.exempelitemlist;
                 }
             };
-                           
-
-            //arrformjsondata.MediaList.MediaUrl = $('#arr_Exempelbild').val();
-            //arrformjsondata.MediaList.MediaFilename = $('#arr_antalmedverkande').val();
-            //arrformjsondata.MediaList.MediaSize = $('#arr_antalmedverkande').val();
-            //arrformjsondata.MediaList.MediaTyp= $('input[name=arr_ExempelTyp]:checked').val();
-    
-            //arrformjsondata.MediaList.mediaTitle = $('#arr_ExempelRubrik').val();
-            //arrformjsondata.MediaList.mediaBeskrivning = $('#arr_Exempelbeskrivning').val();
-            //arrformjsondata.MediaList.mediaLink= $('#arr_ExempelUrl').val();
-            var filen = $("#arr_presentationsbild").get(0).files;
+            
+            let filen = $("#arr_presentationsbild").get(0).files;
             arrformjsondata.MainImage.MediaUrl = filen[0].name;
             arrformjsondata.MainImage.MediaSize = $('#arr_sizefoto').val();
             arrformjsondata.MainImage.MediaAlt = $('#arr_altfoto').val();
             arrformjsondata.MainImage.MediaFoto = $('#arr_fotograf').val();
 
-            var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
+            let isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
             
             if (isbefintligutovare > 0) {
                 arrformjsondata.Utovare = isbefintligutovare;
@@ -362,14 +390,12 @@ module.exports = {
 
             callback(arrformjsondata);
 
-
         });
     },
-    tempuploadimage: function (cmd, nyttarrid, callback) {
+    tempuploadimage: function (cmd, files, nyttarrid, callback) {
        
                 var data = new FormData();
-
-                var files = $("#arr_presentationsbild").get(0).files;
+                       
                 data.append("cmd", cmd);
 
                 if (nyttarrid != "0") {
@@ -420,6 +446,42 @@ module.exports = {
                 alert("Nått blev fel vid uppdatering av parametrarna!");
             }
         });
-
     }
+    //,
+    //tempuploadpdf: function (cmd, nyttarrid, callback) {
+       
+    //    var data = new FormData();
+
+    //    var files = $('#arr_laromedel_file').get(0).files;
+    //    data.append("cmd", cmd);
+
+    //    if (nyttarrid != "0") {
+    //        data.append("arrid", nyttarrid);
+    //    };
+               
+    //    // Add the uploaded image content to the form data collection
+    //    if (files.length > 0) {
+    //        data.append("UploadedImage", files[0]);
+        
+    //        // Make Ajax request with the contentType = false, and procesDate = false
+
+    //        var ajaxRequest = $.ajax({
+    //            type: "POST",
+    //            url: _appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
+    //            contentType: false,
+    //            processData: false,
+    //            data: data
+    //        });
+
+    //        ajaxRequest.done(function (xhr, textStatus) {
+    //            var retfileurl = _appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
+    //            callback(retfileurl)
+    //        });
+       
+    //    } else {
+    //        callback("Nofile");
+    //    }
+        
+
+    //}
 };

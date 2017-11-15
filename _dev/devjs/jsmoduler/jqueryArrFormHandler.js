@@ -15,10 +15,10 @@ module.exports = {
 
             arrformValidator.arrShowforminputs("0");
 
-            var storage = Storages.localStorage
-            storage.set('foo', 'Detta funkar bra detta!');
-            var storage = Storages.localStorage
-            console.log("localstorage: " + storage.get('foo'))
+            //var storage = Storages.localStorage
+            //storage.set('foo', 'Detta funkar bra detta!');
+            //var storage = Storages.localStorage
+            //console.log("localstorage: " + storage.get('foo'))
 
             var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
             var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
@@ -246,18 +246,30 @@ module.exports = {
                        console.log(callback);
                        var arrjson = callback;
 
-                        arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
-                            console.log(callbackarrid);                            
-                            arrformjsonBuilder.tempuploadimage("uploadimg", callbackarrid, function (callback) {
-                                console.log("sista" + callback);
-                                alert("Uppgifterna är nu inskickade!");
-                                clearForm();
-                                tabnavigator(1);
-                                var jsondata = callback;
-                                return true;
-                            });
-                        });
-                                                
+                       arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
+                           console.log(callbackarrid);
+                           let bildfil = $("#arr_presentationsbild").get(0).files;
+                           arrformjsonBuilder.tempuploadimage("uploadimg", bildfil, callbackarrid, function (callback) {
+                               let arr_cvmedverkande = $('#arr_cvmedverkande_file').get(0).files;
+                               if (arr_cvmedverkande.length > 0) {
+                                   arrformjsonBuilder.tempuploadimage("uploadimg", arr_cvmedverkande, callbackarrid, function (callback) {
+
+                                       alert("Uppgifterna är nu inskickade!");
+                                       clearForm();
+                                       tabnavigator(1);
+                                       var jsondata = callback;
+                                       return true;
+                                   });
+                               } else {
+                                   alert("Uppgifterna är nu inskickade!");
+                                   clearForm();
+                                   tabnavigator(1);
+                                   var jsondata = callback;
+                                   return true;
+                               };
+                               
+                           });
+                       });
                     });
                     return false;
 
@@ -301,14 +313,27 @@ module.exports = {
 
             $('#kk_aj_laddatmpimg').on('click', function () {
                 var spinner = "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/public/ajax-loader.gif";
-                $('#kk_aj_tmpimg').attr('src', spinner);
-                arrformjsonBuilder.tempuploadimage("tmpimg","0", function (callback) {
+                let spinnerobj = $('#kk_aj_tmpimg');
+                spinnerobj.attr('src', spinner);
+                let files = $("#arr_presentationsbild").get(0).files;
+                arrformjsonBuilder.tempuploadimage("tmpimg",files,"0", function (callback) {
                     console.log(callback);
-                    $('#kk_aj_tmpimg').attr('src', callback);
+                    spinnerobj.attr('src', callback);
                 });
                 return false;
             });
 
+            //$('#kk_aj_arr_laromedel_fileupload').on('click', function () {
+            //    arrformjsonBuilder.tempuploadpdf("tmpimg", "0", function (callback) {
+            //        console.log(callback);
+            //        $('#arr_laromedel_file').attr('src', callback);
+            //    });
+            //    var filen = $("#arr_laromedel_file").get(0).files;
+            //    alert(filen[0].name);
+            //    return false;
+            //});
+
+           
             $('.kk_aj_befintlignotme').on('click', function () {
                 tidigareutovaredisable(false);
                 isnotme();
@@ -380,6 +405,7 @@ var tabnavigator = function (tab) {
         default:
             addarrtab_1.show();
     };
+    scrollup();
     changetabattr(tab)
 }
 var changetabattr = function (tab) {
@@ -494,3 +520,7 @@ var tidigareutovaredisable = function (dodisable) {
     }
     
 }
+let scrollup = function () {
+    $("html, body").animate({ scrollTop: 100 }, 500);
+    return false;
+};
