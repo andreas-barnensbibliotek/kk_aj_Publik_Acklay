@@ -38,7 +38,7 @@
 <!-- item loop START -->
 {{#faktatypvisas Faktalist 4}}
 <div class="artsidecontainer granska_Ekonomi_mainblock">
-	<h3>Ekononi</h3>  
+	<h3>Kostnad</h3>  
 	{{#each Faktalist}}	 
 		{{#ekonomityp Faktaid Faktarubrik FaktaValue}}		      
 		{{/ekonomityp}} 	      

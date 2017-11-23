@@ -222,8 +222,8 @@ var publiksearchEvents = function () {
 var searchformcollector = function () {
     var tmparrtypid = $('input[name=arr_radioValArrangemang]:checked').val();
     var tmpkonstartid = $('input[name=arr_radioValkontstform]:checked').val();
-    var tmpstartyear= $("#kk_aj_yearspan").attr("rel");
-    var tmpstopyear =$("#kk_aj_yearspan").attr("rev");
+    var tmpstartyear = $("#kk_aj_yearspan2").attr("rel");
+    var tmpstopyear = $("#kk_aj_yearspan2").attr("rev");
 
     searchdataContainer.arrtypid = "0";
     searchdataContainer.konstartid = "0";
@@ -249,8 +249,8 @@ var searchformcollector = function () {
 var resetsearchform = function () {
     $(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
     $(':checkbox, :radio').prop('checked', false);
-    $("#kk_aj_yearspan").attr("rel", "0");
-    $("#kk_aj_yearspan").attr("rev", "0");
+    $("#kk_aj_yearspan2").attr("rel", "0");
+    $("#kk_aj_yearspan2").attr("rev", "0");
     return false;
 }
 

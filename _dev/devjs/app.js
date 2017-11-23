@@ -3,6 +3,7 @@ var appsettingsobject = require("./jsmoduler/appSettings.js");
 var msg = require("./jsmoduler/main.js");
 var pagehandler = require("./jsmoduler/pageloadhandler.js");
 var publiksearch = require("./jsmoduler/publiksearch.js");
+var datepick = require("./jsmoduler/externaljs/datepicker.js");
 //var audioplayer = require("./jsmoduler/audioplayer.js")
 
 var appsetting = appsettingsobject.config;
@@ -57,16 +58,29 @@ $(function () {
     $("#kk_aj_slider-range").slider({
         range: true,
         min: 0,
-        max: 30,
-        values: [6, 12],
+        max: 19,
+        values: [0, 0],
         slide: function (event, ui) {
             $("#kk_aj_yearspan").html(ui.values[0] + unescape("%E5") + "r  - " + ui.values[1] + unescape("%E5") + "r");
-            $("#kk_aj_yearspan").attr("rel", ui.values[0]);
-            $("#kk_aj_yearspan").attr("rev",ui.values[1]);
+            //$("#kk_aj_yearspan").attr("rel", ui.values[0]);
+            //$("#kk_aj_yearspan").attr("rev",ui.values[1]);
+        }
+    });
+    $("#kk_aj_slider-range2").slider({
+        range: true,
+        min: 0,
+        max: 19,
+        values: [0, 19],
+        slide: function (event, ui) {
+            $("#kk_aj_yearspan2").html(ui.values[0] + unescape("%E5") + "r  - " + ui.values[1] + unescape("%E5") + "r");
+            $("#kk_aj_yearspan2").attr("rel", ui.values[0]);
+            $("#kk_aj_yearspan2").attr("rev", ui.values[1]);
         }
     });
     $("#kk_aj_yearspan").html($("#kk_aj_slider-range").slider("values", 0) +
        unescape("%E5") + "r -" + $("#kk_aj_slider-range").slider("values", 1) + unescape("%E5") + "r");
+    $("#kk_aj_yearspan2").html($("#kk_aj_slider-range2").slider("values", 0) +
+      unescape("%E5") + "r -" + $("#kk_aj_slider-range2").slider("values", 1) + unescape("%E5") + "r");
 
 
     // rangeslider för arrangemangformuläret för speltid
@@ -78,14 +92,19 @@ $(function () {
             kk_aj_speltidLabel.html($(this).slider("value") + "min");
         },
         range: "max",
-        min: 1,
+        min: 0,
         max: 180,
-        value: 10,
+        value: 0,
         slide: function (event, ui) {
             kk_aj_speltidLabel.html(ui.value + "min");
         }
     });
 
+    // datepicker arrangörsformuläret.
+    datepick.init();    
+    $('#arr_Premiardatum').fdatepicker(appsetting.datepicksetting);
+    $('#arr_Bokningsbar').fdatepicker(appsetting.datepicksetting);
+    
     //audioplayer.initaudioplayer();
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

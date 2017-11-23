@@ -11,8 +11,8 @@ var _exempellistobject = { "exempelitemlist": [] };
 module.exports = {
     start: function (tab) {
         var appsettings = appsettingsobject.config;
+        
         $(function () {
-
             arrformValidator.arrShowforminputs("0");
 
             //var storage = Storages.localStorage
@@ -25,6 +25,8 @@ module.exports = {
                        
             $('.ArrangemangtypBlock input').on('change', function () {
                 var vald = $('input[name=arr_radioValArrtyp]:checked', '.ArrangemangtypBlock').val();
+                $('small.error').hide();
+                $('.kontformBlock').removeClass("radioError");
                 arrformValidator.arrShowforminputs(vald);
                     arrformValidator.arrtypimg(vald);                    
                 });
@@ -295,7 +297,7 @@ module.exports = {
                 $(this).text(function (i, text) {
                     return text === "Lägg till exempel" ? "Avbryt lägg till exempel" : "Lägg till exempel";
                 })
-                
+                return false;
             });
             
             
@@ -303,7 +305,7 @@ module.exports = {
                 saveArrExempel();
                 $('.arrExempel').slideToggle("slow");
                 $('.kk_aj_btnnyttexemple').text("Lägg till exempel");
-                
+                return false;
             });
             $('body').on('click','.kk_aj_tabortexempel', function (e) {
                 var deletetitle = $(this).attr('rel');

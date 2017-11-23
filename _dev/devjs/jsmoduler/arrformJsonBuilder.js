@@ -44,7 +44,7 @@ var _arrjsondata ={
 module.exports = {
     getArrFormJsonData: function (mediaExempledata, callback) {
         
-        $(function () {
+       // $(function () {
 
             let arrformjsondata = _arrjsondata;
 
@@ -193,7 +193,7 @@ module.exports = {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
                     "FaktaTypID": formVenueRequiermentsId.attr('rel'),
-                    "Faktarubrik": "Övriga lokalkrav",
+                    "Faktarubrik": "Övrigt om lokal",
                     "FaktaValue": formVenueRequiermentsId.val(),
                 });
             };
@@ -239,9 +239,9 @@ module.exports = {
                     "Faktarubrik": "Föreställningar per dag",
                     "FaktaValue": formMaxShowsId.val(),
                 });
-            };
+            };        
             let kk_aj_speltid = $('#kk_aj_speltid');
-            if (kk_aj_speltid.val()) {
+            if (kk_aj_speltid.html()!="0min") {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "3",
                     "FaktaTypID": kk_aj_speltid.attr('rel'),
@@ -390,7 +390,7 @@ module.exports = {
 
             callback(arrformjsondata);
 
-        });
+        //});
     },
     tempuploadimage: function (cmd, files, nyttarrid, callback) {
        
@@ -446,42 +446,5 @@ module.exports = {
                 alert("Nått blev fel vid uppdatering av parametrarna!");
             }
         });
-    }
-    //,
-    //tempuploadpdf: function (cmd, nyttarrid, callback) {
-       
-    //    var data = new FormData();
-
-    //    var files = $('#arr_laromedel_file').get(0).files;
-    //    data.append("cmd", cmd);
-
-    //    if (nyttarrid != "0") {
-    //        data.append("arrid", nyttarrid);
-    //    };
-               
-    //    // Add the uploaded image content to the form data collection
-    //    if (files.length > 0) {
-    //        data.append("UploadedImage", files[0]);
-        
-    //        // Make Ajax request with the contentType = false, and procesDate = false
-
-    //        var ajaxRequest = $.ajax({
-    //            type: "POST",
-    //            url: _appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
-    //            contentType: false,
-    //            processData: false,
-    //            data: data
-    //        });
-
-    //        ajaxRequest.done(function (xhr, textStatus) {
-    //            var retfileurl = _appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
-    //            callback(retfileurl)
-    //        });
-       
-    //    } else {
-    //        callback("Nofile");
-    //    }
-        
-
-    //}
+    }    
 };

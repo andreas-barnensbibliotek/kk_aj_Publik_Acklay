@@ -28,7 +28,16 @@ window.kk_aj_publikAppsettings =
             currenttab: 0           
         },
         currentpage: "",
-        debug: "true" // true / false
+        datepicksetting : {
+            language: 'sv',
+            format: 'yyyy-mm-dd',
+            disableDblClickSelection: true,
+            leftArrow: '<<',
+            rightArrow: '>>',
+            closeIcon: 'X',
+            closeButton: true
+        },
+        debug: "false" // true / false
     };
 
 module.exports = {  

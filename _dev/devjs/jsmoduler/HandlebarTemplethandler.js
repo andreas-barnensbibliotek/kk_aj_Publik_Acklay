@@ -69,12 +69,24 @@ Handlebars.registerHelper('lokaltyp', function (Faktaid, Faktarubrik, FaktaValue
     return ret;
 });
 Handlebars.registerHelper('publiktyp', function (Faktaid, Faktarubrik, FaktaValue) {
-    var ret = "";
-    if (Faktaid === "3") {
+    let ret = "";
+    let age = false;
+    if (Faktarubrik == "Ålder lägst" && FaktaValue <= 0) {
+        age = true;
+    }
+    if (Faktarubrik == "Ålder högst" && FaktaValue <= 0) {
+        age = true;
+    }
+
+    if (Faktaid === "3"&& age == false) {
         ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
         ret += Faktarubrik
         ret += "</div><div class='small-12 medium-6 columns'>"
-        ret += FaktaValue + "</div></div>";
+        ret += FaktaValue;
+        if (!isNaN(FaktaValue)) {
+            ret += faktavalueextention(Faktarubrik);
+        };
+        ret += "</div></div>";
     }
     return ret;
 });
@@ -121,7 +133,13 @@ Handlebars.registerHelper('ovrigttyp', function (Faktaid, Faktarubrik, FaktaValu
 
 var faktavalueextention =function(typ){
    
-    switch(typ){
+    switch (typ) {
+        case "Ålder lägst":
+            return " år";
+            break;
+        case "Ålder högst":
+            return " år";
+            break;
         case "Takhöjd över scen":
             return " m";
             break;
@@ -137,10 +155,13 @@ var faktavalueextention =function(typ){
         case "Rivtid":
             return " min";
             break;
+        case "Speltid":
+            return " min";
+            break;
         case "Kostnad":
             return " kr";
             break;
         default:
-            return " min";
+            return "";
     }
 }
