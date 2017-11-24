@@ -24,21 +24,23 @@ module.exports = {
         var appsettings = appsettingsobject.config;
         jplists.init();
             
-        var initlist = function () {
-
-            arrdataservice("", searchdataContainer, function (data) {
-                handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-
-                    return(returtext)
-
-                });
-            });
-
-        }
+        
         initlist();
         
         publiksearchEvents()
     }
+}
+
+var initlist = function () {
+
+    arrdataservice("", searchdataContainer, function (data) {
+        handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
+
+            return (returtext)
+
+        });
+    });
+
 }
 
 var handlebartempletService = function(targetClass, usetemplateName, currentdata, callback){
@@ -56,12 +58,14 @@ var handlebartempletService = function(targetClass, usetemplateName, currentdata
             command: 'empty'
         });
 
-        $('#kk_aj_mainproductlistblock').jplist({
+        
+        $('#kk_aj_masterproductlistblock').jplist({
             itemsBox: ' #kk_aj_productlist ',
             itemPath: '.kk_aj_arritem',
             panelPath: '.jplist-panel',
             storage: 'localstorage',		
             storageName: 'KulturkatalogenStorage'
+            
         });
         callback(test);
     }, 'html');    
@@ -107,7 +111,7 @@ var arrdataservice = function (callTyp, searchdata, callback) {
 var publiksearchEvents = function () {
     var appsettings = appsettingsobject.config;
     $('.kk_aj_searchformbutton').on('click', function (e) {
-
+        resetfilterlist();
         var tempsearchformcollector = searchformcollector();
         
         arrdataservice("mainsearch", tempsearchformcollector, function (data) {
@@ -131,62 +135,28 @@ var publiksearchEvents = function () {
     });
     
     $('.kk_aj_searchRensaformbutton').on('click', function (e) {
+        initlist();
+        resetfilterlist();
         return resetsearchform();
     });
     $('#kk_aj_freetextSearch').keypress(function (event) {
         if (event.which === 13) {
+            resetfilterlist();
             event.preventDefault(); // Stop the default behaviour
             freesearch();
         }
     });
 
-    $('#kk_aj_btnfreetextSearch').on('click', function (e) {
+    $('#kk_aj_btnfreetextSearch').on('click', function (e) {        
+        resetfilterlist();
         freesearch();
         return false;
     });
 
-    $('input:radio').bind('click mousedown', (function () {
-        //Capture radio button status within its handler scope,
-        //so we do not use any global vars and every radio button keeps its own status.
-        //This required to uncheck them later.
-        //We need to store status separately as browser updates checked status before click handler called,
-        //so radio button will always be checked.
-        var isChecked;
-
-        return function (event) {
-            //console.log(event.type + ": " + this.checked);
-
-            if (event.type == 'click') {
-                //console.log(isChecked);
-
-                if (isChecked) {
-                    //Uncheck and update status
-                    isChecked = this.checked = false;
-                } else {
-                    //Update status
-                    //Browser will check the button by itself
-                    isChecked = true;
-
-                    //Do something else if radio button selected
-                    /*
-                    if(this.value == 'somevalue') {
-                        doSomething();
-                    } else {
-                        doSomethingElse();
-                    }
-                    */
-                }
-            } else {
-                //Get the right status before browser sets it
-                //We need to use onmousedown event here, as it is the only cross-browser compatible event for radio buttons
-                isChecked = this.checked;
-            }
-        }
-    })());
-
+    
     // AUTOCOMPLETE Freetextsearch
     $('body').on('keydown', '#kk_aj_freetextSearch', function (event) {
-
+       
         $(this).autocomplete({
             source: function (request, response) {
                 searchdata = searchdataContainer;
@@ -214,17 +184,62 @@ var publiksearchEvents = function () {
               .appendTo(ul);
         };
     });
+    $('#kk_aj_reset').on('click', function (e) {
+       
+        return false;
+    });
+    
+    $('.kontformBlock a').on('click', function (e) {
+        let obj = $(this);
+        if (obj.hasClass("vald")) {
+            obj.removeClass("vald");
+        } else {
+            $('.kontformBlock a').removeClass("vald");
+            obj.addClass("vald");
+        }       
 
+        return false;
+    })
+    $('.ArrangemangtypBlock a').on('click', function (e) {
+        let obj = $(this);
+        if (obj.hasClass("vald")) {
+            obj.removeClass("vald");
+        } else {
+            $('.ArrangemangtypBlock a').removeClass("vald");
+            obj.addClass("vald");
+        }
+
+        return false;
+    })
 }
-
+var resetfilterlist = function () {
+    $('#kk_aj_valdsokning').hide();
+    $('#kk_aj_masterproductlistblock').jplist({
+        command: 'empty'
+    });
+}
+var addvaldasokord = function (sokord) {
+    let ulobj = $('#kk_aj_valdsokord');
+    ulobj.append('<li class="removevaltsokord"><i class="fa fa-check-square-o" aria-hidden="true"></i> ' + sokord + '</li>');
+    return false;
+}
+$('#kk_aj_valdsokord').on('click', 'li', function (e) {   
+    $(this).remove();
+});
 
 //HELPER
 var searchformcollector = function () {
-    var tmparrtypid = $('input[name=arr_radioValArrangemang]:checked').val();
-    var tmpkonstartid = $('input[name=arr_radioValkontstform]:checked').val();
-    var tmpstartyear = $("#kk_aj_yearspan2").attr("rel");
-    var tmpstopyear = $("#kk_aj_yearspan2").attr("rev");
+    $('#kk_aj_valdsokord').html("");
+    $('#kk_aj_valdsokning').show();
+    let ArrangemangtypBlock =$('.ArrangemangtypBlock a.vald');
+    let kontformBlock = $('.kontformBlock a.vald');
 
+    let tmparrtypid = ArrangemangtypBlock.attr("rel");
+    let tmpkonstartid = kontformBlock.attr("rel");
+    let tmpstartyear = $("#kk_aj_yearspan2").attr("rel");
+    let tmpstopyear = $("#kk_aj_yearspan2").attr("rev");
+
+           
     searchdataContainer.arrtypid = "0";
     searchdataContainer.konstartid = "0";
     searchdataContainer.startyear = "0";
@@ -232,23 +247,29 @@ var searchformcollector = function () {
 
     if (tmparrtypid !== undefined) {
         searchdataContainer.arrtypid = tmparrtypid;
+        addvaldasokord(ArrangemangtypBlock.html());
     }
     if (tmpkonstartid !== undefined) {
         searchdataContainer.konstartid = tmpkonstartid;
+        addvaldasokord(kontformBlock.html());
     }
     if (tmpstartyear !== undefined) {
-        searchdataContainer.startyear = tmpstartyear;
+        searchdataContainer.startyear = tmpstartyear;        
     }
     if (tmpstopyear !== undefined) {
-        searchdataContainer.stopyear = tmpstopyear;
+        searchdataContainer.stopyear = tmpstopyear;        
     }
-
+    if (tmpstartyear != 0 && tmpstopyear != 0) {
+        addvaldasokord("Ålder: " + tmpstartyear + "-" + tmpstopyear);
+    }
+   
     return searchdataContainer;    
 }
 
 var resetsearchform = function () {
-    $(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
-    $(':checkbox, :radio').prop('checked', false);
+    //$(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+    //$(':checkbox, :radio').prop('checked', false);
+    $('.kk_aj_mainsearchblock a').removeClass("vald");
     $("#kk_aj_yearspan2").attr("rel", "0");
     $("#kk_aj_yearspan2").attr("rev", "0");
     return false;

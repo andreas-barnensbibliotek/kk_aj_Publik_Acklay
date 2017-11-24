@@ -10,6 +10,22 @@
         padding-right: 0.1rem;
     }
 }
+
+.jplist-select_Stilmall {        
+                padding: 4px;
+                font-size: 14px;
+                line-height: 1;
+                border: 1px;
+                border-radius: 5px;
+                border-color:#e6e6e6;
+                border-style:solid;
+                height: 30px;
+                background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #f8f8f8;
+                -webkit-appearance: none;
+                background-position-x: 95%;
+            }
+
+
 .kk_aj_mainFreetextSearchblock{
    
     .kk_aj_searchHeader{
@@ -89,7 +105,7 @@
                     li{
                         .button{
                             width:94%;
-                            padding:.8rem;
+                            padding:.6rem;
                         }
                     }
                 }
@@ -182,16 +198,50 @@
                font-weight: bold;
             }
         }
+        .jplist-drop-down {                        
+                font-size: 14px;
+                line-height: 1;
+                border: 1px;
+                border-radius: 5px;
+                border-color:#e6e6e6;
+                border-style:solid;
+                height: 30px;               
+            }
+        .jplist-select {        
+               @extend .jplist-select_Stilmall;
+               margin:0px;
+               padding:0px;
+            }
     }
     .kk_aj_mainproductlistblock{
+        
         .kk_aj_filterblock{
             margin-bottom: 1rem;
+            padding-right:2.5rem!important;
             /* START Filter tillvänster --------------------*/
-            .jplist-range-slider{width:190px;}
+            .spellangdblock{
+                h4{
+                    margin-top:1rem;
+                    margin-bottom:.1rem;
+                }
+                .jplist-range-slider{
+                    width:160px;
+                    margin-top:0px;
+                    margin-left:.5rem;
+                    .value{
+                        margin:0px;
+                        margin-top:.5rem;
+                    }
+                }
+            }
             .kk_aj_searchfilterblock{margin-left:.5rem;}
            
             /* STOPP Filter tillvänster -------------------*/
             .resetbox{margin-top: 1rem;}
+            .jplist-select {        
+               @extend .jplist-select_Stilmall;
+            }
+
         }
         .like{display: none;
         }
@@ -201,6 +251,7 @@
         .kk_aj_productlistblock{
             
             .kk_aj_productlist{
+                #kk_aj_filtervalues{display:none;}
                 .kk_aj_arritem{
                     border:1px solid transparent;
                     border-top:1px solid $smoke; 
@@ -302,8 +353,8 @@
                 padding-bottom:1rem;
                 .jplist-panel {
                      display: table;
-                       margin: 0 auto;
-                       }
+                     margin: 0 auto;
+                }
             }
         }
         /*STOPP Produktlistningen sökresultat ----------*/ 
@@ -343,6 +394,10 @@
     text-align:center;
 }
 .valbaraRadiobuttons{
+    .vald{
+            color:$white!important;
+            background:$orange!important;
+        }
     label{
         & > input{
             visibility: hidden; /* Makes input not-clickable */
@@ -362,6 +417,9 @@
         }
     }
 }
+
+
+
 .jplist-panel{
 
     .jplist-pagination{
@@ -392,3 +450,18 @@
         }
     } 
 }
+#kk_aj_valdsokning{
+    ul{        
+        font-size: 0.8rem;
+    }
+    #kk_aj_valdsokord{
+        margin-left:0px;
+        list-style: none;
+        li{
+            float:left;
+            margin-right:1rem;   
+        }
+    }
+} 
+ 
+

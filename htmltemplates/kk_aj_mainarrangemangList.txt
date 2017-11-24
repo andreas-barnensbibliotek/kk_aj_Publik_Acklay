@@ -1,6 +1,8 @@
 ﻿<!-- item loop START -->
 {{#each kk_aj_admin.ansokningarlista.ansokningar}}
-	<div class="row kk_aj_arritem konstform_{{ansokningkonstformid}}" rel="{{ansokningdate}}">
+{{#if ansokningid}}
+
+	<div class="row kk_aj_arritem S_AR_{{ansokningtypid}} S_KF_{{ansokningkonstformid}}" rel="{{ansokningdate}}" >
 		<div class="small-3 columns kk_aj_arr_item_thumbnail">
 			<div class="row kk_aj_arr_item_thumbnail_color">
 				<div class="small-12">
@@ -33,10 +35,14 @@
 			</div>
 			<div class="row">
 				<div class="kk_aj_arr_item_Utovare small-4 columns" rel="{{ansokningUtovarid}}"><h4>{{ansokningutovare}}</h4></div>
-				<div class="kk_aj_arr_item_konstform small-4 columns"><h4>{{ansokningkonstform}}</h4></div>
-				<div class="kk_aj_arr_item_age small-4 columns age"><h4>Ålder {{ansokningAgespan}} år</h4></div>				
+				<div class="kk_aj_arr_item_konstform small-4 columns"><h4>{{ansokningkonstform}}</h4></div>							
+				<div class="kk_aj_arr_item_age small-4 columns age"><h4>Ålder {{ansokningAgespan}} år</h4></div>								
 			</div>
+			<div id="kk_aj_filtervalues" class="S_BB_p{{ansokningFilterfakta.Bokningsbar}} S_ML_{{ansokningFilterfakta.Morklaggning}} S_TH_{{ansokningFilterfakta.Takhojd}} S_ST">{{ansokningFilterfakta.Speltid}}</div>
 		</div>
 	</div>
+	
+{{else}}
+	{{/if}}
 {{/each}}
 <!-- item loop STOP -->
