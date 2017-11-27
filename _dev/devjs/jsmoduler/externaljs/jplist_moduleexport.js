@@ -686,6 +686,10 @@ module.exports = {
             }; jQuery.fn.jplist.controls.RangeSliderToggleFilter = function (a) { return new d(a) }; jQuery.fn.jplist.controlTypes["range-filter"] = { className: "RangeSliderToggleFilter", options: {} }
         })();
 
+
+
+
+
         jQuery.fn.jplist.settings = {
            
             /**

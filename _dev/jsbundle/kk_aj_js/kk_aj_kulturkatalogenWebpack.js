@@ -230,22 +230,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://kulturkatalog.kivdev.se",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://kulturkatalog.kivdev.se",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -12577,6 +12577,7 @@
 	    }
 	}
 
+
 	var initlist = function () {
 
 	    arrdataservice("", searchdataContainer, function (data) {
@@ -12594,28 +12595,66 @@
 	    var appsetting = appsettingsobject.config;
 
 	    var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
-
+	   
 	    $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
-	        var temptpl = Handlebars.compile(data);           
-	        var test = "ska funka";            
-	        $('#kk_aj_productlist').html(temptpl(currentdata)).hide().slideDown(2000);            
+
+	        var fu = function (datat,currdata, callback) {
+
+	            var temptpl = Handlebars.compile(datat);
+	            var test = "ska funka";
+	            $('#kk_aj_productlist').html(temptpl(currdata)).hide().slideDown(2000);
+	            callback();
+	        }
 	            
-	        $('#kk_aj_mainproductlistblock').jplist({
-	            command: 'empty'
-	        });
+	            fu(data,currentdata,function(){
+	                $('#kk_aj_mainproductlistblock').jplist({
+	                    command: 'empty'
+	                });  
 
 	        
-	        $('#kk_aj_masterproductlistblock').jplist({
-	            itemsBox: ' #kk_aj_productlist ',
-	            itemPath: '.kk_aj_arritem',
-	            panelPath: '.jplist-panel',
-	            storage: 'localstorage',		
-	            storageName: 'KulturkatalogenStorage'
+	                $('#kk_aj_masterproductlistblock').jplist({            
+	                    itemsBox: ' #kk_aj_productlist ',
+	                    itemPath: '.kk_aj_arritem',
+	                    panelPath: '.jplist-panel',
+	                    storage: 'localstorage',		
+	                    storageName: 'KulturkatalogenStorage'
 	            
-	        });
-	        callback(test);
+	                });
+	                
+
+	            })
+
+	        
 	    }, 'html');    
 	}
+
+	//var handlebartempletService = function (targetClass, usetemplateName, currentdata, callback) {
+
+	//    var appsetting = appsettingsobject.config;
+
+	//    var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
+
+	//    $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
+	//        var temptpl = Handlebars.compile(data);
+	//        var test = "ska funka";
+	//        $('#kk_aj_productlist').html(temptpl(currentdata)).hide().slideDown(2000);
+
+	//        $('#kk_aj_mainproductlistblock').jplist({
+	//            command: 'empty'
+	//        });
+
+
+	//        $('#kk_aj_masterproductlistblock').jplist({
+	//            itemsBox: ' #kk_aj_productlist ',
+	//            itemPath: '.kk_aj_arritem',
+	//            panelPath: '.jplist-panel',
+	//            storage: 'localstorage',
+	//            storageName: 'KulturkatalogenStorage'
+
+	//        });
+	//        callback(test);
+	//    }, 'html');
+	//}
 
 
 	var arrdataservice = function (callTyp, searchdata, callback) {
@@ -12656,13 +12695,19 @@
 	// EVENTS
 	var publiksearchEvents = function () {
 	    var appsettings = appsettingsobject.config;
+
+
 	    $('.kk_aj_searchformbutton').on('click', function (e) {
 	        resetfilterlist();
+
 	        var tempsearchformcollector = searchformcollector();
-	        
+
 	        arrdataservice("mainsearch", tempsearchformcollector, function (data) {
+
 	            handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
 	                //scrolla till resultatlistan
+
+
 	                $('html, body').animate({
 	                    scrollTop: $(".kk_aj_searchbuttonblock").offset().top
 	                }, 500);
@@ -12673,6 +12718,28 @@
 
 	        return false;
 	    });
+
+	    //$('.kk_aj_searchformbutton').on('click', function (e) {
+	    //   resetfilterlist();
+	       
+	    //    var tempsearchformcollector = searchformcollector();
+	        
+	    //    arrdataservice("mainsearch", tempsearchformcollector, function (data) {
+	           
+	    //        handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
+	    //            //scrolla till resultatlistan
+	               
+	                
+	    //            $('html, body').animate({
+	    //                scrollTop: $(".kk_aj_searchbuttonblock").offset().top
+	    //            }, 500);
+	    //            return false;
+
+	    //        });
+	    //    });
+
+	    //    return false;
+	    //});
 	    $('.jplist-pagination').on('click', '> *', function (e) {
 	        var searchbox = $(".kk_aj_searchbuttonblock").offset().top;
 	        $('html, body').animate({
@@ -12687,15 +12754,17 @@
 	    });
 	    $('#kk_aj_freetextSearch').keypress(function (event) {
 	        if (event.which === 13) {
+	            freesearch();
 	            resetfilterlist();
 	            event.preventDefault(); // Stop the default behaviour
-	            freesearch();
+	            
 	        }
 	    });
 
 	    $('#kk_aj_btnfreetextSearch').on('click', function (e) {        
-	        resetfilterlist();
 	        freesearch();
+	        resetfilterlist();
+	        
 	        return false;
 	    });
 
@@ -12762,7 +12831,8 @@
 	    $('#kk_aj_valdsokning').hide();
 	    $('#kk_aj_masterproductlistblock').jplist({
 	        command: 'empty'
-	    });
+	    });   
+	   
 	}
 	var addvaldasokord = function (sokord) {
 	    let ulobj = $('#kk_aj_valdsokord');
@@ -32248,6 +32318,10 @@
 	                a); (this.params.selected = a.data.selected) ? this.$control.addClass("jplist-selected") : this.$control.removeClass("jplist-selected")
 	            }; jQuery.fn.jplist.controls.RangeSliderToggleFilter = function (a) { return new d(a) }; jQuery.fn.jplist.controlTypes["range-filter"] = { className: "RangeSliderToggleFilter", options: {} }
 	        })();
+
+
+
+
 
 	        jQuery.fn.jplist.settings = {
 	           
