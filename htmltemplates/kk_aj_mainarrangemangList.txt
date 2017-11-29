@@ -13,7 +13,7 @@
 			</div>
 			<div class="row">
 				<div class="small-12">
-					<a href="#" class="kk_aj_arr_item_minneslista " title="Lägg till i minneslistan" rel="{{ansokningid}}"><i class="fa fa-plus-square"></i> Minneslista</a>
+					<a href="#" class="kk_aj_arr_item_minneslista {{ansokningstatus}}" title="Lägg till i minneslistan" rel="{{ansokningid}}">{{#inMemList ansokningstatus}}{{/inMemList}} Minneslista</a>
                 </div>
 			</div>
 		</div>

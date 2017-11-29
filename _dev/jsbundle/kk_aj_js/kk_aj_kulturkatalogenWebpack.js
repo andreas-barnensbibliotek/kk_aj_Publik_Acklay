@@ -49,7 +49,7 @@
 	var msg = __webpack_require__(2);
 	var pagehandler = __webpack_require__(3);
 	var publiksearch = __webpack_require__(12);
-	var datepick = __webpack_require__(16);
+	var datepick = __webpack_require__(17);
 	//var audioplayer = require("./jsmoduler/audioplayer.js")
 
 	var appsetting = appsettingsobject.config;
@@ -230,22 +230,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            apiserver: "http://localhost:60485",
-	            dnnURL: "http://dnndev.me",           
-	            localOrServerURL: "http://localhost:60485/Api_v2",
-	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://localhost:60485",
+	            //dnnURL: "http://dnndev.me",           
+	            //localOrServerURL: "http://localhost:60485/Api_v2",
+	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            //dnnURL: "http://kulturkatalog.kivdev.se",
-	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            dnnURL: "http://kulturkatalog.kivdev.se",
+	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -294,7 +294,7 @@
 	var appsettings = __webpack_require__(1);
 	var arrformhandler = __webpack_require__(5);
 	var arrsearchhandler = __webpack_require__(12);
-	var arrDetailvyHandler =__webpack_require__(15)
+	var arrDetailvyHandler =__webpack_require__(16)
 	module.exports = {    
 	    pageloader: function (pagetoload, val) {
 	       
@@ -11733,6 +11733,16 @@
 	    return ret;
 	});
 
+	Handlebars.registerHelper('inMemList', function (ansokningstatus) {
+	    var ret = '<i class="fa fa-plus-square"></i>';
+	    if (ansokningstatus) {
+	        ret = '<i class="fa fa-check-square-o"></i>';
+	    }
+
+	    return ret;
+	});
+
+
 	var faktavalueextention =function(typ){
 	   
 	    switch (typ) {
@@ -12548,6 +12558,7 @@
 	__webpack_require__(13);
 	var jplists = __webpack_require__(14);
 	var handlebarTemplethandler = __webpack_require__(7);
+	var minneslistaHandler = __webpack_require__(15);
 
 	var appsettingsobject = __webpack_require__(1);
 
@@ -12560,102 +12571,89 @@
 		"startyear": "",
 		"stopyear": ""	
 	}
+	// använder : https://github.com/julien-maurel/js-storage
+	var storage = Storages.localStorage;
+	var session = Storages.sessionStorage
+	 module.exports = {
+	     search: function () {
+	         //var appsettings = appsettingsobject.config;       
+	     },
+	     init: function (val) {
+	       
+	         var appsettings = appsettingsobject.config;
+	         jplists.init();
+	         
+	         if (isSessionSet()) {            
+	             var currdata = storage.get('currentdata');
+	             if (currdata) {
+	                 handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", currdata, function (returtext) {
+	                    
+	                     return (returtext)
+	                 });
+	             } else {
+	                 initlist();
+	             };
+	         } else {
+	             storage.removeAll()
+	             initlist();
+	         };
 
-
-	module.exports = {
-	    search: function () {
-	        //var appsettings = appsettingsobject.config;       
-	    },
-	    init: function (val) {
-	        var appsettings = appsettingsobject.config;
-	        jplists.init();
-	            
-	        
-	        initlist();
-	        
-	        publiksearchEvents()
-	    }
-	}
+	         minneslistaHandler.counter();
+	         publiksearchEvents()
+	     }
+	 };
 
 
 	var initlist = function () {
 
 	    arrdataservice("", searchdataContainer, function (data) {
+	        SetSession();
 	        handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-
+	           
 	            return (returtext)
 
 	        });
 	    });
 
-	}
+	};
 
 	var handlebartempletService = function(targetClass, usetemplateName, currentdata, callback){
-	    
-	    var appsetting = appsettingsobject.config;
-
-	    var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
 	   
+	    var appsetting = appsettingsobject.config;
+	         
 	    $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
 
 	        var fu = function (datat,currdata, callback) {
-
+	            
+	            currdata = localstorageHandler(currdata);
+	            if (minneslistaHandler.getminneslistan()) {
+	                currdata = minneslistaHandler.inlist(currdata);
+	            };
+	           
 	            var temptpl = Handlebars.compile(datat);
-	            var test = "ska funka";
 	            $('#kk_aj_productlist').html(temptpl(currdata)).hide().slideDown(2000);
+	           
 	            callback();
 	        }
 	            
-	            fu(data,currentdata,function(){
-	                $('#kk_aj_mainproductlistblock').jplist({
-	                    command: 'empty'
-	                });  
+	        fu(data, currentdata, function () {
+	            $('#kk_aj_mainproductlistblock').jplist({
+	                command: 'empty'
+	            });
 
+	            $('#kk_aj_masterproductlistblock').jplist({
+	                itemsBox: ' #kk_aj_productlist ',
+	                itemPath: '.kk_aj_arritem',
+	                panelPath: '.jplist-panel',
+	                storage: 'localstorage',
+	                storageName: 'KulturkatalogenStorage'
+	            });
+
+	        });
 	        
-	                $('#kk_aj_masterproductlistblock').jplist({            
-	                    itemsBox: ' #kk_aj_productlist ',
-	                    itemPath: '.kk_aj_arritem',
-	                    panelPath: '.jplist-panel',
-	                    storage: 'localstorage',		
-	                    storageName: 'KulturkatalogenStorage'
-	            
-	                });
-	                
-
-	            })
-
-	        
-	    }, 'html');    
+	    }, 'html');
+	   
 	}
-
-	//var handlebartempletService = function (targetClass, usetemplateName, currentdata, callback) {
-
-	//    var appsetting = appsettingsobject.config;
-
-	//    var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
-
-	//    $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
-	//        var temptpl = Handlebars.compile(data);
-	//        var test = "ska funka";
-	//        $('#kk_aj_productlist').html(temptpl(currentdata)).hide().slideDown(2000);
-
-	//        $('#kk_aj_mainproductlistblock').jplist({
-	//            command: 'empty'
-	//        });
-
-
-	//        $('#kk_aj_masterproductlistblock').jplist({
-	//            itemsBox: ' #kk_aj_productlist ',
-	//            itemPath: '.kk_aj_arritem',
-	//            panelPath: '.jplist-panel',
-	//            storage: 'localstorage',
-	//            storageName: 'KulturkatalogenStorage'
-
-	//        });
-	//        callback(test);
-	//    }, 'html');
-	//}
-
 
 	var arrdataservice = function (callTyp, searchdata, callback) {
 	    var appsettings = appsettingsobject.config;
@@ -12719,27 +12717,6 @@
 	        return false;
 	    });
 
-	    //$('.kk_aj_searchformbutton').on('click', function (e) {
-	    //   resetfilterlist();
-	       
-	    //    var tempsearchformcollector = searchformcollector();
-	        
-	    //    arrdataservice("mainsearch", tempsearchformcollector, function (data) {
-	           
-	    //        handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-	    //            //scrolla till resultatlistan
-	               
-	                
-	    //            $('html, body').animate({
-	    //                scrollTop: $(".kk_aj_searchbuttonblock").offset().top
-	    //            }, 500);
-	    //            return false;
-
-	    //        });
-	    //    });
-
-	    //    return false;
-	    //});
 	    $('.jplist-pagination').on('click', '> *', function (e) {
 	        var searchbox = $(".kk_aj_searchbuttonblock").offset().top;
 	        $('html, body').animate({
@@ -12767,8 +12744,35 @@
 	        
 	        return false;
 	    });
-
+	    ///MINNESLISTAN
+	    $('body').on('click', '#kk_aj_cmd_minneslistan', function (e) {
+	        resetfilterlist();
+	        let minneslistaData = minneslistaHandler.getminneslistan();
+	        if (minneslistaData) {
+	            handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", minneslistaData, function (returtext) {
+	                               
+	                return false;
+	            });
+	        };
+	        return false;
+	    });
 	    
+
+	    $('body').on('click','.kk_aj_arr_item_minneslista', function (e) {
+	        var arrid = $(this).attr("rel");
+	        if(!$(this).hasClass("inminneslist")){
+	            minneslistaHandler.addto(arrid);
+	            $(this).addClass("inminneslist");
+	        }
+	        return false;
+	    });
+	    $('body').on('click','.inminneslist', function (e) {
+	        var arrid = $(this).attr("rel");
+	        minneslistaHandler.removefrom(arrid);
+	        $(this).removeClass("inminneslist");
+	        return false;
+	    });
+
 	    // AUTOCOMPLETE Freetextsearch
 	    $('body').on('keydown', '#kk_aj_freetextSearch', function (event) {
 	       
@@ -12915,6 +12919,35 @@
 	        });
 	    };
 	}
+
+
+
+	// LOCALSTORAGE
+	// används för att rätt listningar skall visas om användaren öppnar sidan för förstagången = alla arr annars senaste sökningen och
+	// om användaren går till detalj skall senaste sökningen visas.
+
+	var SetSession = function () {
+	    session.set("Session", "true");
+	}
+	var isSessionSet = function () {
+
+	    if (session.get("Session")) {
+	        return true;
+	    }
+
+	    return false;
+	}
+
+	var localstorageHandler = function (stdata) {
+
+	    if (stdata) {
+	        storage.set('currentdata', stdata);
+	    } else {
+	        stdata = storage.get('currentdata');
+	    }
+	    return stdata;
+	};
+
 
 /***/ }),
 /* 13 */
@@ -32357,6 +32390,113 @@
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	var $ = __webpack_require__(4);
+	var appsettingsobject = __webpack_require__(1);
+
+	var storage = Storages.localStorage;
+	module.exports = {
+	    getminneslistan: function () {
+	       return storage.get('minneslistan');
+	    },
+	    addto: function (id) {
+	        if (id) {
+	            let currentdata = storage.get('currentdata');
+	            return getItemTromCurrentlist(currentdata, id, "add");
+	        }
+	        return false;
+	    },
+	    removefrom: function (id) {
+	        if (id) {
+	            let currentdata = storage.get('minneslistan');
+	            return getItemTromCurrentlist(currentdata, id, "del");
+	        }
+	        return false;
+	    },
+	    counter: function () {
+	        let obj = storage.get('minneslistan');
+	        if (obj) {
+	            $('.cmd_minneslistan').html("(" + obj.kk_aj_admin.ansokningarlista.ansokningarcount + ")");
+	        };
+	    },
+	    inlist: function (curdatat) {
+	       return getinlist(curdatat);
+	    }
+	};
+	var getinlist = function (curdata) {
+	    let datat = storage.get('minneslistan');
+	    let obj = curdata.kk_aj_admin.ansokningarlista.ansokningar;
+	    for (var i = 0; i < obj.length; i++) {
+	        
+	        if (checkifinlist(obj[i].ansokningid, datat)) {
+	            obj[i].ansokningstatus = "inminneslist"
+	        } else {
+	            obj[i].ansokningstatus = ""
+	        };  
+	    };
+	    curdata.kk_aj_admin.ansokningarlista.ansokningar = obj;
+	    return curdata;
+	};
+
+	var checkifinlist = function (arrid, storeddata) {
+	    var ret = false;
+	    let obj = storeddata.kk_aj_admin.ansokningarlista.ansokningar
+	    for (var i = 0; i < obj.length; i++) {
+	        if (obj[i].ansokningid == arrid) {
+	            ret = true;
+	            break;
+	        }
+	    }
+	    return ret;
+	}
+
+	var getItemTromCurrentlist = function (datat, arrid, cmd) {
+	    var obj = datat.kk_aj_admin.ansokningarlista.ansokningar;
+	    // iterate over each element in the array
+	    for (var i = 0; i < obj.length; i++) {
+	        // look for the entry with a matching `code` value
+	        if (cmd == "add") {
+	            if (obj[i].ansokningid == arrid) {
+	                minneslistanobj.kk_aj_admin.ansokningarlista.ansokningar.push(obj[i]);
+	                break;
+	            }
+	        };
+
+	        if (cmd == "del") {
+	            if (obj[i].ansokningid == arrid) {
+	                minneslistanobj.kk_aj_admin.ansokningarlista.ansokningar.splice(i, 1);
+	                break;
+	            }
+	        };        
+	    };
+	    var antal = minneslistanobj.kk_aj_admin.ansokningarlista.ansokningar.length;
+	    minneslistanobj.kk_aj_admin.ansokningarlista.ansokningarcount = antal;
+	    $('.cmd_minneslistan').html("(" + antal + ")");
+	    
+	    storage.set('minneslistan', minneslistanobj);
+	};
+
+	var minneslistanobj =
+	    {
+	        "kk_aj_admin": {
+	            "Ansokningstyp": "0",
+	            "ansokningarlista": {
+	                "ansokningarcount": "0",
+	                "ansokningar": []
+	            },
+	            "Ansokningarlistacount": 0,
+	            "Ansokningarlistacurrentpage": 0,
+	            "Ansokningarlistatotalpages": 0,
+	            "nyaansokningarcount": 0,
+	            "approvedansokningarcount": 0,
+	            "deniedansokningarcount": 0,
+	            "status": "Minneslista"
+	        }
+	    };
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
 	var appsettingsobject = __webpack_require__(1);
@@ -32560,7 +32700,7 @@
 	}
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(4);

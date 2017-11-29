@@ -131,6 +131,16 @@ Handlebars.registerHelper('ovrigttyp', function (Faktaid, Faktarubrik, FaktaValu
     return ret;
 });
 
+Handlebars.registerHelper('inMemList', function (ansokningstatus) {
+    var ret = '<i class="fa fa-plus-square"></i>';
+    if (ansokningstatus) {
+        ret = '<i class="fa fa-check-square-o"></i>';
+    }
+
+    return ret;
+});
+
+
 var faktavalueextention =function(typ){
    
     switch (typ) {

@@ -2,6 +2,7 @@
 require('jquery-ui-dist/jquery-ui.js');
 var jplists = require("./externaljs/jplist_moduleexport.js");
 var handlebarTemplethandler = require("./HandlebarTemplethandler.js");
+var minneslistaHandler = require("./minneslistaHandler.js");
 
 var appsettingsobject = require("./appSettings.js");
 
@@ -14,102 +15,89 @@ var searchdataContainer = {
 	"startyear": "",
 	"stopyear": ""	
 }
+// använder : https://github.com/julien-maurel/js-storage
+var storage = Storages.localStorage;
+var session = Storages.sessionStorage
+ module.exports = {
+     search: function () {
+         //var appsettings = appsettingsobject.config;       
+     },
+     init: function (val) {
+       
+         var appsettings = appsettingsobject.config;
+         jplists.init();
+         
+         if (isSessionSet()) {            
+             var currdata = storage.get('currentdata');
+             if (currdata) {
+                 handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", currdata, function (returtext) {
+                    
+                     return (returtext)
+                 });
+             } else {
+                 initlist();
+             };
+         } else {
+             storage.removeAll()
+             initlist();
+         };
 
-
-module.exports = {
-    search: function () {
-        //var appsettings = appsettingsobject.config;       
-    },
-    init: function (val) {
-        var appsettings = appsettingsobject.config;
-        jplists.init();
-            
-        
-        initlist();
-        
-        publiksearchEvents()
-    }
-}
+         minneslistaHandler.counter();
+         publiksearchEvents()
+     }
+ };
 
 
 var initlist = function () {
 
     arrdataservice("", searchdataContainer, function (data) {
+        SetSession();
         handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-
+           
             return (returtext)
 
         });
     });
 
-}
+};
 
 var handlebartempletService = function(targetClass, usetemplateName, currentdata, callback){
-    
-    var appsetting = appsettingsobject.config;
-
-    var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
    
+    var appsetting = appsettingsobject.config;
+         
     $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
 
         var fu = function (datat,currdata, callback) {
-
+            
+            currdata = localstorageHandler(currdata);
+            if (minneslistaHandler.getminneslistan()) {
+                currdata = minneslistaHandler.inlist(currdata);
+            };
+           
             var temptpl = Handlebars.compile(datat);
-            var test = "ska funka";
             $('#kk_aj_productlist').html(temptpl(currdata)).hide().slideDown(2000);
+           
             callback();
         }
             
-            fu(data,currentdata,function(){
-                $('#kk_aj_mainproductlistblock').jplist({
-                    command: 'empty'
-                });  
+        fu(data, currentdata, function () {
+            $('#kk_aj_mainproductlistblock').jplist({
+                command: 'empty'
+            });
 
+            $('#kk_aj_masterproductlistblock').jplist({
+                itemsBox: ' #kk_aj_productlist ',
+                itemPath: '.kk_aj_arritem',
+                panelPath: '.jplist-panel',
+                storage: 'localstorage',
+                storageName: 'KulturkatalogenStorage'
+            });
+
+        });
         
-                $('#kk_aj_masterproductlistblock').jplist({            
-                    itemsBox: ' #kk_aj_productlist ',
-                    itemPath: '.kk_aj_arritem',
-                    panelPath: '.jplist-panel',
-                    storage: 'localstorage',		
-                    storageName: 'KulturkatalogenStorage'
-            
-                });
-                
-
-            })
-
-        
-    }, 'html');    
+    }, 'html');
+   
 }
-
-//var handlebartempletService = function (targetClass, usetemplateName, currentdata, callback) {
-
-//    var appsetting = appsettingsobject.config;
-
-//    var test = appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName;
-
-//    $.get(appsettingsobject.config.globalconfig.htmltemplateURL + "/" + usetemplateName, function (data) {
-//        var temptpl = Handlebars.compile(data);
-//        var test = "ska funka";
-//        $('#kk_aj_productlist').html(temptpl(currentdata)).hide().slideDown(2000);
-
-//        $('#kk_aj_mainproductlistblock').jplist({
-//            command: 'empty'
-//        });
-
-
-//        $('#kk_aj_masterproductlistblock').jplist({
-//            itemsBox: ' #kk_aj_productlist ',
-//            itemPath: '.kk_aj_arritem',
-//            panelPath: '.jplist-panel',
-//            storage: 'localstorage',
-//            storageName: 'KulturkatalogenStorage'
-
-//        });
-//        callback(test);
-//    }, 'html');
-//}
-
 
 var arrdataservice = function (callTyp, searchdata, callback) {
     var appsettings = appsettingsobject.config;
@@ -173,27 +161,6 @@ var publiksearchEvents = function () {
         return false;
     });
 
-    //$('.kk_aj_searchformbutton').on('click', function (e) {
-    //   resetfilterlist();
-       
-    //    var tempsearchformcollector = searchformcollector();
-        
-    //    arrdataservice("mainsearch", tempsearchformcollector, function (data) {
-           
-    //        handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-    //            //scrolla till resultatlistan
-               
-                
-    //            $('html, body').animate({
-    //                scrollTop: $(".kk_aj_searchbuttonblock").offset().top
-    //            }, 500);
-    //            return false;
-
-    //        });
-    //    });
-
-    //    return false;
-    //});
     $('.jplist-pagination').on('click', '> *', function (e) {
         var searchbox = $(".kk_aj_searchbuttonblock").offset().top;
         $('html, body').animate({
@@ -221,8 +188,35 @@ var publiksearchEvents = function () {
         
         return false;
     });
-
+    ///MINNESLISTAN
+    $('body').on('click', '#kk_aj_cmd_minneslistan', function (e) {
+        resetfilterlist();
+        let minneslistaData = minneslistaHandler.getminneslistan();
+        if (minneslistaData) {
+            handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", minneslistaData, function (returtext) {
+                               
+                return false;
+            });
+        };
+        return false;
+    });
     
+
+    $('body').on('click','.kk_aj_arr_item_minneslista', function (e) {
+        var arrid = $(this).attr("rel");
+        if(!$(this).hasClass("inminneslist")){
+            minneslistaHandler.addto(arrid);
+            $(this).addClass("inminneslist");
+        }
+        return false;
+    });
+    $('body').on('click','.inminneslist', function (e) {
+        var arrid = $(this).attr("rel");
+        minneslistaHandler.removefrom(arrid);
+        $(this).removeClass("inminneslist");
+        return false;
+    });
+
     // AUTOCOMPLETE Freetextsearch
     $('body').on('keydown', '#kk_aj_freetextSearch', function (event) {
        
@@ -369,3 +363,31 @@ var freesearch = function () {
         });
     };
 }
+
+
+
+// LOCALSTORAGE
+// används för att rätt listningar skall visas om användaren öppnar sidan för förstagången = alla arr annars senaste sökningen och
+// om användaren går till detalj skall senaste sökningen visas.
+
+var SetSession = function () {
+    session.set("Session", "true");
+}
+var isSessionSet = function () {
+
+    if (session.get("Session")) {
+        return true;
+    }
+
+    return false;
+}
+
+var localstorageHandler = function (stdata) {
+
+    if (stdata) {
+        storage.set('currentdata', stdata);
+    } else {
+        stdata = storage.get('currentdata');
+    }
+    return stdata;
+};

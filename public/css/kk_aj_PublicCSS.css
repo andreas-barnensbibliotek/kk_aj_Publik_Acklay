@@ -12579,11 +12579,14 @@ input[type=radio] + label {
           background-color: #FFFFFF;
           border: 1px solid #f77136;
           color: #f77136; }
-    /* line 351, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 347, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_arritem .inminneslist {
+        color: #43AC6A !important; }
+    /* line 354, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productPagerblock {
       border-top: 1px solid #EEEEEE;
       padding-bottom: 1rem; }
-      /* line 354, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+      /* line 357, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
       .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productPagerblock .jplist-panel {
         display: table;
         margin: 0 auto; }
@@ -12605,64 +12608,64 @@ input[type=radio] + label {
     background-position: 0% 82%; } }
 
 /*Multifunktioner*/
-/* line 393, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 396, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 .centerfields, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock fieldset.arrkonstform, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock fieldset.arrpublik {
   text-align: center; }
 
-/* line 397, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 400, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 .valbaraRadiobuttons .vald, .ArrangemangtypBlock .vald, .kontformBlock .vald, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock .vald {
   color: #FFFFFF !important;
   background: #f77136 !important; }
 
-/* line 402, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 405, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 .valbaraRadiobuttons label > input, .ArrangemangtypBlock label > input, .kontformBlock label > input, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label > input {
   visibility: hidden;
   /* Makes input not-clickable */
   position: absolute; }
-  /* line 406, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+  /* line 409, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
   .valbaraRadiobuttons label > input:checked + span, .ArrangemangtypBlock label > input:checked + span, .kontformBlock label > input:checked + span, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label > input:checked + span {
     color: #FFFFFF;
     background: #f77136 !important; }
 
-/* line 414, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 417, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 .valbaraRadiobuttons label + button, .ArrangemangtypBlock label + button, .kontformBlock label + button, .kk_aj_superProductListBlock .kk_aj_mainsearchblock .searchformblock .kontformBlock label + button {
   /* IMAGE STYLES */
   cursor: pointer;
   border: 2px solid transparent; }
 
-/* line 428, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 431, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 .jplist-panel .jplist-pagination button {
   font-family: "acumin-pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   text-shadow: none;
   font-weight: normal;
   color: #666666 !important;
   background: #ebeae9; }
-  /* line 435, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+  /* line 438, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
   .jplist-panel .jplist-pagination button.jplist-current {
     font-weight: normal;
     color: #FFFFFF !important;
     background: #43AC6A; }
-    /* line 439, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+    /* line 442, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .jplist-panel .jplist-pagination button.jplist-current:hover {
       opacity: 1;
       color: inherit;
       background: #43AC6A; }
-  /* line 444, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+  /* line 447, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
   .jplist-panel .jplist-pagination button:hover {
     color: #FFFFFF !important;
     opacity: 0.5;
     color: inherit;
     background: #43AC6A; }
 
-/* line 454, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 457, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 #kk_aj_valdsokning ul {
   font-size: 0.8rem; }
 
-/* line 457, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+/* line 460, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
 #kk_aj_valdsokning #kk_aj_valdsokord {
   margin-left: 0px;
   list-style: none; }
-  /* line 460, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
+  /* line 463, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
   #kk_aj_valdsokning #kk_aj_valdsokord li {
     float: left;
     margin-right: 1rem; }
