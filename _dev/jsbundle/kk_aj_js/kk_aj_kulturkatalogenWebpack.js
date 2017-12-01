@@ -230,22 +230,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://kulturkatalog.kivdev.se",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://kulturkatalog.kivdev.se",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -10620,6 +10620,7 @@
 	var arrformValidator = __webpack_require__(8);
 	var arrGranskaVy = __webpack_require__(9);
 	var arrformAutocompleteHandler = __webpack_require__(11);
+	//var tinyeditorHandler = require("./externaljs/tinyeditor.js");
 	var _exempellistobject = { "exempelitemlist": [] };
 
 	module.exports = {
@@ -10628,7 +10629,7 @@
 	        
 	        $(function () {
 	            arrformValidator.arrShowforminputs("0");
-
+	           // tinyeditorHandler.init();
 	            //var storage = Storages.localStorage
 	            //storage.set('foo', 'Detta funkar bra detta!');
 	            //var storage = Storages.localStorage
@@ -11197,7 +11198,7 @@
 
 	            arrformjsondata.Rubrik = $('#arr_rubrik').val();
 	            arrformjsondata.UnderRubrik = $('#arr_underrubrik').val();
-	            arrformjsondata.Innehall = $('#arr_presentation').val();
+	            arrformjsondata.Innehall = htmlEncode($('#arr_presentation').val());
 	            arrformjsondata.Arrangemangtyp = $('input[name=arr_radioValArrtyp]:checked').val();
 	            arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
 
@@ -11596,6 +11597,13 @@
 	    }    
 	};
 
+	var htmlEncode = function(value) {
+	    //create a in-memory div, set it's inner text(which jQuery automatically encodes)
+	    //then grab the encoded contents back out.  The div never exists on the page.
+	    return $('<div/>').text(value).html();
+	}
+
+
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -11662,7 +11670,7 @@
 	        ret += Faktarubrik;
 	        ret += "</div><div class='small-12 medium-6 columns'>";
 	        ret += FaktaValue
-	        if (!isNaN(FaktaValue)) {
+	        if (!isNaN(parseFloat(FaktaValue))) {
 	            ret += faktavalueextention(Faktarubrik);
 	        };
 	        ret += "</div></div>";
@@ -11744,33 +11752,35 @@
 
 
 	var faktavalueextention =function(typ){
-	   
-	    switch (typ) {
-	        case "Ålder lägst":
+	    let fixat = typ.replace(/^\s+|\s+$/gm, '').toLowerCase();
+	    
+
+	    switch (fixat) {
+	        case "ålder lägst":
 	            return " år";
 	            break;
-	        case "Ålder högst":
+	        case "ålder högst":
 	            return " år";
 	            break;
-	        case "Takhöjd över scen":
+	        case "takhöjd över scen":
 	            return " m";
 	            break;
-	        case "Bredd på scen":
+	        case "bredd på scen":
 	            return " m";
 	            break;
-	        case "Djup på scen":
+	        case "djup på scen":
 	            return " m";
 	            break;
-	        case "Byggtid":
+	        case "byggtid":
 	            return " min";
 	            break;
-	        case "Rivtid":
+	        case "rivtid":
 	            return " min";
 	            break;
-	        case "Speltid":
+	        case "speltid":
 	            return " min";
 	            break;
-	        case "Kostnad":
+	        case "kostnad/pris":
 	            return " kr";
 	            break;
 	        default:
@@ -11816,17 +11826,19 @@
 	                    ret = step3(next);
 	                    break;
 	            }
-	        }
-	        if (ret == false) {
-	            $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
-	            $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
+	        
+	            if (ret == false) {
+	                $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
+	                $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
 
-	        } else {
-	            $('#addarrtab-' + step + ' small').hide();
-	            $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
-	            $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
+	            } else {
+	                $('#addarrtab-' + step + ' small').hide();
+	                $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
+	                $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
+	            }
 	        }
 	        return ret;
+
 	    },
 	    arrtypimg: function (vald) {
 	        var basesrc = _basesrc;
@@ -12372,6 +12384,9 @@
 	    },
 	    RenderUtovareContentJson: function (arrJson) {
 	        utovareContentJson(arrJson);
+	    },
+	    RenderExempelContentJson: function (arrJson) {
+	        exempelcontent(arrJson);
 	    }
 	};
 
@@ -12396,7 +12411,9 @@
 	    HandlebarTemplet.injecthtmltemplate(".granskaFaktaMainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
 
 	};
-
+	var exempelcontent = function (arrJson) {
+	    HandlebarTemplet.injecthtmltemplate(".arrExempellist", "kk_aj_arrpubExempelList.txt", arrJson);
+	}
 	var utovareContent = function (utovareJson) {
 	    $('.granska_Utovare_Organisation').html($('#utovare_aktor_grupp').val());
 	    $('.granska_Utovare_namn').html($('#utovare_fornamn').val() + " " + $('#utovare_efternamn').val());
@@ -12587,7 +12604,7 @@
 	             var currdata = storage.get('currentdata');
 	             if (currdata) {
 	                 handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", currdata, function (returtext) {
-	                    
+	                     
 	                     return (returtext)
 	                 });
 	             } else {
@@ -12609,7 +12626,7 @@
 	    arrdataservice("", searchdataContainer, function (data) {
 	        SetSession();
 	        handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-	           
+	            
 	            return (returtext)
 
 	        });
@@ -12632,7 +12649,7 @@
 	           
 	            var temptpl = Handlebars.compile(datat);
 	            $('#kk_aj_productlist').html(temptpl(currdata)).hide().slideDown(2000);
-	           
+	          
 	            callback();
 	        }
 	            
@@ -12652,7 +12669,7 @@
 	        });
 	        
 	    }, 'html');
-	   
+	    callback();
 	}
 
 	var arrdataservice = function (callTyp, searchdata, callback) {
@@ -12704,11 +12721,7 @@
 
 	            handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
 	                //scrolla till resultatlistan
-
-
-	                $('html, body').animate({
-	                    scrollTop: $(".kk_aj_searchbuttonblock").offset().top
-	                }, 500);
+	                scrolldowntosearchresult();
 	                return false;
 
 	            });
@@ -12750,7 +12763,7 @@
 	        let minneslistaData = minneslistaHandler.getminneslistan();
 	        if (minneslistaData) {
 	            handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", minneslistaData, function (returtext) {
-	                               
+	                scrolldowntosearchresult();
 	                return false;
 	            });
 	        };
@@ -12920,7 +12933,13 @@
 	    };
 	}
 
+	var scrolldowntosearchresult = function () {
+	    $('html, body').animate({
+	        scrollTop: $(".kk_aj_searchbuttonblock").offset().top
+	    }, 500);
+	    return false;
 
+	}
 
 	// LOCALSTORAGE
 	// används för att rätt listningar skall visas om användaren öppnar sidan för förstagången = alla arr annars senaste sökningen och
@@ -32380,6 +32399,29 @@
 	          , likesValues: function ($slider, $prev, $next) {
 	              $prev.text($slider.slider('values', 0) + ' min');
 	              $next.text($slider.slider('values', 1) + ' min');
+	          },
+	            /**
+	            * Kostnad: jquery ui range slider
+	            */
+	          kostnadSlider: function ($slider, $prev, $next) {
+	              $slider.slider({
+	                  min: 0
+	                 , max: 50000
+	                 , range: true
+	                 , values: [0, 50000]
+	                 , slide: function (event, ui) {
+	                     $prev.text(ui.values[0] + ' kr');
+	                     $next.text(ui.values[1] + ' kr');
+	                 }
+	              });
+	          }
+
+	            /**
+	            * LIKES: jquery ui set values
+	            */
+	          , kostnadValues: function ($slider, $prev, $next) {
+	              $prev.text($slider.slider('values', 0) + ' kr');
+	              $next.text($slider.slider('values', 1) + ' kr');
 	          }
 	        };
 
@@ -32516,6 +32558,7 @@
 	    detailhandler.RenderMainContent(arrJson);
 	    detailhandler.RendeFaktaContent(arrJson);
 	    detailhandler.RenderUtovareContentJson(arrJson);
+	    detailhandler.RenderExempelContentJson(arrJson);
 	}
 
 
@@ -32563,7 +32606,7 @@
 	    _arrjsondata.Arrid = arrdata.ansokningid;
 	    _arrjsondata.Rubrik = arrdata.ansokningtitle;
 	    _arrjsondata.UnderRubrik = arrdata.ansokningsubtitle;
-	    _arrjsondata.Innehall = arrdata.ansokningContent;
+	    _arrjsondata.Innehall = htmlDecode(arrdata.ansokningContent);
 	    _arrjsondata.Arrangemangtyp = arrdata.ansokningtyp;
 	    _arrjsondata.Konstform = arrdata.ansokningkonstform;
 	    _arrjsondata.MainImage.MediaUrl = arrdata.ansokningMediaImage.MediaUrl;
@@ -32589,7 +32632,7 @@
 	        
 	        switch (val.FaktaTypID) {
 	            // FAKTA 1
-	            case 1: case 2: case 3: case 4: case 5: case 25:  case 41:
+	            case 1: case 2: case 3: case 4: case 5: case 25: case 35: 
 	                _arrjsondata.Faktalist.push({
 	                    "Faktaid": "1",
 	                    "FaktaTypID": val.FaktaTypID,
@@ -32599,7 +32642,7 @@
 	                break;
 
 	                // LOKAL 2
-	            case 10: case 11: case 12: case 13: case 14: case 15: case 16: case 17: case 18: case 33: case 34:
+	            case 10: case 11: case 12: case 13: case 14: case 15: case 16: case 17: case 18: case 27: case 28:
 	                _arrjsondata.Faktalist.push({
 	                    "Faktaid": "2",
 	                    "FaktaTypID": val.FaktaTypID,
@@ -32609,7 +32652,7 @@
 	                break;
 
 	                // PUBLIK 3
-	            case 6: case 7: case 8: case 9: case 32: case 42:
+	            case 6: case 7: case 8: case 9:  case 36:
 
 	                if (val.FaktaTypID == 7 || val.FaktaTypID == 8) {
 	                    val.FaktaValue = val.FaktaValue + " år"
@@ -32624,7 +32667,7 @@
 	                break;
 
 	                // EKONOMI 4
-	            case 19: case 20: case 21: case 22: case 23: case 24: case 35: case 36: case 37: case 38: case 40:
+	            case 19: case 20: case 21: case 22: case 23: case 24: case 29: case 30: case 31: case 32: case 34: 
 	                _arrjsondata.Faktalist.push({
 	                    "Faktaid": "4",
 	                    "FaktaTypID": val.FaktaTypID,
@@ -32633,7 +32676,7 @@
 	                });
 	                break;
 	                // ÖVRIGT 5
-	            case 39:
+	            case 33:
 	                _arrjsondata.Faktalist.push({
 	                    "Faktaid": "5",
 	                    "FaktaTypID": val.FaktaTypID,
@@ -32642,6 +32685,9 @@
 	                });
 	                break;
 
+	            // Fakta för konsulenten enbart
+	            case 37: case 38: case 39: case 40: case 41:                
+	                break;
 	                // default är ÖVRIGT
 	            default:
 	                _arrjsondata.Faktalist.push({
@@ -32654,8 +32700,8 @@
 	        };
 
 	    });
-
-	    callback(_arrjsondata)
+	    _arrjsondata.Faktalist = sortByKey(_arrjsondata.Faktalist, "Faktalist.Faktarubrik")
+	    callback(_arrjsondata);
 
 
 	}
@@ -32698,6 +32744,39 @@
 	        "Weburl": ""
 	    }
 	}
+
+
+	var htmlEncode= function(value) {
+	    //create a in-memory div, set it's inner text(which jQuery automatically encodes)
+	    //then grab the encoded contents back out.  The div never exists on the page.
+	    return $('<div/>').text(value).html();
+	}
+
+	var htmlDecode= function(value) {
+	    return $('<div/>').html(value).text();
+	}
+
+	var sortByKey = function(objArray, prop, direction){
+	    if (arguments.length<2) throw new Error("ARRAY, AND OBJECT PROPERTY MINIMUM ARGUMENTS, OPTIONAL DIRECTION");
+	    if (!Array.isArray(objArray)) throw new Error("FIRST ARGUMENT NOT AN ARRAY");
+	    const clone = objArray.slice(0);
+	    const direct = arguments.length>2 ? arguments[2] : 1; //Default to ascending
+	    const propPath = (prop.constructor===Array) ? prop : prop.split(".");
+	    clone.sort(function(a,b){
+	        for (let p in propPath){
+	            if (a[propPath[p]] && b[propPath[p]]){
+	                a = a[propPath[p]];
+	                b = b[propPath[p]];
+	            }
+	        }
+	        // convert numeric strings to integers
+	        a = a.match(/^\d+$/) ? +a : a;
+	        b = b.match(/^\d+$/) ? +b : b;
+	        return ( (a < b) ? -1*direct : ((a > b) ? 1*direct : 0) );
+	    });
+	    return clone;
+	}
+
 
 /***/ }),
 /* 17 */

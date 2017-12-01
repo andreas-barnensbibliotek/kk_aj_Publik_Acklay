@@ -32,17 +32,19 @@ module.exports = {
                     ret = step3(next);
                     break;
             }
-        }
-        if (ret == false) {
-            $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
-            $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
+        
+            if (ret == false) {
+                $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
+                $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
 
-        } else {
-            $('#addarrtab-' + step + ' small').hide();
-            $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
-            $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
+            } else {
+                $('#addarrtab-' + step + ' small').hide();
+                $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
+                $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
+            }
         }
         return ret;
+
     },
     arrtypimg: function (vald) {
         var basesrc = _basesrc;

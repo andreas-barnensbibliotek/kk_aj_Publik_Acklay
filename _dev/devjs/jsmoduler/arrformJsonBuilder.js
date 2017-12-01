@@ -50,7 +50,7 @@ module.exports = {
 
             arrformjsondata.Rubrik = $('#arr_rubrik').val();
             arrformjsondata.UnderRubrik = $('#arr_underrubrik').val();
-            arrformjsondata.Innehall = $('#arr_presentation').val();
+            arrformjsondata.Innehall = htmlEncode($('#arr_presentation').val());
             arrformjsondata.Arrangemangtyp = $('input[name=arr_radioValArrtyp]:checked').val();
             arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
 
@@ -448,3 +448,9 @@ module.exports = {
         });
     }    
 };
+
+var htmlEncode = function(value) {
+    //create a in-memory div, set it's inner text(which jQuery automatically encodes)
+    //then grab the encoded contents back out.  The div never exists on the page.
+    return $('<div/>').text(value).html();
+}

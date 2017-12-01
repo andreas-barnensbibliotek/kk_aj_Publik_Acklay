@@ -714,6 +714,29 @@ module.exports = {
           , likesValues: function ($slider, $prev, $next) {
               $prev.text($slider.slider('values', 0) + ' min');
               $next.text($slider.slider('values', 1) + ' min');
+          },
+            /**
+            * Kostnad: jquery ui range slider
+            */
+          kostnadSlider: function ($slider, $prev, $next) {
+              $slider.slider({
+                  min: 0
+                 , max: 50000
+                 , range: true
+                 , values: [0, 50000]
+                 , slide: function (event, ui) {
+                     $prev.text(ui.values[0] + ' kr');
+                     $next.text(ui.values[1] + ' kr');
+                 }
+              });
+          }
+
+            /**
+            * LIKES: jquery ui set values
+            */
+          , kostnadValues: function ($slider, $prev, $next) {
+              $prev.text($slider.slider('values', 0) + ' kr');
+              $next.text($slider.slider('values', 1) + ' kr');
           }
         };
 

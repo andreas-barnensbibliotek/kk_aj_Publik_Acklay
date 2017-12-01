@@ -31,7 +31,7 @@ var session = Storages.sessionStorage
              var currdata = storage.get('currentdata');
              if (currdata) {
                  handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", currdata, function (returtext) {
-                    
+                     
                      return (returtext)
                  });
              } else {
@@ -53,7 +53,7 @@ var initlist = function () {
     arrdataservice("", searchdataContainer, function (data) {
         SetSession();
         handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
-           
+            
             return (returtext)
 
         });
@@ -76,7 +76,7 @@ var handlebartempletService = function(targetClass, usetemplateName, currentdata
            
             var temptpl = Handlebars.compile(datat);
             $('#kk_aj_productlist').html(temptpl(currdata)).hide().slideDown(2000);
-           
+          
             callback();
         }
             
@@ -96,7 +96,7 @@ var handlebartempletService = function(targetClass, usetemplateName, currentdata
         });
         
     }, 'html');
-   
+    callback();
 }
 
 var arrdataservice = function (callTyp, searchdata, callback) {
@@ -148,11 +148,7 @@ var publiksearchEvents = function () {
 
             handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", data, function (returtext) {
                 //scrolla till resultatlistan
-
-
-                $('html, body').animate({
-                    scrollTop: $(".kk_aj_searchbuttonblock").offset().top
-                }, 500);
+                scrolldowntosearchresult();
                 return false;
 
             });
@@ -194,7 +190,7 @@ var publiksearchEvents = function () {
         let minneslistaData = minneslistaHandler.getminneslistan();
         if (minneslistaData) {
             handlebartempletService(".kk_aj_productlist", "kk_aj_mainarrangemangList.txt", minneslistaData, function (returtext) {
-                               
+                scrolldowntosearchresult();
                 return false;
             });
         };
@@ -364,7 +360,13 @@ var freesearch = function () {
     };
 }
 
+var scrolldowntosearchresult = function () {
+    $('html, body').animate({
+        scrollTop: $(".kk_aj_searchbuttonblock").offset().top
+    }, 500);
+    return false;
 
+}
 
 // LOCALSTORAGE
 // används för att rätt listningar skall visas om användaren öppnar sidan för förstagången = alla arr annars senaste sökningen och

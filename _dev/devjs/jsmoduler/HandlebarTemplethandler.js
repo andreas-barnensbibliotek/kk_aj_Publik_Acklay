@@ -60,7 +60,7 @@ Handlebars.registerHelper('lokaltyp', function (Faktaid, Faktarubrik, FaktaValue
         ret += Faktarubrik;
         ret += "</div><div class='small-12 medium-6 columns'>";
         ret += FaktaValue
-        if (!isNaN(FaktaValue)) {
+        if (!isNaN(parseFloat(FaktaValue))) {
             ret += faktavalueextention(Faktarubrik);
         };
         ret += "</div></div>";
@@ -142,33 +142,35 @@ Handlebars.registerHelper('inMemList', function (ansokningstatus) {
 
 
 var faktavalueextention =function(typ){
-   
-    switch (typ) {
-        case "Ålder lägst":
+    let fixat = typ.replace(/^\s+|\s+$/gm, '').toLowerCase();
+    
+
+    switch (fixat) {
+        case "ålder lägst":
             return " år";
             break;
-        case "Ålder högst":
+        case "ålder högst":
             return " år";
             break;
-        case "Takhöjd över scen":
+        case "takhöjd över scen":
             return " m";
             break;
-        case "Bredd på scen":
+        case "bredd på scen":
             return " m";
             break;
-        case "Djup på scen":
+        case "djup på scen":
             return " m";
             break;
-        case "Byggtid":
+        case "byggtid":
             return " min";
             break;
-        case "Rivtid":
+        case "rivtid":
             return " min";
             break;
-        case "Speltid":
+        case "speltid":
             return " min";
             break;
-        case "Kostnad":
+        case "kostnad/pris":
             return " kr";
             break;
         default:

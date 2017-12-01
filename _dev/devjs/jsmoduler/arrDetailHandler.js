@@ -16,6 +16,9 @@ module.exports = {
     },
     RenderUtovareContentJson: function (arrJson) {
         utovareContentJson(arrJson);
+    },
+    RenderExempelContentJson: function (arrJson) {
+        exempelcontent(arrJson);
     }
 };
 
@@ -40,7 +43,9 @@ var faktaContent = function (fakalistJson) {
     HandlebarTemplet.injecthtmltemplate(".granskaFaktaMainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
 
 };
-
+var exempelcontent = function (arrJson) {
+    HandlebarTemplet.injecthtmltemplate(".arrExempellist", "kk_aj_arrpubExempelList.txt", arrJson);
+}
 var utovareContent = function (utovareJson) {
     $('.granska_Utovare_Organisation').html($('#utovare_aktor_grupp').val());
     $('.granska_Utovare_namn').html($('#utovare_fornamn').val() + " " + $('#utovare_efternamn').val());

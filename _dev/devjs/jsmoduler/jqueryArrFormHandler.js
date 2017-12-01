@@ -6,6 +6,7 @@ var handlebarTemplethandler = require("./HandlebarTemplethandler.js");
 var arrformValidator = require("./arrFormValidator.js");
 var arrGranskaVy = require("./arrGranskaVy.js");
 var arrformAutocompleteHandler = require("./arrformAutocompleteHandler.js");
+//var tinyeditorHandler = require("./externaljs/tinyeditor.js");
 var _exempellistobject = { "exempelitemlist": [] };
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
         
         $(function () {
             arrformValidator.arrShowforminputs("0");
-
+           // tinyeditorHandler.init();
             //var storage = Storages.localStorage
             //storage.set('foo', 'Detta funkar bra detta!');
             //var storage = Storages.localStorage
