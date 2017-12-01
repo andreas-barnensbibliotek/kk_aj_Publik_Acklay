@@ -91,7 +91,7 @@ var fyllArrJson = function (data, callback) {
         
         switch (val.FaktaTypID) {
             // FAKTA 1
-            case 1: case 2: case 3: case 4: case 5: case 25: case 35: 
+            case 1: case 2: case 3: case 4: case 5: case 25: case 26: case 35:
                 _arrjsondata.Faktalist.push({
                     "Faktaid": "1",
                     "FaktaTypID": val.FaktaTypID,
@@ -159,6 +159,27 @@ var fyllArrJson = function (data, callback) {
         };
 
     });
+
+    $.each(arrdata.ansokningMedialist, function (itm, val) {
+
+        if (val.MediaTyp == "2") {            
+            val.MediaUrl = val.MediaUrl.replace("https://youtu.be/", "");
+        };
+
+        _arrjsondata.MediaList.push({
+            "MediaID": val.MediaID,
+            "MediaUrl": val.MediaUrl,
+            "MediaFilename": val.MediaFilename,
+            "MediaSize": val.MediaSize,
+            "MediaAlt": val.MediaAlt,
+            "MediaFoto": val.MediaFoto,
+            "MediaTyp": val.MediaTyp,
+            "mediaTitle": val.mediaTitle,
+            "mediaBeskrivning": val.mediaBeskrivning,
+            "mediaLink": val.mediaLink
+        });               
+    });
+
     _arrjsondata.Faktalist = sortByKey(_arrjsondata.Faktalist, "Faktalist.Faktarubrik")
     callback(_arrjsondata);
 

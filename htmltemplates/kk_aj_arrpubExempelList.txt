@@ -1,7 +1,6 @@
 ﻿<!-- item loop START -->
-test
-{{ansokningarlista.ansokningar.ansokningMedialist}}
-{{#each ansokningarlista.ansokningar.ansokningMedialist}}
+
+{{#each MediaList}}
 	<li>
 		<div class="row">
 			<div class="medium-4 columns">

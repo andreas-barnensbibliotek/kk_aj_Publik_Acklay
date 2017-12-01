@@ -230,22 +230,22 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            apiserver: "http://localhost:60485",
-	            dnnURL: "http://dnndev.me",           
-	            localOrServerURL: "http://localhost:60485/Api_v2",
-	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //apiserver: "http://localhost:60485",
+	            //dnnURL: "http://dnndev.me",           
+	            //localOrServerURL: "http://localhost:60485/Api_v2",
+	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	           //SERVERN
-	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            //dnnURL: "http://kulturkatalog.kivdev.se",
-	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            dnnURL: "http://kulturkatalog.kivdev.se",
+	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
 
 	        },
 	        userinfo: {
@@ -11656,7 +11656,11 @@
 	        ret+= "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
 	        ret += Faktarubrik;
 	        ret += "</div><div class='small-12 medium-6 columns'>";
-	        ret += FaktaValue + "</div></div>";
+	        ret += FaktaValue
+	        if (!isNaN(parseFloat(FaktaValue))) {
+	            ret += faktavalueextention(Faktarubrik);
+	        };
+	        ret += "</div></div>";
 	        
 	    }
 	    return ret;
@@ -11777,7 +11781,7 @@
 	        case "rivtid":
 	            return " min";
 	            break;
-	        case "speltid":
+	        case "speltid (min)":
 	            return " min";
 	            break;
 	        case "kostnad/pris":
@@ -32632,7 +32636,7 @@
 	        
 	        switch (val.FaktaTypID) {
 	            // FAKTA 1
-	            case 1: case 2: case 3: case 4: case 5: case 25: case 35: 
+	            case 1: case 2: case 3: case 4: case 5: case 25: case 26: case 35:
 	                _arrjsondata.Faktalist.push({
 	                    "Faktaid": "1",
 	                    "FaktaTypID": val.FaktaTypID,
@@ -32700,6 +32704,27 @@
 	        };
 
 	    });
+
+	    $.each(arrdata.ansokningMedialist, function (itm, val) {
+
+	        if (val.MediaTyp == "2") {            
+	            val.MediaUrl = val.MediaUrl.replace("https://youtu.be/", "");
+	        };
+
+	        _arrjsondata.MediaList.push({
+	            "MediaID": val.MediaID,
+	            "MediaUrl": val.MediaUrl,
+	            "MediaFilename": val.MediaFilename,
+	            "MediaSize": val.MediaSize,
+	            "MediaAlt": val.MediaAlt,
+	            "MediaFoto": val.MediaFoto,
+	            "MediaTyp": val.MediaTyp,
+	            "mediaTitle": val.mediaTitle,
+	            "mediaBeskrivning": val.mediaBeskrivning,
+	            "mediaLink": val.mediaLink
+	        });               
+	    });
+
 	    _arrjsondata.Faktalist = sortByKey(_arrjsondata.Faktalist, "Faktalist.Faktarubrik")
 	    callback(_arrjsondata);
 

@@ -12882,20 +12882,25 @@ input[type=radio] + label {
   background-color: #555;
   /* Add a dark-grey background on hover */ }
 
-/* line 2, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+/* line 3, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+.detailblock .artikelwrapper .artsidecontainer {
+  font-size: .9rem;
+  line-height: 1.2rem; }
+
+/* line 8, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
 .detailblock .granska_rubrik {
   border-bottom: 10px solid #000000;
   color: #f77136;
   font-weight: 100;
   padding-bottom: .5rem; }
 
-/* line 8, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+/* line 14, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
 .detailblock .arrRubrikblock {
   margin-top: 3rem;
   margin-bottom: 1rem; }
-  /* line 11, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  /* line 17, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
   .detailblock .arrRubrikblock h2 {
-    font-size: 1rem;
+    font-size: 1.3rem;
     margin-left: .5rem; }
 
 /*@import 'foundation/components/grid';

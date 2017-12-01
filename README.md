@@ -11,4 +11,5 @@ install
 5. npm install --save-dev gulp gulp-sass gulp-autoprefixer gulp-rename gulp-clean-css gulp-sourcemaps webpack-stream gulp-minify-css gulp-uglify
 6. npm install jquery --save
 glöm inte att lägga till .gitignore (med texten:node_modules/ och bower_components/ ) i "node_modules" foldern så att inte alla dependencyfilerna kommer med i gitt repot.
-
+7. npm install jquery.ui --save -dev
+8. npm install jquery-ui-dist --save -dev

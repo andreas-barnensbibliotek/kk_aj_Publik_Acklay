@@ -46,7 +46,11 @@ Handlebars.registerHelper('faktatyp', function (Faktaid, Faktarubrik, FaktaValue
         ret+= "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
         ret += Faktarubrik;
         ret += "</div><div class='small-12 medium-6 columns'>";
-        ret += FaktaValue + "</div></div>";
+        ret += FaktaValue
+        if (!isNaN(parseFloat(FaktaValue))) {
+            ret += faktavalueextention(Faktarubrik);
+        };
+        ret += "</div></div>";
         
     }
     return ret;
@@ -167,7 +171,7 @@ var faktavalueextention =function(typ){
         case "rivtid":
             return " min";
             break;
-        case "speltid":
+        case "speltid (min)":
             return " min";
             break;
         case "kostnad/pris":
