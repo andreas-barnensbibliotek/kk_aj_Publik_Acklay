@@ -27,7 +27,7 @@ var maincontent = function (arrJson) {
     $('.granska_rubrik').html(arrJson.Rubrik);
     $('.granska_underrubrik').html(arrJson.UnderRubrik);
     $('.granska_innehall').html(arrJson.Innehall);
-    var imgsrc = _appsetting.globalconfig.arrtmpimgurl + '_' + arrJson.MainImage.MediaUrl;
+    var imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.Arrid + '_' + arrJson.MainImage.MediaUrl;
     $('.granska_pressentationsbild').attr('src', imgsrc);
     $('.arrmainfoto').html('<span>Foto: </span> ' + arrJson.MainImage.MediaFoto);
 
@@ -36,6 +36,11 @@ var maincontent = function (arrJson) {
     } else {
         $('.granska_exempel').hide();
     }
+ 
+    $('#shareMail').attr('href', 'mailto:?Subject=Delat%20fr%C3%A5n+Kulturkatalogen%20V%C3%A4st%20-%20' + arrJson.Rubrik + '&body=Jag%20vill%20dela%20arrangemanget:%20%22' + arrJson.Rubrik + '%22%20%0D%0Afr%C3%A5n%20Kulturkatalogen%20V%C3%A4st%3A%20 http://kulturkatalog.kivdev.se/Kulturkatalogen/ArrangemangDetail/id/' + arrJson.Arrid);
+    $('#shareFacebook').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=http://kulturkatalog.kivdev.se/Kulturkatalogen/ArrangemangDetail/id/' + arrJson.Arrid + '&picture=&' + imgsrc + '&title=' + arrJson.Rubrik + '&description=' + arrJson.UnderRubrik);
+       
+    
 };
 
 var faktaContent = function (fakalistJson) {

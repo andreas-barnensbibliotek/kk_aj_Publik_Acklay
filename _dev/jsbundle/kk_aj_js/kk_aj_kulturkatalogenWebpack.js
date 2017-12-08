@@ -236,7 +236,8 @@
 	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
 	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
 	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
+	            //arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/"
 
 	           //SERVERN
 	            apiserver: "http://kulturkatalog.kivdev.se:8080",
@@ -245,7 +246,8 @@
 	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
 	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
 	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/",
+	            arrimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/"
 
 	        },
 	        userinfo: {
@@ -265,7 +267,7 @@
 	            closeIcon: 'X',
 	            closeButton: true
 	        },
-	        debug: "false" // true / false
+	        debug: "true" // true / false
 	    };
 
 	module.exports = {  
@@ -11655,7 +11657,7 @@
 	    if (Faktaid === "1") {
 	        ret+= "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
 	        ret += Faktarubrik;
-	        ret += "</div><div class='small-12 medium-6 columns'>";
+	        ret += "</div><div class='small-12 medium-6 columns'>";               
 	        ret += FaktaValue
 	        if (!isNaN(parseFloat(FaktaValue))) {
 	            ret += faktavalueextention(Faktarubrik);
@@ -11666,13 +11668,17 @@
 	    return ret;
 	});
 
-	Handlebars.registerHelper('lokaltyp', function (Faktaid, Faktarubrik, FaktaValue) {
+	Handlebars.registerHelper('lokaltyp', function (Faktaid, Faktarubrik, FaktaValue, Faktatypid) {
 	    var ret = "";
 	    if (Faktaid === "2") {
 	        
 	        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
 	        ret += Faktarubrik;
-	        ret += "</div><div class='small-12 medium-6 columns'>";
+	        if (Faktatypid == "18" && FaktaValue.length >18) {
+	            ret += "</div><div class='small-12 columns'>";
+	        } else {
+	            ret += "</div><div class='small-12 medium-6 columns'>";
+	        }       
 	        ret += FaktaValue
 	        if (!isNaN(parseFloat(FaktaValue))) {
 	            ret += faktavalueextention(Faktarubrik);
@@ -11704,12 +11710,16 @@
 	    }
 	    return ret;
 	});
-	Handlebars.registerHelper('ekonomityp', function (Faktaid, Faktarubrik, FaktaValue) {
+	Handlebars.registerHelper('ekonomityp', function (Faktaid, Faktarubrik, FaktaValue, Faktatypid) {
 	    var ret = "";
 	    if (Faktaid === "4") {
 	        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
 	        ret += Faktarubrik
-	        ret += "</div><div class='small-12 medium-6 columns'>"
+	        if (Faktatypid == "30" && FaktaValue.length > 18) {
+	            ret += "</div><div class='small-12 columns'>";
+	        } else {
+	            ret += "</div><div class='small-12 medium-6 columns'>";
+	        }
 	        ret += FaktaValue;
 	        if (!isNaN(FaktaValue)) {
 	            ret += faktavalueextention(Faktarubrik);
@@ -11728,13 +11738,17 @@
 	    
 	});
 
-	Handlebars.registerHelper('ovrigttyp', function (Faktaid, Faktarubrik, FaktaValue) {
+	Handlebars.registerHelper('ovrigttyp', function (Faktaid, Faktarubrik, FaktaValue, Faktatypid) {
 	    var ret = "";
 	    if (Faktaid === "5") {
 
 	        ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
 	        ret += Faktarubrik;
-	        ret += "</div><div class='small-12 medium-6 columns'>";
+	        if (Faktatypid == "33" && FaktaValue.length > 18) {
+	            ret += "</div><div class='small-12 columns'>";
+	        } else {
+	            ret += "</div><div class='small-12 medium-6 columns'>";
+	        }
 	        ret += FaktaValue
 	        if (!isNaN(FaktaValue)) {
 	            ret += faktavalueextention(Faktarubrik);
@@ -12399,7 +12413,7 @@
 	    $('.granska_rubrik').html(arrJson.Rubrik);
 	    $('.granska_underrubrik').html(arrJson.UnderRubrik);
 	    $('.granska_innehall').html(arrJson.Innehall);
-	    var imgsrc = _appsetting.globalconfig.arrtmpimgurl + '_' + arrJson.MainImage.MediaUrl;
+	    var imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.Arrid + '_' + arrJson.MainImage.MediaUrl;
 	    $('.granska_pressentationsbild').attr('src', imgsrc);
 	    $('.arrmainfoto').html('<span>Foto: </span> ' + arrJson.MainImage.MediaFoto);
 
@@ -12408,6 +12422,11 @@
 	    } else {
 	        $('.granska_exempel').hide();
 	    }
+	 
+	    $('#shareMail').attr('href', 'mailto:?Subject=Delat%20fr%C3%A5n+Kulturkatalogen%20V%C3%A4st%20-%20' + arrJson.Rubrik + '&body=Jag%20vill%20dela%20arrangemanget:%20%22' + arrJson.Rubrik + '%22%20%0D%0Afr%C3%A5n%20Kulturkatalogen%20V%C3%A4st%3A%20 http://kulturkatalog.kivdev.se/Kulturkatalogen/ArrangemangDetail/id/' + arrJson.Arrid);
+	    $('#shareFacebook').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=http://kulturkatalog.kivdev.se/Kulturkatalogen/ArrangemangDetail/id/' + arrJson.Arrid + '&picture=&' + imgsrc + '&title=' + arrJson.Rubrik + '&description=' + arrJson.UnderRubrik);
+	       
+	    
 	};
 
 	var faktaContent = function (fakalistJson) {
@@ -32620,13 +32639,13 @@
 	    //UTÖVAREBLOCK
 	    _arrjsondata.UtovareData.UtovarID = arrdata.ansokningUtovardata.UtovarID;
 	    _arrjsondata.UtovareData.Organisation = arrdata.ansokningUtovardata.Organisation;
-	    _arrjsondata.UtovareData.Fornamn = arrdata.ansokningUtovardata.Fornamn;
-	    _arrjsondata.UtovareData.Efternamn = arrdata.ansokningUtovardata.Efternamn;
-	    _arrjsondata.UtovareData.Telefon = arrdata.ansokningUtovardata.Telefon;
+	    _arrjsondata.UtovareData.Fornamn = arrdata.ansokningKontaktfornamn;
+	    _arrjsondata.UtovareData.Efternamn = arrdata.ansokningKontaktEfternamn;
+	    _arrjsondata.UtovareData.Telefon = arrdata.ansokningKontaktTelefon;
 	    _arrjsondata.UtovareData.Adress = arrdata.ansokningUtovardata.Adress;
 	    _arrjsondata.UtovareData.Postnr = arrdata.ansokningUtovardata.Postnr;
 	    _arrjsondata.UtovareData.Ort = arrdata.ansokningUtovardata.Ort;
-	    _arrjsondata.UtovareData.Epost = arrdata.ansokningUtovardata.Epost;
+	    _arrjsondata.UtovareData.Epost = arrdata.ansokningKontaktEpost;
 	    _arrjsondata.UtovareData.Kommun = arrdata.ansokningUtovardata.Kommun;
 	    _arrjsondata.UtovareData.Weburl = arrdata.ansokningUtovardata.Weburl;
 	    

@@ -45,7 +45,7 @@ Handlebars.registerHelper('faktatyp', function (Faktaid, Faktarubrik, FaktaValue
     if (Faktaid === "1") {
         ret+= "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
         ret += Faktarubrik;
-        ret += "</div><div class='small-12 medium-6 columns'>";
+        ret += "</div><div class='small-12 medium-6 columns'>";               
         ret += FaktaValue
         if (!isNaN(parseFloat(FaktaValue))) {
             ret += faktavalueextention(Faktarubrik);
@@ -56,13 +56,17 @@ Handlebars.registerHelper('faktatyp', function (Faktaid, Faktarubrik, FaktaValue
     return ret;
 });
 
-Handlebars.registerHelper('lokaltyp', function (Faktaid, Faktarubrik, FaktaValue) {
+Handlebars.registerHelper('lokaltyp', function (Faktaid, Faktarubrik, FaktaValue, Faktatypid) {
     var ret = "";
     if (Faktaid === "2") {
         
         ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
         ret += Faktarubrik;
-        ret += "</div><div class='small-12 medium-6 columns'>";
+        if (Faktatypid == "18" && FaktaValue.length >18) {
+            ret += "</div><div class='small-12 columns'>";
+        } else {
+            ret += "</div><div class='small-12 medium-6 columns'>";
+        }       
         ret += FaktaValue
         if (!isNaN(parseFloat(FaktaValue))) {
             ret += faktavalueextention(Faktarubrik);
@@ -94,12 +98,16 @@ Handlebars.registerHelper('publiktyp', function (Faktaid, Faktarubrik, FaktaValu
     }
     return ret;
 });
-Handlebars.registerHelper('ekonomityp', function (Faktaid, Faktarubrik, FaktaValue) {
+Handlebars.registerHelper('ekonomityp', function (Faktaid, Faktarubrik, FaktaValue, Faktatypid) {
     var ret = "";
     if (Faktaid === "4") {
         ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
         ret += Faktarubrik
-        ret += "</div><div class='small-12 medium-6 columns'>"
+        if (Faktatypid == "30" && FaktaValue.length > 18) {
+            ret += "</div><div class='small-12 columns'>";
+        } else {
+            ret += "</div><div class='small-12 medium-6 columns'>";
+        }
         ret += FaktaValue;
         if (!isNaN(FaktaValue)) {
             ret += faktavalueextention(Faktarubrik);
@@ -118,13 +126,17 @@ Handlebars.registerHelper('faktatypvisas', function (faktalist, val, opts) {
     
 });
 
-Handlebars.registerHelper('ovrigttyp', function (Faktaid, Faktarubrik, FaktaValue) {
+Handlebars.registerHelper('ovrigttyp', function (Faktaid, Faktarubrik, FaktaValue, Faktatypid) {
     var ret = "";
     if (Faktaid === "5") {
 
         ret += "<div class='row'><div class='small-12 medium-6 columns faktalabel'>";
         ret += Faktarubrik;
-        ret += "</div><div class='small-12 medium-6 columns'>";
+        if (Faktatypid == "33" && FaktaValue.length > 18) {
+            ret += "</div><div class='small-12 columns'>";
+        } else {
+            ret += "</div><div class='small-12 medium-6 columns'>";
+        }
         ret += FaktaValue
         if (!isNaN(FaktaValue)) {
             ret += faktavalueextention(Faktarubrik);

@@ -75,13 +75,13 @@ var fyllArrJson = function (data, callback) {
     //UTÖVAREBLOCK
     _arrjsondata.UtovareData.UtovarID = arrdata.ansokningUtovardata.UtovarID;
     _arrjsondata.UtovareData.Organisation = arrdata.ansokningUtovardata.Organisation;
-    _arrjsondata.UtovareData.Fornamn = arrdata.ansokningUtovardata.Fornamn;
-    _arrjsondata.UtovareData.Efternamn = arrdata.ansokningUtovardata.Efternamn;
-    _arrjsondata.UtovareData.Telefon = arrdata.ansokningUtovardata.Telefon;
+    _arrjsondata.UtovareData.Fornamn = arrdata.ansokningKontaktfornamn;
+    _arrjsondata.UtovareData.Efternamn = arrdata.ansokningKontaktEfternamn;
+    _arrjsondata.UtovareData.Telefon = arrdata.ansokningKontaktTelefon;
     _arrjsondata.UtovareData.Adress = arrdata.ansokningUtovardata.Adress;
     _arrjsondata.UtovareData.Postnr = arrdata.ansokningUtovardata.Postnr;
     _arrjsondata.UtovareData.Ort = arrdata.ansokningUtovardata.Ort;
-    _arrjsondata.UtovareData.Epost = arrdata.ansokningUtovardata.Epost;
+    _arrjsondata.UtovareData.Epost = arrdata.ansokningKontaktEpost;
     _arrjsondata.UtovareData.Kommun = arrdata.ansokningUtovardata.Kommun;
     _arrjsondata.UtovareData.Weburl = arrdata.ansokningUtovardata.Weburl;
     

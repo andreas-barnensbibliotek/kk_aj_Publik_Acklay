@@ -8,7 +8,8 @@ window.kk_aj_publikAppsettings =
             //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
             //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
             //basepageUri: "/KulturkatalogenAdmin",
-            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/"
+            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
+            //arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/"
 
            //SERVERN
             apiserver: "http://kulturkatalog.kivdev.se:8080",
@@ -17,7 +18,8 @@ window.kk_aj_publikAppsettings =
             htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
             detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
             basepageUri: "/KulturkatalogenAdmin",
-            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/"
+            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/",
+            arrimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/"
 
         },
         userinfo: {
@@ -37,7 +39,7 @@ window.kk_aj_publikAppsettings =
             closeIcon: 'X',
             closeButton: true
         },
-        debug: "false" // true / false
+        debug: "true" // true / false
     };
 
 module.exports = {  

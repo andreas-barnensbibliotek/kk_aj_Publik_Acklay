@@ -16,7 +16,7 @@
 <div class="artsidecontainer granska_lokal_mainblock">
 	<h3>Lokal</h3>  
 	{{#each Faktalist}}	 
-		{{#lokaltyp Faktaid Faktarubrik FaktaValue}}		      
+		{{#lokaltyp Faktaid Faktarubrik FaktaValue FaktaTypID}}		      
 		{{/lokaltyp}} 	      
 	{{/each}}
 </div> 
@@ -40,7 +40,7 @@
 <div class="artsidecontainer granska_Ekonomi_mainblock">
 	<h3>Kostnad</h3>  
 	{{#each Faktalist}}	 
-		{{#ekonomityp Faktaid Faktarubrik FaktaValue}}		      
+		{{#ekonomityp Faktaid Faktarubrik FaktaValue FaktaTypID}}		      
 		{{/ekonomityp}} 	      
 	{{/each}}
 </div>
@@ -52,7 +52,7 @@
 <div class="artsidecontainer granska_Ovrigt_mainblock">
 	<h3>Övrigt</h3>  
 	{{#each Faktalist}}	 
-		{{#ovrigttyp Faktaid Faktarubrik FaktaValue}}		      
+		{{#ovrigttyp Faktaid Faktarubrik FaktaValue FaktaTypID}}		      
 		{{/ovrigttyp}} 	      
 	{{/each}}
 </div>
