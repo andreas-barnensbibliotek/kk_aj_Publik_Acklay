@@ -2,24 +2,26 @@
 window.kk_aj_publikAppsettings =
     {
         globalconfig: {
-            //apiserver: "http://localhost:60485",
-            //dnnURL: "http://dnndev.me",           
-            //localOrServerURL: "http://localhost:60485/Api_v2",
-            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-            //basepageUri: "/KulturkatalogenAdmin",
-            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
-            //arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/"
+            apiserver: "http://localhost:60485",
+            dnnURL: "http://dnndev.me",           
+            localOrServerURL: "http://localhost:60485/Api_v2",
+            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+            basepageUri: "/KulturkatalogenAdmin",
+            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
+            arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/",
+            granskavy: "GranskaDetalj"
 
            //SERVERN
-            apiserver: "http://kulturkatalog.kivdev.se:8080",
-            dnnURL: "http://kulturkatalog.kivdev.se",
-            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-            basepageUri: "/KulturkatalogenAdmin",
-            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/",
-            arrimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/"
+            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+            //dnnURL: "http://kulturkatalog.kivdev.se",
+            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+            //basepageUri: "/KulturkatalogenAdmin",
+            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/",
+            //arrimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/",
+            //granskavy: "GranskaDetalj"
 
         },
         userinfo: {
@@ -39,7 +41,7 @@ window.kk_aj_publikAppsettings =
             closeIcon: 'X',
             closeButton: true
         },
-        debug: "true" // true / false
+        debug: "false" // true / false
     };
 
 module.exports = {  

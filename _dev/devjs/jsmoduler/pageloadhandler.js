@@ -14,43 +14,49 @@ module.exports = {
                 arrsearchhandler.init(val)
                 break;
             case "Dnn_module_kk_aj_Publik_detail":
-                arrDetailvyHandler.DetailVy(val);
+                let granskapage = appsettings.config.globalconfig.granskavy
+
+                if ($('.kk_aj_CurrentPageName').html() == granskapage) {
+                    arrDetailvyHandler.GranskaVy(val);
+                } else {
+                    arrDetailvyHandler.DetailVy(val);
+                }                
                 break;
 
             default:               
-                loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
+                //loadtemplateTypes(appsettings.topnavtemplate, appsettings.currentUserid);
                 
                 break;
         }        
     }
 };
 
-var loadtemplateTypes = function (pagetemplate, userid, sortera, val) {
+//var loadtemplateTypes = function (pagetemplate, userid, sortera, val) {
   
-    $.each(pagetemplate, function( obj, value ) {   
-        ServiceHandler.injecttemplateDebug(value.templatedata, userid, val, function (data) {         
-            loadpagetemplates(value, data, function (data) {
-                if (data == "ja") {
-                   // console.log("KLART");                    
-                }
-            });
-        });     
-    });
+//    $.each(pagetemplate, function( obj, value ) {   
+//        ServiceHandler.injecttemplateDebug(value.templatedata, userid, val, function (data) {         
+//            loadpagetemplates(value, data, function (data) {
+//                if (data == "ja") {
+//                   // console.log("KLART");                    
+//                }
+//            });
+//        });     
+//    });
    
-}
+//}
 
 
-var loadpagetemplates = function (template, currentdata,callback) {
+//var loadpagetemplates = function (template, currentdata,callback) {
     
-    $.get(appsettings.htmltemplateURL + "/" + template.filename, function (data) {
-        var temptpl = Handlebars.compile(data);
+//    $.get(appsettings.htmltemplateURL + "/" + template.filename, function (data) {
+//        var temptpl = Handlebars.compile(data);
 
-        updatecountmenybox(currentdata);
-        $(template.targetdiv).html(temptpl(currentdata));
-        callback("ja");
-    }, 'html');
+//        updatecountmenybox(currentdata);
+//        $(template.targetdiv).html(temptpl(currentdata));
+//        callback("ja");
+//    }, 'html');
 
-}
+//}
 
 
 

@@ -23,6 +23,7 @@ module.exports = {
 
             var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
             var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
+            var btn_befintlig_utovartxtBlock = $('.kk_aj_form_visa_utovarinfo');
                        
             $('.ArrangemangtypBlock input').on('change', function () {
                 var vald = $('input[name=arr_radioValArrtyp]:checked', '.ArrangemangtypBlock').val();
@@ -37,9 +38,10 @@ module.exports = {
             });
             // Nav Event
             $('body').on('click', '.kk_aj_btnbefintligutovare', function () {
-                tidigareutovaredisable(true);
+                //tidigareutovaredisable(true);
                 $('.kk_aj_form_utovareuppgifter :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
                 btn_befintlig_utovareBlock.hide();
+                btn_befintlig_utovartxtBlock.hide();
                 btn_ny_utovareBlock.show();
                 $('.kk_aj_verifystep2').hide();                
                 $('small.error').hide();
@@ -50,11 +52,12 @@ module.exports = {
                 return false;
             });
             $('body').on('click', '.kk_aj_btnnyutovare', function () {
-                tidigareutovaredisable(false);
+                //tidigareutovaredisable(false);
                 arrformAutocompleteHandler.emptyutovareform();
                 btn_befintlig_utovareBlock.removeClass('successborder').show();
                 btn_ny_utovareBlock.hide();
                 $('.kk_aj_befintlignotme').hide();
+                btn_befintlig_utovartxtBlock.hide();
                 $('.kk_aj_verifystep2').show();
                 $(this).removeClass("secondary");
                 $('.kk_aj_btnbefintligutovare').addClass("secondary");
@@ -65,7 +68,7 @@ module.exports = {
 
             // Get befintlig arrangör
             $('body').on('click', '.kk_aj_btnHamtakontaktupg', function () {
-                tidigareutovaredisable(true);
+                //tidigareutovaredisable(true);
                 var epost = $('.kk_aj_search_utovareEpost');
                 var postnr = $('.kk_aj_search_utovarePostnr');
                 var kk_aj_search_utovarePostnr_error = $('.kk_aj_search_utovarePostnr_error');
@@ -90,12 +93,16 @@ module.exports = {
 
                 if (epost.val() && postnr.val()) {
                     arrformAutocompleteHandler.getBefintligutovare(epost.val(), postnr.val(), function (data) {
-                        if (!data == false) {
+                       
 
+
+                        if (!data == false) {
+                            btn_befintlig_utovartxtBlock.show();
+                            kk_aj_form_utovareuppgifter.hide()
                             kk_aj_btnHamtakontaktupg.removeClass('secondary').addClass('success');
 
-                            kk_aj_form_utovareuppgifter.addClass('successborder').show();
-                            $('.kk_aj_befintlignotme').show();
+                            //kk_aj_form_utovareuppgifter.addClass('successborder').show();
+                            //$('.kk_aj_befintlignotme').show();
                             kk_aj_verifystep2.show();                           
                         } else {
                             kk_aj_search_Nothingtoshow.show();
@@ -112,6 +119,20 @@ module.exports = {
                 }               
                 return false;
             });
+            $('#ChangeUppgifterKontakt').on('click', function (e) {
+                btn_befintlig_utovartxtBlock.hide();
+                btn_befintlig_utovareBlock.show();
+                $('.SparaUppgifterKontaktBlock').show();
+                return false;
+            })
+
+            $('#SparaUppgifterKontakt').on('click', function (e) {
+                arrformAutocompleteHandler.savekontaktuppgifter();
+                btn_befintlig_utovartxtBlock.show();
+                btn_befintlig_utovareBlock.hide();
+                $('.SparaUppgifterKontaktBlock').hide();
+                return false;
+            })
 
             // Verify steg 1
             $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {                

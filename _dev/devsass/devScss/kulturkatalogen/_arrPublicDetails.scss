@@ -20,3 +20,24 @@
       }
     }
 }
+
+.kk_aj_granskablock{
+    background-color: $snow;
+    padding:1rem;
+    #kk_aj_arrangorstod{
+        background-color:$white;
+    }
+    .errorborder{
+        border:1px solid $alert-color;
+    }
+   
+}
+.top-bar-section .dropdown li ul li{
+    width:300px;
+    a{  
+        max-width: 300px;
+        white-space:normal;
+        overflow-wrap: break-word!important;
+        word-wrap:break-word!important;      
+    }
+ }

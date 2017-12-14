@@ -7,6 +7,8 @@
 @import 'devScss/Komponenter/_tab-bar';
 @import 'devScss/foundation/_offcanvas';
 @import 'devScss/foundation/_forms';
+/*@import 'devScss/Komponenter/_dropdown';
+@import 'devScss/Komponenter/_dropdown-buttons';*/
 @import 'devScss/Komponenter/_global';
 @import 'devScss/Komponenter/_buttons';
 @import 'devScss/Komponenter/_button-groups';
@@ -45,7 +47,8 @@
 @import 'devScss/kulturkatalogen/_kulturkatalogenArtikel';
 @import 'devScss/kulturkatalogen/_kulturkatalogMain';
 @import 'devScss/kulturkatalogen/_arrPublicDetails';
-
+@import 'foundation/components/dropdown';
+@import 'foundation/components/dropdown-buttons';
 //@import 'devScss/vendors/_animateSlider';
 // Behold, here are all the Foundation components.
 
@@ -1676,4 +1679,16 @@ a.ui-button:active,
 
 #kk_aj_conf{display:none;}
 .ui-slider{ width:100% !important;}
+
+.top-bar-section a{color:#000!important;
+   font-size: 1rem!important;
+}
+.top-bar-section ul li *{
+   background:#fff!important;
+   
+}
+.top-bar-section ul ul li *{
+   background-color:#eee!important;
+}
+.caret{color:#000;}
 

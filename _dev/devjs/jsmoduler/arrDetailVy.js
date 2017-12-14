@@ -2,14 +2,23 @@
 var $ = require("jquery");
 var appsettingsobject = require("./appSettings.js");
 var detailhandler = require("./arrDetailHandler.js");
+var granska = require("./arrgranskahandler.js");
 var _appsetting = appsettingsobject.config;
 
 module.exports = {
     DetailVy: function (arrid) {
 
-        fillDetaildata(arrid);
+        fillDetaildata(arrid, "details");
 
         
+    },
+    /* Granskavy fyller granskavyn med detaljdata och sätter upp jqueryeventen för granskavyn */
+    GranskaVy: function (arrid) {
+
+        fillDetaildata(arrid, "granska");
+        
+        granska.granskahandler(arrid);
+
     }
 };
 
@@ -21,11 +30,15 @@ var renderDetails = function (arrJson) {
 }
 
 
-var fillDetaildata = function (arrid) {
+var fillDetaildata = function (arrid, typ) {
 
-    Servicehandler(arrid, function (data) {
+    Servicehandler(arrid, typ, function (data) {
         if (data.kk_aj_admin.ansokningarlista.ansokningarcount == "0") {
-            window.location.href = "/404";
+            //if (typ == "granska") {
+            //    $('.detailblock').hide();
+            //} else {
+                window.location.href = "/404";
+            
             return false;
         };
         fyllArrJson(data, function (json) {
@@ -38,8 +51,9 @@ var fillDetaildata = function (arrid) {
 }
 
 
-var Servicehandler = function (arrid, callback) {
-    var arrurl = "/Api_v2/arrangemang/details/uid/0/typ/" + arrid + "/devkey/alf?type=json&callback=testar";
+var Servicehandler = function (arrid, typ, callback) {
+
+    var arrurl = "/Api_v2/arrangemang/"+ typ +"/uid/0/typ/" + arrid + "/devkey/alf?type=json&callback=testar";
     var serverurl = _appsetting.globalconfig.apiserver + arrurl;
 
     $.ajax({
