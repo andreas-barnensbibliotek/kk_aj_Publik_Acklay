@@ -9,6 +9,13 @@ var _arrjsondata ={
     "Innehall": "",
     "Arrangemangtyp": "",
     "Konstform": "",
+    "Konstform2": "",
+    "Konstform3": "",
+    "KontaktId": "",
+    "Kontaktfornamn": "",
+    "KontaktEfternamn": "",
+    "KontaktTelefon": "",
+    "KontaktEpost": "",
     "Faktalist": [],
     "MediaList": [],
     "Username": "",
@@ -46,13 +53,28 @@ module.exports = {
         
        // $(function () {
 
-            let arrformjsondata = _arrjsondata;
+        let arrformjsondata = _arrjsondata;
 
-            arrformjsondata.Rubrik = $('#arr_rubrik').val();
-            arrformjsondata.UnderRubrik = $('#arr_underrubrik').val();
-            arrformjsondata.Innehall = htmlEncode($('#arr_presentation').val());
-            arrformjsondata.Arrangemangtyp = $('input[name=arr_radioValArrtyp]:checked').val();
-            arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
+        arrformjsondata.Rubrik = $('#arr_rubrik').val();
+        arrformjsondata.UnderRubrik = $('#arr_underrubrik').val();
+        arrformjsondata.Innehall = htmlEncode($('#arr_presentation').val());
+        arrformjsondata.Arrangemangtyp = $('input[name=arr_radioValArrtyp]:checked').val();
+        arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
+        arrformjsondata.Konstform2 = $('#formFler1KonstformId').val();
+        arrformjsondata.Konstform3="";        
+        arrformjsondata.Kontaktfornamn = $('#arr_kontakt_fornamn').val();
+        arrformjsondata.KontaktEfternamn = $('#arr_kontakt_efternamn').val();
+        arrformjsondata.KontaktTelefon = $('#arr_kontakt_telefonnr').val();
+        arrformjsondata.KontaktEpost = $('#arr_kontakt_epost').val();
+
+        let Efternamn = $('#utovare_efternamn').val();
+        $('#arr_kontakt_efternamn').val(Efternamn);
+        
+        let Telefon = $('#utovare_telefonnr').val();
+        $('#arr_kontakt_telefonnr').val(Telefon);    
+
+        let Epost = $('#utovare_epost').val();
+        $('#arr_kontakt_epost').val(Epost);    
 
             let arr_antalmedverkande = $('#arr_antalmedverkande');
             arrformjsondata.Faktalist = [];

@@ -70,6 +70,9 @@ module.exports = {
     },
     savekontaktuppgifter: function () {
         savekontaktupg();
+    },
+    kopierakontaktuppgifter: function () {
+        copykontaktupg();
     }
 
 };
@@ -147,6 +150,23 @@ var savekontaktupg = function () {
     $('#visa_utovareEpost2').html(Epost);
     
 };
+
+var copykontaktupg = function () {
+
+    let Fornamn = $('#utovare_fornamn').val();
+    $('#arr_kontakt_fornamn').val(Fornamn);
+
+    let Efternamn = $('#utovare_efternamn').val();
+    $('#arr_kontakt_efternamn').val(Efternamn);
+    
+    let Telefon = $('#utovare_telefonnr').val();
+    $('#arr_kontakt_telefonnr').val(Telefon);    
+
+    let Epost = $('#utovare_epost').val();
+    $('#arr_kontakt_epost').val(Epost);    
+
+}
+
 //var fyllutovaredata = function (data) {
 //    var utovare = data.kk_aj_admin.Utovarelist[0];
 //    tomutovarefield();

@@ -12080,11 +12080,20 @@ input[type=radio] + label {
   margin-bottom: 2rem; }
 
 /* line 335, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.exempleblock {
+  /*.exempleblockbg{
+        background-color: #F9F9F9;
+    }*/ }
+  /* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .exempleblock fieldset {
+    padding-bottom: 0rem !important;
+    margin-bottom: 0px !important; }
+
+/* line 347, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrexempel_block fieldset {
-  padding-bottom: 0rem !important;
   margin-bottom: 0px !important; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker {
   display: none;
   position: absolute;
@@ -12092,7 +12101,7 @@ input[type=radio] + label {
   margin-top: 1px;
   direction: ltr; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker.dropdown-menu {
   position: absolute;
   top: 100%;
@@ -12113,17 +12122,17 @@ input[type=radio] + label {
   font-size: 13px;
   line-height: 18px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker.dropdown-menu td, .datepicker.dropdown-menu th {
   padding: 4px 5px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker table {
   border: 0;
   margin: 0;
   width: auto; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker table tr td span {
   display: block;
   width: 23%;
@@ -12133,7 +12142,7 @@ input[type=radio] + label {
   margin: 1%;
   cursor: pointer; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td, .datepicker th {
   text-align: center;
   width: 20px;
@@ -12143,82 +12152,82 @@ input[type=radio] + label {
   padding: 4px 8px;
   cursor: pointer; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td {
   background: #fff; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td span.active, .datepicker td.active.day, .datepicker td.active.year {
   background: #2ba6cb; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td.new, .datepicker td.old {
   color: #999; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td span.month.disabled, .datepicker td span.year.disabled, .datepicker td.day.disabled {
   color: #eee; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker th {
   background: #fff; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker th span.active, .datepicker th.active.day, .datepicker th.active.year {
   background: #2ba6cb; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker th.date-switch {
   width: 145px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker .cw {
   font-size: 10px;
   width: 12px;
   padding: 0 2px 0 5px;
   vertical-align: middle; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker.days div.datepicker-days, .datepicker.months div.datepicker-months, .datepicker.years div.datepicker-years {
   display: block; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown:after, .datepicker-dropdown:before {
   content: '';
   display: inline-block;
   position: absolute; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker thead tr:first-child th {
   cursor: pointer; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker thead tr:first-child th.cw {
   cursor: default;
   background-color: transparent; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker tfoot tr:first-child th {
   cursor: pointer; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-inline {
   width: 220px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-rtl {
   direction: rtl; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-rtl table tr td span {
   float: right; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown {
   top: 0;
   left: 0; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
@@ -12227,7 +12236,7 @@ input[type=radio] + label {
   top: -7px;
   left: 6px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown:after {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
@@ -12235,11 +12244,11 @@ input[type=radio] + label {
   top: -6px;
   left: 7px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown::after, .datepicker-dropdown::before, .datepicker > div {
   display: none; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-close {
   position: absolute;
   top: -30px;
@@ -12249,7 +12258,7 @@ input[type=radio] + label {
   padding: 0;
   display: none; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .table-striped .datepicker table tr td, .table-striped .datepicker table tr th {
   background-color: transparent; }
 
@@ -13879,11 +13888,20 @@ input[type=radio] + label {
   margin-bottom: 2rem; }
 
 /* line 335, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.exempleblock {
+  /*.exempleblockbg{
+        background-color: #F9F9F9;
+    }*/ }
+  /* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+  .exempleblock fieldset {
+    padding-bottom: 0rem !important;
+    margin-bottom: 0px !important; }
+
+/* line 347, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .arrexempel_block fieldset {
-  padding-bottom: 0rem !important;
   margin-bottom: 0px !important; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker {
   display: none;
   position: absolute;
@@ -13891,7 +13909,7 @@ input[type=radio] + label {
   margin-top: 1px;
   direction: ltr; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker.dropdown-menu {
   position: absolute;
   top: 100%;
@@ -13912,17 +13930,17 @@ input[type=radio] + label {
   font-size: 13px;
   line-height: 18px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker.dropdown-menu td, .datepicker.dropdown-menu th {
   padding: 4px 5px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker table {
   border: 0;
   margin: 0;
   width: auto; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker table tr td span {
   display: block;
   width: 23%;
@@ -13932,7 +13950,7 @@ input[type=radio] + label {
   margin: 1%;
   cursor: pointer; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td, .datepicker th {
   text-align: center;
   width: 20px;
@@ -13942,82 +13960,82 @@ input[type=radio] + label {
   padding: 4px 8px;
   cursor: pointer; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td {
   background: #fff; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td span.active, .datepicker td.active.day, .datepicker td.active.year {
   background: #2ba6cb; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td.new, .datepicker td.old {
   color: #999; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker td span.month.disabled, .datepicker td span.year.disabled, .datepicker td.day.disabled {
   color: #eee; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker th {
   background: #fff; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker th span.active, .datepicker th.active.day, .datepicker th.active.year {
   background: #2ba6cb; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker th.date-switch {
   width: 145px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker .cw {
   font-size: 10px;
   width: 12px;
   padding: 0 2px 0 5px;
   vertical-align: middle; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker.days div.datepicker-days, .datepicker.months div.datepicker-months, .datepicker.years div.datepicker-years {
   display: block; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown:after, .datepicker-dropdown:before {
   content: '';
   display: inline-block;
   position: absolute; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker thead tr:first-child th {
   cursor: pointer; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker thead tr:first-child th.cw {
   cursor: default;
   background-color: transparent; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker tfoot tr:first-child th {
   cursor: pointer; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-inline {
   width: 220px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-rtl {
   direction: rtl; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-rtl table tr td span {
   float: right; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown {
   top: 0;
   left: 0; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
@@ -14026,7 +14044,7 @@ input[type=radio] + label {
   top: -7px;
   left: 6px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown:after {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
@@ -14034,11 +14052,11 @@ input[type=radio] + label {
   top: -6px;
   left: 7px; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-dropdown::after, .datepicker-dropdown::before, .datepicker > div {
   display: none; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .datepicker-close {
   position: absolute;
   top: -30px;
@@ -14048,7 +14066,7 @@ input[type=radio] + label {
   padding: 0;
   display: none; }
 
-/* line 340, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+/* line 352, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .table-striped .datepicker table tr td, .table-striped .datepicker table tr th {
   background-color: transparent; }
 
