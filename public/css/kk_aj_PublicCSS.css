@@ -12935,6 +12935,88 @@ input[type=radio] + label {
     overflow-wrap: break-word !important;
     word-wrap: break-word !important; }
 
+@media print {
+  /* line 46, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .kk_aj_mainFreetextSearchblock, .kk_aj_mainsearchblock, .kk_aj_filterblock, .kk_aj_filterRubrikBlock, .kk_aj_arr_item_buttonblock {
+    display: none !important; }
+  /* line 47, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .kk_aj_superProductListBlock {
+    background: none; }
+  /* line 48, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .kk_aj_arr_item_contentblock {
+    min-height: 0px !important; }
+  /* line 51, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .menybreadcrumb, .footencol, .granska_Dela, #myBtn, nav {
+    display: none !important; }
+  /* line 52, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .granskaFaktaMainblock {
+    float: right; }
+  /* line 53, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .artsidecontainer {
+    padding-bottom: 0px;
+    margin-bottom: 0px !important; }
+  /* line 54, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .detailblock, .arrRubrikblock {
+    padding-top: 0rem;
+    margin-top: 0rem !important; }
+  /* line 55, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  h3 {
+    margin: 0px; }
+  /* line 56, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .right {
+    float: left !important; }
+  /* line 57, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  a[href]:after {
+    content: none !important; }
+  /* line 60, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .large-1 {
+    width: 8.33333%; }
+  /* line 64, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .large-2 {
+    width: 16.66667%; }
+  /* line 68, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .small-3 {
+    width: 25%; }
+  /* line 72, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .medium-4 {
+    width: 33.33333%; }
+  /* line 76, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .large-5 {
+    width: 41.66667%; }
+  /* line 80, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .large-6 {
+    width: 50%; }
+  /* line 84, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .large-7 {
+    width: 58.33333%; }
+  /* line 88, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .medium-8 {
+    width: 66.66667%; }
+  /* line 92, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .small-9 {
+    width: 75%; }
+  /* line 96, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .large-10 {
+    width: 83.33333%; }
+  /* line 100, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .large-11 {
+    width: 91.66667%; }
+  /* line 104, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .small-12 {
+    width: 100%; }
+  /* line 107, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+  .ModDnnmodulekkajPublikproductlistC {
+    font-size: 0.8rem !important; }
+    /* line 109, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+    .ModDnnmodulekkajPublikproductlistC h1 {
+      font-size: 1.5rem !important; }
+    /* line 110, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+    .ModDnnmodulekkajPublikproductlistC h2 {
+      font-size: 1.3rem !important; }
+    /* line 111, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
+    .ModDnnmodulekkajPublikproductlistC h3 {
+      font-size: 1.1rem !important; } }
+
 /*@import 'foundation/components/grid';
 @import 'foundation/components/accordion';
 @import 'foundation/components/alert-boxes';

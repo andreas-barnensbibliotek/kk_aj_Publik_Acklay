@@ -52,7 +52,7 @@ module.exports = {
         $('.img_forestallningtune').attr("src", basesrc + "forestallningpatune.png");
         $('.img_Skolbio').attr("src", basesrc + "Skolbio.png");
         $('.img_forfattarbesok').attr("src", basesrc + "forfattarbesok.png");
-        $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "kulturpedagogiskaprojekt.png");
+        $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "workshops_projekt.png");
         $('.img_Fortbildningar').attr("src", basesrc + "Fortbildningar.png");
         $('.img_resmalsbesok').attr("src", basesrc + "resmalsbesok.png");
 
@@ -68,7 +68,7 @@ module.exports = {
                 $('.img_forfattarbesok').attr("src", basesrc + "forfattarbesok_invert.png");
                 break;
             case "4":
-                $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "kulturpedagogiskaprojekt_invert.png");
+                $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "workshops_projekt_invert.png");
                 break;
             case "5":
                 $('.img_Fortbildningar').attr("src", basesrc + "Fortbildningar_invert.png");
@@ -249,9 +249,11 @@ var validateinputs = function (validateobj, next, ret) {
     //var ret = true;
     validateobj.each(function () {
         var current = $(this);
-        var current_error = $("." + current.attr('id') + "_error");
-
-        if (current.val() != "" || current.html() != "" || current.hasClass('novalidate')) {
+        var currentid =current.attr('id')
+       
+            var current_error = $("." + currentid + "_error");
+        
+            if (current.val() != "" || current.html() != "" || current.hasClass('novalidate')) {
             
             $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
             $('.kk_aj_verifystep' + next + '').removeClass('disabled');

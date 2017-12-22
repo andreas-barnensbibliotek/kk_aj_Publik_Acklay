@@ -73,6 +73,42 @@ module.exports = {
     },
     kopierakontaktuppgifter: function () {
         copykontaktupg();
+    },
+    getutovareArrlist: function (utovareid) {
+        var requesturl = "";
+        var ok = "false";
+
+        if (utovareid) {
+            ok = true;
+        }
+
+        if (ok) {
+            //http://localhost:60485/Api_v2/arrangemang/byutovare/uid/0/typ/0/val/78/devkey/alf?type=json&callback=testar
+                requesturl = _appsetting.globalconfig.apiserver + "/Api_v2/arrangemang/byutovare/uid/0/typ/0/val/" + utovareid + "/devkey/alf?type=json";
+
+            servercall(requesturl, function (data, retmess) {
+                console.log("detta är REtmess " + retmess);
+
+                $.each(data.kk_aj_admin.ansokningarlista.ansokningar, function (i, option) {
+                    $('#arr_getTidigareArrangemang').append($('<option/>').attr("value", option.ansokningid).text(option.ansokningtitle));
+                });                
+            });
+        }
+    },
+    getTidigareArrDetail: function (arrid) {
+        var requesturl = "";
+        var ok = "false";
+
+        if (arrid){ 
+            //http://localhost:60485/Api_v2/arrangemang/details/uid/0/typ/118/devkey/alf?type=json&callback=testar
+            requesturl = _appsetting.globalconfig.apiserver + "/Api_v2/arrangemang/details/uid/0/typ/" + arrid + "/devkey/alf?type=json&callback=testar";
+
+            servercall(requesturl, function (data, retmess) {
+                console.log("detta är REtmess " + retmess);
+                fyllarrangemangDetaildata(data)
+               
+            });
+        };
     }
 
 };
@@ -166,6 +202,121 @@ var copykontaktupg = function () {
     $('#arr_kontakt_epost').val(Epost);    
 
 }
+
+
+var fyllarrangemangDetaildata = function (data) {
+
+    var arrval = data.kk_aj_admin.ansokningarlista.ansokningar;
+    var yearMin = "";
+    var yearMax = "";
+    if (arrval.length > 0) {
+
+        $('ul.ArrangemangtypBlock input[name=arr_radioValArrtyp][value="' + arrval[0].ansokningtypid + '"] ').click();
+        $('ul.kontformBlock input[name=arr_radioValkontstform][value="' + arrval[0].ansokningkonstformid + '"] ').click();
+        $('#arr_rubrik').val(arrval[0].ansokningtitle);
+        $('#arr_underrubrik').val(arrval[0].ansokningsubtitle);
+        $('#arr_presentation').html(arrval[0].ansokningContent);
+        let imgurl = _appsetting.globalconfig.dnnURL + "/Portals/0/kulturkatalogenArrImages/" + arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl
+        $('#kk_aj_tmpimg').attr("src", imgurl);
+        $('#kk_aj_tmpimg').attr("alt", arrval[0].ansokningMediaImage.MediaUrl);
+        $('#kk_aj_tmpimg').attr("title", arrval[0].ansokningMediaImage.MediaUrl);
+        //$('#arr_presentationsbild').val(arrval[0].ansokningMediaImage.MediaUrl);
+        $('#arr_altfoto').val(arrval[0].ansokningMediaImage.MediaAlt);
+        $('#arr_fotograf').val(arrval[0].ansokningMediaImage.MediaFoto);
+        
+        $.each(arrval[0].ansokningFaktalist, function (i, val) {
+
+            if (val.FaktaTypID == "2") {
+                $('#arr_antalmedverkande').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "3") {
+                $('#arr_medverkande').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "5") {
+                $('#arr_Bokningsbar').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "6") {
+                $('#formMaxAudienceId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "7") {
+                yearMin = val.FaktaValue;
+            };
+            if (val.FaktaTypID == "8") {
+                yearMax = val.FaktaValue;
+            };
+            if (val.FaktaTypID == "9") {
+                $('#formMaxShowsId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "10") {
+                $('#formBuildTimeId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "11") {
+                $('#formDemolishTimeId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "12") {
+                $('#formVenueWidthId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "13") {
+                $('#formVenueDepthId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "14") {
+                $('#formVenueHeightId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "15") {
+                $('input[name=arr_ljus][value="' + val.FaktaValue + '"] ').click();
+            };
+            if (val.FaktaTypID == "16") {
+                $('#formCarriersId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "17") {
+                $('#formElectricityId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "19") {
+                $('#arr_ekonomikostnad').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "21") {
+                $('input[name=arr_resor][value="' + val.FaktaValue + '"] ').click();
+            };
+            if (val.FaktaTypID == "22") {
+                $('input[name=arr_logi][value="' + val.FaktaValue + '"] ').click();
+            };
+            if (val.FaktaTypID == "24") {
+                $('input[name=arr_Traktamente][value="' + val.FaktaValue + '"] ').click();
+            };
+            if (val.FaktaTypID == "25") {
+                $('#arr_laromedel').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "26") {
+                $('#kk_aj_speltid').html(val.FaktaValue + "min");
+            };
+            if (val.FaktaTypID == "27") {
+                $('input[name=arr_morklaggning][value="' + val.FaktaValue + '"] ').click();
+            };
+            if (val.FaktaTypID == "28") {
+                $('input[name=arr_ljud][value="' + val.FaktaValue + '"] ').click();
+            };
+            if (val.FaktaTypID == "30") {
+                $('#arr_resorovrigt').html(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "33") {
+                $('#arr_overiganoter').html(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "35") {
+                $('#arr_Premiardatum').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "36") {
+                $('#formMaxParticipantsId').val(val.FaktaValue);
+            };
+            if (val.FaktaTypID == "36") {
+                $('#formMaxParticipantsId').val(val.FaktaValue);
+            };
+
+
+        });
+
+        $('#kk_aj_yearspan').html(yearMin + "år - " + yearMax + "år");
+    };
+};
 
 //var fyllutovaredata = function (data) {
 //    var utovare = data.kk_aj_admin.Utovarelist[0];

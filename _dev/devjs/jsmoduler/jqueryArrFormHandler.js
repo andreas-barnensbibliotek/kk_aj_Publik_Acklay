@@ -48,6 +48,7 @@ module.exports = {
                 btn_ny_utovareBlock.show();
                 $('.kk_aj_verifystep2').hide();                
                 $('small.error').hide();
+                $('#arr_presentationsbild').removeClass('novalidate');
                 $(this).removeClass("secondary");
                 $('.kk_aj_btnnyutovare').addClass("secondary");
                 $('#utovare_epost').addClass('befintligutovare')
@@ -56,12 +57,13 @@ module.exports = {
             });
             $('body').on('click', '.kk_aj_btnnyutovare', function () {
                 //tidigareutovaredisable(false);
-                arrformAutocompleteHandler.emptyutovareform();
-                //btn_befintlig_utovareBlock.removeClass('successborder').show();
+                clearForm();
+                arrformAutocompleteHandler.emptyutovareform();               
+                btn_befintlig_utovareBlock.show();
                 btn_ny_utovareBlock.hide();
                 visagetTidigareArrBlock.hide();
                 btn_kontaktupg_arrangemangBlock.show();
-                //$('.kk_aj_befintlignotme').hide();
+                $('#arr_presentationsbild').removeClass('novalidate');
                 btn_befintlig_utovartxtBlock.hide();
                 $('.kk_aj_verifystep2').show();
                 $(this).removeClass("secondary");
@@ -102,6 +104,9 @@ module.exports = {
 
 
                         if (!data == false) {
+                            let currentutovareid = $('.kk_aj_form_befintligutovare').attr('rel');
+                            $('#arr_presentationsbild').addClass('novalidate');
+                            arrformAutocompleteHandler.getutovareArrlist(currentutovareid);
                             btn_befintlig_utovartxtBlock.show();
                             kk_aj_form_utovareuppgifter.hide()
                             kk_aj_btnHamtakontaktupg.removeClass('secondary').addClass('success');
@@ -110,6 +115,7 @@ module.exports = {
                             //$('.kk_aj_befintlignotme').show();
                             kk_aj_verifystep2.show();                           
                         } else {
+                            $('#arr_presentationsbild').removeClass('novalidate');
                             visagetTidigareArrBlock.hide();
                             kk_aj_search_Nothingtoshow.show();
                             kk_aj_search_Nothingtoshow_error.show().attr("style", "display:block");
@@ -125,6 +131,16 @@ module.exports = {
                 }               
                 return false;
             });
+
+            $('#arr_getTidigareArrangemang_Get').on('click', function (e) {
+
+                let utovareid = $('#arr_getTidigareArrangemang').val();
+                arrformAutocompleteHandler.getTidigareArrDetail(utovareid);
+               
+                return false;
+            })
+            
+
             $('#ChangeUppgifterKontakt').on('click', function (e) {
                 btn_befintlig_utovartxtBlock.hide();
                 btn_befintlig_utovareBlock.show();
@@ -283,30 +299,32 @@ module.exports = {
                         arrformjsonBuilder.getArrFormJsonData( _exempellistobject, function (callback) {
                            console.log(callback);
                            var arrjson = callback;
-
+                            // if utovareid>0 och arrid>0 och väljfil == 0 då behöver man inte ladda upp utan använder samma som tidigare
                            arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
                                console.log(callbackarrid);
-                               let bildfil = $("#arr_presentationsbild").get(0).files;
-                               arrformjsonBuilder.tempuploadimage("uploadimg", bildfil, callbackarrid, function (callback) {
-                                   let arr_cvmedverkande = $('#arr_cvmedverkande_file').get(0).files;
-                                   if (arr_cvmedverkande.length > 0) {
-                                       arrformjsonBuilder.tempuploadimage("uploadimg", arr_cvmedverkande, callbackarrid, function (callback) {
+                               var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
 
-                                           alert("Uppgifterna är nu inskickade!");
-                                           clearForm();
-                                           tabnavigator(1);
-                                           var jsondata = callback;
-                                           return true;
-                                       });
-                                   } else {
+                               let bildfil = $("#arr_presentationsbild").get(0).files;
+                               if ( bildfil.length > 0) {                                   
+                                   arrformjsonBuilder.tempuploadimage("uploadimg", bildfil, callbackarrid, function (callback) { return callback });
+                               }
+                               
+                               let arr_cvmedverkande = $('#arr_cvmedverkande_file').get(0).files;
+                               if (arr_cvmedverkande.length > 0) {
+                                   arrformjsonBuilder.tempuploadimage("uploadimg", arr_cvmedverkande, callbackarrid, function (callback) {
+
                                        alert("Uppgifterna är nu inskickade!");
                                        clearForm();
-                                       tabnavigator(1);
-                                       var jsondata = callback;
+                                       tabnavigator(1);                                       
                                        return true;
-                                   };
-                               
-                               });
+                                   });
+                               } else {
+                                   alert("Uppgifterna är nu inskickade!");
+                                   clearForm();
+                                   tabnavigator(1);                                   
+                                   return true;
+                               };
+
                            });
                         });
                         return false;
@@ -387,40 +405,44 @@ module.exports = {
               
 
         var clearForm = function () {
-            var addarrtab_1 = $('#addarrtab-1');
-            var addarrtab_2 = $('#addarrtab-2');
-            var addarrtab_3 = $('#addarrtab-3');
-            var addarrtab_4 = $('#addarrtab-4');
+            let addarrtab_1 = $('#addarrtab-1');
+            let addarrtab_2 = $('#addarrtab-2');
+            let addarrtab_3 = $('#addarrtab-3');
+            let addarrtab_4 = $('#addarrtab-4');
             addarrtab_1.show();
             addarrtab_2.show();
             addarrtab_3.show();
             addarrtab_4.show();
             $('#mainarrformcontainer :input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
             $('#mainarrformcontainer :checkbox, #mainarrformcontainer :radio').prop('checked', false);
-            addarrtab_1.hide();
+            //addarrtab_1.hide();
             addarrtab_2.hide();
             addarrtab_3.hide();
-            addarrtab_4;
+            addarrtab_4.hide();
+            
+            let btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
+            let btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
+            let btn_befintlig_utovartxtBlock = $('.kk_aj_form_visa_utovarinfo');
+            let btn_kontaktupg_arrangemangBlock = $('.kk_aj_form_kontaktuppgifterarr');
+            let visagetTidigareArrBlock = $('.kk_aj_visagetTidigareArrBlock');
             $('#kk_aj_tmpimg').attr('src', 'http://kulturkatalog.kivdev.se/DesktopModules/kk_aj_Publik_ArrangemangForm/images/missingimage.jpg');
-            $('.kk_aj_form_befintligutovare').hide();
-            $('.kk_aj_form_utovareuppgifter').removeClass('successborder').show();           
+            btn_ny_utovareBlock.hide();
+            btn_befintlig_utovareBlock.removeClass('successborder').show();           
             $('.kk_aj_verifystep2').show();
             $('.kk_aj_btnnyutovare').removeClass("secondary");
             $('.kk_aj_btnbefintligutovare').addClass("secondary");
             $('.kk_aj_form_befintligutovare').attr('rel', '0');
             $('.kk_aj_befintlignotme').hide();
-            //var btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
-            //var btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
-            //var btn_befintlig_utovartxtBlock = $('.kk_aj_form_visa_utovarinfo');
-            //var btn_kontaktupg_arrangemangBlock = $('.kk_aj_form_kontaktuppgifterarr');
-            //var visagetTidigareArrBlock = $('.kk_aj_visagetTidigareArrBlock');
-
+            let securetext = "Datalagringsavtal";
+            securetext += "Genom att skicka in din ansökan godkänner du att Kulturkatalogen behandlar och lagrar användardata. och... Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.";
+            
+            $('#ApproveText').html(securetext);
+            
             btn_ny_utovareBlock.hide();
             visagetTidigareArrBlock.hide();
             btn_kontaktupg_arrangemangBlock.show();           
             btn_befintlig_utovartxtBlock.hide();
-
-            
+                        
             $('#visa_utovareNamn2').html("");
             $('#visa_utovareHemsida2').html("");            
             $('#visa_utovareAdress2').html("");
@@ -431,6 +453,17 @@ module.exports = {
             $('#visa_utovareEfternamn2').html("");
             $('#visa_utovareTelenr2').html("");
             $('#visa_utovareEpost2').html("");
+
+            $('#utovare_aktor_grupp').val('');
+            $('#utovare_orghemsida').val("");
+            $('#utovare_adress').val("");
+            $('#utovare_postnummer').val("");
+            $('#utovare_ort').val("");
+            $('#utovare_kommun').val("");
+            $('#utovare_fornamn').val("");
+            $('#utovare_efternamn').val("");
+            $('#utovare_telefonnr').val("");
+            $('#utovare_epost').val("");
         }
 
     }
