@@ -118,15 +118,15 @@
 	        max: 19,
 	        values: [0, 19],
 	        slide: function (event, ui) {
-	            $("#kk_aj_yearspan2").html(ui.values[0] + unescape("%E5") + "r  - " + ui.values[1] + unescape("%E5") + "r");
+	            $("#kk_aj_yearspan2").html(ui.values[0] + " " + unescape("%E5") + "r  - " + ui.values[1] + " " + unescape("%E5") + "r");
 	            $("#kk_aj_yearspan2").attr("rel", ui.values[0]);
 	            $("#kk_aj_yearspan2").attr("rev", ui.values[1]);
 	        }
 	    });
 	    $("#kk_aj_yearspan").html($("#kk_aj_slider-range").slider("values", 0) +
-	       unescape("%E5") + "r -" + $("#kk_aj_slider-range").slider("values", 1) + unescape("%E5") + "r");
+	       " " + unescape("%E5") + "r -" + $("#kk_aj_slider-range").slider("values", 1) + " " + unescape("%E5") + "r");
 	    $("#kk_aj_yearspan2").html($("#kk_aj_slider-range2").slider("values", 0) +
-	      unescape("%E5") + "r -" + $("#kk_aj_slider-range2").slider("values", 1) + unescape("%E5") + "r");
+	      " " + unescape("%E5") + "r -" + $("#kk_aj_slider-range2").slider("values", 1) + " " + unescape("%E5") + "r");
 
 
 	    // rangeslider f�r arrangemangformul�ret f�r speltid
@@ -217,9 +217,9 @@
 	    init()
 
 	    
-	});
+	      
+	    });
 	 
-
 
 
 /***/ }),
@@ -230,26 +230,37 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
+	            arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/",
+	            granskavy: "GranskaDetalj"
+
+	           //SERVERN DEV
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://kulturkatalog.kivdev.se",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
 	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
-	            //arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/",
+	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/",
+	            //arrimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/",
 	            //granskavy: "GranskaDetalj"
 
-	           //SERVERN
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://kulturkatalog.kivdev.se",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/",
-	            arrimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/",
-	            granskavy: "GranskaDetalj"
+	            //SERVERN
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://www.kulturkatalogenvast.org",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://www.kulturkatalogenvast.org/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/tmp/",
+	            //arrimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/",
+	            //granskavy: "GranskaDetalj"
 
 	        },
 	        userinfo: {
@@ -11909,15 +11920,23 @@
 	    return ret;
 	});
 
-	Handlebars.registerHelper('inMemList', function (ansokningstatus) {
+	Handlebars.registerHelper('showyearspan', function (ansokningstatus) {
+	    var rettext = '';
+	    if (ansokningstatus.trim() != "-") {
+	        rettext = 'Ålder ' + ansokningstatus + ' år';
+	    }
+	    ret = '<div class="kk_aj_arr_item_age small-4 columns age"><h4>' + rettext + '</h4></div>';
+	    return ret;
+	});
+
+	Handlebars.registerHelper('inMemList', function (yearspan) {
 	    var ret = '<i class="fa fa-plus-square"></i>';
-	    if (ansokningstatus) {
+	    if (yearspan) {
 	        ret = '<i class="fa fa-check-square-o"></i>';
 	    }
 
 	    return ret;
 	});
-
 
 	var faktavalueextention =function(typ){
 	    let fixat = typ.replace(/^\s+|\s+$/gm, '').toLowerCase();
@@ -12015,8 +12034,8 @@
 	        $('.img_Skolbio').attr("src", basesrc + "Skolbio.png");
 	        $('.img_forfattarbesok').attr("src", basesrc + "forfattarbesok.png");
 	        $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "workshops_projekt.png");
-	        $('.img_Fortbildningar').attr("src", basesrc + "Fortbildningar.png");
-	        $('.img_resmalsbesok').attr("src", basesrc + "resmalsbesok.png");
+	        $('.img_Fortbildningar').attr("src", basesrc + "Kompetensutveckling.png");
+	        $('.img_resmalsbesok').attr("src", basesrc + "besoksmalmedresestod.png");
 
 
 	        switch (vald) {
@@ -12033,10 +12052,10 @@
 	                $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "workshops_projekt_invert.png");
 	                break;
 	            case "5":
-	                $('.img_Fortbildningar').attr("src", basesrc + "Fortbildningar_invert.png");
+	                $('.img_Fortbildningar').attr("src", basesrc + "Kompetensutveckling_invert.png");
 	                break;
 	            case "7":
-	                $('.img_resmalsbesok').attr("src", basesrc + "resmalsbesok_invert.png");
+	                $('.img_resmalsbesok').attr("src", basesrc + "besoksmalmedresestod_invert.png");
 	                break;
 	        }
 	        return false;
@@ -12249,7 +12268,7 @@
 	            hidemulitvalueinputs();
 	            $('#kk_aj_yearspan').val("");
 	            emptyclassinputs('kk_aj_kp');
-	            kk_aj_kp_verify();
+	            ret = kk_aj_kp_verify(ret);
 	            if (currentret== false) {
 	                ret = currentret;
 	            }
@@ -12261,7 +12280,7 @@
 	            hidemulitvalueinputs();
 	            $('#kk_aj_yearspan').val("");
 	            emptyclassinputs('kk_aj_fob');
-	            kk_aj_fob_verify();
+	            ret = kk_aj_fob_verify(ret);
 	            if (currentret == false) {
 	                ret = currentret;
 	            }
@@ -12272,7 +12291,7 @@
 	            ret = validateinputs(obj, next, ret);
 	            hidemulitvalueinputs();
 	            emptyclassinputs('kk_aj_rm');
-	            kk_aj_rm_verify();
+	            ret = kk_aj_rm_verify(ret);
 	            if (currentret == false) {
 	                ret = currentret;
 	            }
@@ -12283,7 +12302,7 @@
 	            ret = validateinputs(obj, next, ret);
 	            hidemulitvalueinputs();
 	            emptyclassinputs('kk_aj_sb');
-	            kk_aj_sb_verify();
+	            ret = kk_aj_sb_verify(ret);
 	            if (currentret == false) {
 	                ret = currentret;
 	            }
@@ -12374,7 +12393,7 @@
 	        
 	}
 
-	var kk_aj_ft_verify = function () {
+	var kk_aj_ft_verify = function (ret) {
 
 	    if ($('input[name=arr_ljud]:checked').length <= 0) {
 	        $('.kk_aj_search_arr_ljud_error').css('display', 'block');
@@ -12432,9 +12451,10 @@
 	        $('.arr_cvmedverkande_error').css('display', 'block');
 	        ret = false;
 	    }
+	    return ret;
 	}
 
-	var kk_aj_fob_verify = function () {
+	var kk_aj_fob_verify = function (ret) {
 
 	    if ($('input[name=arr_resor]:checked').length <= 0) {
 	        $('.kk_aj_search_arr_resor_error').css('display', 'block');
@@ -12464,9 +12484,10 @@
 	        $('.arr_cvmedverkande_error').css('display', 'block');
 	        ret = false;
 	    }
+	    return ret;
 	};
 
-	var kk_aj_kp_verify = function () {
+	var kk_aj_kp_verify = function (ret) {
 
 	    if ($('input[name=arr_resor]:checked').length <= 0) {
 	        $('.kk_aj_search_arr_resor_error').css('display', 'block');
@@ -12496,15 +12517,17 @@
 	        $('.arr_cvmedverkande_error').css('display', 'block');
 	        ret = false;
 	    }
+	    return ret;
 	}
-	var kk_aj_rm_verify = function () {
+	var kk_aj_rm_verify = function (ret) {
 
 	    if ($("#kk_aj_yearspan").html() === '0år -0år') {
 	        $('.kk_aj_yearspan_error').css('display', 'block');
 	        ret = false;
-	    }   
+	    }
+	    return ret;
 	}
-	var kk_aj_sb_verify = function () {
+	var kk_aj_sb_verify = function (ret) {
 
 	    if ($("#kk_aj_yearspan").html() === '0år -0år') {
 	        $('.kk_aj_yearspan_error').css('display', 'block');
@@ -12514,6 +12537,7 @@
 	        $('.kk_aj_speltid_error').css('display', 'block');
 	        ret = false;
 	    }
+	    return ret;
 	}
 
 /***/ }),
@@ -12563,6 +12587,7 @@
 
 
 	var maincontent = function (arrJson) {
+	     
 	    $('.granska_rubrik').html(arrJson.Rubrik);
 	    $('.granska_underrubrik').html(arrJson.UnderRubrik);
 	    $('.granska_innehall').html(arrJson.Innehall);
@@ -12570,7 +12595,12 @@
 	    if (arrJson.Arrid) {
 	        imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.Arrid + '_' + arrJson.MainImage.MediaUrl;
 	    } else {
+	        let tidigarearrid = $('#arr_getTidigareArrangemang_Get').attr('rel');
 	        imgsrc = _appsetting.globalconfig.arrimgurl + 'tmp/_' + arrJson.MainImage.MediaUrl;
+	        if (tidigarearrid > 0) {
+	            imgsrc = _appsetting.globalconfig.arrimgurl + '/' + arrJson.MainImage.MediaUrl;
+	        };     
+	       
 	    }
 	    
 	    $('.granska_pressentationsbild').attr('src', imgsrc);
@@ -12836,16 +12866,18 @@
 	    var yearMin = "";
 	    var yearMax = "";
 	    if (arrval.length > 0) {
-
+	        $('#arr_getTidigareArrangemang_Get').attr('rel', arrval[0].ansokningid);
 	        $('ul.ArrangemangtypBlock input[name=arr_radioValArrtyp][value="' + arrval[0].ansokningtypid + '"] ').click();
 	        $('ul.kontformBlock input[name=arr_radioValkontstform][value="' + arrval[0].ansokningkonstformid + '"] ').click();
 	        $('#arr_rubrik').val(arrval[0].ansokningtitle);
 	        $('#arr_underrubrik').val(arrval[0].ansokningsubtitle);
-	        $('#arr_presentation').html(arrval[0].ansokningContent);
+	        $('#arr_presentation').val(arrval[0].ansokningContent);
 	        let imgurl = _appsetting.globalconfig.dnnURL + "/Portals/0/kulturkatalogenArrImages/" + arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl
-	        $('#kk_aj_tmpimg').attr("src", imgurl);
-	        $('#kk_aj_tmpimg').attr("alt", arrval[0].ansokningMediaImage.MediaUrl);
-	        $('#kk_aj_tmpimg').attr("title", arrval[0].ansokningMediaImage.MediaUrl);
+	        let imgfilenamn = arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl;
+	        let imgobj = $('#kk_aj_tmpimg');
+	        imgobj.attr("src", imgurl);
+	        imgobj.attr("alt", imgfilenamn);
+	        imgobj.attr("title", imgfilenamn);
 	        //$('#arr_presentationsbild').val(arrval[0].ansokningMediaImage.MediaUrl);
 	        $('#arr_altfoto').val(arrval[0].ansokningMediaImage.MediaAlt);
 	        $('#arr_fotograf').val(arrval[0].ansokningMediaImage.MediaFoto);

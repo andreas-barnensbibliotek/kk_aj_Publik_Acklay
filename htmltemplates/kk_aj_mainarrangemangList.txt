@@ -36,7 +36,8 @@
 			<div class="row">
 				<div class="kk_aj_arr_item_Utovare small-4 columns" rel="{{ansokningUtovarid}}"><h4>{{ansokningutovare}}</h4></div>
 				<div class="kk_aj_arr_item_konstform small-4 columns"><h4>{{ansokningkonstform}}</h4></div>							
-				<div class="kk_aj_arr_item_age small-4 columns age"><h4>Ålder {{ansokningAgespan}} år</h4></div>								
+				{{#showyearspan ansokningAgespan}}{{/showyearspan}}
+												
 			</div>
 			<div id="kk_aj_filtervalues" class="S_BB_p{{ansokningFilterfakta.Bokningsbar}} S_ML_{{ansokningFilterfakta.Morklaggning}} S_TH_{{ansokningFilterfakta.Takhojd}} S_ST">{{ansokningFilterfakta.Speltid}}</div><div class="S_KO">{{ansokningFilterfakta.Kostnad}}</div>
 		</div>

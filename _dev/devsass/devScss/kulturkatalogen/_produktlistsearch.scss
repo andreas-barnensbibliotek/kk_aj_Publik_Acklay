@@ -76,9 +76,14 @@
     /*Sök form --------------------------------------*/
     .kk_aj_mainsearchblock{
           padding-top: 4rem;
+          
         .ui-state-active{background:#fff !important; border-color:#f77136 !important;}
         .searchformblock{
-            margin-top:4rem;
+            margin-top:1rem;
+            #kk_aj_yearspan2{padding-top:.4rem;}
+             @media #{$large-up} { 
+                 margin-top: 4rem;
+             }
             /* mainblock globals */               
             .button{
                 margin-bottom:0.6rem;  
@@ -101,6 +106,7 @@
             } /*END button*/
         
             .button-group{
+                #val_formDesign{padding-left:1rem; padding-right:1rem;}
                 &.even-2{
                     li{
                         .button{
@@ -157,7 +163,10 @@
         }
         .kk_aj_searchbuttonblock{
             margin-top:2rem;
-            margin-bottom:4rem;
+            margin-bottom:4rem;          
+            @media #{$small-only} {
+                margin-bottom:2rem;
+            }
             .button{
                 margin-left:1rem;  
                 margin-right:1rem;
@@ -245,7 +254,14 @@
         }
         .like{display: none;
         }
-
+        .kk_aj_sort{
+            .jplist-select {        
+               @extend .jplist-select_Stilmall;
+               margin:0px;
+               padding:0px;
+               padding-left:.5rem;
+            }
+        }
 
         /*START Produktlistningen sökresultat-----------*/ 
         .kk_aj_productlistblock{

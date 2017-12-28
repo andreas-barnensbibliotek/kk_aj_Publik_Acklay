@@ -25,6 +25,7 @@ module.exports = {
 
 
 var maincontent = function (arrJson) {
+     
     $('.granska_rubrik').html(arrJson.Rubrik);
     $('.granska_underrubrik').html(arrJson.UnderRubrik);
     $('.granska_innehall').html(arrJson.Innehall);
@@ -32,7 +33,12 @@ var maincontent = function (arrJson) {
     if (arrJson.Arrid) {
         imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.Arrid + '_' + arrJson.MainImage.MediaUrl;
     } else {
+        let tidigarearrid = $('#arr_getTidigareArrangemang_Get').attr('rel');
         imgsrc = _appsetting.globalconfig.arrimgurl + 'tmp/_' + arrJson.MainImage.MediaUrl;
+        if (tidigarearrid > 0) {
+            imgsrc = _appsetting.globalconfig.arrimgurl + '/' + arrJson.MainImage.MediaUrl;
+        };     
+       
     }
     
     $('.granska_pressentationsbild').attr('src', imgsrc);

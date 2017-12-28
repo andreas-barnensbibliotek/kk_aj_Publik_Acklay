@@ -18,7 +18,7 @@
 					<div class="medium-12 columns">
 						<label>{{mediaBeskrivning}}</label>
 						<label>                                                    
-							<a href="{{mediaLink}}">gå till: {{mediaTitle}}</a>
+							<a href="{{mediaLink}}" class="not-active">{{mediaTitle}}</a>
 						</label>
 					</div>
 				</div>

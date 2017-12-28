@@ -210,16 +210,18 @@ var fyllarrangemangDetaildata = function (data) {
     var yearMin = "";
     var yearMax = "";
     if (arrval.length > 0) {
-
+        $('#arr_getTidigareArrangemang_Get').attr('rel', arrval[0].ansokningid);
         $('ul.ArrangemangtypBlock input[name=arr_radioValArrtyp][value="' + arrval[0].ansokningtypid + '"] ').click();
         $('ul.kontformBlock input[name=arr_radioValkontstform][value="' + arrval[0].ansokningkonstformid + '"] ').click();
         $('#arr_rubrik').val(arrval[0].ansokningtitle);
         $('#arr_underrubrik').val(arrval[0].ansokningsubtitle);
-        $('#arr_presentation').html(arrval[0].ansokningContent);
+        $('#arr_presentation').val(arrval[0].ansokningContent);
         let imgurl = _appsetting.globalconfig.dnnURL + "/Portals/0/kulturkatalogenArrImages/" + arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl
-        $('#kk_aj_tmpimg').attr("src", imgurl);
-        $('#kk_aj_tmpimg').attr("alt", arrval[0].ansokningMediaImage.MediaUrl);
-        $('#kk_aj_tmpimg').attr("title", arrval[0].ansokningMediaImage.MediaUrl);
+        let imgfilenamn = arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl;
+        let imgobj = $('#kk_aj_tmpimg');
+        imgobj.attr("src", imgurl);
+        imgobj.attr("alt", imgfilenamn);
+        imgobj.attr("title", imgfilenamn);
         //$('#arr_presentationsbild').val(arrval[0].ansokningMediaImage.MediaUrl);
         $('#arr_altfoto').val(arrval[0].ansokningMediaImage.MediaAlt);
         $('#arr_fotograf').val(arrval[0].ansokningMediaImage.MediaFoto);

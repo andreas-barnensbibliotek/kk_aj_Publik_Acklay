@@ -5,7 +5,10 @@
   #mainarrformcontainer-t-0 a span{
      text-align:center;
  }
- 
+ .not-active {
+    pointer-events: none;
+    cursor: default;
+ }
  .steps{
     ul{
         li{
@@ -305,14 +308,24 @@ input[type=radio] + label {
     legend{
         margin-left:-.8rem;  
     }
-    background-color: #F9F9F9;
-    border-top: 1px solid #F5F5F5;
+    background-color: $snow;
+    border-top: 1px solid $white-smoke;
     padding-top: 1rem;
     padding: .5rem;
     margin-bottom: 0rem;
 }
 .granska_pressentationsbild{max-height: 400px;}
-.infotext{display:none;  background-color:#008CBA; color:#fff;padding:4px;margin-bottom:2px;}
+.infotext{
+    display:none;  
+    background-color:#008CBA; 
+    color:$white;
+    padding:4px;
+    margin-bottom:2px;
+    a{
+        color:$white;
+        text-decoration:underline;
+    }
+}
 .kk_aj_exempelblock{/*display:none;*/}
 .medverkandeblock{
   margin-bottom: 2rem;

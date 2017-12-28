@@ -72,15 +72,15 @@ $(function () {
         max: 19,
         values: [0, 19],
         slide: function (event, ui) {
-            $("#kk_aj_yearspan2").html(ui.values[0] + unescape("%E5") + "r  - " + ui.values[1] + unescape("%E5") + "r");
+            $("#kk_aj_yearspan2").html(ui.values[0] + " " + unescape("%E5") + "r  - " + ui.values[1] + " " + unescape("%E5") + "r");
             $("#kk_aj_yearspan2").attr("rel", ui.values[0]);
             $("#kk_aj_yearspan2").attr("rev", ui.values[1]);
         }
     });
     $("#kk_aj_yearspan").html($("#kk_aj_slider-range").slider("values", 0) +
-       unescape("%E5") + "r -" + $("#kk_aj_slider-range").slider("values", 1) + unescape("%E5") + "r");
+       " " + unescape("%E5") + "r -" + $("#kk_aj_slider-range").slider("values", 1) + " " + unescape("%E5") + "r");
     $("#kk_aj_yearspan2").html($("#kk_aj_slider-range2").slider("values", 0) +
-      unescape("%E5") + "r -" + $("#kk_aj_slider-range2").slider("values", 1) + unescape("%E5") + "r");
+      " " + unescape("%E5") + "r -" + $("#kk_aj_slider-range2").slider("values", 1) + " " + unescape("%E5") + "r");
 
 
     // rangeslider för arrangemangformuläret för speltid
@@ -171,6 +171,6 @@ $(function () {
     init()
 
     
-});
+      
+    });
  
-

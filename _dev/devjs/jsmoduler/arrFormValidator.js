@@ -53,8 +53,8 @@ module.exports = {
         $('.img_Skolbio').attr("src", basesrc + "Skolbio.png");
         $('.img_forfattarbesok').attr("src", basesrc + "forfattarbesok.png");
         $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "workshops_projekt.png");
-        $('.img_Fortbildningar').attr("src", basesrc + "Fortbildningar.png");
-        $('.img_resmalsbesok').attr("src", basesrc + "resmalsbesok.png");
+        $('.img_Fortbildningar').attr("src", basesrc + "Kompetensutveckling.png");
+        $('.img_resmalsbesok').attr("src", basesrc + "besoksmalmedresestod.png");
 
 
         switch (vald) {
@@ -71,10 +71,10 @@ module.exports = {
                 $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "workshops_projekt_invert.png");
                 break;
             case "5":
-                $('.img_Fortbildningar').attr("src", basesrc + "Fortbildningar_invert.png");
+                $('.img_Fortbildningar').attr("src", basesrc + "Kompetensutveckling_invert.png");
                 break;
             case "7":
-                $('.img_resmalsbesok').attr("src", basesrc + "resmalsbesok_invert.png");
+                $('.img_resmalsbesok').attr("src", basesrc + "besoksmalmedresestod_invert.png");
                 break;
         }
         return false;
@@ -287,7 +287,7 @@ var validatearrtyp = function(validateobj, next, ret) {
             hidemulitvalueinputs();
             $('#kk_aj_yearspan').val("");
             emptyclassinputs('kk_aj_kp');
-            kk_aj_kp_verify();
+            ret = kk_aj_kp_verify(ret);
             if (currentret== false) {
                 ret = currentret;
             }
@@ -299,7 +299,7 @@ var validatearrtyp = function(validateobj, next, ret) {
             hidemulitvalueinputs();
             $('#kk_aj_yearspan').val("");
             emptyclassinputs('kk_aj_fob');
-            kk_aj_fob_verify();
+            ret = kk_aj_fob_verify(ret);
             if (currentret == false) {
                 ret = currentret;
             }
@@ -310,7 +310,7 @@ var validatearrtyp = function(validateobj, next, ret) {
             ret = validateinputs(obj, next, ret);
             hidemulitvalueinputs();
             emptyclassinputs('kk_aj_rm');
-            kk_aj_rm_verify();
+            ret = kk_aj_rm_verify(ret);
             if (currentret == false) {
                 ret = currentret;
             }
@@ -321,7 +321,7 @@ var validatearrtyp = function(validateobj, next, ret) {
             ret = validateinputs(obj, next, ret);
             hidemulitvalueinputs();
             emptyclassinputs('kk_aj_sb');
-            kk_aj_sb_verify();
+            ret = kk_aj_sb_verify(ret);
             if (currentret == false) {
                 ret = currentret;
             }
@@ -412,7 +412,7 @@ var emptyclassinputs = function (classtoempty) {
         
 }
 
-var kk_aj_ft_verify = function () {
+var kk_aj_ft_verify = function (ret) {
 
     if ($('input[name=arr_ljud]:checked').length <= 0) {
         $('.kk_aj_search_arr_ljud_error').css('display', 'block');
@@ -470,9 +470,10 @@ var kk_aj_ft_verify = function () {
         $('.arr_cvmedverkande_error').css('display', 'block');
         ret = false;
     }
+    return ret;
 }
 
-var kk_aj_fob_verify = function () {
+var kk_aj_fob_verify = function (ret) {
 
     if ($('input[name=arr_resor]:checked').length <= 0) {
         $('.kk_aj_search_arr_resor_error').css('display', 'block');
@@ -502,9 +503,10 @@ var kk_aj_fob_verify = function () {
         $('.arr_cvmedverkande_error').css('display', 'block');
         ret = false;
     }
+    return ret;
 };
 
-var kk_aj_kp_verify = function () {
+var kk_aj_kp_verify = function (ret) {
 
     if ($('input[name=arr_resor]:checked').length <= 0) {
         $('.kk_aj_search_arr_resor_error').css('display', 'block');
@@ -534,15 +536,17 @@ var kk_aj_kp_verify = function () {
         $('.arr_cvmedverkande_error').css('display', 'block');
         ret = false;
     }
+    return ret;
 }
-var kk_aj_rm_verify = function () {
+var kk_aj_rm_verify = function (ret) {
 
     if ($("#kk_aj_yearspan").html() === '0år -0år') {
         $('.kk_aj_yearspan_error').css('display', 'block');
         ret = false;
-    }   
+    }
+    return ret;
 }
-var kk_aj_sb_verify = function () {
+var kk_aj_sb_verify = function (ret) {
 
     if ($("#kk_aj_yearspan").html() === '0år -0år') {
         $('.kk_aj_yearspan_error').css('display', 'block');
@@ -552,4 +556,5 @@ var kk_aj_sb_verify = function () {
         $('.kk_aj_speltid_error').css('display', 'block');
         ret = false;
     }
+    return ret;
 }

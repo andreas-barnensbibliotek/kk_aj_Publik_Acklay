@@ -147,15 +147,23 @@ Handlebars.registerHelper('ovrigttyp', function (Faktaid, Faktarubrik, FaktaValu
     return ret;
 });
 
-Handlebars.registerHelper('inMemList', function (ansokningstatus) {
+Handlebars.registerHelper('showyearspan', function (ansokningstatus) {
+    var rettext = '';
+    if (ansokningstatus.trim() != "-") {
+        rettext = 'Ålder ' + ansokningstatus + ' år';
+    }
+    ret = '<div class="kk_aj_arr_item_age small-4 columns age"><h4>' + rettext + '</h4></div>';
+    return ret;
+});
+
+Handlebars.registerHelper('inMemList', function (yearspan) {
     var ret = '<i class="fa fa-plus-square"></i>';
-    if (ansokningstatus) {
+    if (yearspan) {
         ret = '<i class="fa fa-check-square-o"></i>';
     }
 
     return ret;
 });
-
 
 var faktavalueextention =function(typ){
     let fixat = typ.replace(/^\s+|\s+$/gm, '').toLowerCase();
