@@ -67,17 +67,9 @@ module.exports = {
         arrformjsondata.KontaktTelefon = $('#arr_kontakt_telefonnr').val();
         arrformjsondata.KontaktEpost = $('#arr_kontakt_epost').val();
 
-        let Efternamn = $('#utovare_efternamn').val();
-        $('#arr_kontakt_efternamn').val(Efternamn);
-        
-        let Telefon = $('#utovare_telefonnr').val();
-        $('#arr_kontakt_telefonnr').val(Telefon);    
-
-        let Epost = $('#utovare_epost').val();
-        $('#arr_kontakt_epost').val(Epost);    
-
             let arr_antalmedverkande = $('#arr_antalmedverkande');
             arrformjsondata.Faktalist = [];
+
             if (arr_antalmedverkande.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "1",
@@ -168,7 +160,7 @@ module.exports = {
                     "FaktaValue": formVenueHeightId.val(),
                 });
             };            
-            if ($('input[name=arr_ljud]:checked').val()) {
+            if ($("input:radio[name=arr_ljud]").is(":checked")) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
                     "FaktaTypID": $('input[name=arr_ljud]:checked').attr('rel'),
@@ -176,7 +168,8 @@ module.exports = {
                     "FaktaValue": $('input[name=arr_ljud]:checked').val(),
                 });
             };            
-            if ($('input[name=arr_ljus]:checked').val()) {
+            //if ($('input[name=arr_ljus]:checked').val()) {
+            if($("input:radio[name=arr_ljus]").is(":checked")) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
                     "FaktaTypID": $('input[name=arr_ljus]:checked').attr('rel'),
@@ -184,7 +177,7 @@ module.exports = {
                     "FaktaValue": $('input[name=arr_ljus]:checked').val(),
                 });
             };
-            if ($('input[name=arr_morklaggning]:checked').val()) {
+            if($("input:radio[name=arr_morklaggning]").is(":checked")) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "2",
                     "FaktaTypID": $('input[name=arr_morklaggning]:checked').attr('rel'),
@@ -269,25 +262,28 @@ module.exports = {
                 });
             };        
             let kk_aj_speltid = $('#kk_aj_speltid');
-            if (kk_aj_speltid.html()!="0min") {
-                arrformjsondata.Faktalist.push({
-                    "Faktaid": "3",
-                    "FaktaTypID": kk_aj_speltid.attr('rel'),
-                    "Faktarubrik": "Speltid",
-                    "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
-                });
-            };
+            if (kk_aj_speltid.html() !="") {
+                if (kk_aj_speltid.html() != "0min") {
+                    arrformjsondata.Faktalist.push({
+                        "Faktaid": "3",
+                        "FaktaTypID": kk_aj_speltid.attr('rel'),
+                        "Faktarubrik": "Speltid",
+                        "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
+                    });
+                };
+            }
 
             let arr_ekonomikostnad = $('#arr_ekonomikostnad');
             if (arr_ekonomikostnad.val()) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "4",
                     "FaktaTypID": arr_ekonomikostnad.attr('rel'),
-                    "Faktarubrik": "Kostnad",
+                    "Faktarubrik": "Kostnad/Pris",
                     "FaktaValue": arr_ekonomikostnad.val(),
                 });
-            };            
-            if ($('input[name=arr_resor]:checked').val()) {
+            };           
+
+            if ($("input:radio[name=arr_resor]").is(":checked")) {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "4",
                     "FaktaTypID": $('input[name=arr_resor]:checked').attr('rel'),
@@ -295,7 +291,7 @@ module.exports = {
                     "FaktaValue": $('input[name=arr_resor]:checked').val(),
                 });
             };
-            if ($('input[name=arr_logi]:checked').val()) {
+            if ($("input:radio[name=arr_logi]").is(":checked")) {            
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "4",
                     "FaktaTypID": $('input[name=arr_logi]:checked').attr('rel'),
@@ -303,7 +299,7 @@ module.exports = {
                     "FaktaValue": $('input[name=arr_logi]:checked').val(),
                 }); 
             };
-            if ($('input[name=arr_Traktamente]:checked').val()) {
+            if ($("input:radio[name=arr_Traktamente]").is(":checked")) {            
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "4",
                     "FaktaTypID": $('input[name=arr_Traktamente]:checked').attr('rel'),
@@ -317,7 +313,7 @@ module.exports = {
                 arrformjsondata.Faktalist.push({
                     "Faktaid": "4",
                     "FaktaTypID": arr_resorovrigt.attr('rel'),
-                    "Faktarubrik": "Övrigt",
+                    "Faktarubrik": "Övrigt om kostnader",
                     "FaktaValue": arr_resorovrigt.val(),
                 });
             };
@@ -450,7 +446,7 @@ module.exports = {
                     });
 
                     ajaxRequest.done(function (xhr, textStatus) {
-                        var retfileurl = _appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
+                        var retfileurl = _appsetting.globalconfig.arrimgurl + files[0].name;
                         callback(retfileurl)
                     });
        

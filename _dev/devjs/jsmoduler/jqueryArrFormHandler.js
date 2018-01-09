@@ -136,17 +136,16 @@ module.exports = {
 
                 let utovareid = $('#arr_getTidigareArrangemang').val();
                 arrformAutocompleteHandler.getTidigareArrDetail(utovareid);
-               
+
                 return false;
-            })
-            
+            });            
 
             $('#ChangeUppgifterKontakt').on('click', function (e) {
                 btn_befintlig_utovartxtBlock.hide();
                 btn_befintlig_utovareBlock.show();
                 $('.SparaUppgifterKontaktBlock').show();
                 return false;
-            })
+            });
 
             $('#SparaUppgifterKontakt').on('click', function (e) {
                 arrformAutocompleteHandler.savekontaktuppgifter();
@@ -154,14 +153,13 @@ module.exports = {
                 btn_befintlig_utovareBlock.hide();
                 $('.SparaUppgifterKontaktBlock').hide();
                 return false;
-            })
+            });
 
             $('.kk_aj_sammakontaktpers').on('click', function (e) {
                 arrformAutocompleteHandler.kopierakontaktuppgifter();
                 
                 return false;
-            })
-            
+            })            
 
             // Verify steg 1
             $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {                
@@ -210,8 +208,7 @@ module.exports = {
                         tabnavigator(2);
                     }                    
                    
-                    return ret;
-                    
+                    return ret;                    
                    
                 } else {
                     tabnavigator(1);
@@ -291,41 +288,40 @@ module.exports = {
                 return true;
             });
 
-
             $('.kk_aj_btn_SendArr').on('click', function (e) {
                 if ($('#chkApproved').is(':checked')) {
                     if (confirm('Är du säker på att du vill skicka in uppgifterna för arrangemanget?')) {
                         console.log(_exempellistobject);
-                        arrformjsonBuilder.getArrFormJsonData( _exempellistobject, function (callback) {
-                           console.log(callback);
-                           var arrjson = callback;
+                        arrformjsonBuilder.getArrFormJsonData(_exempellistobject, function (callback) {
+                            console.log(callback);
+                            var arrjson = callback;
                             // if utovareid>0 och arrid>0 och väljfil == 0 då behöver man inte ladda upp utan använder samma som tidigare
-                           arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
-                               console.log(callbackarrid);
-                               var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
+                            arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
+                                console.log(callbackarrid);
+                                var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
 
-                               let bildfil = $("#arr_presentationsbild").get(0).files;
-                               if ( bildfil.length > 0) {                                   
-                                   arrformjsonBuilder.tempuploadimage("uploadimg", bildfil, callbackarrid, function (callback) { return callback });
-                               }
-                               
-                               let arr_cvmedverkande = $('#arr_cvmedverkande_file').get(0).files;
-                               if (arr_cvmedverkande.length > 0) {
-                                   arrformjsonBuilder.tempuploadimage("uploadimg", arr_cvmedverkande, callbackarrid, function (callback) {
+                                let bildfil = $("#arr_presentationsbild").get(0).files;
+                                if (bildfil.length > 0) {
+                                    arrformjsonBuilder.tempuploadimage("uploadimg", bildfil, callbackarrid, function (callback) { return callback });
+                                }
 
-                                       alert("Uppgifterna är nu inskickade!");
-                                       clearForm();
-                                       tabnavigator(1);                                       
-                                       return true;
-                                   });
-                               } else {
-                                   alert("Uppgifterna är nu inskickade!");
-                                   clearForm();
-                                   tabnavigator(1);                                   
-                                   return true;
-                               };
+                                let arr_cvmedverkande = $('#arr_cvmedverkande_file').get(0).files;
+                                if (arr_cvmedverkande.length > 0) {
+                                    arrformjsonBuilder.tempuploadimage("uploadimg", arr_cvmedverkande, callbackarrid, function (callback) {
 
-                           });
+                                        alert("Uppgifterna är nu inskickade!");
+                                        clearForm();
+                                        tabnavigator(1);
+                                        return true;
+                                    });
+                                } else {
+                                    alert("Uppgifterna är nu inskickade!");
+                                    clearForm();
+                                    tabnavigator(1);
+                                    return true;
+                                };
+
+                            });
                         });
                         return false;
 
@@ -336,9 +332,7 @@ module.exports = {
                     alert("Du måste godkänna avtalet för att göra ansökan!")
                     return false
                 }
-            })
-
-
+            });
 
             $('.kk_aj_AvbrytSteps').on('click', function (e) {
                 if (confirm('Är du säker på att du vill radera alla ifyllda uppgifter för arrangemanget? Raderade uppgifter går inte att ångra!')) {
@@ -356,8 +350,7 @@ module.exports = {
                     return text === "Lägg till exempel" ? "Avbryt lägg till exempel" : "Lägg till exempel";
                 })
                 return false;
-            });
-            
+            });            
             
             $('#kk_aj_addExempel').on('click', function (e) {               
                 saveArrExempel();

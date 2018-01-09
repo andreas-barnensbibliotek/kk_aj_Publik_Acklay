@@ -275,7 +275,7 @@ var validatearrtyp = function(validateobj, next, ret) {
         case "1": {
             obj = $('.kk_aj_ft');
             ret = validateinputs(obj, next, ret);
-            hidemulitvalueinputs();
+            hidemulitvalueinputs();           
             emptyclassinputs('kk_aj_ft');
             kk_aj_ft_verify();
             
@@ -283,9 +283,10 @@ var validatearrtyp = function(validateobj, next, ret) {
         }
         case "4": {
             obj = $('.kk_aj_kp');
+            $('#kk_aj_yearspan').html("");
+            $('#kk_aj_speltid').html("");            
             ret = validateinputs(obj, next, ret);
             hidemulitvalueinputs();
-            $('#kk_aj_yearspan').val("");
             emptyclassinputs('kk_aj_kp');
             ret = kk_aj_kp_verify(ret);
             if (currentret== false) {
@@ -294,10 +295,11 @@ var validatearrtyp = function(validateobj, next, ret) {
             break;
         }
         case "5": {
-            obj = $('.kk_aj_fob');
+            obj = $('.kk_aj_fob'); 
+            $('#kk_aj_yearspan').html("");
+            $('#kk_aj_speltid').html("");           
             ret = validateinputs(obj, next, ret);
-            hidemulitvalueinputs();
-            $('#kk_aj_yearspan').val("");
+            hidemulitvalueinputs();           
             emptyclassinputs('kk_aj_fob');
             ret = kk_aj_fob_verify(ret);
             if (currentret == false) {
@@ -309,7 +311,10 @@ var validatearrtyp = function(validateobj, next, ret) {
             obj = $('.kk_aj_rm');
             ret = validateinputs(obj, next, ret);
             hidemulitvalueinputs();
+           
+            $('#arr_laromedel').val("");
             emptyclassinputs('kk_aj_rm');
+            
             ret = kk_aj_rm_verify(ret);
             if (currentret == false) {
                 ret = currentret;
@@ -320,7 +325,7 @@ var validatearrtyp = function(validateobj, next, ret) {
             obj = $('.kk_aj_sb');
             ret = validateinputs(obj, next, ret);
             hidemulitvalueinputs();
-            emptyclassinputs('kk_aj_sb');
+            emptyclassinputs('kk_aj_sb');                        
             ret = kk_aj_sb_verify(ret);
             if (currentret == false) {
                 ret = currentret;
@@ -342,7 +347,8 @@ var hideformfields = function(){
     $('.kk_aj_sb').hide();  //skolbio
     $('.kk_aj_kp').hide();  //kulturpedagogoskaprojekt  
     $('.kk_aj_fob').hide(); //fortbildningar
-    $('.kk_aj_rm').hide();  //resmål    
+    $('.kk_aj_rm').hide();  //resmål   
+   
 }
 
 var konstforminputs = {
@@ -402,12 +408,40 @@ var hidemulitvalueinputs = function () {
 }
 
 var emptyclassinputs = function (classtoempty) {
-    $('input.kk_aj_ft').each(function () {    
+    $('input.kk_aj_ft').each(function () {
         var current = $(this);
-        if (current.hasClass(classtoempty) == false) {           
+        if (current.hasClass(classtoempty) == false) {
             current.val("");
-        }
-    })
+        };
+    });
+    if (classtoempty != 'kk_aj_kp'){
+            $('#formMaxParticipantsId').val("");
+    };
+     
+    if (classtoempty == 'kk_aj_kp' || classtoempty == 'kk_aj_fob' || classtoempty == 'kk_aj_rm') {
+        $('#kk_aj_speltid').html("0min");
+    };
+    if (classtoempty == 'kk_aj_kp' || classtoempty == 'kk_aj_fob') {
+        $('#kk_aj_yearspan').html("0år - 0år");
+    };
+    if (classtoempty != 'kk_aj_ft') {
+        $("input:radio[name=arr_ljus]").prop("checked", false);
+        $("input:radio[name=arr_ljud]").prop("checked", false);
+        $("input:radio[name=arr_morklaggning]").prop("checked", false);
+        $('#formElectricityId').val("");
+        $('#formCarriersId').val("");
+    };
+     
+    if (classtoempty == 'kk_aj_rm' || classtoempty == 'kk_aj_sb' || classtoempty == 'kk_aj_fob' ) {
+        $("input:radio[name=arr_resor]").prop("checked", false);
+        $("input:radio[name=arr_logi]").prop("checked", false);
+        $("input:radio[name=arr_Traktamente]").prop("checked", false);
+       
+    };
+    if (classtoempty == 'kk_aj_ft' || classtoempty == 'kk_aj_sb' || classtoempty == 'kk_aj_fob') {
+        $('#formVenueRequiermentsId').val("");       
+    }
+   
     return false;
         
 }

@@ -10771,17 +10771,16 @@
 
 	                let utovareid = $('#arr_getTidigareArrangemang').val();
 	                arrformAutocompleteHandler.getTidigareArrDetail(utovareid);
-	               
+
 	                return false;
-	            })
-	            
+	            });            
 
 	            $('#ChangeUppgifterKontakt').on('click', function (e) {
 	                btn_befintlig_utovartxtBlock.hide();
 	                btn_befintlig_utovareBlock.show();
 	                $('.SparaUppgifterKontaktBlock').show();
 	                return false;
-	            })
+	            });
 
 	            $('#SparaUppgifterKontakt').on('click', function (e) {
 	                arrformAutocompleteHandler.savekontaktuppgifter();
@@ -10789,14 +10788,13 @@
 	                btn_befintlig_utovareBlock.hide();
 	                $('.SparaUppgifterKontaktBlock').hide();
 	                return false;
-	            })
+	            });
 
 	            $('.kk_aj_sammakontaktpers').on('click', function (e) {
 	                arrformAutocompleteHandler.kopierakontaktuppgifter();
 	                
 	                return false;
-	            })
-	            
+	            })            
 
 	            // Verify steg 1
 	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {                
@@ -10845,8 +10843,7 @@
 	                        tabnavigator(2);
 	                    }                    
 	                   
-	                    return ret;
-	                    
+	                    return ret;                    
 	                   
 	                } else {
 	                    tabnavigator(1);
@@ -10926,41 +10923,40 @@
 	                return true;
 	            });
 
-
 	            $('.kk_aj_btn_SendArr').on('click', function (e) {
 	                if ($('#chkApproved').is(':checked')) {
 	                    if (confirm('Är du säker på att du vill skicka in uppgifterna för arrangemanget?')) {
 	                        console.log(_exempellistobject);
-	                        arrformjsonBuilder.getArrFormJsonData( _exempellistobject, function (callback) {
-	                           console.log(callback);
-	                           var arrjson = callback;
+	                        arrformjsonBuilder.getArrFormJsonData(_exempellistobject, function (callback) {
+	                            console.log(callback);
+	                            var arrjson = callback;
 	                            // if utovareid>0 och arrid>0 och väljfil == 0 då behöver man inte ladda upp utan använder samma som tidigare
-	                           arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
-	                               console.log(callbackarrid);
-	                               var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
+	                            arrformjsonBuilder.PostMainArrangemang(arrjson, function (callbackarrid) {
+	                                console.log(callbackarrid);
+	                                var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
 
-	                               let bildfil = $("#arr_presentationsbild").get(0).files;
-	                               if ( bildfil.length > 0) {                                   
-	                                   arrformjsonBuilder.tempuploadimage("uploadimg", bildfil, callbackarrid, function (callback) { return callback });
-	                               }
-	                               
-	                               let arr_cvmedverkande = $('#arr_cvmedverkande_file').get(0).files;
-	                               if (arr_cvmedverkande.length > 0) {
-	                                   arrformjsonBuilder.tempuploadimage("uploadimg", arr_cvmedverkande, callbackarrid, function (callback) {
+	                                let bildfil = $("#arr_presentationsbild").get(0).files;
+	                                if (bildfil.length > 0) {
+	                                    arrformjsonBuilder.tempuploadimage("uploadimg", bildfil, callbackarrid, function (callback) { return callback });
+	                                }
 
-	                                       alert("Uppgifterna är nu inskickade!");
-	                                       clearForm();
-	                                       tabnavigator(1);                                       
-	                                       return true;
-	                                   });
-	                               } else {
-	                                   alert("Uppgifterna är nu inskickade!");
-	                                   clearForm();
-	                                   tabnavigator(1);                                   
-	                                   return true;
-	                               };
+	                                let arr_cvmedverkande = $('#arr_cvmedverkande_file').get(0).files;
+	                                if (arr_cvmedverkande.length > 0) {
+	                                    arrformjsonBuilder.tempuploadimage("uploadimg", arr_cvmedverkande, callbackarrid, function (callback) {
 
-	                           });
+	                                        alert("Uppgifterna är nu inskickade!");
+	                                        clearForm();
+	                                        tabnavigator(1);
+	                                        return true;
+	                                    });
+	                                } else {
+	                                    alert("Uppgifterna är nu inskickade!");
+	                                    clearForm();
+	                                    tabnavigator(1);
+	                                    return true;
+	                                };
+
+	                            });
 	                        });
 	                        return false;
 
@@ -10971,9 +10967,7 @@
 	                    alert("Du måste godkänna avtalet för att göra ansökan!")
 	                    return false
 	                }
-	            })
-
-
+	            });
 
 	            $('.kk_aj_AvbrytSteps').on('click', function (e) {
 	                if (confirm('Är du säker på att du vill radera alla ifyllda uppgifter för arrangemanget? Raderade uppgifter går inte att ångra!')) {
@@ -10991,8 +10985,7 @@
 	                    return text === "Lägg till exempel" ? "Avbryt lägg till exempel" : "Lägg till exempel";
 	                })
 	                return false;
-	            });
-	            
+	            });            
 	            
 	            $('#kk_aj_addExempel').on('click', function (e) {               
 	                saveArrExempel();
@@ -11345,17 +11338,9 @@
 	        arrformjsondata.KontaktTelefon = $('#arr_kontakt_telefonnr').val();
 	        arrformjsondata.KontaktEpost = $('#arr_kontakt_epost').val();
 
-	        let Efternamn = $('#utovare_efternamn').val();
-	        $('#arr_kontakt_efternamn').val(Efternamn);
-	        
-	        let Telefon = $('#utovare_telefonnr').val();
-	        $('#arr_kontakt_telefonnr').val(Telefon);    
-
-	        let Epost = $('#utovare_epost').val();
-	        $('#arr_kontakt_epost').val(Epost);    
-
 	            let arr_antalmedverkande = $('#arr_antalmedverkande');
 	            arrformjsondata.Faktalist = [];
+
 	            if (arr_antalmedverkande.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "1",
@@ -11446,7 +11431,7 @@
 	                    "FaktaValue": formVenueHeightId.val(),
 	                });
 	            };            
-	            if ($('input[name=arr_ljud]:checked').val()) {
+	            if ($("input:radio[name=arr_ljud]").is(":checked")) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
 	                    "FaktaTypID": $('input[name=arr_ljud]:checked').attr('rel'),
@@ -11454,7 +11439,8 @@
 	                    "FaktaValue": $('input[name=arr_ljud]:checked').val(),
 	                });
 	            };            
-	            if ($('input[name=arr_ljus]:checked').val()) {
+	            //if ($('input[name=arr_ljus]:checked').val()) {
+	            if($("input:radio[name=arr_ljus]").is(":checked")) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
 	                    "FaktaTypID": $('input[name=arr_ljus]:checked').attr('rel'),
@@ -11462,7 +11448,7 @@
 	                    "FaktaValue": $('input[name=arr_ljus]:checked').val(),
 	                });
 	            };
-	            if ($('input[name=arr_morklaggning]:checked').val()) {
+	            if($("input:radio[name=arr_morklaggning]").is(":checked")) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "2",
 	                    "FaktaTypID": $('input[name=arr_morklaggning]:checked').attr('rel'),
@@ -11547,25 +11533,28 @@
 	                });
 	            };        
 	            let kk_aj_speltid = $('#kk_aj_speltid');
-	            if (kk_aj_speltid.html()!="0min") {
-	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": "3",
-	                    "FaktaTypID": kk_aj_speltid.attr('rel'),
-	                    "Faktarubrik": "Speltid",
-	                    "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
-	                });
-	            };
+	            if (kk_aj_speltid.html() !="") {
+	                if (kk_aj_speltid.html() != "0min") {
+	                    arrformjsondata.Faktalist.push({
+	                        "Faktaid": "3",
+	                        "FaktaTypID": kk_aj_speltid.attr('rel'),
+	                        "Faktarubrik": "Speltid",
+	                        "FaktaValue": kk_aj_speltid.html().replace(/min/g, ''),
+	                    });
+	                };
+	            }
 
 	            let arr_ekonomikostnad = $('#arr_ekonomikostnad');
 	            if (arr_ekonomikostnad.val()) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "4",
 	                    "FaktaTypID": arr_ekonomikostnad.attr('rel'),
-	                    "Faktarubrik": "Kostnad",
+	                    "Faktarubrik": "Kostnad/Pris",
 	                    "FaktaValue": arr_ekonomikostnad.val(),
 	                });
-	            };            
-	            if ($('input[name=arr_resor]:checked').val()) {
+	            };           
+
+	            if ($("input:radio[name=arr_resor]").is(":checked")) {
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "4",
 	                    "FaktaTypID": $('input[name=arr_resor]:checked').attr('rel'),
@@ -11573,7 +11562,7 @@
 	                    "FaktaValue": $('input[name=arr_resor]:checked').val(),
 	                });
 	            };
-	            if ($('input[name=arr_logi]:checked').val()) {
+	            if ($("input:radio[name=arr_logi]").is(":checked")) {            
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "4",
 	                    "FaktaTypID": $('input[name=arr_logi]:checked').attr('rel'),
@@ -11581,7 +11570,7 @@
 	                    "FaktaValue": $('input[name=arr_logi]:checked').val(),
 	                }); 
 	            };
-	            if ($('input[name=arr_Traktamente]:checked').val()) {
+	            if ($("input:radio[name=arr_Traktamente]").is(":checked")) {            
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "4",
 	                    "FaktaTypID": $('input[name=arr_Traktamente]:checked').attr('rel'),
@@ -11595,7 +11584,7 @@
 	                arrformjsondata.Faktalist.push({
 	                    "Faktaid": "4",
 	                    "FaktaTypID": arr_resorovrigt.attr('rel'),
-	                    "Faktarubrik": "Övrigt",
+	                    "Faktarubrik": "Övrigt om kostnader",
 	                    "FaktaValue": arr_resorovrigt.val(),
 	                });
 	            };
@@ -11728,7 +11717,7 @@
 	                    });
 
 	                    ajaxRequest.done(function (xhr, textStatus) {
-	                        var retfileurl = _appsetting.globalconfig.arrtmpimgurl + '_' + files[0].name;
+	                        var retfileurl = _appsetting.globalconfig.arrimgurl + files[0].name;
 	                        callback(retfileurl)
 	                    });
 	       
@@ -11964,7 +11953,7 @@
 	        case "rivtid":
 	            return " min";
 	            break;
-	        case "speltid (min)":
+	        case "speltid":
 	            return " min";
 	            break;
 	        case "kostnad/pris":
@@ -12256,7 +12245,7 @@
 	        case "1": {
 	            obj = $('.kk_aj_ft');
 	            ret = validateinputs(obj, next, ret);
-	            hidemulitvalueinputs();
+	            hidemulitvalueinputs();           
 	            emptyclassinputs('kk_aj_ft');
 	            kk_aj_ft_verify();
 	            
@@ -12264,9 +12253,10 @@
 	        }
 	        case "4": {
 	            obj = $('.kk_aj_kp');
+	            $('#kk_aj_yearspan').html("");
+	            $('#kk_aj_speltid').html("");            
 	            ret = validateinputs(obj, next, ret);
 	            hidemulitvalueinputs();
-	            $('#kk_aj_yearspan').val("");
 	            emptyclassinputs('kk_aj_kp');
 	            ret = kk_aj_kp_verify(ret);
 	            if (currentret== false) {
@@ -12275,10 +12265,11 @@
 	            break;
 	        }
 	        case "5": {
-	            obj = $('.kk_aj_fob');
+	            obj = $('.kk_aj_fob'); 
+	            $('#kk_aj_yearspan').html("");
+	            $('#kk_aj_speltid').html("");           
 	            ret = validateinputs(obj, next, ret);
-	            hidemulitvalueinputs();
-	            $('#kk_aj_yearspan').val("");
+	            hidemulitvalueinputs();           
 	            emptyclassinputs('kk_aj_fob');
 	            ret = kk_aj_fob_verify(ret);
 	            if (currentret == false) {
@@ -12290,7 +12281,10 @@
 	            obj = $('.kk_aj_rm');
 	            ret = validateinputs(obj, next, ret);
 	            hidemulitvalueinputs();
+	           
+	            $('#arr_laromedel').val("");
 	            emptyclassinputs('kk_aj_rm');
+	            
 	            ret = kk_aj_rm_verify(ret);
 	            if (currentret == false) {
 	                ret = currentret;
@@ -12301,7 +12295,7 @@
 	            obj = $('.kk_aj_sb');
 	            ret = validateinputs(obj, next, ret);
 	            hidemulitvalueinputs();
-	            emptyclassinputs('kk_aj_sb');
+	            emptyclassinputs('kk_aj_sb');                        
 	            ret = kk_aj_sb_verify(ret);
 	            if (currentret == false) {
 	                ret = currentret;
@@ -12323,7 +12317,8 @@
 	    $('.kk_aj_sb').hide();  //skolbio
 	    $('.kk_aj_kp').hide();  //kulturpedagogoskaprojekt  
 	    $('.kk_aj_fob').hide(); //fortbildningar
-	    $('.kk_aj_rm').hide();  //resmål    
+	    $('.kk_aj_rm').hide();  //resmål   
+	   
 	}
 
 	var konstforminputs = {
@@ -12383,12 +12378,40 @@
 	}
 
 	var emptyclassinputs = function (classtoempty) {
-	    $('input.kk_aj_ft').each(function () {    
+	    $('input.kk_aj_ft').each(function () {
 	        var current = $(this);
-	        if (current.hasClass(classtoempty) == false) {           
+	        if (current.hasClass(classtoempty) == false) {
 	            current.val("");
-	        }
-	    })
+	        };
+	    });
+	    if (classtoempty != 'kk_aj_kp'){
+	            $('#formMaxParticipantsId').val("");
+	    };
+	     
+	    if (classtoempty == 'kk_aj_kp' || classtoempty == 'kk_aj_fob' || classtoempty == 'kk_aj_rm') {
+	        $('#kk_aj_speltid').html("0min");
+	    };
+	    if (classtoempty == 'kk_aj_kp' || classtoempty == 'kk_aj_fob') {
+	        $('#kk_aj_yearspan').html("0år - 0år");
+	    };
+	    if (classtoempty != 'kk_aj_ft') {
+	        $("input:radio[name=arr_ljus]").prop("checked", false);
+	        $("input:radio[name=arr_ljud]").prop("checked", false);
+	        $("input:radio[name=arr_morklaggning]").prop("checked", false);
+	        $('#formElectricityId').val("");
+	        $('#formCarriersId').val("");
+	    };
+	     
+	    if (classtoempty == 'kk_aj_rm' || classtoempty == 'kk_aj_sb' || classtoempty == 'kk_aj_fob' ) {
+	        $("input:radio[name=arr_resor]").prop("checked", false);
+	        $("input:radio[name=arr_logi]").prop("checked", false);
+	        $("input:radio[name=arr_Traktamente]").prop("checked", false);
+	       
+	    };
+	    if (classtoempty == 'kk_aj_ft' || classtoempty == 'kk_aj_sb' || classtoempty == 'kk_aj_fob') {
+	        $('#formVenueRequiermentsId').val("");       
+	    }
+	   
 	    return false;
 	        
 	}
@@ -12590,13 +12613,14 @@
 	     
 	    $('.granska_rubrik').html(arrJson.Rubrik);
 	    $('.granska_underrubrik').html(arrJson.UnderRubrik);
-	    $('.granska_innehall').html(arrJson.Innehall);
+	    let decodehtml = $('<div/>').html(arrJson.Innehall).text();
+	    $('.granska_innehall').html(decodehtml);
 	    var imgsrc = "";
 	    if (arrJson.Arrid) {
-	        imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.Arrid + '_' + arrJson.MainImage.MediaUrl;
+	        imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.MainImage.MediaUrl;
 	    } else {
 	        let tidigarearrid = $('#arr_getTidigareArrangemang_Get').attr('rel');
-	        imgsrc = _appsetting.globalconfig.arrimgurl + 'tmp/_' + arrJson.MainImage.MediaUrl;
+	        imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.MainImage.MediaUrl;
 	        if (tidigarearrid > 0) {
 	            imgsrc = _appsetting.globalconfig.arrimgurl + '/' + arrJson.MainImage.MediaUrl;
 	        };     
@@ -12630,11 +12654,11 @@
 	}
 	var utovareContent = function (utovareJson) {
 	    $('.granska_Utovare_Organisation').html($('#utovare_aktor_grupp').val());
-	    $('.granska_Utovare_namn').html($('#utovare_fornamn').val() + " " + $('#utovare_efternamn').val());
+	    $('.granska_Utovare_namn').html($('#arr_kontakt_fornamn').val() + " " + $('#arr_kontakt_efternamn').val());
 	    $('.granska_Utovare_Adress').html($('#utovare_adress').val());
 	    $('.granska_Utovare_postort').html($('#utovare_postnummer').val() + " " + $('#utovare_ort').val());
-	    $('.granska_Utovare_tfn').html($('#utovare_telefonnr').val());
-	    $('.granska_Utovare_epost').html($('#utovare_epost').val());
+	    $('.granska_Utovare_tfn').html($('#arr_kontakt_telefonnr').val());
+	    $('.granska_Utovare_epost').html($('#arr_kontakt_epost').val());
 	    $('.granska_Utovare_hemsida').html($('#utovare_orghemsida').val());
 	};
 
@@ -12964,11 +12988,7 @@
 	            };
 	            if (val.FaktaTypID == "36") {
 	                $('#formMaxParticipantsId').val(val.FaktaValue);
-	            };
-	            if (val.FaktaTypID == "36") {
-	                $('#formMaxParticipantsId').val(val.FaktaValue);
-	            };
-
+	            };          
 
 	        });
 

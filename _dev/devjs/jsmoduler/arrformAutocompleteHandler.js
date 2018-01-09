@@ -308,11 +308,7 @@ var fyllarrangemangDetaildata = function (data) {
             };
             if (val.FaktaTypID == "36") {
                 $('#formMaxParticipantsId').val(val.FaktaValue);
-            };
-            if (val.FaktaTypID == "36") {
-                $('#formMaxParticipantsId').val(val.FaktaValue);
-            };
-
+            };          
 
         });
 

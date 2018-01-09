@@ -191,7 +191,7 @@ var faktavalueextention =function(typ){
         case "rivtid":
             return " min";
             break;
-        case "speltid (min)":
+        case "speltid":
             return " min";
             break;
         case "kostnad/pris":
