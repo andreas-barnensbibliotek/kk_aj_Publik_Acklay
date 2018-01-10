@@ -4,10 +4,13 @@ var msg = require("./jsmoduler/main.js");
 var pagehandler = require("./jsmoduler/pageloadhandler.js");
 var publiksearch = require("./jsmoduler/publiksearch.js");
 var datepick = require("./jsmoduler/externaljs/datepicker.js");
-//var audioplayer = require("./jsmoduler/audioplayer.js")
 
 var appsetting = appsettingsobject.config;
-//  kulturkatalogen publik start
+/**
+ * funkar denna!!.
+ * @param {number} input any number
+ * @returns {number} information om allt.
+ */
 $(function () {
     $('body').foundation({
         tab: {
@@ -16,13 +19,11 @@ $(function () {
                 
             }
         }
-
-
-
     });
     //////// History handler
     //// ta hand om querystring parametrar och lagra dom i ett jsonobject urlparam.
     var urlParams = {};
+   
     var checkparamsinurl = function () {
         var match,
             pl = /\+/g,  // Regex for replacing addition symbol with a space

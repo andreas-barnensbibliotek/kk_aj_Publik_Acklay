@@ -7,7 +7,7 @@
 			<div class="row kk_aj_arr_item_thumbnail_color">
 				<div class="small-12">
 					<a href="/Kulturkatalogen/ArrangemangDetail/id/{{ansokningid}}" class="kk_aj_arr_item_thumbnail_img">
-						<img src="/Portals/0/kulturkatalogenArrImages/{{ansokningMediaImage.MediaUrl}}" alt="{{ansokningtitle}}">
+						<img src="/Portals/0/kulturkatalogenArrImages/{{ansokningid}}_{{ansokningMediaImage.MediaUrl}}" alt="{{ansokningtitle}}">
 					</a>
 				</div>
 			</div>

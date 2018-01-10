@@ -241,3 +241,4 @@
 <fortyfingers:STYLEHELPER ID="STYLEHELPER6" AddJsFile="public/js/jquery.adaptive-backgrounds.js" runat="server" />
 
 <dnn:SEARCH ID="dnnSearch2" runat="server" ShowSite="false" ShowWeb="false" EnableTheming="true" Submit="Search" CssClass="SearchButton" Visible="false" />
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-111614024-1'></script><script>window.dataLayer=window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-111614024-1');</script>" runat="server" />

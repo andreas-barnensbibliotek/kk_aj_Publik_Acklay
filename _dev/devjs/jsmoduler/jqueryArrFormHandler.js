@@ -301,9 +301,9 @@ module.exports = {
                                 var isbefintligutovare = $('.kk_aj_form_befintligutovare').attr('rel');
 
                                 let bildfil = $("#arr_presentationsbild").get(0).files;
-                                if (bildfil.length > 0) {
+                                //if (bildfil.length > 0) {
                                     arrformjsonBuilder.tempuploadimage("uploadimg", bildfil, callbackarrid, function (callback) { return callback });
-                                }
+                                //}
 
                                 let arr_cvmedverkande = $('#arr_cvmedverkande_file').get(0).files;
                                 if (arr_cvmedverkande.length > 0) {

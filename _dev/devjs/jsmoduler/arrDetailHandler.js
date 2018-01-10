@@ -32,7 +32,7 @@ var maincontent = function (arrJson) {
     $('.granska_innehall').html(decodehtml);
     var imgsrc = "";
     if (arrJson.Arrid) {
-        imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.MainImage.MediaUrl;
+        imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.Arrid + '_' + arrJson.MainImage.MediaUrl;
     } else {
         let tidigarearrid = $('#arr_getTidigareArrangemang_Get').attr('rel');
         imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.MainImage.MediaUrl;

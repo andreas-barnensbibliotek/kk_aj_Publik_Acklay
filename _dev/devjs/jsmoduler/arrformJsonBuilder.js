@@ -423,38 +423,38 @@ module.exports = {
     },
     tempuploadimage: function (cmd, files, nyttarrid, callback) {
        
-                var data = new FormData();
+            var data = new FormData();
                        
-                data.append("cmd", cmd);
+            data.append("cmd", cmd);
 
-                if (nyttarrid != "0") {
-                    data.append("arrid", nyttarrid);
-                };
+            if (nyttarrid != "0") {
+                data.append("arrid", nyttarrid);
+            };
                
-                // Add the uploaded image content to the form data collection
-                if (files.length > 0) {
-                    data.append("UploadedImage", files[0]);
-        
-                    // Make Ajax request with the contentType = false, and procesDate = false
+            // Add the uploaded image content to the form data collection
+            if (files.length > 0) {
+                data.append("UploadedImage", files[0]);
+            } else {
+                data.append("UploadedImage", "");
+            }
+                // Make Ajax request with the contentType = false, and procesDate = false
 
-                    var ajaxRequest = $.ajax({
-                        type: "POST",
-                        url: _appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
-                        contentType: false,
-                        processData: false,
-                        data: data
-                    });
+                var ajaxRequest = $.ajax({
+                    type: "POST",
+                    url: _appsetting.globalconfig.apiserver + "/Api/uploadmedia/devkey/alf",
+                    contentType: false,
+                    processData: false,
+                    data: data
+                });
 
-                    ajaxRequest.done(function (xhr, textStatus) {
+                ajaxRequest.done(function (xhr, textStatus) {
+                    var retfileurl = "";
+                    if (files.length > 0) {
                         var retfileurl = _appsetting.globalconfig.arrimgurl + files[0].name;
-                        callback(retfileurl)
-                    });
-       
-                } else {
-                    callback("Nofile");
-                }
-        
-
+                    }
+                    callback(retfileurl)
+                       
+                });       
     },
     PostMainArrangemang: function (Arrjson, callback) {
 

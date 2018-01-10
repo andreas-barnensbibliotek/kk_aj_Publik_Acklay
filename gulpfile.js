@@ -6,9 +6,10 @@ install
 4. npm init
 5. npm install --save-dev gulp gulp-sass gulp-autoprefixer gulp-rename gulp-clean-css gulp-sourcemaps webpack-stream
 6. skapa gulpfile.js nedan med länkar till bower foundation
+7  npm install --save-dev gulp-babel babel-preset-env
 */
 
-
+var gulpDocumentation = require('gulp-documentation');
 var gulp = require('gulp'),
     sass = require('gulp-sass'),	
     autoprefixer = require('gulp-autoprefixer'),
@@ -18,6 +19,8 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	concat = require('gulp-concat'),
 	sourcemaps = require('gulp-sourcemaps'),
+    babel = require('gulp-babel'),
+minify = require("gulp-babel-minify"),  
 	path = require('path');
 
 	/*
@@ -47,17 +50,7 @@ gulp.task('SassToCssSrc', function() {
 		
 });
 
-gulp.task('foundationJS', function () {
-	//gulp.src(
-	//		[
-	//			//srcPath.bower +'/jquery/dist/jquery.js',
-	//			srcPath.bower +'/foundation/js/foundation.js',
-	//			srcPath.bower + '/foundation/js/foundation/foundation.alert.js',
-	//		]
-	//	)			
-	//	.pipe(concat('foundationvendor.js'))
-	//	.pipe(gulp.dest(srcPath.jsbundle +'/'));
-		
+gulp.task('foundationJS', function () {		
 	return gulp.src([
 		srcPath.bower + '/modernizr/modernizr.js'
 		]
@@ -105,18 +98,30 @@ gulp.task('jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
        .pipe(sourcemaps.write())
        .pipe(gulp.dest(srcPath.publik + '/js/'));
 });
-	 
-//gulp.task('jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
-//    return gulp.src(srcPath.jsbundle + '/**/*.js')
-//        .pipe(sourcemaps.init())
-//      .pipe(concat('kk_aj_publicbundle.js'))
-//        .pipe(sourcemaps.write())
-//      .pipe(gulp.dest(srcPath.publik + '/js/'));
-//});
-//Watch task
+ 
+
 gulp.task('default',function() {
     gulp.watch('_dev/devsass/**/*.scss', ['SassToCssSrc']); 
 	gulp.watch('_dev/devjs/**/*.js', ['jsconcatfiles']);       
    
 });
 
+
+gulp.task('jspublicera', function () {
+    return gulp.src(
+            srcPath.publik + '/js/kk_aj_publicbundle.js'
+        )
+        .pipe(minify({
+            mangle: {
+                keepClassName: true
+            }
+        }))
+        .pipe(rename('kk_aj_publicbundle_min.js'))
+       .pipe(gulp.dest(srcPath.publik + '/js/'));
+});
+
+gulp.task('dochtml', function () {
+    return gulp.src(srcPath.publik + '/js/testar.js')
+      .pipe(gulpDocumentation('html'))
+      .pipe(gulp.dest(srcPath.publik + '/doc/test'));
+});

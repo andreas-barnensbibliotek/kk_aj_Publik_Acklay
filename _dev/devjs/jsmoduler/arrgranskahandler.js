@@ -44,7 +44,7 @@ module.exports = {
 };
 
 var updateArrangemangMotivering = function (NyArrStatus,tmparrid, callback) {
-    let tmpstatusid = parseInt(NyArrStatus);
+    let tmpstatusid = parseInt(NyArrStatus) + 1;
     let userexists = $('.kk_aj_konsu').html();
 
     if (userexists) {
