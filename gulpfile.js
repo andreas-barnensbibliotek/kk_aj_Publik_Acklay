@@ -31,7 +31,8 @@ minify = require("gulp-babel-minify"),
 		'scss': './_dev/devsass',	
 		'publik': './public',
         'devjs':'./_dev/devjs',
-		'jsbundle': './_dev/jsbundle'
+        'jsbundle': './_dev/jsbundle',
+        'docsrc': './_dev/devjs/jsbundle'
 	};
 	
 	
@@ -98,7 +99,30 @@ gulp.task('jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
        .pipe(sourcemaps.write())
        .pipe(gulp.dest(srcPath.publik + '/js/'));
 });
- 
+
+gulp.task('pub_jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
+    return gulp.src(
+            [
+                srcPath.jsbundle + '/jplist_pagination/jquery-ui.min.js',
+                srcPath.jsbundle + '/jplist_pagination/jplist.core.min.js',
+                srcPath.jsbundle + '/jplist_pagination/jplist.pagination-bundle.min.js',
+                srcPath.jsbundle + '/jplist_pagination/jplist.sort-bundle.min.js',
+                srcPath.jsbundle + '/jplist_pagination/jplist.filter-dropdown-bundle.min.js',
+                srcPath.jsbundle + '/jplist_pagination/jplist.jquery-ui-bundle.min.js',
+                srcPath.jsbundle + '/jplist_pagination/jplist.history-bundle.min.js',
+				srcPath.jsbundle + '/foundation/foundation.min.js',
+                srcPath.jsbundle + '/foundation/foundation.topbar.js',
+                srcPath.jsbundle + '/handelbars/handlebars.js',
+                //srcPath.jsbundle + '/autocomplete/jquery.easy-autocomplete.js',
+                srcPath.jsbundle + '/localstorage/localstorage.js',
+                srcPath.jsbundle + '/kk_aj_js/kk_aj_kulturkatalogenWebpack.js',
+            ]
+        )
+       //.pipe(sourcemaps.init())
+       .pipe(concat('kk_aj_publicbundle.js'))
+       //.pipe(sourcemaps.write())
+       .pipe(gulp.dest(srcPath.publik + '/js/'));
+});
 
 gulp.task('default',function() {
     gulp.watch('_dev/devsass/**/*.scss', ['SassToCssSrc']); 
@@ -107,7 +131,7 @@ gulp.task('default',function() {
 });
 
 
-gulp.task('jspublicera', function () {
+gulp.task('jspublicera',['pub_jsconcatfiles'], function () {
     return gulp.src(
             srcPath.publik + '/js/kk_aj_publicbundle.js'
         )
@@ -121,7 +145,7 @@ gulp.task('jspublicera', function () {
 });
 
 gulp.task('dochtml', function () {
-    return gulp.src(srcPath.publik + '/js/testar.js')
+    return gulp.src('./_dev/devjs/jsmoduler/*.js')
       .pipe(gulpDocumentation('html'))
       .pipe(gulp.dest(srcPath.publik + '/doc/test'));
 });

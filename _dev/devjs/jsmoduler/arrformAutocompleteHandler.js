@@ -1,9 +1,20 @@
-﻿//här sätts alla pluggin och jquery.ready starters 
+﻿/**
+ * get aputocomplete handler främst utövaredata
+ * Plats: arrformAutocompleteHandler.js    
+ * @name arrformAutocompleteHandler.js
+ * @module arrformAutocompleteHandler_js
+ */
+//här sätts alla pluggin och jquery.ready starters 
 var $ = require("jquery");
 var appsettingsobject = require("./appSettings.js");
 var _appsetting = appsettingsobject.config;
 
 module.exports = {
+    /**
+   * RenderMainContent render detaljvyn 
+   * Plats: arrformAutocompleteHandler.js
+   * @description maincontent(arrJson) 
+   */
     getBefintligutovare: function (epost, postnr, callback) {
         var requesturl = "";
         var ok = "false";
@@ -34,6 +45,11 @@ module.exports = {
           }             
         
     },
+    /**
+   * RenderMainContent render detaljvyn 
+   * Plats: arrformAutocompleteHandler.js
+   * @description maincontent(arrJson) 
+   */
     allreadyExistsutovare: function (epost, postnr, callback) {
         var requesturl = "";
         var ok = "false";
@@ -65,15 +81,35 @@ module.exports = {
         }
 
     },
+    /**
+   * RenderMainContent render detaljvyn 
+   * Plats: arrformAutocompleteHandler.js
+   * @description maincontent(arrJson) 
+   */
     emptyutovareform: function () {
         tomutovarefield();
     },
+    /**
+   * RenderMainContent render detaljvyn 
+   * Plats: arrformAutocompleteHandler.js
+   * @description maincontent(arrJson) 
+   */
     savekontaktuppgifter: function () {
         savekontaktupg();
     },
+    /**
+   * kopierakontaktuppgifter render detaljvyn 
+   * Plats: arrformAutocompleteHandler.js
+   * @description maincontent(arrJson) 
+   */
     kopierakontaktuppgifter: function () {
         copykontaktupg();
     },
+    /**
+   * getutovareArrlist render hämtar tidigare arrangemang i en lista om det finns några 
+   * Plats: arrformAutocompleteHandler.js
+   * @description maincontent(arrJson) 
+   */
     getutovareArrlist: function (utovareid) {
         var requesturl = "";
         var ok = "false";
@@ -95,6 +131,11 @@ module.exports = {
             });
         }
     },
+    /**
+   * getTidigareArrDetail render hämta tidigare arrangemangs detalj 
+   * Plats: getTidigareArrDetail.js
+   * @description getTidigareArrDetail(arrJson) 
+   */
     getTidigareArrDetail: function (arrid) {
         var requesturl = "";
         var ok = "false";

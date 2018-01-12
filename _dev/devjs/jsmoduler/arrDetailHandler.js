@@ -1,29 +1,66 @@
-﻿//här sätts alla pluggin och jquery.ready starters 
+﻿/**
+ * Detaljhanteraren har hand om visning av admindetaljvyn
+ * Plats: arrDetailHandler.js
+ * @name arrDetailHandler.js
+ * @module arrDetailHandler_js
+ */
+
+//här sätts alla pluggin och jquery.ready starters 
 var $ = require("jquery");
 var appsettingsobject = require("./appSettings.js");
 var HandlebarTemplet = require("./HandlebarTemplethandler.js");
 var _appsetting = appsettingsobject.config;
 
 module.exports = {
+    /**
+    * RenderMainContent render detaljvyn 
+    * Plats: arrDetailHandler.js
+    * @description maincontent(arrJson) 
+    */
     RenderMainContent: function (arrJson) {
         maincontent(arrJson);       
     },
+    /**
+    * RendeFaktaContent render detaljvyn
+    * Plats: arrDetailHandler.js
+    * @description faktaContent(arrJson)
+    */
     RendeFaktaContent: function (arrJson) {       
         faktaContent(arrJson);
     },
+    /**
+    * RenderUtovareContent render detaljvyn
+    * Plats: arrDetailHandler.js
+    * @description utovareContent(arrJson)    
+    */
     RenderUtovareContent: function (arrJson) {       
         utovareContent(arrJson);
     },
+    /**
+    * RenderUtovareContentJson render detaljvyn
+    * Plats: arrDetailHandler.js
+    * @description utovareContentJson(arrJson)    
+    */
     RenderUtovareContentJson: function (arrJson) {
         utovareContentJson(arrJson);
     },
+    /**
+    * RenderExempelContentJson render detaljvyn
+    * Plats: arrDetailHandler.js
+    * @description  exempelcontent(arrJson)    
+    */
     RenderExempelContentJson: function (arrJson) {
         exempelcontent(arrJson);
        
     }
 };
 
-
+/**
+    * maincontent uppdaterar detaljvyn med rubrik underrubrik content och bild
+    * Plats: arrDetailHandler.js    
+    * @description maincontent: jqueryfunction updaterar huvudinnehållet i arrangemanget
+    * @memberof arrDetailHandler_js    
+    */
 var maincontent = function (arrJson) {
      
     $('.granska_rubrik').html(arrJson.Rubrik);
@@ -43,6 +80,7 @@ var maincontent = function (arrJson) {
     }
     
     $('.granska_pressentationsbild').attr('src', imgsrc);
+    $('.granska_pressentationsbild').attr('alt', arrJson.MainImage.MediaAlt);
     $('.arrmainfoto').html('<span>Foto: </span> ' + arrJson.MainImage.MediaFoto);
 
     if (arrJson.MediaList.length > 0) {
@@ -58,15 +96,34 @@ var maincontent = function (arrJson) {
        
     
 };
-
+/**
+    * faktaContent uppdaterar detaljvyn med alla faktauppgifter
+    * Plats: arrDetailHandler.js    
+    * @description faktaContent: jqueryfunction updaterar faktainnehållet i arrangemanget
+    * @memberof arrDetailHandler_js    
+    */
 var faktaContent = function (fakalistJson) {
 
     HandlebarTemplet.injecthtmltemplate(".granskaFaktaMainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
 
 };
+
+/**
+    * exempelcontent uppdaterar detaljvyn med alla exempel
+    * Plats: arrDetailHandler.js    
+    * @description exempelcontent: jqueryfunction updaterar exempelinnehållet i arrangemanget
+    * @memberof arrDetailHandler_js    
+    */
 var exempelcontent = function (arrJson) {
     HandlebarTemplet.injecthtmltemplate(".arrExempellist", "kk_aj_arrpubExempelList.txt", arrJson);
 }
+
+/**
+    * utovareContent uppdaterar detaljvyn kopierar alla utövardata till kontaktuppgifter för arrangemanget
+    * Plats: arrDetailHandler.js    
+    * @description utovareContent: kopierar alla utövardata till kontaktuppgifter för arrangemanget
+    * @memberof arrDetailHandler_js    
+    */
 var utovareContent = function (utovareJson) {
     $('.granska_Utovare_Organisation').html($('#utovare_aktor_grupp').val());
     $('.granska_Utovare_namn').html($('#arr_kontakt_fornamn').val() + " " + $('#arr_kontakt_efternamn').val());
@@ -77,6 +134,12 @@ var utovareContent = function (utovareJson) {
     $('.granska_Utovare_hemsida').html($('#utovare_orghemsida').val());
 };
 
+/**
+    * utovareContentJson uppdaterar detaljvyn med alla utövardata 
+    * Plats: arrDetailHandler.js    
+    * @description utovareContent: uppdaterar detaljvyn med alla utövardata för arrangemanget ingår i postdata json
+    * @memberof arrDetailHandler_js    
+    */
 var utovareContentJson = function (utovareJson) {
     $('.granska_Utovare_Organisation').html(utovareJson.UtovareData.Organisation);
     $('.granska_Utovare_namn').html(utovareJson.UtovareData.Fornamn + " " + utovareJson.UtovareData.Efternamn);

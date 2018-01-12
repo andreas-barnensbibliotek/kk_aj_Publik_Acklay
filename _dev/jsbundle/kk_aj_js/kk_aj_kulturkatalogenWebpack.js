@@ -44,7 +44,12 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	
+	/**
+	 * Startpunkt f�r kulturkatalogen v�st Javascript
+	 * Plats: app.js    
+	 * @name app.js
+	 * @module app_js
+	 */
 	var appsettingsobject = __webpack_require__(1);
 	var msg = __webpack_require__(2);
 	var pagehandler = __webpack_require__(3);
@@ -218,8 +223,12 @@
 	    init()
 
 	    
-	      
+	    $('.togglebgimagehide').on('click', function () {
+	        $('.off-canvas-submenu').slideToggle("slow");
+	        $(this).toggleClass('togglebgimagehide togglebgimageshow');
+	        return false;
 	    });
+	});
 	 
 
 
@@ -231,26 +240,26 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
-	            //arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/",
-	            //granskavy: "GranskaDetalj"
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
+	            arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/",
+	            granskavy: "GranskaDetalj"
 
 	           //SERVERN DEV
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://kulturkatalog.kivdev.se",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/",
-	            arrimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/",
-	            granskavy: "GranskaDetalj"
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://kulturkatalog.kivdev.se",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/tmp/",
+	            //arrimgurl: "http://kulturkatalog.kivdev.se/Portals/0/kulturkatalogenArrImages/",
+	            //granskavy: "GranskaDetalj"
 
 	            //SERVERN
 	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
@@ -11651,6 +11660,15 @@
 	                    "FaktaValue": $('input[name=arr_centrumbildningjanej]:checked').val(),
 	                });
 	            };
+	            let arr_overiginformation = $('#arr_overiginformation');
+	            if (arr_overiginformation.val()) {
+	                arrformjsondata.Faktalist.push({
+	                    "Faktaid": "4",
+	                    "FaktaTypID": arr_overiginformation.attr('rel'),
+	                    "Faktarubrik": "Övrig information",
+	                    "FaktaValue": arr_overiginformation.val(),
+	                });
+	            };
 
 	            if (mediaExempledata.exempelitemlist) {
 	                if (mediaExempledata.exempelitemlist.length >= 0) {
@@ -12584,6 +12602,13 @@
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	/**
+	 * Detaljhanteraren har hand om visning av admindetaljvyn
+	 * Plats: arrDetailHandler.js
+	 * @name arrDetailHandler.js
+	 * @module arrDetailHandler_js
+	 */
+
 	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
 	var appsettingsobject = __webpack_require__(1);
@@ -12591,25 +12616,55 @@
 	var _appsetting = appsettingsobject.config;
 
 	module.exports = {
+	    /**
+	    * RenderMainContent render detaljvyn 
+	    * Plats: arrDetailHandler.js
+	    * @description maincontent(arrJson) 
+	    */
 	    RenderMainContent: function (arrJson) {
 	        maincontent(arrJson);       
 	    },
+	    /**
+	    * RendeFaktaContent render detaljvyn
+	    * Plats: arrDetailHandler.js
+	    * @description faktaContent(arrJson)
+	    */
 	    RendeFaktaContent: function (arrJson) {       
 	        faktaContent(arrJson);
 	    },
+	    /**
+	    * RenderUtovareContent render detaljvyn
+	    * Plats: arrDetailHandler.js
+	    * @description utovareContent(arrJson)    
+	    */
 	    RenderUtovareContent: function (arrJson) {       
 	        utovareContent(arrJson);
 	    },
+	    /**
+	    * RenderUtovareContentJson render detaljvyn
+	    * Plats: arrDetailHandler.js
+	    * @description utovareContentJson(arrJson)    
+	    */
 	    RenderUtovareContentJson: function (arrJson) {
 	        utovareContentJson(arrJson);
 	    },
+	    /**
+	    * RenderExempelContentJson render detaljvyn
+	    * Plats: arrDetailHandler.js
+	    * @description  exempelcontent(arrJson)    
+	    */
 	    RenderExempelContentJson: function (arrJson) {
 	        exempelcontent(arrJson);
 	       
 	    }
 	};
 
-
+	/**
+	    * maincontent uppdaterar detaljvyn med rubrik underrubrik content och bild
+	    * Plats: arrDetailHandler.js    
+	    * @description maincontent: jqueryfunction updaterar huvudinnehållet i arrangemanget
+	    * @memberof arrDetailHandler_js    
+	    */
 	var maincontent = function (arrJson) {
 	     
 	    $('.granska_rubrik').html(arrJson.Rubrik);
@@ -12629,6 +12684,7 @@
 	    }
 	    
 	    $('.granska_pressentationsbild').attr('src', imgsrc);
+	    $('.granska_pressentationsbild').attr('alt', arrJson.MainImage.MediaAlt);
 	    $('.arrmainfoto').html('<span>Foto: </span> ' + arrJson.MainImage.MediaFoto);
 
 	    if (arrJson.MediaList.length > 0) {
@@ -12644,15 +12700,34 @@
 	       
 	    
 	};
-
+	/**
+	    * faktaContent uppdaterar detaljvyn med alla faktauppgifter
+	    * Plats: arrDetailHandler.js    
+	    * @description faktaContent: jqueryfunction updaterar faktainnehållet i arrangemanget
+	    * @memberof arrDetailHandler_js    
+	    */
 	var faktaContent = function (fakalistJson) {
 
 	    HandlebarTemplet.injecthtmltemplate(".granskaFaktaMainblock", "kk_aj_granskafaktaList.txt", fakalistJson);
 
 	};
+
+	/**
+	    * exempelcontent uppdaterar detaljvyn med alla exempel
+	    * Plats: arrDetailHandler.js    
+	    * @description exempelcontent: jqueryfunction updaterar exempelinnehållet i arrangemanget
+	    * @memberof arrDetailHandler_js    
+	    */
 	var exempelcontent = function (arrJson) {
 	    HandlebarTemplet.injecthtmltemplate(".arrExempellist", "kk_aj_arrpubExempelList.txt", arrJson);
 	}
+
+	/**
+	    * utovareContent uppdaterar detaljvyn kopierar alla utövardata till kontaktuppgifter för arrangemanget
+	    * Plats: arrDetailHandler.js    
+	    * @description utovareContent: kopierar alla utövardata till kontaktuppgifter för arrangemanget
+	    * @memberof arrDetailHandler_js    
+	    */
 	var utovareContent = function (utovareJson) {
 	    $('.granska_Utovare_Organisation').html($('#utovare_aktor_grupp').val());
 	    $('.granska_Utovare_namn').html($('#arr_kontakt_fornamn').val() + " " + $('#arr_kontakt_efternamn').val());
@@ -12663,6 +12738,12 @@
 	    $('.granska_Utovare_hemsida').html($('#utovare_orghemsida').val());
 	};
 
+	/**
+	    * utovareContentJson uppdaterar detaljvyn med alla utövardata 
+	    * Plats: arrDetailHandler.js    
+	    * @description utovareContent: uppdaterar detaljvyn med alla utövardata för arrangemanget ingår i postdata json
+	    * @memberof arrDetailHandler_js    
+	    */
 	var utovareContentJson = function (utovareJson) {
 	    $('.granska_Utovare_Organisation').html(utovareJson.UtovareData.Organisation);
 	    $('.granska_Utovare_namn').html(utovareJson.UtovareData.Fornamn + " " + utovareJson.UtovareData.Efternamn);
@@ -12679,12 +12760,23 @@
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	/**
+	 * get aputocomplete handler främst utövaredata
+	 * Plats: arrformAutocompleteHandler.js    
+	 * @name arrformAutocompleteHandler.js
+	 * @module arrformAutocompleteHandler_js
+	 */
 	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
 	var appsettingsobject = __webpack_require__(1);
 	var _appsetting = appsettingsobject.config;
 
 	module.exports = {
+	    /**
+	   * RenderMainContent render detaljvyn 
+	   * Plats: arrformAutocompleteHandler.js
+	   * @description maincontent(arrJson) 
+	   */
 	    getBefintligutovare: function (epost, postnr, callback) {
 	        var requesturl = "";
 	        var ok = "false";
@@ -12715,6 +12807,11 @@
 	          }             
 	        
 	    },
+	    /**
+	   * RenderMainContent render detaljvyn 
+	   * Plats: arrformAutocompleteHandler.js
+	   * @description maincontent(arrJson) 
+	   */
 	    allreadyExistsutovare: function (epost, postnr, callback) {
 	        var requesturl = "";
 	        var ok = "false";
@@ -12746,15 +12843,35 @@
 	        }
 
 	    },
+	    /**
+	   * RenderMainContent render detaljvyn 
+	   * Plats: arrformAutocompleteHandler.js
+	   * @description maincontent(arrJson) 
+	   */
 	    emptyutovareform: function () {
 	        tomutovarefield();
 	    },
+	    /**
+	   * RenderMainContent render detaljvyn 
+	   * Plats: arrformAutocompleteHandler.js
+	   * @description maincontent(arrJson) 
+	   */
 	    savekontaktuppgifter: function () {
 	        savekontaktupg();
 	    },
+	    /**
+	   * kopierakontaktuppgifter render detaljvyn 
+	   * Plats: arrformAutocompleteHandler.js
+	   * @description maincontent(arrJson) 
+	   */
 	    kopierakontaktuppgifter: function () {
 	        copykontaktupg();
 	    },
+	    /**
+	   * getutovareArrlist render hämtar tidigare arrangemang i en lista om det finns några 
+	   * Plats: arrformAutocompleteHandler.js
+	   * @description maincontent(arrJson) 
+	   */
 	    getutovareArrlist: function (utovareid) {
 	        var requesturl = "";
 	        var ok = "false";
@@ -12776,6 +12893,11 @@
 	            });
 	        }
 	    },
+	    /**
+	   * getTidigareArrDetail render hämta tidigare arrangemangs detalj 
+	   * Plats: getTidigareArrDetail.js
+	   * @description getTidigareArrDetail(arrJson) 
+	   */
 	    getTidigareArrDetail: function (arrid) {
 	        var requesturl = "";
 	        var ok = "false";
@@ -33024,6 +33146,11 @@
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	/**
+	 * Detaljhanteraren har hand om visning av admindetaljvyn
+	 * @name arrDetailVy.js
+	 * @module arrDetailVy_mainmodule
+	 */
 	//här sätts alla pluggin och jquery.ready starters 
 	var $ = __webpack_require__(4);
 	var appsettingsobject = __webpack_require__(1);
@@ -33032,13 +33159,21 @@
 	var _appsetting = appsettingsobject.config;
 
 	module.exports = {
+	    /**
+	    * DetailVy render hanterar detaljvyn data
+	    * @function fillDetaildata(arrid, "details") 
+	    */
 	    DetailVy: function (arrid) {
 
 	        fillDetaildata(arrid, "details");
 
 	        
-	    },
-	    /* Granskavy fyller granskavyn med detaljdata och sätter upp jqueryeventen för granskavyn */
+	    },    
+	    /**
+	    * Granskavy fyller granskavyn med detaljdata och sätter upp jqueryeventen för granskavyn 
+	    * DetailVy render hanterar detaljvyn data
+	    * @function fillDetaildata(arrid, "details") 
+	    */
 	    GranskaVy: function (arrid) {
 
 	        fillDetaildata(arrid, "granska");

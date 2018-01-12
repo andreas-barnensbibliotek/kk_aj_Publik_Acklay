@@ -1,4 +1,9 @@
-﻿//här sätts alla pluggin och jquery.ready starters 
+﻿/**
+ * Detaljhanteraren har hand om visning av admindetaljvyn
+ * @name arrDetailVy.js
+ * @module arrDetailVy_mainmodule
+ */
+//här sätts alla pluggin och jquery.ready starters 
 var $ = require("jquery");
 var appsettingsobject = require("./appSettings.js");
 var detailhandler = require("./arrDetailHandler.js");
@@ -6,13 +11,21 @@ var granska = require("./arrgranskahandler.js");
 var _appsetting = appsettingsobject.config;
 
 module.exports = {
+    /**
+    * DetailVy render hanterar detaljvyn data
+    * @function fillDetaildata(arrid, "details") 
+    */
     DetailVy: function (arrid) {
 
         fillDetaildata(arrid, "details");
 
         
-    },
-    /* Granskavy fyller granskavyn med detaljdata och sätter upp jqueryeventen för granskavyn */
+    },    
+    /**
+    * Granskavy fyller granskavyn med detaljdata och sätter upp jqueryeventen för granskavyn 
+    * DetailVy render hanterar detaljvyn data
+    * @function fillDetaildata(arrid, "details") 
+    */
     GranskaVy: function (arrid) {
 
         fillDetaildata(arrid, "granska");

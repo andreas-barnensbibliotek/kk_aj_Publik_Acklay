@@ -1,4 +1,9 @@
-
+/**
+ * Startpunkt för kulturkatalogen väst Javascript
+ * Plats: app.js    
+ * @name app.js
+ * @module app_js
+ */
 var appsettingsobject = require("./jsmoduler/appSettings.js");
 var msg = require("./jsmoduler/main.js");
 var pagehandler = require("./jsmoduler/pageloadhandler.js");
@@ -172,6 +177,10 @@ $(function () {
     init()
 
     
-      
+    $('.togglebgimagehide').on('click', function () {
+        $('.off-canvas-submenu').slideToggle("slow");
+        $(this).toggleClass('togglebgimagehide togglebgimageshow');
+        return false;
     });
+});
  

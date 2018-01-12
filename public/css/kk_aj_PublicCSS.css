@@ -6874,7 +6874,7 @@ blockquote p {
 /* line 415, bower_components/foundation/scss/foundation/components/_offcanvas.scss */
 .tab-bar {
   -webkit-backface-visibility: hidden;
-  background: #333333;
+  background: #000000;
   color: #FFFFFF;
   height: 2.8125rem;
   line-height: 2.8125rem;
@@ -6895,7 +6895,7 @@ blockquote p {
   position: absolute;
   top: 0;
   width: 2.8125rem;
-  border-right: solid 1px #1a1a1a;
+  border-right: solid 1px black;
   left: 0; }
 
 /* line 418, bower_components/foundation/scss/foundation/components/_offcanvas.scss */
@@ -6904,7 +6904,7 @@ blockquote p {
   position: absolute;
   top: 0;
   width: 2.8125rem;
-  border-left: solid 1px #1a1a1a;
+  border-left: solid 1px black;
   right: 0; }
 
 /* line 420, bower_components/foundation/scss/foundation/components/_offcanvas.scss */
@@ -7098,10 +7098,10 @@ ul.off-canvas-list {
     transition: background 300ms ease; }
     /* line 264, bower_components/foundation/scss/foundation/components/_offcanvas.scss */
     ul.off-canvas-list li a:hover {
-      background: #242424; }
+      background: black; }
     /* line 267, bower_components/foundation/scss/foundation/components/_offcanvas.scss */
     ul.off-canvas-list li a:active {
-      background: #242424; }
+      background: black; }
 
 /* line 459, bower_components/foundation/scss/foundation/components/_offcanvas.scss */
 .move-right > .inner-wrap {

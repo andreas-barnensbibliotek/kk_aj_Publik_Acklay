@@ -379,6 +379,15 @@ module.exports = {
                     "FaktaValue": $('input[name=arr_centrumbildningjanej]:checked').val(),
                 });
             };
+            let arr_overiginformation = $('#arr_overiginformation');
+            if (arr_overiginformation.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "4",
+                    "FaktaTypID": arr_overiginformation.attr('rel'),
+                    "Faktarubrik": "Övrig information",
+                    "FaktaValue": arr_overiginformation.val(),
+                });
+            };
 
             if (mediaExempledata.exempelitemlist) {
                 if (mediaExempledata.exempelitemlist.length >= 0) {

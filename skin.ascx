@@ -67,7 +67,7 @@
          <aside class="left-off-canvas-menu">
              <ul class="off-canvas-list">       
                  <li class="first expanded"><a href="http://www.kulturivast.se" title="">Start</a></li>
-                 <li class="expanded"><a href="http://www.kulturivast.se/det-har-jobbar-vi-med" class="togglebgimageshow" title="">Det h&auml;r jobbar vi med</a></li>
+                 <li class="expanded"><a href="http://www.kulturivast.se/det-har-jobbar-vi-med" class="togglebgimagehide" title="">Det h&auml;r jobbar vi med</a></li>
                  <ul class="off-canvas-submenu multiColumn">
                      <li><a href="http://www.kulturivast.se/arkitektur">arkitektur</a></li>
                      <li><a href="http://www.kulturivast.se/arrangorsutveckling">arrang&ouml;rsutveckling</a></li>
@@ -109,9 +109,10 @@
                  <div class="row">
                      <div class="small-12 columns">
                          <div class="searchmainContent">
-                             <input type="text" class="searchinputbox" placeholder="S&ouml;k p&aring; kulturivast.se" />
+                             <label for="searchinputbox">S&ouml;k p&aring; kulturivast.se</label>
+                             <input type="text" id="searchinputbox" class="searchinputbox" placeholder="S&ouml;k p&aring; kulturivast.se" />
                              <button type="button" class="searchButton">
-                                 <img src="http://kulturivast.se/sites/all/themes/kivnew/images/PilVanster28.png" /></button>
+                                 <img src="http://kulturivast.se/sites/all/themes/kivnew/images/PilVanster28.png" alt="Sök" /></button>
                          </div>
                      </div>
 
@@ -137,7 +138,7 @@
             <div class="row">
                 <div id="ContentPane" class="contentPane content-wrapper" runat="server">
                     <div class="loader">
-                         <img src="http://kulturivast.se/sites/all/themes/kivnew/images/page-loader.gif" />
+                         <img src="http://kulturivast.se/sites/all/themes/kivnew/images/page-loader.gif" alt="Laddar sidan" />
                      </div>
                 </div>
               </div>
