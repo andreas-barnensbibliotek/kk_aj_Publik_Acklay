@@ -32,7 +32,8 @@ minify = require("gulp-babel-minify"),
 		'publik': './public',
         'devjs':'./_dev/devjs',
         'jsbundle': './_dev/jsbundle',
-        'docsrc': './_dev/devjs/jsbundle'
+        'docsrc': './_dev/devjs/jsbundle',
+        'docoutput': './documentation'
 	};
 	
 	
@@ -147,5 +148,5 @@ gulp.task('jspublicera',['pub_jsconcatfiles'], function () {
 gulp.task('dochtml', function () {
     return gulp.src('./_dev/devjs/jsmoduler/*.js')
       .pipe(gulpDocumentation('html'))
-      .pipe(gulp.dest(srcPath.publik + '/doc/test'));
+      .pipe(gulp.dest(srcPath.docoutput));
 });

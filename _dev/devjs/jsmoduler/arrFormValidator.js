@@ -432,13 +432,13 @@ var emptyclassinputs = function (classtoempty) {
         $('#formCarriersId').val("");
     };
      
-    if (classtoempty == 'kk_aj_rm' || classtoempty == 'kk_aj_sb' || classtoempty == 'kk_aj_fob' ) {
+    if (classtoempty == 'kk_aj_rm' || classtoempty == 'kk_aj_sb'  ) {
         $("input:radio[name=arr_resor]").prop("checked", false);
         $("input:radio[name=arr_logi]").prop("checked", false);
         $("input:radio[name=arr_Traktamente]").prop("checked", false);
        
     };
-    if (classtoempty == 'kk_aj_ft' || classtoempty == 'kk_aj_sb' || classtoempty == 'kk_aj_fob') {
+    if ( classtoempty == 'kk_aj_sb' || classtoempty == 'kk_aj_fob') {
         $('#formVenueRequiermentsId').val("");       
     }
    
