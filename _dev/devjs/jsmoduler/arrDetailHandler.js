@@ -84,11 +84,25 @@ var maincontent = function (arrJson) {
     $('.arrmainfoto').html('<span>Foto: </span> ' + arrJson.MainImage.MediaFoto);
 
     if (arrJson.MediaList.length > 0) {
+        var headertext = $('.arrExempellistHeader');
+        switch (arrJson.Arrangemangtyp) {
+            case "Föreställning på turné":
+                headertext.html("SMAKPROV FRÅN FÖRESTÄLLNINGEN");
+                break;
+            case "Skolbio":
+                headertext.html("TRAILER FRÅN FILMEN");
+                break;
+            default:
+                headertext.html("HÄR FÅR DU VETA MER");
+        };
+
         $('.granska_exempel').show();
     } else {
         $('.granska_exempel').hide();
     }
- 
+    $(".faktaarrtyp").html(arrJson.Arrangemangtyp);
+    $(".faktakonstform").html(arrJson.Konstform);
+    
     $('#shareMail').attr('href', 'mailto:?Subject=Delat%20fr%C3%A5n+Kulturkatalogen%20V%C3%A4st%20-%20' + arrJson.Rubrik + '&body=Jag%20vill%20dela%20arrangemanget:%20%22' + arrJson.Rubrik + '%22%20%0D%0Afr%C3%A5n%20Kulturkatalogen%20V%C3%A4st%3A%20 http://kulturkatalog.kivdev.se/Kulturkatalogen/ArrangemangDetail/id/' + arrJson.Arrid);
     let facebokURI = "https://www.facebook.com/sharer.php?u=";
     facebokURI += encodeURIComponent('http://kulturkatalog.kivdev.se/Kulturkatalogen/ArrangemangDetail/id/') + arrJson.Arrid  +'&picture=&' + encodeURIComponent(imgsrc) + '&t=' + encodeURIComponent(arrJson.Rubrik) + '&description=' + encodeURIComponent(arrJson.UnderRubrik);

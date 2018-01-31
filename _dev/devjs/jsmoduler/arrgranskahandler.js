@@ -9,14 +9,17 @@ module.exports = {
        
         let txtarrstod = $('#kk_aj_Motivering');
 
-        $('.motiveringEditblock').attr('rel', arrid);
-        $('body').on('click', '.premotivering', function () {
-        /* insert premotivering till motiveringstexten */
-        
-            let premotivering = $(this).html();
+        $('.motiveringEditblock').attr('rel', arrid);       
 
+        $('body').on('click', '.stdmottext', function (e) {
+            $("#Motivering").val($(this).text());
+            e.preventDefault();
+        })
+        $('.motiv_alt').on('click', function (e) {
+            let premotivering = $(this).html();
             txtarrstod.append(premotivering);
         });
+
        
         /* godkänn arrangemanget i granskavy */
         $('body').on('click', '.kk_aj_detailapproved', function () {

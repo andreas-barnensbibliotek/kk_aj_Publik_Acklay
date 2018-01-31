@@ -12539,7 +12539,7 @@ input[type=radio] + label {
       padding: 0px;
       padding-left: .5rem; }
     /* line 272, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
-    .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist #kk_aj_filtervalues {
+    .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .kk_aj_filtervalues {
       display: none; }
     /* line 273, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
     .kk_aj_superProductListBlock .kk_aj_mainproductlistblock .kk_aj_productlistblock .kk_aj_productlist .S_KO {
@@ -12929,6 +12929,103 @@ input[type=radio] + label {
   background-color: #555;
   /* Add a dark-grey background on hover */ }
 
+/* Menu Styles */
+/* line 23, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+.third-level-menu {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none; }
+  /* line 34, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+  .third-level-menu > li {
+    height: auto;
+    background: #FFFFFF; }
+    /* line 37, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+    .third-level-menu > li:hover {
+      z-index: 9999;
+      background: #EEEEEE; }
+
+/* line 44, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+.second-level-menu {
+  z-index: 9999;
+  position: absolute;
+  top: 34px;
+  left: 0;
+  width: 150px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  background: #F6F6F6; }
+  /* line 56, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+  .second-level-menu > li {
+    position: relative;
+    height: 34px;
+    background: #F6F6F6; }
+    /* line 60, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+    .second-level-menu > li:hover {
+      z-index: 9999;
+      background: #EEEEEE; }
+
+/* line 67, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+.top-level-menu {
+  z-index: 9999;
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+  /* line 73, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+  .top-level-menu a {
+    border: 1px #ccc solid;
+    color: #000000;
+    text-decoration: none;
+    padding: 0 0 0 10px;
+    /* Make the link cover the entire list item-container */
+    display: block;
+    line-height: 34px; }
+    /* line 81, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+    .top-level-menu a:hover {
+      color: #000000; }
+  /* line 83, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+  .top-level-menu > li {
+    position: relative;
+    float: left;
+    height: 34px;
+    width: 120px;
+    background: #FFFFFF; }
+    /* line 89, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+    .top-level-menu > li:hover {
+      z-index: 9999;
+      background: #EEEEEE; }
+
+/* line 96, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+.top-level-menu li:hover > ul {
+  /* On hover, display the next level's menu */
+  display: inline; }
+
+/* line 102, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+.motivlabel {
+  color: #777777;
+  font-size: 0.625rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 8px 0.9375rem 2px;
+  text-transform: uppercase; }
+  /* line 109, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+  .motivlabel:hover {
+    background: #FFFFFF !important; }
+
+/* line 111, _dev/devsass/devScss/kulturkatalogen/_kulturkatalogMain.scss */
+.motiv_alt {
+  padding: .5rem; }
+
+/*.top-level-menu a.godkandlabel{color:#00a65a;}
+.top-level-menu a.nekalabel{color:#dd4b39;}
+.top-level-menu a.ovrigtlabel{color:#f39c12;}*/
 /* line 3, _dev/devsass/devScss/kulturkatalogen/_arrPublicDetails.scss */
 .detailblock .artikelwrapper .artsidecontainer {
   font-size: .9rem;
@@ -17090,3 +17187,8 @@ a.ui-button:active,
 /* line 2028, _dev/devsass/kk_aj_PublicCSS.scss */
 #kk_aj_CurrentUserid {
   display: none; }
+
+/* line 2030, _dev/devsass/kk_aj_PublicCSS.scss */
+a:active, a:focus,
+li:active, li:focus {
+  opacity: .5; }

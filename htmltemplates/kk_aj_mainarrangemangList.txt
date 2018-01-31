@@ -39,7 +39,7 @@
 				{{#showyearspan ansokningAgespan}}{{/showyearspan}}
 												
 			</div>
-			<div id="kk_aj_filtervalues" class="S_BB_p{{ansokningFilterfakta.Bokningsbar}} S_ML_{{ansokningFilterfakta.Morklaggning}} S_TH_{{ansokningFilterfakta.Takhojd}} S_ST">{{ansokningFilterfakta.Speltid}}</div><div class="S_KO">{{ansokningFilterfakta.Kostnad}}</div>
+			<div  class="kk_aj_filtervalues S_BB_p{{ansokningFilterfakta.Bokningsbar}} S_ML_{{ansokningFilterfakta.Morklaggning}} S_TH_{{ansokningFilterfakta.Takhojd}} S_ST">{{ansokningFilterfakta.Speltid}}</div><div class="S_KO">{{ansokningFilterfakta.Kostnad}}</div>
 		</div>
 	</div>
 	

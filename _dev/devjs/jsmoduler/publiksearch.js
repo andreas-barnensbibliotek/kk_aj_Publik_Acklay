@@ -259,6 +259,22 @@ var publiksearchEvents = function () {
 
         return false;
     })
+    $('body').on('keypress','a', function (e) {   
+        let obj = $(this);
+        alert("inne" + e.keyCode)
+        if (e.keyCode === 0 || e.keyCode === 32) {
+           alert("japp" + e.keyCode)
+            if (obj.hasClass("vald")) {
+                obj.removeClass("vald");
+            } else {
+                $('.kontformBlock a').removeClass("vald");
+                obj.addClass("vald");
+            }
+        }
+        return false;
+    })
+    
+
     $('.ArrangemangtypBlock a').on('click', function (e) {
         let obj = $(this);
         if (obj.hasClass("vald")) {

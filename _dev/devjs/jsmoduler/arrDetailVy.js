@@ -114,6 +114,18 @@ var fyllArrJson = function (data, callback) {
     
     // FAKTA BLOCK
     //_arrformjsondata.Faktalist = [];
+    _arrjsondata.Faktalist.push({
+        "Faktaid": "1",
+        "FaktaTypID": 0,
+        "Faktarubrik": "Arrarangemangstyp",
+        "FaktaValue": _arrjsondata.Arrangemangtyp
+    });
+    _arrjsondata.Faktalist.push({
+        "Faktaid": "1",
+        "FaktaTypID": 0,
+        "Faktarubrik": "Konstform",
+        "FaktaValue": _arrjsondata.Konstform
+    });
     $.each(arrdata.ansokningFaktalist, function (itm, val) {
         
         switch (val.FaktaTypID) {

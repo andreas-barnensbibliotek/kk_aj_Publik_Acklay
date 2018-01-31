@@ -12688,11 +12688,25 @@
 	    $('.arrmainfoto').html('<span>Foto: </span> ' + arrJson.MainImage.MediaFoto);
 
 	    if (arrJson.MediaList.length > 0) {
+	        var headertext = $('.arrExempellistHeader');
+	        switch (arrJson.Arrangemangtyp) {
+	            case "Föreställning på turné":
+	                headertext.html("SMAKPROV FRÅN FÖRESTÄLLNINGEN");
+	                break;
+	            case "Skolbio":
+	                headertext.html("TRAILER FRÅN FILMEN");
+	                break;
+	            default:
+	                headertext.html("HÄR FÅR DU VETA MER");
+	        };
+
 	        $('.granska_exempel').show();
 	    } else {
 	        $('.granska_exempel').hide();
 	    }
-	 
+	    $(".faktaarrtyp").html(arrJson.Arrangemangtyp);
+	    $(".faktakonstform").html(arrJson.Konstform);
+	    
 	    $('#shareMail').attr('href', 'mailto:?Subject=Delat%20fr%C3%A5n+Kulturkatalogen%20V%C3%A4st%20-%20' + arrJson.Rubrik + '&body=Jag%20vill%20dela%20arrangemanget:%20%22' + arrJson.Rubrik + '%22%20%0D%0Afr%C3%A5n%20Kulturkatalogen%20V%C3%A4st%3A%20 http://kulturkatalog.kivdev.se/Kulturkatalogen/ArrangemangDetail/id/' + arrJson.Arrid);
 	    let facebokURI = "https://www.facebook.com/sharer.php?u=";
 	    facebokURI += encodeURIComponent('http://kulturkatalog.kivdev.se/Kulturkatalogen/ArrangemangDetail/id/') + arrJson.Arrid  +'&picture=&' + encodeURIComponent(imgsrc) + '&t=' + encodeURIComponent(arrJson.Rubrik) + '&description=' + encodeURIComponent(arrJson.UnderRubrik);
@@ -13439,6 +13453,22 @@
 
 	        return false;
 	    })
+	    $('body').on('keypress','a', function (e) {   
+	        let obj = $(this);
+	        alert("inne" + e.keyCode)
+	        if (e.keyCode === 0 || e.keyCode === 32) {
+	           alert("japp" + e.keyCode)
+	            if (obj.hasClass("vald")) {
+	                obj.removeClass("vald");
+	            } else {
+	                $('.kontformBlock a').removeClass("vald");
+	                obj.addClass("vald");
+	            }
+	        }
+	        return false;
+	    })
+	    
+
 	    $('.ArrangemangtypBlock a').on('click', function (e) {
 	        let obj = $(this);
 	        if (obj.hasClass("vald")) {
@@ -33262,6 +33292,18 @@
 	    
 	    // FAKTA BLOCK
 	    //_arrformjsondata.Faktalist = [];
+	    _arrjsondata.Faktalist.push({
+	        "Faktaid": "1",
+	        "FaktaTypID": 0,
+	        "Faktarubrik": "Arrarangemangstyp",
+	        "FaktaValue": _arrjsondata.Arrangemangtyp
+	    });
+	    _arrjsondata.Faktalist.push({
+	        "Faktaid": "1",
+	        "FaktaTypID": 0,
+	        "Faktarubrik": "Konstform",
+	        "FaktaValue": _arrjsondata.Konstform
+	    });
 	    $.each(arrdata.ansokningFaktalist, function (itm, val) {
 	        
 	        switch (val.FaktaTypID) {
@@ -33448,14 +33490,17 @@
 	       
 	        let txtarrstod = $('#kk_aj_Motivering');
 
-	        $('.motiveringEditblock').attr('rel', arrid);
-	        $('body').on('click', '.premotivering', function () {
-	        /* insert premotivering till motiveringstexten */
-	        
-	            let premotivering = $(this).html();
+	        $('.motiveringEditblock').attr('rel', arrid);       
 
+	        $('body').on('click', '.stdmottext', function (e) {
+	            $("#Motivering").val($(this).text());
+	            e.preventDefault();
+	        })
+	        $('.motiv_alt').on('click', function (e) {
+	            let premotivering = $(this).html();
 	            txtarrstod.append(premotivering);
 	        });
+
 	       
 	        /* godkänn arrangemanget i granskavy */
 	        $('body').on('click', '.kk_aj_detailapproved', function () {
