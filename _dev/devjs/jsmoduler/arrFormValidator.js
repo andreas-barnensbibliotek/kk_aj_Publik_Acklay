@@ -209,6 +209,8 @@ var step1 = function (next) {
 var step2 = function (next) {
     var ret = true;
 
+    window.editorobj.triggerSave(false, true);
+
     var validateobj = $('.kk_aj_requireValidation_step2');
     ret = validateinputs(validateobj, next,ret);
 
@@ -234,6 +236,7 @@ var step2 = function (next) {
     return ret;
 }
 var step3 = function (next) {
+    
     ret = true;
     return ret;
 }

@@ -6,6 +6,7 @@ var handlebarTemplethandler = require("./HandlebarTemplethandler.js");
 var arrformValidator = require("./arrFormValidator.js");
 var arrGranskaVy = require("./arrGranskaVy.js");
 var arrformAutocompleteHandler = require("./arrformAutocompleteHandler.js");
+var editorHandler = require("./externaljs/editor.js");
 //var tinyeditorHandler = require("./externaljs/tinyeditor.js");
 var _exempellistobject = { "exempelitemlist": [] };
 
@@ -15,6 +16,12 @@ module.exports = {
         
         $(function () {
             arrformValidator.arrShowforminputs("0");
+           
+            
+
+
+            
+            //$(".editor").html("testar");
            // tinyeditorHandler.init();
             //var storage = Storages.localStorage
             //storage.set('foo', 'Detta funkar bra detta!');
@@ -136,10 +143,12 @@ module.exports = {
 
                 let utovareid = $('#arr_getTidigareArrangemang').val();
                 arrformAutocompleteHandler.getTidigareArrDetail(utovareid);
-
+                
                 return false;
             });            
-
+            $("#arr_presentation").on("focus", function (e) {
+                editorHandler.updatera();
+            })
             $('#ChangeUppgifterKontakt').on('click', function (e) {
                 btn_befintlig_utovartxtBlock.hide();
                 btn_befintlig_utovareBlock.show();
@@ -394,6 +403,10 @@ module.exports = {
                 $('.' + classen +'text').toggle();
                 return false;
             });
+
+            editorHandler.init();
+
+
         });
               
 
