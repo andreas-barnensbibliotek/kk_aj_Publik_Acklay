@@ -12052,16 +12052,20 @@
 	        var basesrc = _basesrc;
 	        
 	        $('.img_forestallningtune').attr("src", basesrc + "forestallningpatune.png");
+	        $('.img_utstallningturne').attr("src", basesrc + "utstallningpaturne.png");
 	        $('.img_Skolbio').attr("src", basesrc + "Skolbio.png");
 	        $('.img_forfattarbesok').attr("src", basesrc + "forfattarbesok.png");
 	        $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "workshops_projekt.png");
 	        $('.img_Fortbildningar').attr("src", basesrc + "Kompetensutveckling.png");
 	        $('.img_resmalsbesok').attr("src", basesrc + "besoksmalmedresestod.png");
-
+	        
 
 	        switch (vald) {
 	            case "1":
 	                $('.img_forestallningtune').attr("src", basesrc + "forestallningpatune_invert.png");
+	                break;
+	            case "2":
+	                $('.img_utstallningturne').attr("src", basesrc + "utstallningpaturne_invert.png");
 	                break;
 	            case "8":
 	                $('.img_Skolbio').attr("src", basesrc + "Skolbio_invert.png");
@@ -12161,6 +12165,10 @@
 	            case "1":
 	                konstforminputs.forestallningtune.kontroller();
 	                emptyclassinputs('kk_aj_ft');
+	                break;
+	            case "2":
+	                konstforminputs.utstallningturne.kontroller();
+	                emptyclassinputs('kk_aj_ut');
 	                break;
 	            case "4":
 	                konstforminputs.kulturpedagogiskaprojekt.kontroller();
@@ -12286,9 +12294,18 @@
 	            
 	            break;
 	        }
+	        case "2": {
+	            obj = $('.kk_aj_ut');
+	            ret = validateinputs(obj, next, ret);
+	            hidemulitvalueinputs();
+	            emptyclassinputs('kk_aj_ut');
+	            kk_aj_ut_verify();
+
+	            break;
+	        }
 	        case "4": {
 	            obj = $('.kk_aj_kp');
-	            $('#kk_aj_yearspan').html("");
+	            //$('#kk_aj_yearspan').html("");
 	            $('#kk_aj_speltid').html("");            
 	            ret = validateinputs(obj, next, ret);
 	            hidemulitvalueinputs();
@@ -12301,7 +12318,7 @@
 	        }
 	        case "5": {
 	            obj = $('.kk_aj_fob'); 
-	            $('#kk_aj_yearspan').html("");
+	            //$('#kk_aj_yearspan').html("");
 	            $('#kk_aj_speltid').html("");           
 	            ret = validateinputs(obj, next, ret);
 	            hidemulitvalueinputs();           
@@ -12349,9 +12366,10 @@
 	    $('.kk_aj_form_Arrangemang').hide();
 	    
 	    $('.kk_aj_ft').hide();  //forestallningtune
+	    $('.kk_aj_ut').hide();  //Utställning på turné 
 	    $('.kk_aj_sb').hide();  //skolbio
 	    $('.kk_aj_kp').hide();  //kulturpedagogoskaprojekt  
-	    $('.kk_aj_fob').hide(); //fortbildningar
+	    $('.kk_aj_fob').hide(); //kompetensutveckling  (fortbildningar)
 	    $('.kk_aj_rm').hide();  //resmål   
 	   
 	}
@@ -12362,6 +12380,13 @@
 	        kontroller: function () {
 	            hideformfields();
 	            $('.kk_aj_ft').show();
+	        }
+	    },
+	    utstallningturne: {
+	        block: "kk_aj_ut",
+	        kontroller: function () {
+	            hideformfields();
+	            $('.kk_aj_ut').show();
 	        }
 	    },
 	    skolbio: {
@@ -12426,9 +12451,9 @@
 	    if (classtoempty == 'kk_aj_kp' || classtoempty == 'kk_aj_fob' || classtoempty == 'kk_aj_rm') {
 	        $('#kk_aj_speltid').html("0min");
 	    };
-	    if (classtoempty == 'kk_aj_kp' || classtoempty == 'kk_aj_fob') {
-	        $('#kk_aj_yearspan').html("0år - 0år");
-	    };
+	    //if (classtoempty == 'kk_aj_kp' || classtoempty == 'kk_aj_fob') {
+	    //    $('#kk_aj_yearspan').html("0år - 0år");
+	    //};
 	    if (classtoempty != 'kk_aj_ft') {
 	        $("input:radio[name=arr_ljus]").prop("checked", false);
 	        $("input:radio[name=arr_ljud]").prop("checked", false);
@@ -12511,6 +12536,68 @@
 	    }
 	    return ret;
 	}
+
+	var kk_aj_ut_verify = function (ret) {
+
+	    if ($('input[name=arr_ljud]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_ljud_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_ljus]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_ljus_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_morklaggning]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_morklaggning_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($("#formCarriersId option:selected").val() === "") {
+	        $('.kk_aj_search_arr_carriers_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($("#formElectricityId option:selected").val() === "") {
+	        $('.kk_aj_search_arr_electricity_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($("#kk_aj_yearspan").html() === '0år -0år') {
+	        $('.kk_aj_yearspan_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($("#kk_aj_speltid").html() === '0min') {
+	        $('.kk_aj_speltid_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_resor]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_resor_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_logi]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_logi_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_Traktamente]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_traktamente_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_statligtstodjanej]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_statligtstodjanej_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_fskattsedeljanej]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_fskattsedeljanej_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if ($('input[name=arr_centrumbildningjanej]:checked').length <= 0) {
+	        $('.kk_aj_search_arr_centrumbildningjanej_error').css('display', 'block');
+	        ret = false;
+	    }
+	    if (($('#arr_cvmedverkande_url').val() == "") && ($('#arr_cvmedverkande_file').val() == "")) {
+	        $('.arr_cvmedverkande_error').css('display', 'block');
+	        ret = false;
+	    }
+	    return ret;
+	}
+
 
 	var kk_aj_fob_verify = function (ret) {
 
@@ -13048,8 +13135,10 @@
 	        $('ul.kontformBlock input[name=arr_radioValkontstform][value="' + arrval[0].ansokningkonstformid + '"] ').click();
 	        $('#arr_rubrik').val(arrval[0].ansokningtitle);
 	        $('#arr_underrubrik').val(arrval[0].ansokningsubtitle);
-	        $('#arr_presentation').val(arrval[0].ansokningContent);
-	        window.editorobj.activeEditor.setContent(arrval[0].ansokningContent);
+	        $('#arr_presentation').val(arrval[0].ansokningContent).text();
+	        
+	        var text = $('<div/>').html(arrval[0].ansokningContent).text();
+	        window.editorobj.activeEditor.setContent(text);
 	        let imgurl = _appsetting.globalconfig.dnnURL + "/Portals/0/kulturkatalogenArrImages/" + arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl
 	        let imgfilenamn = arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl;
 	        let imgobj = $('#kk_aj_tmpimg');

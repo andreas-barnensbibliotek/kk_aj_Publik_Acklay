@@ -256,8 +256,10 @@ var fyllarrangemangDetaildata = function (data) {
         $('ul.kontformBlock input[name=arr_radioValkontstform][value="' + arrval[0].ansokningkonstformid + '"] ').click();
         $('#arr_rubrik').val(arrval[0].ansokningtitle);
         $('#arr_underrubrik').val(arrval[0].ansokningsubtitle);
-        $('#arr_presentation').val(arrval[0].ansokningContent);
-        window.editorobj.activeEditor.setContent(arrval[0].ansokningContent);
+        $('#arr_presentation').val(arrval[0].ansokningContent).text();
+        
+        var text = $('<div/>').html(arrval[0].ansokningContent).text();
+        window.editorobj.activeEditor.setContent(text);
         let imgurl = _appsetting.globalconfig.dnnURL + "/Portals/0/kulturkatalogenArrImages/" + arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl
         let imgfilenamn = arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl;
         let imgobj = $('#kk_aj_tmpimg');
