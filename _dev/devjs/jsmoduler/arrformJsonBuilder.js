@@ -87,6 +87,37 @@ module.exports = {
                     "FaktaValue": arr_medverkande.val(),
                 });
             };
+
+            let arr_pedagogiskverksamhet = $('#arr_pedagogiskverksamhet');
+            if (arr_pedagogiskverksamhet.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "1",
+                    "FaktaTypID": arr_pedagogiskverksamhet.attr('rel'),
+                    "Faktarubrik": "Pedagogisk verksamhet",
+                    "FaktaValue": arr_pedagogiskverksamhet.val(),
+                });
+            };
+
+            let arr_marknadsforing = $('#arr_marknadsforing');
+            if (arr_marknadsforing.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "1",
+                    "FaktaTypID": arr_marknadsforing.attr('rel'),
+                    "Faktarubrik": "Marknadföring",
+                    "FaktaValue": arr_marknadsforing.val(),
+                });
+            };
+
+            let arr_utstallningsperiod = $('#arr_utstallningsperiod');
+            if (arr_utstallningsperiod.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "1",
+                    "FaktaTypID": arr_utstallningsperiod.attr('rel'),
+                    "Faktarubrik": "Utställningsperiod",
+                    "FaktaValue": arr_utstallningsperiod.val(),
+                });
+            };
+
             let arr_Premiardatum = $('#arr_Premiardatum');
             if (arr_Premiardatum.val()) {
                 arrformjsondata.Faktalist.push({
@@ -212,6 +243,15 @@ module.exports = {
                     "FaktaValue": formVenueRequiermentsId.val(),
                 });
             };
+            let arr_yta = $('#arr_yta');
+            if (arr_yta.val()) {
+                arrformjsondata.Faktalist.push({
+                    "Faktaid": "2",
+                    "FaktaTypID": arr_yta.attr('rel'),
+                    "Faktarubrik": "Yta",
+                    "FaktaValue": arr_yta.val(),
+                });
+            };         
 
             let formMaxAudienceId = $('#formMaxAudienceId');
             if (formMaxAudienceId.val()) {

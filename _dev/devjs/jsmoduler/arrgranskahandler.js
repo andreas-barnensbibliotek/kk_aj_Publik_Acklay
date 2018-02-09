@@ -24,7 +24,7 @@ module.exports = {
         /* godkänn arrangemanget i granskavy */
         $('body').on('click', '.kk_aj_detailapproved', function () {
 
-            if (valideragranska()) {
+            if (valideragranska("approve")) {
                 updateArrangemangMotivering('2',arrid, function () {
                     $('.motiveringEditblock').hide();
                     $('.kk_aj_granskaBehandlat').show();
@@ -35,7 +35,7 @@ module.exports = {
         /* neka arrangemanget i granskavy */
         $('body').on('click', '.kk_aj_detaildenied', function () {
 
-            if (valideragranska()) {
+            if (valideragranska("neka")) {
                 updateArrangemangMotivering('3',arrid, function () {
                     $('.motiveringEditblock').hide();
                     $('.kk_aj_granskaBehandlat').show();
@@ -89,7 +89,7 @@ var updatemotivering = function (postjson, callback) {
 
 };
 
-var valideragranska = function () {
+var valideragranska = function (typ) {
     let ret = true;
     let drparrstrod = $('#kk_aj_arrangorstod');
     let txtarrstod = $('#kk_aj_Motivering');
@@ -97,13 +97,18 @@ var valideragranska = function () {
     drparrstrod.removeClass("errorborder");
     txtarrstod.removeClass("errorborder");
 
-    if (drparrstrod.val() === "") {
-        ret= false;
-        drparrstrod.addClass("errorborder");
-    };
     if (txtarrstod.val() === "") {
         ret= false;
         txtarrstod.addClass("errorborder");
     };
+
+    if (typ != "neka") {
+        drparrstrod.removeClass("errorborder");
+        if (drparrstrod.val() === "") {
+            ret= false;
+            drparrstrod.addClass("errorborder");
+        };
+    }    
+   
     return ret;
 }

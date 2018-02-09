@@ -61,6 +61,7 @@ var initlist = function () {
 
 };
 
+/* handlebartempletService hämtar handelbartemplate och uppdaterar produktlistan både i filter och i sök */
 var handlebartempletService = function(targetClass, usetemplateName, currentdata, callback){
    
     var appsetting = appsettingsobject.config;
@@ -89,10 +90,20 @@ var handlebartempletService = function(targetClass, usetemplateName, currentdata
                 itemsBox: ' #kk_aj_productlist ',
                 itemPath: '.kk_aj_arritem',
                 panelPath: '.jplist-panel',
-                storage: 'localstorage',
-                storageName: 'KulturkatalogenStorage'
+                storage: 'localstorage',               
+                storageName: 'KulturkatalogenStorage',
+                redrawCallback: function (collection, $dataview, statuses) {
+
+                        /* döljer produktlistan om filter inte ger resultat */
+                        if ($('.jplist-no-results').is(":visible")) {                           
+                            $('#kk_aj_productlist').hide();
+                        } else {
+                            $('#kk_aj_productlist').show();
+                        }                    
+                }
             });
 
+           
         });
         
     }, 'html');
@@ -334,8 +345,11 @@ var searchformcollector = function () {
     }
     if (tmpstopyear !== undefined) {
         searchdataContainer.stopyear = tmpstopyear;        
+        if (searchdataContainer.startyear == 0 && searchdataContainer.stopyear > 0) {
+            searchdataContainer.startyear = 1
+        };
     }
-    if (tmpstartyear != 0 && tmpstopyear != 0) {
+    if (tmpstartyear != 0 || tmpstopyear != 0) {
         addvaldasokord("Ålder: " + tmpstartyear + "-" + tmpstopyear);
     }
    

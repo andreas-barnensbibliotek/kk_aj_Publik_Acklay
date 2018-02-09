@@ -561,10 +561,10 @@ var kk_aj_ut_verify = function (ret) {
         $('.kk_aj_yearspan_error').css('display', 'block');
         ret = false;
     }
-    if ($("#kk_aj_speltid").html() === '0min') {
-        $('.kk_aj_speltid_error').css('display', 'block');
-        ret = false;
-    }
+    //if ($("#kk_aj_speltid").html() === '0min') {
+    //    $('.kk_aj_speltid_error').css('display', 'block');
+    //    ret = false;
+    //}
     if ($('input[name=arr_resor]:checked').length <= 0) {
         $('.kk_aj_search_arr_resor_error').css('display', 'block');
         ret = false;

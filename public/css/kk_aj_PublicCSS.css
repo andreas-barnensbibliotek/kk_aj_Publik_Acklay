@@ -12278,6 +12278,10 @@ input[type=radio] + label {
 .table-striped .datepicker table tr td, .table-striped .datepicker table tr th {
   background-color: transparent; }
 
+/* line 374, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.kk_ajuseravtalblock div {
+  font-style: italic; }
+
 @media only screen and (max-width: 40em) {
   /* line 1, _dev/devsass/devScss/kulturkatalogen/_produktlistsearch.scss */
   .columns {
@@ -14316,6 +14320,10 @@ input[type=radio] + label {
 /* line 372, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
 .table-striped .datepicker table tr td, .table-striped .datepicker table tr th {
   background-color: transparent; }
+
+/* line 374, _dev/devsass/devScss/kulturkatalogen/_arrangemangsteps.scss */
+.kk_ajuseravtalblock div {
+  font-style: italic; }
 
 /* line 98, _dev/devsass/kk_aj_PublicCSS.scss */
 .h2 {

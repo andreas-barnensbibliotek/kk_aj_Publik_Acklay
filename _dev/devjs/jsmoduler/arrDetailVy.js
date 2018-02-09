@@ -130,7 +130,7 @@ var fyllArrJson = function (data, callback) {
         
         switch (val.FaktaTypID) {
             // FAKTA 1
-            case 1: case 2: case 3: case 4: case 5: case 25: case 26: case 35:
+            case 1: case 2: case 3: case 4: case 5: case 25: case 26: case 35: case 43: case 44: case 45: case 46:
                 _arrjsondata.Faktalist.push({
                     "Faktaid": "1",
                     "FaktaTypID": val.FaktaTypID,
