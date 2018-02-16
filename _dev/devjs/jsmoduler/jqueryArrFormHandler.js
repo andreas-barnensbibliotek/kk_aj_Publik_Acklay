@@ -173,7 +173,17 @@ module.exports = {
             // Verify steg 1
             $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {                
                 var ret = true;
-                if (!$('#utovare_epost').val() || !$('#utovare_postnummer').val()) {
+
+                arrformAutocompleteHandler.allreadyExistsutovare($('#utovare_epost').val(), $('#utovare_postnummer').val(), function (data) {
+                    var ret = true;
+                    if (!$('#utovare_epost').hasClass('befintligutovare')) {
+                        if (data) {
+                            utovareexeists();
+                            ret = false;
+                        }
+                    }
+
+                if (!$('#utovare_epost').val() && !$('#utovare_postnummer').val()) {
                     if (arrformValidator.formvalidator(1) == true && ret == true) {
 
                         if ($('#utovare_epost').hasClass('notYouTest')) {
@@ -195,14 +205,7 @@ module.exports = {
                     }
                 }
                 
-               arrformAutocompleteHandler.allreadyExistsutovare($('#utovare_epost').val(), $('#utovare_postnummer').val(), function (data) {
-                   var ret = true;
-                   if(!$('#utovare_epost').hasClass('befintligutovare')){
-                       if (data) {
-                            utovareexeists();
-                            ret= false;
-                        }
-                    }
+               
 
                 if (arrformValidator.formvalidator(1)== true && ret==true ) {
                     
@@ -228,6 +231,13 @@ module.exports = {
             
             // Verify steg 2
             $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
+                
+                let missingimg = $('#kk_aj_tmpimg').attr("src");
+                if (missingimg.indexOf("/missingimage.jpg") > 0) {
+                    $('#arr_presentationsbild').removeClass('novalidate');
+                } else {
+                    $('#arr_presentationsbild').addClass('novalidate');
+                };
                 if (arrformValidator.formvalidator(2)) {
                     console.log("_exempellistobject " +_exempellistobject);
                     // FYll på inmatade värden i granskavyn!   
@@ -559,7 +569,7 @@ var saveArrfilmExempel = function () {
 
     let urltest = bild_film_url.indexOf("https://youtu.be/");
     if (urltest < 0) {
-        alert("Du måste ange en korrekt youtubelänk (ex: https://youtu.be/######)");
+        alert("Du måste ange en korrekt youtubelänk. 1. Öppna din video på youtube.com. 2. Klicka på Dela under videon. 3. Kopiera den länk du har där och klistra in den i detta fält. Länken ska se ut enligt följande exempel: https://youtu.be/AATlj6UwMzA");
         return false;
     };
     let fixurl = bild_film_url.replace("https://youtu.be/", "");

@@ -65,8 +65,12 @@ var maincontent = function (arrJson) {
      
     $('.granska_rubrik').html(arrJson.Rubrik);
     $('.granska_underrubrik').html(arrJson.UnderRubrik);
-    let decodehtml = $('<div/>').html(arrJson.Innehall).text();
-    $('.granska_innehall').html(decodehtml);
+   
+        let decodehtml = $('<div/>').html(arrJson.Innehall).text(); // detta behövs inte då decodingen görs i arrDetailVy.js -> fyllArrJson
+        $('.granska_innehall').html(decodehtml);
+        //$('.granska_innehall').html(arrJson.Innehall);
+        //let decodehtml = $('<div/>').html(arrJson.Innehall).text(); // detta behövs inte då decodingen görs i arrDetailVy.js -> fyllArrJson
+    //$('.granska_innehall').html(arrJson.Innehall);
     var imgsrc = "";
     if (arrJson.Arrid) {
         imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.MainImage.MediaUrl;

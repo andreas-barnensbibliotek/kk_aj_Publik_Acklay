@@ -240,26 +240,26 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
-	            //arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/",
-	            //granskavy: "GranskaDetalj"
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
+	            arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/",
+	            granskavy: "GranskaDetalj"
 
 	            //SERVERN kulturkatalogenvast.org
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://www.kulturkatalogenvast.org",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://www.kulturkatalogenvast.org/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/tmp/",
-	            arrimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/",
-	            granskavy: "GranskaDetalj"
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://www.kulturkatalogenvast.org",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://www.kulturkatalogenvast.org/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/tmp/",
+	            //arrimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/",
+	            //granskavy: "GranskaDetalj"
 
 	            //SERVERN DEV
 	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
@@ -10819,7 +10819,17 @@
 	            // Verify steg 1
 	            $('.kk_aj_btn_next_step[rel=2]').on('click', function (e) {                
 	                var ret = true;
-	                if (!$('#utovare_epost').val() || !$('#utovare_postnummer').val()) {
+
+	                arrformAutocompleteHandler.allreadyExistsutovare($('#utovare_epost').val(), $('#utovare_postnummer').val(), function (data) {
+	                    var ret = true;
+	                    if (!$('#utovare_epost').hasClass('befintligutovare')) {
+	                        if (data) {
+	                            utovareexeists();
+	                            ret = false;
+	                        }
+	                    }
+
+	                if (!$('#utovare_epost').val() && !$('#utovare_postnummer').val()) {
 	                    if (arrformValidator.formvalidator(1) == true && ret == true) {
 
 	                        if ($('#utovare_epost').hasClass('notYouTest')) {
@@ -10841,14 +10851,7 @@
 	                    }
 	                }
 	                
-	               arrformAutocompleteHandler.allreadyExistsutovare($('#utovare_epost').val(), $('#utovare_postnummer').val(), function (data) {
-	                   var ret = true;
-	                   if(!$('#utovare_epost').hasClass('befintligutovare')){
-	                       if (data) {
-	                            utovareexeists();
-	                            ret= false;
-	                        }
-	                    }
+	               
 
 	                if (arrformValidator.formvalidator(1)== true && ret==true ) {
 	                    
@@ -10874,6 +10877,13 @@
 	            
 	            // Verify steg 2
 	            $('.kk_aj_btn_next_step[rel=3]').on('click', function (e) {
+	                
+	                let missingimg = $('#kk_aj_tmpimg').attr("src");
+	                if (missingimg.indexOf("/missingimage.jpg") > 0) {
+	                    $('#arr_presentationsbild').removeClass('novalidate');
+	                } else {
+	                    $('#arr_presentationsbild').addClass('novalidate');
+	                };
 	                if (arrformValidator.formvalidator(2)) {
 	                    console.log("_exempellistobject " +_exempellistobject);
 	                    // FYll på inmatade värden i granskavyn!   
@@ -11205,7 +11215,7 @@
 
 	    let urltest = bild_film_url.indexOf("https://youtu.be/");
 	    if (urltest < 0) {
-	        alert("Du måste ange en korrekt youtubelänk (ex: https://youtu.be/######)");
+	        alert("Du måste ange en korrekt youtubelänk. 1. Öppna din video på youtube.com. 2. Klicka på Dela under videon. 3. Kopiera den länk du har där och klistra in den i detta fält. Länken ska se ut enligt följande exempel: https://youtu.be/AATlj6UwMzA");
 	        return false;
 	    };
 	    let fixurl = bild_film_url.replace("https://youtu.be/", "");
@@ -11717,7 +11727,7 @@
 	            let arr_overiginformation = $('#arr_overiginformation');
 	            if (arr_overiginformation.val()) {
 	                arrformjsondata.Faktalist.push({
-	                    "Faktaid": "4",
+	                    "Faktaid": "0",
 	                    "FaktaTypID": arr_overiginformation.attr('rel'),
 	                    "Faktarubrik": "Övrig information",
 	                    "FaktaValue": arr_overiginformation.val(),
@@ -12813,8 +12823,12 @@
 	     
 	    $('.granska_rubrik').html(arrJson.Rubrik);
 	    $('.granska_underrubrik').html(arrJson.UnderRubrik);
-	    let decodehtml = $('<div/>').html(arrJson.Innehall).text();
-	    $('.granska_innehall').html(decodehtml);
+	   
+	        let decodehtml = $('<div/>').html(arrJson.Innehall).text(); // detta behövs inte då decodingen görs i arrDetailVy.js -> fyllArrJson
+	        $('.granska_innehall').html(decodehtml);
+	        //$('.granska_innehall').html(arrJson.Innehall);
+	        //let decodehtml = $('<div/>').html(arrJson.Innehall).text(); // detta behövs inte då decodingen görs i arrDetailVy.js -> fyllArrJson
+	    //$('.granska_innehall').html(arrJson.Innehall);
 	    var imgsrc = "";
 	    if (arrJson.Arrid) {
 	        imgsrc = _appsetting.globalconfig.arrimgurl + arrJson.MainImage.MediaUrl;
@@ -33691,7 +33705,8 @@
 	    _arrjsondata.Arrid = arrdata.ansokningid;
 	    _arrjsondata.Rubrik = arrdata.ansokningtitle;
 	    _arrjsondata.UnderRubrik = arrdata.ansokningsubtitle;
-	    _arrjsondata.Innehall = htmlDecode(arrdata.ansokningContent);
+	    //_arrjsondata.Innehall = htmlEncode(arrdata.ansokningContent);
+	    _arrjsondata.Innehall = arrdata.ansokningContent;
 	    _arrjsondata.Arrangemangtyp = arrdata.ansokningtyp;
 	    _arrjsondata.Konstform = arrdata.ansokningkonstform;
 	    _arrjsondata.MainImage.MediaUrl = arrdata.ansokningMediaImage.MediaUrl;
@@ -33783,7 +33798,7 @@
 	                break;
 
 	            // Fakta för konsulenten enbart
-	            case 37: case 38: case 39: case 40: case 41:                
+	            case 37: case 38: case 39: case 40: case 41: case 42:
 	                break;
 	                // default är ÖVRIGT
 	            default:

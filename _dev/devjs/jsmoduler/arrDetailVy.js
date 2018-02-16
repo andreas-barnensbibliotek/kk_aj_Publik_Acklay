@@ -92,7 +92,8 @@ var fyllArrJson = function (data, callback) {
     _arrjsondata.Arrid = arrdata.ansokningid;
     _arrjsondata.Rubrik = arrdata.ansokningtitle;
     _arrjsondata.UnderRubrik = arrdata.ansokningsubtitle;
-    _arrjsondata.Innehall = htmlDecode(arrdata.ansokningContent);
+    //_arrjsondata.Innehall = htmlEncode(arrdata.ansokningContent);
+    _arrjsondata.Innehall = arrdata.ansokningContent;
     _arrjsondata.Arrangemangtyp = arrdata.ansokningtyp;
     _arrjsondata.Konstform = arrdata.ansokningkonstform;
     _arrjsondata.MainImage.MediaUrl = arrdata.ansokningMediaImage.MediaUrl;
@@ -184,7 +185,7 @@ var fyllArrJson = function (data, callback) {
                 break;
 
             // Fakta för konsulenten enbart
-            case 37: case 38: case 39: case 40: case 41:                
+            case 37: case 38: case 39: case 40: case 41: case 42:
                 break;
                 // default är ÖVRIGT
             default:

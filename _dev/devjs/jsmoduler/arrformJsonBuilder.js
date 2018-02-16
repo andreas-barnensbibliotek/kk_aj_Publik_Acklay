@@ -422,7 +422,7 @@ module.exports = {
             let arr_overiginformation = $('#arr_overiginformation');
             if (arr_overiginformation.val()) {
                 arrformjsondata.Faktalist.push({
-                    "Faktaid": "4",
+                    "Faktaid": "0",
                     "FaktaTypID": arr_overiginformation.attr('rel'),
                     "Faktarubrik": "Övrig information",
                     "FaktaValue": arr_overiginformation.val(),
