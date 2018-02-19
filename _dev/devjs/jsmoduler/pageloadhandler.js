@@ -11,10 +11,10 @@ module.exports = {
                 arrformhandler.start(val);
                 break;
             case "Dnn_module_kk_aj_Publik_productlist":
-                arrsearchhandler.init(val)
+                arrsearchhandler.init(val);
                 break;
             case "Dnn_module_kk_aj_Publik_detail":
-                let granskapage = appsettings.config.globalconfig.granskavy
+                let granskapage = appsettings.config.globalconfig.granskavy;
 
                 if ($('.kk_aj_CurrentPageName').html() == granskapage) {
                     arrDetailvyHandler.GranskaVy(val);
@@ -30,34 +30,3 @@ module.exports = {
         }        
     }
 };
-
-//var loadtemplateTypes = function (pagetemplate, userid, sortera, val) {
-  
-//    $.each(pagetemplate, function( obj, value ) {   
-//        ServiceHandler.injecttemplateDebug(value.templatedata, userid, val, function (data) {         
-//            loadpagetemplates(value, data, function (data) {
-//                if (data == "ja") {
-//                   // console.log("KLART");                    
-//                }
-//            });
-//        });     
-//    });
-   
-//}
-
-
-//var loadpagetemplates = function (template, currentdata,callback) {
-    
-//    $.get(appsettings.htmltemplateURL + "/" + template.filename, function (data) {
-//        var temptpl = Handlebars.compile(data);
-
-//        updatecountmenybox(currentdata);
-//        $(template.targetdiv).html(temptpl(currentdata));
-//        callback("ja");
-//    }, 'html');
-
-//}
-
-
-
-

@@ -34,16 +34,19 @@ module.exports = {
             var btn_kontaktupg_arrangemangBlock = $('.kk_aj_form_kontaktuppgifterarr');
             var visagetTidigareArrBlock = $('.kk_aj_visagetTidigareArrBlock');
                        
-            $('.ArrangemangtypBlock input').on('change', function () {
+            $('.ArrangemangtypBlock input:radio').on('click', function () {
                 var vald = $('input[name=arr_radioValArrtyp]:checked', '.ArrangemangtypBlock').val();
                 $('small.error').hide();
                 $('.kontformBlock').removeClass("radioError");
                 arrformValidator.arrShowforminputs(vald);
                     arrformValidator.arrtypimg(vald);                    
                 });
-            $('.kontformBlock input').on('change', function () {
+
+            $('.kontformBlock input:radio').on('click', function () {
                 var vald = $('input[name=arr_radioValkontstform]:checked', '.kontformBlock').val();
-                arrformValidator.konsttypimg(vald);                
+                //$(this).prev().attr('checked', true);
+                arrformValidator.konsttypimg(vald);
+                //alert("click" + vald);
             });
             // Nav Event
             $('body').on('click', '.kk_aj_btnbefintligutovare', function () {

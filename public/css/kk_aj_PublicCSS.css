@@ -17298,3 +17298,7 @@ li:active, li:focus {
   border: 0px;
   display: none;
   min-height: 140px; }
+
+/* line 2121, _dev/devsass/kk_aj_PublicCSS.scss */
+label img {
+  pointer-events: none; }
