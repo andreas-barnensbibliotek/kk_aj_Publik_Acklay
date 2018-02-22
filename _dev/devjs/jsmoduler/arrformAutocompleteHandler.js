@@ -262,6 +262,10 @@ var fyllarrangemangDetaildata = function (data) {
         window.editorobj.activeEditor.setContent(text);
         let imgurl = _appsetting.globalconfig.dnnURL + "/Portals/0/kulturkatalogenArrImages/" + arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl
         let imgfilenamn = arrval[0].ansokningid + "_" + arrval[0].ansokningMediaImage.MediaUrl;
+
+        //let imgurl = _appsetting.globalconfig.dnnURL + "/Portals/0/kulturkatalogenArrImages/" + arrval[0].ansokningMediaImage.MediaUrl
+        //let imgfilenamn = arrval[0].ansokningMediaImage.MediaUrl;
+
         let imgobj = $('#kk_aj_tmpimg');
         imgobj.attr("src", imgurl);
         imgobj.attr("alt", imgfilenamn);

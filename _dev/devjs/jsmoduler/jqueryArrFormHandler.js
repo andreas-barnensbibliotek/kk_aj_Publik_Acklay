@@ -18,7 +18,8 @@ module.exports = {
             arrformValidator.arrShowforminputs("0");
            
             
-
+            var storage = Storages.localStorage;
+            var session = Storages.sessionStorage
 
             
             //$(".editor").html("testar");
@@ -67,6 +68,7 @@ module.exports = {
             });
             $('body').on('click', '.kk_aj_btnnyutovare', function () {
                 //tidigareutovaredisable(false);
+                clearUtovareform();
                 clearForm();
                 arrformAutocompleteHandler.emptyutovareform();               
                 btn_befintlig_utovareBlock.show();
@@ -332,12 +334,14 @@ module.exports = {
                                     arrformjsonBuilder.tempuploadimage("uploadimg", arr_cvmedverkande, callbackarrid, function (callback) {
 
                                         alert("Uppgifterna är nu inskickade!");
+                                        clearUtovareform();
                                         clearForm();
                                         tabnavigator(1);
                                         return true;
                                     });
                                 } else {
                                     alert("Uppgifterna är nu inskickade!");
+                                    clearUtovareform();
                                     clearForm();
                                     tabnavigator(1);
                                     return true;
@@ -358,6 +362,7 @@ module.exports = {
 
             $('.kk_aj_AvbrytSteps').on('click', function (e) {
                 if (confirm('Är du säker på att du vill radera alla ifyllda uppgifter för arrangemanget? Raderade uppgifter går inte att ångra!')) {
+                    clearUtovareform();
                     clearForm();
                     tabnavigator(1);
                     return true;
@@ -438,7 +443,34 @@ module.exports = {
             addarrtab_2.hide();
             addarrtab_3.hide();
             addarrtab_4.hide();
-            
+            $('#kk_aj_yearspan').html("");
+            $('#kk_aj_speltid').html("");
+            editorHandler.clear();
+
+            //arrangemang images
+            $('.img_resmalsbesok').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/besoksmalmedresestod.png');
+            $('.img_forestallningtune').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/forestallningpatune.png');
+            $('.img_Skolbio').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Skolbio.png');
+            $('.img_Kulturpedagogiskaprojekt').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/workshops_projekt.png');
+            $('.img_utstallningturne').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/utstallningpaturne.png');
+
+            //Konstform EJ _invert
+            $('.img_arkitektur').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Arkitekturochdesign.png');
+            $('.img_dans').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/dans.png');
+            $('.img_film').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Filmochmedia.png');
+            $('.img_konst').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Konstformochdesign.png');
+            $('.img_litteratur').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Litteraturberattandeskrivande.png');
+            $('.img_musik').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/musik.png');
+
+            $('.img_naturochkultruarv').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Naturochkulturarv.png');
+            $('.img_nycirkus').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Nycirkus_cirkus.png');
+            $('.img_slojd').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Slojd.png');
+            $('.img_teater').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/teater.png');
+            $('.img_teknik').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Teknikochmultimedia.png');
+            $('.img_annascenkonst').attr('src', '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/Annanscenkonst.png');
+
+            $('.arrExempellist').empty();
+
             let btn_ny_utovareBlock = $('.kk_aj_form_befintligutovare');
             let btn_befintlig_utovareBlock = $('.kk_aj_form_utovareuppgifter');
             let btn_befintlig_utovartxtBlock = $('.kk_aj_form_visa_utovarinfo');
@@ -446,7 +478,7 @@ module.exports = {
             let visagetTidigareArrBlock = $('.kk_aj_visagetTidigareArrBlock');
             $('#kk_aj_tmpimg').attr('src', 'http://kulturkatalog.kivdev.se/DesktopModules/kk_aj_Publik_ArrangemangForm/images/missingimage.jpg');
             btn_ny_utovareBlock.hide();
-            btn_befintlig_utovareBlock.removeClass('successborder').show();           
+            btn_befintlig_utovareBlock.removeClass('successborder').show();
             $('.kk_aj_verifystep2').show();
             $('.kk_aj_btnnyutovare').removeClass("secondary");
             $('.kk_aj_btnbefintligutovare').addClass("secondary");
@@ -454,16 +486,18 @@ module.exports = {
             $('.kk_aj_befintlignotme').hide();
             let securetext = "Datalagringsavtal";
             securetext += "Genom att skicka in din ansökan godkänner du att Kulturkatalogen behandlar och lagrar användardata. och... Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.";
-            
+
             $('#ApproveText').html(securetext);
-            
+
             btn_ny_utovareBlock.hide();
             visagetTidigareArrBlock.hide();
-            btn_kontaktupg_arrangemangBlock.show();           
+            btn_kontaktupg_arrangemangBlock.show();
             btn_befintlig_utovartxtBlock.hide();
-                        
+
+        };
+        var clearUtovareform = function () {
             $('#visa_utovareNamn2').html("");
-            $('#visa_utovareHemsida2').html("");            
+            $('#visa_utovareHemsida2').html("");
             $('#visa_utovareAdress2').html("");
             $('#visa_utovarePostnr2').html("");
             $('#visa_utovareOrt2').html("");
@@ -483,8 +517,9 @@ module.exports = {
             $('#utovare_efternamn').val("");
             $('#utovare_telefonnr').val("");
             $('#utovare_epost').val("");
-        }
+        };
 
+       
     }
 };
 
@@ -605,6 +640,12 @@ var tomexempelform = function () {
     $('#arr_ExempelRubrik').val("");
     $('#arr_Exempelbeskrivning').val("");
     $('#arr_ExempelUrl').val("");
+    //film
+    $('#arr_ExempelfilmRubrik').val("");       
+    $('#arr_Exempelfilmbeskrivning').val("");
+    $('#arr_Exempelfilm').val("");
+    
+
 }
 
 var tabortexempelfromJson = function (delval) {

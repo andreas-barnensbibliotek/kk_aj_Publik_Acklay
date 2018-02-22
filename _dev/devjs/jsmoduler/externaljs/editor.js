@@ -14,8 +14,10 @@ module.exports = {
         });
 
         //tinymce.get('arr_presentation').getContent()
-    }//end init
-    
+    },//end init
+    clear: function () {
+        window.editorobj.activeEditor.setContent('');
+    }
 } //end moduleexport
 
 var TINY = TINY || {},

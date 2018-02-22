@@ -55,8 +55,8 @@ module.exports = {
 
         let arrformjsondata = _arrjsondata;
 
-        arrformjsondata.Rubrik = $('#arr_rubrik').val();
-        arrformjsondata.UnderRubrik = $('#arr_underrubrik').val();
+        arrformjsondata.Rubrik = cleanWordPaste($('#arr_rubrik').val());
+        arrformjsondata.UnderRubrik = cleanWordPaste($('#arr_underrubrik').val());
         arrformjsondata.Innehall = htmlEncode(cleanWordPaste($('#arr_presentation').val()));
         arrformjsondata.Arrangemangtyp = $('input[name=arr_radioValArrtyp]:checked').val();
         arrformjsondata.Konstform = $('input[name=arr_radioValkontstform]:checked').val();
