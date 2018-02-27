@@ -28,7 +28,7 @@
 <fortyfingers:STYLEHELPER ID="STYLEHELPER3" AddToHead='<meta charset="UTF-8">' runat="server" />
 <fortyfingers:STYLEHELPER ID="headMeta1" AddToHead='<meta http-equiv="X-UA-Compatible" content="IE=edge">' runat="server" />
 <fortyfingers:STYLEHELPER ID="headMeta2" AddToHead='<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">' runat="server" />
-<fortyfingers:STYLEHELPER ID="headreferrer" AddToHead='<meta name="referrer" content="origin">' runat="server" />
+<fortyfingers:STYLEHELPER ID="headreferrer" AddToHead='<meta name="referrer" content="no-referrer">' runat="server" />
 <fortyfingers:STYLEHELPER ID="STYLEHELPER2" AddCssFile="public/css/jquery-ui.css" runat="server" />
 
 <%--<!-- kulturkatalogen.org GOOGLEANALYTICS kör denna när domänen är ändrad
@@ -45,19 +45,21 @@
 
 <!-- ### OFFCANVAS START ################################################################################################ --> 
  <div class="off-canvas-wrap" data-offcanvas>
-     <div class="inner-wrap">
+     <div class="inner-wrap kiv-new-header">
          
          <!-- ### MENYBALK START (NAV)################################################################################################ -->
          <nav class="tab-bar">
              <section class="left-small">
+            <a class="left-off-canvas-toggle" href="#" title="Meny">
+                <span>MENY</span>
+            </a>
+        </section>
 
-                 <a class="left-off-canvas-toggle" href="#"><span>MENY</span></a>
-             </section>
-
-             <section class="right tab-bar-section tab-bar-logosection">
-                 <a href="index.html">
-                     <img src="http://www.kulturivast.se/sites/default/files/kivlogo.png" alt="Kultur i V&auml;st" /></a>
-             </section>
+        <section class="right tab-bar-section tab-bar-logosection">
+                        <div class="logo-img">
+            	<a rel="home" href="http://develop-v1.kulturivast.se" title="Kultur i Väst Hem">Kultur i Väst</a>
+	        </div>
+        </section>
 
              <section class="right-small">
                  <a href="http://www.kulturivast.se/search?query="><span>S&Ouml;K</span></a>
@@ -66,7 +68,12 @@
          <!-- ### MENYBALK END (NAV) ################################################################################################ -->
 
          <aside class="left-off-canvas-menu">
-             <ul class="off-canvas-list">       
+             <h2 class="block-title">
+                 <div class="menu_block">2015 new meny</div>
+             </h2>
+            <div class="menu-block-wrapper menu-block-9 menu-name-menu-2015-meny parent-mlid-0 menu-level-1">
+             
+              <ul class="off-canvas-list">       
                  <li class="first expanded"><a href="http://www.kulturivast.se" title="">Start</a></li>
                  <li class="expanded"><a href="http://www.kulturivast.se/det-har-jobbar-vi-med" class="togglebgimagehide" title="">Det h&auml;r jobbar vi med</a></li>
                  <ul class="off-canvas-submenu multiColumn">
@@ -98,6 +105,7 @@
                  <li><a href="http://www.kulturivast.se/in-english">In English</a></li>
                  <li>
              </ul>
+            </div>
              <dnn:MENU ID="MENU1" MenuStyle="Simple" runat="Server" />
          </aside>
          <a class="exit-off-canvas"></a>
@@ -232,8 +240,7 @@
 
      
 
-    
-     
+   
  </div>
 
 <dnn:jQuery ID="dnnjQuery" runat="server" />

@@ -136,17 +136,18 @@ module.exports = {
    * Plats: getTidigareArrDetail.js
    * @description getTidigareArrDetail(arrJson) 
    */
-    getTidigareArrDetail: function (arrid) {
+    getTidigareArrDetail: function (arrid, callback) {
         var requesturl = "";
-        var ok = "false";
-
+        
         if (arrid){ 
             //http://localhost:60485/Api_v2/arrangemang/details/uid/0/typ/118/devkey/alf?type=json&callback=testar
             requesturl = _appsetting.globalconfig.apiserver + "/Api_v2/arrangemang/details/uid/0/typ/" + arrid + "/devkey/alf?type=json&callback=testar";
 
             servercall(requesturl, function (data, retmess) {
                 console.log("detta är REtmess " + retmess);
-                fyllarrangemangDetaildata(data)
+                fyllarrangemangDetaildata(data, function (arrid,konstformid) {
+                    callback(arrid,konstformid);
+                });
                
             });
         };
@@ -245,7 +246,7 @@ var copykontaktupg = function () {
 }
 
 
-var fyllarrangemangDetaildata = function (data) {
+var fyllarrangemangDetaildata = function (data,callback) {
 
     var arrval = data.kk_aj_admin.ansokningarlista.ansokningar;
     var yearMin = "";
@@ -359,32 +360,12 @@ var fyllarrangemangDetaildata = function (data) {
             };          
 
         });
-
+        let test = arrval[0].ansokningkonstformid;
         $('#kk_aj_yearspan').html(yearMin + "år - " + yearMax + "år");
+        callback(arrval[0].ansokningtypid, test);
     };
 };
 
-//var fyllutovaredata = function (data) {
-//    var utovare = data.kk_aj_admin.Utovarelist[0];
-//    tomutovarefield();
-//    if (utovare) {
-//        $('.kk_aj_form_befintligutovare').attr('rel', utovare.UtovarID);
-//        $('#utovare_aktor_grupp').val(utovare.Organisation);
-//        $('#utovare_orghemsida').val(utovare.Weburl);
-//        $('#utovare_adress').val(utovare.Adress);
-//        $('#utovare_postnummer').val(utovare.Postnr);
-//        $('#utovare_ort').val(utovare.Ort);
-//        $('#utovare_kommun').val(utovare.Kommun);
-//        $('#utovare_fornamn').val(utovare.Fornamn);
-//        $('#utovare_efternamn').val(utovare.Efternamn);
-//        $('#utovare_telefonnr').val(utovare.Telefon);
-//        $('#utovare_epost').val(utovare.Epost);
-//        return true;
-//    } else {
-//        return false;
-//    }; 
-    
-//}
 
 var servercall = function (currurl, callback) {
     

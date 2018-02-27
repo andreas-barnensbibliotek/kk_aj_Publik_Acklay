@@ -147,8 +147,13 @@ module.exports = {
             $('#arr_getTidigareArrangemang_Get').on('click', function (e) {
 
                 let utovareid = $('#arr_getTidigareArrangemang').val();
-                arrformAutocompleteHandler.getTidigareArrDetail(utovareid);
-                
+                 
+                arrformAutocompleteHandler.getTidigareArrDetail(utovareid, function (arrid,konstformid) {
+                    arrformValidator.arrtypimg(arrid);
+                    arrformValidator.konsttypimg(konstformid);
+                    console.log("hämtat");
+                   
+                });
                 return false;
             });            
             $("#arr_presentation").on("focus", function (e) {
@@ -399,14 +404,25 @@ module.exports = {
             });
 
             $('#kk_aj_laddatmpimg').on('click', function () {
-                var spinner = "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/public/ajax-loader.gif";
+                var spinner = appsettings.globalconfig.dnnURL + "/Portals/_default/Skins/kk_aj_Publik_Acklay/public/ajax-loader.gif";
+                var orgimg = appsettings.globalconfig.dnnURL + "/DesktopModules/kk_aj_Publik_ArrangemangForm/images/missingimage.jpg";
                 let spinnerobj = $('#kk_aj_tmpimg');
+                var filinput = $("#arr_presentationsbild");
                 spinnerobj.attr('src', spinner);
-                let files = $("#arr_presentationsbild").get(0).files;
-                arrformjsonBuilder.tempuploadimage("tmpimg",files,"0", function (callback) {
-                    console.log(callback);
-                    spinnerobj.attr('src', callback);
-                });
+
+                var ext = filinput.val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                    alert("Du kan bara ladda upp filer i formaten: gif, png, jpg, jpeg");
+                    filinput.val("");
+                    spinnerobj.attr('src', orgimg);
+                } else {                   
+                    let files = filinput.get(0).files;
+                    arrformjsonBuilder.tempuploadimage("tmpimg", files, "0", function (callback) {
+                        console.log(callback);
+                        spinnerobj.attr('src', callback);
+                    });
+                }
+                
                 return false;
             });            
            
@@ -421,6 +437,14 @@ module.exports = {
                 $('.' + classen +'text').toggle();
                 return false;
             });
+            $('#tab-cv-1').on('click', function (e) {
+                $('#arr_cvmedverkande_file').val("");                
+                
+            });
+            $('#tab-cv-2').on('click', function (e) {
+                $('#arr_cvmedverkande_url').val("");
+                
+            });            
 
             editorHandler.init();
 
@@ -476,7 +500,7 @@ module.exports = {
             let btn_befintlig_utovartxtBlock = $('.kk_aj_form_visa_utovarinfo');
             let btn_kontaktupg_arrangemangBlock = $('.kk_aj_form_kontaktuppgifterarr');
             let visagetTidigareArrBlock = $('.kk_aj_visagetTidigareArrBlock');
-            $('#kk_aj_tmpimg').attr('src', 'http://kulturkatalog.kivdev.se/DesktopModules/kk_aj_Publik_ArrangemangForm/images/missingimage.jpg');
+            $('#kk_aj_tmpimg').attr('src',  appsettings.globalconfig.dnnURL + '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/missingimage.jpg');
             btn_ny_utovareBlock.hide();
             btn_befintlig_utovareBlock.removeClass('successborder').show();
             $('.kk_aj_verifystep2').show();
@@ -484,9 +508,11 @@ module.exports = {
             $('.kk_aj_btnbefintligutovare').addClass("secondary");
             $('.kk_aj_form_befintligutovare').attr('rel', '0');
             $('.kk_aj_befintlignotme').hide();
-            let securetext = "Datalagringsavtal";
-            securetext += "Genom att skicka in din ansökan godkänner du att Kulturkatalogen behandlar och lagrar användardata. och... Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.";
-
+            let securetext = "<h3>Datalagringsavtal</h3> <ul> <li>Jag godkänner att Kultur i Väst behandlar och lagrar användardata som har fyllts i i arrangörsformuläret.</li>";
+            securetext += "<li>Kulturkatalogen Väst använder uppgifterna för att visa arrangemang i sin digitala utbudskatalog.</li>";
+            securetext += "<li>Alla uppgifter i formuläret är publika förutom de uppgifter som har fyllts i under rubriken ”Information inför bedömning”. För förställning på turné och utställning på turné gäller att alla uppgifter är publika då de saknar bedömningsdelen.</li>";
+            securetext += "<li>Användardata kommer att lagras för arkivering då det innefattas av offentlighetsprincipen eller tills det att du som användare aktivt väljer att ta bort datat. Att användaruppgifterna lagras förenklar även fortsatt förnyelse av ett arrangemang.</li></ul>";
+           
             $('#ApproveText').html(securetext);
 
             btn_ny_utovareBlock.hide();

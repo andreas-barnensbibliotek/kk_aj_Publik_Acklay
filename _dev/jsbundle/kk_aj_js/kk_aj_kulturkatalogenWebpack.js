@@ -240,26 +240,26 @@
 	window.kk_aj_publikAppsettings =
 	    {
 	        globalconfig: {
-	            //apiserver: "http://localhost:60485",
-	            //dnnURL: "http://dnndev.me",           
-	            //localOrServerURL: "http://localhost:60485/Api_v2",
-	            //htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            //detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
-	            //basepageUri: "/KulturkatalogenAdmin",
-	            //arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
-	            //arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/",
-	            //granskavy: "GranskaDetalj"
+	            apiserver: "http://localhost:60485",
+	            dnnURL: "http://dnndev.me",           
+	            localOrServerURL: "http://localhost:60485/Api_v2",
+	            htmltemplateURL: "http://dnndev.me/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            detailediturl: "http://localhost:60485/Api_v3/updatearrangemang",
+	            basepageUri: "/KulturkatalogenAdmin",
+	            arrtmpimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/tmp/",
+	            arrimgurl: "http://dnndev.me/Portals/0/kulturkatalogenArrImages/",
+	            granskavy: "GranskaDetalj"
 
 	            //SERVERN kulturkatalogenvast.org
-	            apiserver: "http://kulturkatalog.kivdev.se:8080",
-	            dnnURL: "http://www.kulturkatalogenvast.org",
-	            localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
-	            htmltemplateURL: "http://www.kulturkatalogenvast.org/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
-	            detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
-	            basepageUri: "/KulturkatalogenAdmin",
-	            arrtmpimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/tmp/",
-	            arrimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/",
-	            granskavy: "GranskaDetalj"
+	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
+	            //dnnURL: "http://www.kulturkatalogenvast.org",
+	            //localOrServerURL: "http://kulturkatalog.kivdev.se:8080/Api_v2",
+	            //htmltemplateURL: "http://www.kulturkatalogenvast.org/Portals/_default/Skins/kk_aj_Publik_Acklay/htmltemplates",
+	            //detailediturl: "http://kulturkatalog.kivdev.se:8080/Api_v3/updatearrangemang",
+	            //basepageUri: "/KulturkatalogenAdmin",
+	            //arrtmpimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/tmp/",
+	            //arrimgurl: "http://www.kulturkatalogenvast.org/Portals/0/kulturkatalogenArrImages/",
+	            //granskavy: "GranskaDetalj"
 
 	            //SERVERN DEV
 	            //apiserver: "http://kulturkatalog.kivdev.se:8080",
@@ -10761,8 +10761,13 @@
 	            $('#arr_getTidigareArrangemang_Get').on('click', function (e) {
 
 	                let utovareid = $('#arr_getTidigareArrangemang').val();
-	                arrformAutocompleteHandler.getTidigareArrDetail(utovareid);
-	                
+	                 
+	                arrformAutocompleteHandler.getTidigareArrDetail(utovareid, function (arrid,konstformid) {
+	                    arrformValidator.arrtypimg(arrid);
+	                    arrformValidator.konsttypimg(konstformid);
+	                    console.log("hämtat");
+	                   
+	                });
 	                return false;
 	            });            
 	            $("#arr_presentation").on("focus", function (e) {
@@ -11013,14 +11018,25 @@
 	            });
 
 	            $('#kk_aj_laddatmpimg').on('click', function () {
-	                var spinner = "http://kulturkatalog.kivdev.se/Portals/_default/Skins/kk_aj_Publik_Acklay/public/ajax-loader.gif";
+	                var spinner = appsettings.globalconfig.dnnURL + "/Portals/_default/Skins/kk_aj_Publik_Acklay/public/ajax-loader.gif";
+	                var orgimg = appsettings.globalconfig.dnnURL + "/DesktopModules/kk_aj_Publik_ArrangemangForm/images/missingimage.jpg";
 	                let spinnerobj = $('#kk_aj_tmpimg');
+	                var filinput = $("#arr_presentationsbild");
 	                spinnerobj.attr('src', spinner);
-	                let files = $("#arr_presentationsbild").get(0).files;
-	                arrformjsonBuilder.tempuploadimage("tmpimg",files,"0", function (callback) {
-	                    console.log(callback);
-	                    spinnerobj.attr('src', callback);
-	                });
+
+	                var ext = filinput.val().split('.').pop().toLowerCase();
+	                if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+	                    alert("Du kan bara ladda upp filer i formaten: gif, png, jpg, jpeg");
+	                    filinput.val("");
+	                    spinnerobj.attr('src', orgimg);
+	                } else {                   
+	                    let files = filinput.get(0).files;
+	                    arrformjsonBuilder.tempuploadimage("tmpimg", files, "0", function (callback) {
+	                        console.log(callback);
+	                        spinnerobj.attr('src', callback);
+	                    });
+	                }
+	                
 	                return false;
 	            });            
 	           
@@ -11035,6 +11051,14 @@
 	                $('.' + classen +'text').toggle();
 	                return false;
 	            });
+	            $('#tab-cv-1').on('click', function (e) {
+	                $('#arr_cvmedverkande_file').val("");                
+	                
+	            });
+	            $('#tab-cv-2').on('click', function (e) {
+	                $('#arr_cvmedverkande_url').val("");
+	                
+	            });            
 
 	            editorHandler.init();
 
@@ -11090,7 +11114,7 @@
 	            let btn_befintlig_utovartxtBlock = $('.kk_aj_form_visa_utovarinfo');
 	            let btn_kontaktupg_arrangemangBlock = $('.kk_aj_form_kontaktuppgifterarr');
 	            let visagetTidigareArrBlock = $('.kk_aj_visagetTidigareArrBlock');
-	            $('#kk_aj_tmpimg').attr('src', 'http://kulturkatalog.kivdev.se/DesktopModules/kk_aj_Publik_ArrangemangForm/images/missingimage.jpg');
+	            $('#kk_aj_tmpimg').attr('src',  appsettings.globalconfig.dnnURL + '/DesktopModules/kk_aj_Publik_ArrangemangForm/images/missingimage.jpg');
 	            btn_ny_utovareBlock.hide();
 	            btn_befintlig_utovareBlock.removeClass('successborder').show();
 	            $('.kk_aj_verifystep2').show();
@@ -11098,9 +11122,11 @@
 	            $('.kk_aj_btnbefintligutovare').addClass("secondary");
 	            $('.kk_aj_form_befintligutovare').attr('rel', '0');
 	            $('.kk_aj_befintlignotme').hide();
-	            let securetext = "Datalagringsavtal";
-	            securetext += "Genom att skicka in din ansökan godkänner du att Kulturkatalogen behandlar och lagrar användardata. och... Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok. Lorem ipsum har inte bara överlevt fem århundraden, utan även övergången till elektronisk typografi utan större förändringar. Det blev allmänt känt på 1960-talet i samband med lanseringen av Letraset-ark med avsnitt av Lorem Ipsum, och senare med mjukvaror som Aldus PageMaker.";
-
+	            let securetext = "<h3>Datalagringsavtal</h3> <ul> <li>Jag godkänner att Kultur i Väst behandlar och lagrar användardata som har fyllts i i arrangörsformuläret.</li>";
+	            securetext += "<li>Kulturkatalogen Väst använder uppgifterna för att visa arrangemang i sin digitala utbudskatalog.</li>";
+	            securetext += "<li>Alla uppgifter i formuläret är publika förutom de uppgifter som har fyllts i under rubriken ”Information inför bedömning”. För förställning på turné och utställning på turné gäller att alla uppgifter är publika då de saknar bedömningsdelen.</li>";
+	            securetext += "<li>Användardata kommer att lagras för arkivering då det innefattas av offentlighetsprincipen eller tills det att du som användare aktivt väljer att ta bort datat. Att användaruppgifterna lagras förenklar även fortsatt förnyelse av ett arrangemang.</li></ul>";
+	           
 	            $('#ApproveText').html(securetext);
 
 	            btn_ny_utovareBlock.hide();
@@ -13183,17 +13209,18 @@
 	   * Plats: getTidigareArrDetail.js
 	   * @description getTidigareArrDetail(arrJson) 
 	   */
-	    getTidigareArrDetail: function (arrid) {
+	    getTidigareArrDetail: function (arrid, callback) {
 	        var requesturl = "";
-	        var ok = "false";
-
+	        
 	        if (arrid){ 
 	            //http://localhost:60485/Api_v2/arrangemang/details/uid/0/typ/118/devkey/alf?type=json&callback=testar
 	            requesturl = _appsetting.globalconfig.apiserver + "/Api_v2/arrangemang/details/uid/0/typ/" + arrid + "/devkey/alf?type=json&callback=testar";
 
 	            servercall(requesturl, function (data, retmess) {
 	                console.log("detta är REtmess " + retmess);
-	                fyllarrangemangDetaildata(data)
+	                fyllarrangemangDetaildata(data, function (arrid,konstformid) {
+	                    callback(arrid,konstformid);
+	                });
 	               
 	            });
 	        };
@@ -13292,7 +13319,7 @@
 	}
 
 
-	var fyllarrangemangDetaildata = function (data) {
+	var fyllarrangemangDetaildata = function (data,callback) {
 
 	    var arrval = data.kk_aj_admin.ansokningarlista.ansokningar;
 	    var yearMin = "";
@@ -13406,32 +13433,12 @@
 	            };          
 
 	        });
-
+	        let test = arrval[0].ansokningkonstformid;
 	        $('#kk_aj_yearspan').html(yearMin + "år - " + yearMax + "år");
+	        callback(arrval[0].ansokningtypid, test);
 	    };
 	};
 
-	//var fyllutovaredata = function (data) {
-	//    var utovare = data.kk_aj_admin.Utovarelist[0];
-	//    tomutovarefield();
-	//    if (utovare) {
-	//        $('.kk_aj_form_befintligutovare').attr('rel', utovare.UtovarID);
-	//        $('#utovare_aktor_grupp').val(utovare.Organisation);
-	//        $('#utovare_orghemsida').val(utovare.Weburl);
-	//        $('#utovare_adress').val(utovare.Adress);
-	//        $('#utovare_postnummer').val(utovare.Postnr);
-	//        $('#utovare_ort').val(utovare.Ort);
-	//        $('#utovare_kommun').val(utovare.Kommun);
-	//        $('#utovare_fornamn').val(utovare.Fornamn);
-	//        $('#utovare_efternamn').val(utovare.Efternamn);
-	//        $('#utovare_telefonnr').val(utovare.Telefon);
-	//        $('#utovare_epost').val(utovare.Epost);
-	//        return true;
-	//    } else {
-	//        return false;
-	//    }; 
-	    
-	//}
 
 	var servercall = function (currurl, callback) {
 	    
