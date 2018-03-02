@@ -31,8 +31,8 @@ module.exports = {
                 case 4:
                     ret = step3(next);
                     break;
-            }
-        
+            };
+
             if (ret == false) {
                 $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('error').removeClass('success');
                 $('.tab-title[rel=' + step + ']').addClass('error').removeClass('done');
@@ -41,8 +41,8 @@ module.exports = {
                 $('#addarrtab-' + step + ' small').hide();
                 $('.kk_aj_btn_next_step[rel=' + next + ']').addClass('success').removeClass('error');
                 $('.tab-title[rel=' + step + ']').addClass('done').removeClass('error').removeClass('active');
-            }
-        }
+            };
+        };
         return ret;
 
     },
@@ -55,8 +55,7 @@ module.exports = {
         $('.img_forfattarbesok').attr("src", basesrc + "forfattarbesok.png");
         $('.img_Kulturpedagogiskaprojekt').attr("src", basesrc + "workshops_projekt.png");
         $('.img_Fortbildningar').attr("src", basesrc + "Kompetensutveckling.png");
-        $('.img_resmalsbesok').attr("src", basesrc + "besoksmalmedresestod.png");
-        
+        $('.img_resmalsbesok').attr("src", basesrc + "besoksmalmedresestod.png");        
 
         switch (vald) {
             case "1":
@@ -80,7 +79,7 @@ module.exports = {
             case "7":
                 $('.img_resmalsbesok').attr("src", basesrc + "besoksmalmedresestod_invert.png");
                 break;
-        }
+        };
         return false;
 
     },
@@ -150,7 +149,7 @@ module.exports = {
             case "12":
                 img_annascenkonst.attr("src", basesrc + "Annanscenkonst_invert.png");
                 break;
-        }
+        };
         return false;
     },
     arrShowforminputs: function (arrtypid) {
@@ -175,7 +174,7 @@ module.exports = {
             case "5":
                 konstforminputs.fortbildningar.kontroller();
                 emptyclassinputs('kk_aj_fob');
-                break;                
+                break;
             case "7":
                 konstforminputs.resmal.kontroller();
                 emptyclassinputs('kk_aj_rm');
@@ -186,9 +185,8 @@ module.exports = {
                 break;
             default:
                 hideformfields();
-                
                 break;
-        }
+        };
         kk_aj_form_Arrangemang.show(500);
     }
 };
@@ -204,15 +202,15 @@ var step0 = function (next) {
     } else {
         pass.addClass("formerror");
         ret = false;
-    }
+    };
     return ret;
-}
+};
 
 var step1 = function (next) {
     ret = true;
     var validateobj = $('.kk_aj_requireValidation_step1');
     return validateinputs(validateobj, next, ret);
-}
+};
 
 var step2 = function (next) {
     var ret = true;
@@ -220,7 +218,7 @@ var step2 = function (next) {
     window.editorobj.triggerSave(false, true);
 
     var validateobj = $('.kk_aj_requireValidation_step2');
-    ret = validateinputs(validateobj, next,ret);
+    ret = validateinputs(validateobj, next, ret);
 
     $('.arr_radioValArrtyp_error').css('display', 'none');
     $('.arr_radioValkontstform_error').css('display', 'none');
@@ -232,27 +230,26 @@ var step2 = function (next) {
         $('.arr_radioValArrtyp_error').css('display', 'block');
         $('.ArrangemangtypBlock').addClass('radioError');
         ret = false;
-    }
+    };
     if ($('input[name=arr_radioValkontstform]:checked').length <= 0) {
         $('.arr_radioValkontstform_error').css('display', 'block');
         $('.kontformBlock').addClass('radioError');
         ret = false;
-    }
-        
+    };
+
     ret = validatearrtyp(validateobj, next, ret);
 
     return ret;
-}
+};
 var step3 = function (next) {
-    
     ret = true;
     return ret;
-}
+};
 
 var step4 = function (next) {
     ret = true;
     return ret;
-}
+};
 
 
 
@@ -260,25 +257,25 @@ var validateinputs = function (validateobj, next, ret) {
     //var ret = true;
     validateobj.each(function () {
         var current = $(this);
-        var currentid =current.attr('id')
-       
-            var current_error = $("." + currentid + "_error");
-        
-            if (current.val() != "" || current.html() != "" || current.hasClass('novalidate')) {
-            
+        var currentid = current.attr('id');
+
+        var current_error = $("." + currentid + "_error");
+
+        if (current.val() != "" || current.html() != "" || current.hasClass('novalidate')) {
+
             $('.tab-title[rel=' + next + ']').addClass('active').removeClass('done').removeClass('disabled');
             $('.kk_aj_verifystep' + next + '').removeClass('disabled');
             current_error.css('display', 'none');
         } else {
             current_error.css('display', 'block');
             ret = false;
-        }
+        };
 
     });
     return ret;
-}
+};
 
-var validatearrtyp = function(validateobj, next, ret) {   
+var validatearrtyp = function (validateobj, next, ret) {
     var obj;
     var currentret = ret;
     var arrtypid = $('input[name=arr_radioValArrtyp]:checked').val();
@@ -286,13 +283,13 @@ var validatearrtyp = function(validateobj, next, ret) {
         case "1": {
             obj = $('.kk_aj_ft');
             ret = validateinputs(obj, next, ret);
-            hidemulitvalueinputs();           
+            hidemulitvalueinputs();
             emptyclassinputs('kk_aj_ft');
-            
+
             ret = kk_aj_ft_verify(ret);
             if (currentret == false) {
                 ret = currentret;
-            }
+            };
             break;
         }
         case "2": {
@@ -303,79 +300,79 @@ var validatearrtyp = function(validateobj, next, ret) {
             ret = kk_aj_ut_verify(ret);
             if (currentret == false) {
                 ret = currentret;
-            }
+            };
             break;
         }
         case "4": {
             obj = $('.kk_aj_kp');
             //$('#kk_aj_yearspan').html("");
-            $('#kk_aj_speltid').html("");            
+            $('#kk_aj_speltid').html("");
             ret = validateinputs(obj, next, ret);
             hidemulitvalueinputs();
             emptyclassinputs('kk_aj_kp');
             ret = kk_aj_kp_verify(ret);
-            if (currentret== false) {
+            if (currentret == false) {
                 ret = currentret;
-            }
+            };
             break;
         }
         case "5": {
-            obj = $('.kk_aj_fob'); 
+            obj = $('.kk_aj_fob');
             //$('#kk_aj_yearspan').html("");
-            $('#kk_aj_speltid').html("");           
+            $('#kk_aj_speltid').html("");
             ret = validateinputs(obj, next, ret);
-            hidemulitvalueinputs();           
+            hidemulitvalueinputs();
             emptyclassinputs('kk_aj_fob');
             ret = kk_aj_fob_verify(ret);
             if (currentret == false) {
                 ret = currentret;
-            }
+            };
             break;
         }
         case "7": {
             obj = $('.kk_aj_rm');
             ret = validateinputs(obj, next, ret);
             hidemulitvalueinputs();
-           
+
             $('#arr_laromedel').val("");
             emptyclassinputs('kk_aj_rm');
-            
+
             ret = kk_aj_rm_verify(ret);
             if (currentret == false) {
                 ret = currentret;
-            }
+            };
             break;
         }
         case "8": {
             obj = $('.kk_aj_sb');
             ret = validateinputs(obj, next, ret);
             hidemulitvalueinputs();
-            emptyclassinputs('kk_aj_sb');                        
+            emptyclassinputs('kk_aj_sb');
             ret = kk_aj_sb_verify(ret);
             if (currentret == false) {
                 ret = currentret;
-            }
+            };
             break;
         }
     }
 
     return ret;
 
-}
+};
        
 
-var hideformfields = function(){
+var hideformfields = function () {
     //lokalblock
     $('.kk_aj_form_Arrangemang').hide();
-    
+
     $('.kk_aj_ft').hide();  //forestallningtune
     $('.kk_aj_ut').hide();  //Utställning på turné 
     $('.kk_aj_sb').hide();  //skolbio
     $('.kk_aj_kp').hide();  //kulturpedagogoskaprojekt  
     $('.kk_aj_fob').hide(); //kompetensutveckling  (fortbildningar)
     $('.kk_aj_rm').hide();  //resmål   
-   
-}
+
+};
 
 var konstforminputs = {
     forestallningtune: {
@@ -447,10 +444,10 @@ var emptyclassinputs = function (classtoempty) {
             current.val("");
         };
     });
-    if (classtoempty != 'kk_aj_kp'){
-            $('#formMaxParticipantsId').val("");
+    if (classtoempty != 'kk_aj_kp') {
+        $('#formMaxParticipantsId').val("");
     };
-     
+
     if (classtoempty == 'kk_aj_kp' || classtoempty == 'kk_aj_fob' || classtoempty == 'kk_aj_rm') {
         $('#kk_aj_speltid').html("0min");
     };
@@ -464,20 +461,20 @@ var emptyclassinputs = function (classtoempty) {
         $('#formElectricityId').val("");
         $('#formCarriersId').val("");
     };
-     
-    if (classtoempty == 'kk_aj_rm' || classtoempty == 'kk_aj_sb'  ) {
+
+    if (classtoempty == 'kk_aj_rm' || classtoempty == 'kk_aj_sb') {
         $("input:radio[name=arr_resor]").prop("checked", false);
         $("input:radio[name=arr_logi]").prop("checked", false);
         $("input:radio[name=arr_Traktamente]").prop("checked", false);
-       
+
     };
     if (classtoempty == 'kk_aj_sb' || classtoempty == 'kk_aj_fob') {
         $('#formVenueRequiermentsId').val("");
     };
-   
+
     return false;
-        
-}
+
+};
 
 var kk_aj_ft_verify = function (ret) {
 
@@ -538,38 +535,14 @@ var kk_aj_ft_verify = function (ret) {
         ret = false;
     };
     return ret;
-}
+};
 
 var kk_aj_ut_verify = function (ret) {
 
-    if ($('input[name=arr_ljud]:checked').length <= 0) {
-        $('.kk_aj_search_arr_ljud_error').css('display', 'block');
-        ret = false;
-    };
-    if ($('input[name=arr_ljus]:checked').length <= 0) {
-        $('.kk_aj_search_arr_ljus_error').css('display', 'block');
-        ret = false;
-    };
-    if ($('input[name=arr_morklaggning]:checked').length <= 0) {
-        $('.kk_aj_search_arr_morklaggning_error').css('display', 'block');
-        ret = false;
-    };
-    if ($("#formCarriersId option:selected").val() === "") {
-        $('.kk_aj_search_arr_carriers_error').css('display', 'block');
-        ret = false;
-    };
-    if ($("#formElectricityId option:selected").val() === "") {
-        $('.kk_aj_search_arr_electricity_error').css('display', 'block');
-        ret = false;
-    };
     if ($("#kk_aj_yearspan").html() === '0år -0år') {
         $('.kk_aj_yearspan_error').css('display', 'block');
         ret = false;
     };
-    //if ($("#kk_aj_speltid").html() === '0min') {
-    //    $('.kk_aj_speltid_error').css('display', 'block');
-    //    ret = false;
-    //}
     if ($('input[name=arr_resor]:checked').length <= 0) {
         $('.kk_aj_search_arr_resor_error').css('display', 'block');
         ret = false;
@@ -582,26 +555,10 @@ var kk_aj_ut_verify = function (ret) {
         $('.kk_aj_search_arr_traktamente_error').css('display', 'block');
         ret = false;
     };
-    if ($('input[name=arr_statligtstodjanej]:checked').length <= 0) {
-        $('.kk_aj_search_arr_statligtstodjanej_error').css('display', 'block');
-        ret = false;
-    };
-    if ($('input[name=arr_fskattsedeljanej]:checked').length <= 0) {
-        $('.kk_aj_search_arr_fskattsedeljanej_error').css('display', 'block');
-        ret = false;
-    };
-    if ($('input[name=arr_centrumbildningjanej]:checked').length <= 0) {
-        $('.kk_aj_search_arr_centrumbildningjanej_error').css('display', 'block');
-        ret = false;
-    };
-    if (($('#arr_cvmedverkande_url').val() == "") && ($('#arr_cvmedverkande_file').val() == "")) {
-        $('.arr_cvmedverkande_error').css('display', 'block');
-        ret = false;
-    };
 
     ret = validateage(ret);
     return ret;
-}
+};
 
 
 var kk_aj_fob_verify = function (ret) {
@@ -670,11 +627,11 @@ var kk_aj_kp_verify = function (ret) {
     };
     ret = validateage(ret);
     return ret;
-}
+};
 var kk_aj_rm_verify = function (ret) {
 
     return validateage(ret);
-}
+};
 var kk_aj_sb_verify = function (ret) {
 
     if ($("#kk_aj_yearspan").html() === '0år -0år') {
@@ -687,11 +644,11 @@ var kk_aj_sb_verify = function (ret) {
     };
     ret = validateage(ret);
     return ret;
-}
+};
 var validateage = function (ret) {
     if ($("#kk_aj_yearspan").html() === '0år -0år') {
         $('.kk_aj_yearspan_error').css('display', 'block');
         ret = false;
     };
     return ret;
-}
+};

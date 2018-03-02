@@ -1,3 +1,6 @@
+Kulturkatalogen Väst VERSION 1.0 - goes live: 2018-04-11 
+name: kk_aj_Public_Acklay 
+
 # webpack_sass_gulp
 boilerplate för gulp och sass och webpack 
 
@@ -13,3 +16,44 @@ install
 glöm inte att lägga till .gitignore (med texten:node_modules/ och bower_components/ ) i "node_modules" foldern så att inte alla dependencyfilerna kommer med i gitt repot.
 7. npm install jquery.ui --save -dev
 8. npm install jquery-ui-dist --save -dev
+
+
+Kulturkatalogen Väst VERSION 1.0 - goes live: 2018-04-11 
+kk_aj_Public_Acklay 
+Patchnotes
+
+kk_aj_publicbundle.1.0.2
+*---------------------------------------------------
+* lagt till maxlängd i inputfälten i arrangörsformuläret.
+* lagt till verifiering av pressentationsbild så endast bilder går att lägga upp
+* Uppladding av CV hoppar man mellan tabbarna i cv töms fälten på tidigare tab
+* Verifiering av fälten för utställning på turné är ändrad så att endast fält som syns verifieras.
+
+* BUGG FIX
+  -fixat * verifieringen av utställning på turné verifierade osynliga fält så som ljud, ljus, mörkläggning, elektricitet m.m samma som föreställning på turné.
+*---------------------------------------------------
+
+
+kk_aj_publicbundle.1.0.5.js 
+*---------------------------------------------------
+* -TESTAD OCH KLAR ATT ANVÄNDA
+* uppdaterat bytt let mot var
+* gjort manuellt inte genererat via gulp
+*---------------------------------------------------
+
+kk_aj_publicbundle.1.0.6.js
+*---------------------------------------------------
+* miniferad med babel 
+*---------------------------------------------------
+
+kk_aj_publicbundle.1.0.9.js
+*---------------------------------------------------
+* använder babel för safari
+* gör om kk_aj_kulturkatalogenWebpack med babel till kk_aj_kulturkatalogenWebpack.0.0.1.js innan den skickar till pub_jsconcatfiles
+* ingen minifiering påslagen
+*---------------------------------------------------
+
+kk_aj_publicbundle.1.1.0.js
+*---------------------------------------------------
+* minifiering påslagen
+*---------------------------------------------------

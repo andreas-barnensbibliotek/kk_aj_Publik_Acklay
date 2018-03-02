@@ -61,15 +61,6 @@ gulp.task('foundationJS', function () {
 	.pipe(gulp.dest(srcPath.publik +'/js/'));		
 		
 });
-	
-//gulp.task('jsconcatfiles', ['foundationJS'], function () {
-//    return gulp.src(srcPath.jsbundle + '/**/*.js')
-//        .pipe(sourcemaps.init())
-//		.pipe(webpack( require('./config/webpack.config.js') ))
-//      .pipe(concat('kk_aj_publicbundle.js'))
-//        .pipe(sourcemaps.write())
-//      .pipe(gulp.dest(srcPath.publik + '/js/'));
-//});
 
 gulp.task('webpackjs', function () {
     return gulp.src(srcPath.devjs + '/app.js')
@@ -116,7 +107,7 @@ gulp.task('pub_jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
                 srcPath.jsbundle + '/handelbars/handlebars.js',
                 //srcPath.jsbundle + '/autocomplete/jquery.easy-autocomplete.js',
                 srcPath.jsbundle + '/localstorage/localstorage.js',
-                srcPath.jsbundle + '/kk_aj_js/kk_aj_kulturkatalogenWebpack.js',
+                srcPath.jsbundle + '/kk_aj_js/kk_aj_kulturkatalogenWebpack.babel.js',
             ]
         )
        //.pipe(sourcemaps.init())
@@ -125,23 +116,33 @@ gulp.task('pub_jsconcatfiles', ['webpackjs', 'foundationJS'], function () {
        .pipe(gulp.dest(srcPath.publik + '/js/'));
 });
 
+gulp.task('jsbabel', function () {
+    return gulp.src(
+             srcPath.jsbundle + '/kk_aj_js/kk_aj_kulturkatalogenWebpack.js'
+        )
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(rename('kk_aj_kulturkatalogenWebpack.babel.js'))
+       .pipe(gulp.dest(srcPath.jsbundle + '/kk_aj_js/'));
+});
+
 gulp.task('default',function() {
     gulp.watch('_dev/devsass/**/*.scss', ['SassToCssSrc']); 
 	gulp.watch('_dev/devjs/**/*.js', ['jsconcatfiles']);       
    
 });
 
-
-gulp.task('jspublicera',['pub_jsconcatfiles'], function () {
+gulp.task('jspublicera',['jsbabel','pub_jsconcatfiles'], function () {
     return gulp.src(
             srcPath.publik + '/js/kk_aj_publicbundle.js'
-        )
+        )      
         .pipe(minify({
             mangle: {
                 keepClassName: true
             }
         }))
-        .pipe(rename('kk_aj_publicbundle_min.js'))
+        .pipe(rename('kk_aj_publicbundle.1.1.1.js'))
        .pipe(gulp.dest(srcPath.publik + '/js/'));
 });
 
@@ -150,3 +151,4 @@ gulp.task('dochtml', function () {
       .pipe(gulpDocumentation('html'))
       .pipe(gulp.dest(srcPath.docoutput));
 });
+

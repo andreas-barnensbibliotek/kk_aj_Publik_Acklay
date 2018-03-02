@@ -660,6 +660,52 @@ var saveArrfilmExempel = function () {
     tomexempelform();
 };
 
+//lägg till när vimeo skall läggas in!
+//var saveArrfilmYoutubeVimeoExempel = function () {
+//    let val = $('#arr_ExempelfilmRubrik').val();
+//    let bild_film_url = $('#arr_Exempelfilm').val();
+
+//    let urlyoutubetest = bild_film_url.indexOf("https://youtu.be/");
+//    let urlvimeotest = bild_film_url.indexOf("https://vimeo.com/");
+//    let Errorverifymovie;
+//    let errormess = "";
+//    let fixurl = "";
+//    if (urlyoutubetest >= 0) {
+//        fixurl = bild_film_url.replace("https://youtu.be/", "");
+//        errormess = "youtube";
+//    }
+//    if (urlvimeotest >= 0) {
+//        fixurl = bild_film_url.replace("https://vimeo.com/", "");
+//        errormess = "vimeo";
+//    };
+
+//    if (errormess == "") {
+//        alert("Du måste ha en korrekt filmlänk, Använd antingen Youtube.com:s eller Vimeo.com:s delalänkar.");
+//        return false;
+//    };
+
+//    bild_film_url = fixurl;
+
+//    let index = _exempellistobject.exempelitemlist.findIndex(function (item, i) {
+//        return item.mediaTitle === val
+//    });
+
+//    if (index >= 0) {
+//        alert("Exemplet finns redan!");
+//        return false;
+//    }
+//    _exempellistobject.exempelitemlist.push(
+//        {
+//            "MediaUrl": bild_film_url,
+//            "MediaTyp": "2",
+//            "mediaTitle": $('#arr_ExempelfilmRubrik').val(),
+//            "mediaBeskrivning": $('#arr_Exempelfilmbeskrivning').val(),
+//            "mediaLink": $('#arr_ExempelfilmUrl').val()
+//        }
+//    );
+//    handlebarTemplethandler.injecthtmltemplate(".arrExempellist", "kk_aj_arrformExempelList.txt", _exempellistobject);
+//    tomexempelform();
+//};
 
 var tomexempelform = function () {
     $('#arr_Exempelbild').val("");       

@@ -28,7 +28,8 @@
 <fortyfingers:STYLEHELPER ID="STYLEHELPER3" AddToHead='<meta charset="UTF-8">' runat="server" />
 <fortyfingers:STYLEHELPER ID="headMeta1" AddToHead='<meta http-equiv="X-UA-Compatible" content="IE=edge">' runat="server" />
 <fortyfingers:STYLEHELPER ID="headMeta2" AddToHead='<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">' runat="server" />
-<fortyfingers:STYLEHELPER ID="STYLEHELPER2" AddCssFile="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" runat="server" />
+<fortyfingers:STYLEHELPER ID="headreferrer" AddToHead='<meta name="referrer" content="no-referrer">' runat="server" />
+<fortyfingers:STYLEHELPER ID="STYLEHELPER2" AddCssFile="public/css/jquery-ui.css" runat="server" />
 
 <%--<!-- kulturkatalogen.org GOOGLEANALYTICS kör denna när domänen är ändrad
 <fortyfingers:STYLEHELPER ID="googleanalytics" AddToHead="<script async src='https://www.googletagmanager.com/gtag/js?id=UA-7175122-13'></script><script>window.dataLayer=window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-7175122-13');</script>" runat="server" />
@@ -44,19 +45,21 @@
 
 <!-- ### OFFCANVAS START ################################################################################################ --> 
  <div class="off-canvas-wrap" data-offcanvas>
-     <div class="inner-wrap">
+     <div class="inner-wrap kiv-new-header">
          
          <!-- ### MENYBALK START (NAV)################################################################################################ -->
          <nav class="tab-bar">
              <section class="left-small">
+            <a class="left-off-canvas-toggle" href="#" title="Meny">
+                <span>MENY</span>
+            </a>
+        </section>
 
-                 <a class="left-off-canvas-toggle" href="#"><span>MENY</span></a>
-             </section>
-
-             <section class="right tab-bar-section tab-bar-logosection">
-                 <a href="index.html">
-                     <img src="http://kulturivast.se/sites/all/themes/kivnew/images/kivlogo.png" alt="Kultur i V&auml;st" /></a>
-             </section>
+        <section class="right tab-bar-section tab-bar-logosection">
+                        <div class="logo-img">
+            	<a rel="home" href="http://develop-v1.kulturivast.se" title="Kultur i Väst Hem">Kultur i Väst</a>
+	        </div>
+        </section>
 
              <section class="right-small">
                  <a href="http://www.kulturivast.se/search?query="><span>S&Ouml;K</span></a>
@@ -65,9 +68,14 @@
          <!-- ### MENYBALK END (NAV) ################################################################################################ -->
 
          <aside class="left-off-canvas-menu">
-             <ul class="off-canvas-list">       
+             <h2 class="block-title">
+                 <div class="menu_block">2015 new meny</div>
+             </h2>
+            <div class="menu-block-wrapper menu-block-9 menu-name-menu-2015-meny parent-mlid-0 menu-level-1">
+             
+              <ul class="off-canvas-list">       
                  <li class="first expanded"><a href="http://www.kulturivast.se" title="">Start</a></li>
-                 <li class="expanded"><a href="http://www.kulturivast.se/det-har-jobbar-vi-med" class="togglebgimageshow" title="">Det h&auml;r jobbar vi med</a></li>
+                 <li class="expanded"><a href="http://www.kulturivast.se/det-har-jobbar-vi-med" class="togglebgimagehide" title="">Det h&auml;r jobbar vi med</a></li>
                  <ul class="off-canvas-submenu multiColumn">
                      <li><a href="http://www.kulturivast.se/arkitektur">arkitektur</a></li>
                      <li><a href="http://www.kulturivast.se/arrangorsutveckling">arrang&ouml;rsutveckling</a></li>
@@ -97,6 +105,7 @@
                  <li><a href="http://www.kulturivast.se/in-english">In English</a></li>
                  <li>
              </ul>
+            </div>
              <dnn:MENU ID="MENU1" MenuStyle="Simple" runat="Server" />
          </aside>
          <a class="exit-off-canvas"></a>
@@ -109,9 +118,10 @@
                  <div class="row">
                      <div class="small-12 columns">
                          <div class="searchmainContent">
-                             <input type="text" class="searchinputbox" placeholder="S&ouml;k p&aring; kulturivast.se" />
+                             <label for="searchinputbox">S&ouml;k p&aring; kulturivast.se</label>
+                             <input type="text" id="searchinputbox" class="searchinputbox" placeholder="S&ouml;k p&aring; kulturivast.se" />
                              <button type="button" class="searchButton">
-                                 <img src="http://kulturivast.se/sites/all/themes/kivnew/images/PilVanster28.png" /></button>
+                                 <img src="http://kulturivast.se/sites/all/themes/kivnew/images/PilVanster28.png" alt="Sök" /></button>
                          </div>
                      </div>
 
@@ -137,7 +147,7 @@
             <div class="row">
                 <div id="ContentPane" class="contentPane content-wrapper" runat="server">
                     <div class="loader">
-                         <img src="http://kulturivast.se/sites/all/themes/kivnew/images/page-loader.gif" />
+                         <img src="http://kulturivast.se/sites/all/themes/kivnew/images/page-loader.gif" alt="Laddar sidan" />
                      </div>
                 </div>
               </div>
@@ -230,15 +240,14 @@
 
      
 
-    
-     
+   
  </div>
 
 <dnn:jQuery ID="dnnjQuery" runat="server" />
 <fortyfingers:STYLEHELPER ID="STYLEHELPER5" AddJsFile="public/js/tinymce/tinymce.min.js" runat="server" />
-<fortyfingers:STYLEHELPER ID="STYLEHELPER1" AddJsFile="public/js/kk_aj_publicbundle.js" runat="server" />
+<fortyfingers:STYLEHELPER ID="STYLEHELPER1" AddJsFile="public/js/kk_aj_publicbundle.1.0.2.js" runat="server" />
 <fortyfingers:STYLEHELPER ID="STYLEHELPER4" AddJsFile="public/js/modernizr.js" runat="server" />
 <fortyfingers:STYLEHELPER ID="STYLEHELPER6" AddJsFile="public/js/jquery.adaptive-backgrounds.js" runat="server" />
 
 <dnn:SEARCH ID="dnnSearch2" runat="server" ShowSite="false" ShowWeb="false" EnableTheming="true" Submit="Search" CssClass="SearchButton" Visible="false" />
-<script async src='https://www.googletagmanager.com/gtag/js?id=UA-111614024-1'></script><script>window.dataLayer=window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-111614024-1');</script>" runat="server" />
+<script async src='https://www.googletagmanager.com/gtag/js?id=UA-111614024-1'></script><script>window.dataLayer=window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-111614024-1');</script>

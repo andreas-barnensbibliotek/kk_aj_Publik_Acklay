@@ -14,7 +14,7 @@ module.exports = {
                 arrsearchhandler.init(val);
                 break;
             case "Dnn_module_kk_aj_Publik_detail":
-                let granskapage = appsettings.config.globalconfig.granskavy;
+                var granskapage = appsettings.config.globalconfig.granskavy;
 
                 if ($('.kk_aj_CurrentPageName').html() == granskapage) {
                     arrDetailvyHandler.GranskaVy(val);

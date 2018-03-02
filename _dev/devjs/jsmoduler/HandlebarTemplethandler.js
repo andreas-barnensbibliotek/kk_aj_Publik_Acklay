@@ -28,7 +28,14 @@ Handlebars.registerHelper('iffilm', function (object, url) {
             rettext = '<img src="' + url + '" />';
             break;
         case "2":
-            rettext = '<iframe width="auto" height="auto" src="https://www.youtube.com/embed/' + url + '" frameborder="0" allowfullscreen="true" style="max-width:100%;"></iframe>';;
+            if (isNaN(url)) {
+                urltoMovie = "https://www.youtube.com/embed/" + url;
+            } else {
+                urltoMovie = "https://www.youtube.com/embed/" + url;
+                //urltoMovie = "https://player.vimeo.com/video/" + url; lägg till när vimeo skall läggas in!
+            };
+            rettext = '<iframe width="auto" height="auto" src="' + urltoMovie + '" frameborder="0" allowfullscreen="true" style="max-width:100%;"></iframe>';
+
             break;
         case "3":
             //rettext = '<audio name="ljudspelare" src="' + url + '" preload />';
